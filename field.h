@@ -1,16 +1,11 @@
 #include <cstdlib>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include "opencv2/core/core.hpp"
 #include <iostream>
-#include <opencv2/imgcodecs/imgcodecs.hpp>
-#include <opencv2/opencv.hpp>
-#include "opencv2/videoio.hpp"
 #include <vector>
 #include <cstdio>
 #include "cell.h"
 #include "worm.h"
 #include "wormlogic.h"
+#include "CommonIncludes.h"
 #ifndef FIELD_H_
 #define FIELD_H_
 
