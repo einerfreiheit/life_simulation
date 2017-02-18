@@ -12,7 +12,7 @@ class wormlogic {
 public:
 	wormlogic();
 	double eat(double);
-	void move(bool,int,int,int,int);
+	void move(bool, int, int, int, int);
 	int next_x;
 	int next_y;
 	int way;

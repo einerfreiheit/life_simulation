@@ -14,9 +14,9 @@ public:
 	int worm_x;
 	int worm_y;
 	bool worm_hungry;
-	int  getAdressY();
-	int  getAdressX();
-	void createWorm(int,int,int);
+	int getAdressY();
+	int getAdressX();
+	void createWorm(int, int, int);
 	virtual ~worm();
 	void eat();
 };

@@ -10,15 +10,13 @@
 #include <unistd.h>
 using namespace std;
 
-int main (){
+int main() {
 	field b;
-	for (;;){
+	for (;;) {
 		b.getVis();
 		b.step();
 		usleep(500000);
 	}
 	return 0;
 }
-
-
 

@@ -16,7 +16,7 @@ public:
 	int getColor();
 	double life_res;
 	virtual ~cell();
-	bool wormishere=false;
+	bool wormishere = false;
 };
 
 #endif /* CELL_H_ */
