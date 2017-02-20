@@ -8,18 +8,19 @@
 #ifndef WORMLOGIC_H_
 #define WORMLOGIC_H_
 
-class wormlogic {
+class wormlogic
+{
 public:
-	wormlogic();
-	double eat(double);
-	void move(bool, int, int, int, int);
-	int next_x;
-	int next_y;
-	int way;
-	bool IsHungry(double);
-	bool hungry;
+    wormlogic();
+    double eat(double);
+    void move(bool, int, int, int, int);
+    int next_x;
+    int next_y;
+    int way;
+    bool IsHungry(double);
+    bool hungry;
 
-	virtual ~wormlogic();
+    virtual ~wormlogic();
 };
 
 #endif /* WORMLOGIC_H_ */

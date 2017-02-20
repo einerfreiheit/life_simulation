@@ -8,15 +8,16 @@
 #ifndef CELL_H_
 #define CELL_H_
 
-class cell {
+class cell
+{
 public:
-	cell();
-	void getRes();
-	double blue;
-	int getColor();
-	double life_res;
-	virtual ~cell();
-	bool wormishere = false;
+    cell();
+    void getRes();
+    double blue;
+    int getColor();
+    double life_res;
+    virtual ~cell();
+    bool wormishere = false;
 };
 
 #endif /* CELL_H_ */
