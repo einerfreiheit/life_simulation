@@ -8,14 +8,22 @@
 #include <cstdlib>
 #include "wormlogic.h"
 
-wormlogic::wormlogic()
+wormlogic::wormlogic(int y,int x)
 {
     hungry = false;
     way = -1;
     next_x = 0;
     next_y = 0;
+    this->size_y=y;
+    this->size_x=x;
 
 }
+
+
+
+
+
+
 double wormlogic::eat(double food)
 {
     if (food > 10) {
@@ -34,7 +42,7 @@ bool wormlogic::IsHungry(double food)
         hungry = false;
     return hungry;
 }
-void wormlogic::move(bool hungry, int y, int x, int size_y, int size_x)
+void wormlogic::move(bool hungry, int y, int x)
 {
     next_x = x;
     next_y = y;

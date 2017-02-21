@@ -11,11 +11,13 @@
 class wormlogic
 {
 public:
-    wormlogic();
+    wormlogic(int,int);
     double eat(double);
-    void move(bool, int, int, int, int);
+    void move(bool, int, int);
     int next_x;
     int next_y;
+    int size_x;
+    int size_y;
     int way;
     enum { down=0,up,left,right};
     bool IsHungry(double);
