@@ -39,36 +39,40 @@ void wormlogic::move(bool hungry, int y, int x, int size_y, int size_x)
     next_x = x;
     next_y = y;
     if (hungry == true) {
-        way = rand() % 4;
-
-        if (way == 0) {
-            if (y > 0)
-                next_y = y - 1;
-            else
-                next_y = y + 1;
+        way=rand()%4;
+        switch (way){
+        	case down:{
+				if (y > 0)
+		                next_y = y - 1;
+		            else
+		                next_y = y + 1;
+				break;
+		        }
+        	case up: {
+        		if (y < size_y)
+        		         next_y = y + 1;
+        	    else
+        		         next_y = y - 1;
+        		break;
+        	}
+        	case left:{
+        		 if (x > 0)
+        		         next_x = x - 1;
+        		  else
+        		         next_x = x + 1;
+        		 break;
+        	}
+        	case right:{
+        		  if (x < size_x)
+        		         next_x = x + 1;
+        		  else
+        		         next_x = x - 1;
+        		  break;
+        	}
         }
-        if (way == 1) {
-            if (y < size_y)
-                next_y = y + 1;
-            else
-                next_y = y - 1;
-        }
-        if (way == 2) {
-            if (x > 0)
-                next_x = x - 1;
-            else
-                next_x = x + 1;
-        }
-        if (way == 3) {
-            if (x < size_x)
-                next_x = x + 1;
-            else
-                next_x = x - 1;
-        }
-
     }
-
 }
+
 
 wormlogic::~wormlogic()
 {

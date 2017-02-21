@@ -17,6 +17,7 @@ public:
     int next_x;
     int next_y;
     int way;
+    enum { down=0,up,left,right};
     bool IsHungry(double);
     bool hungry;
 
