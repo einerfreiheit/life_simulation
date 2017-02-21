@@ -16,8 +16,10 @@ public:
     void move(bool, int, int);
     int next_x;
     int next_y;
-    int size_x;
+
     int size_y;
+    int size_x;
+
     int way;
     enum { down=0,up,left,right};
     bool IsHungry(double);
