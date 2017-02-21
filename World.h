@@ -7,7 +7,6 @@
 #include <cstdio>
 #include "cell.h"
 #include "worm.h"
-#include "CommonIncludes.h"
 
 class World
 {

@@ -1,9 +1,10 @@
 #include "SimulationRunner.h"
+#include "Workers/AIWorker.h"
+#include "Workers/VisualWorker.h"
 #include <iostream>
 #include <time.h>
 #include <unistd.h>
 
-#include "Workers/AIWorker.h"
 
 SimulationRunner::SimulationRunner()
 {
@@ -17,7 +18,9 @@ SimulationRunner::~SimulationRunner()
 
 void SimulationRunner::init(){
     world = new World();
+    workers.push_back(new VisualWorker);
     workers.push_back(new AIWorker);
+
 }
 
 void SimulationRunner::run(){
@@ -25,8 +28,10 @@ void SimulationRunner::run(){
         for (WorldWorker *worker: workers){
             std::cout << worker->getName() << std::endl;
             worker->work(world);
+
+
         }
-        world->getVis();
+
         usleep(500000);
     }
 }
