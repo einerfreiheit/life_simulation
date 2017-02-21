@@ -16,7 +16,7 @@ void AIWorker::work(World *world)
     std::vector<worm> &worm_map = world->worm_map;
     std::vector<std::vector<cell> > &map = world->map;
     
-    wormlogic logic;
+    wormlogic logic(world->getHeight(),world->getWidth());
     for (int i = 0; i < worm_map.size(); i++) {
 
         int x = worm_map[i].getAdressX();
@@ -24,8 +24,7 @@ void AIWorker::work(World *world)
 
         map[y][x].life_res = logic.eat(map[y][x].life_res);
 
-        logic.move(logic.IsHungry(map[y][x].life_res), y, x, world->getHeight(),
-                   world->getWidth());
+        logic.move(logic.IsHungry(map[y][x].life_res), y, x);
         x = logic.next_x;
         y = logic.next_y;
         worm_map[i].worm_hungry = logic.IsHungry(map[y][x].life_res);
