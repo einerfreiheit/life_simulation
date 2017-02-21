@@ -1,9 +1,8 @@
 #include "SimulationRunner.h"
 #include "Workers/AIWorker.h"
 #include "Workers/VisualWorker.h"
+#include "Workers/WaiterWorker.h"
 #include <iostream>
-#include <time.h>
-#include <unistd.h>
 
 
 SimulationRunner::SimulationRunner()
@@ -20,7 +19,7 @@ void SimulationRunner::init(){
     world = new World();
     workers.push_back(new VisualWorker);
     workers.push_back(new AIWorker);
-
+    workers.push_back(new WaiterWorker(5000));
 }
 
 void SimulationRunner::run(){
@@ -32,6 +31,5 @@ void SimulationRunner::run(){
 
         }
 
-        usleep(500000);
     }
 }
