@@ -16,7 +16,14 @@ wormlogic::wormlogic(int y,int x)
     next_y = 0;
     this->size_y=y;
     this->size_x=x;
+
 }
+
+
+
+
+
+
 double wormlogic::eat(double food)
 {
     if (food > 10) {

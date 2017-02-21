@@ -13,12 +13,10 @@ class World
 public:
     World();
     ~World();
-    void step();
     int getHeight() const;
     int getWidth() const;
     void init();
     void getVis();
-    void getWorm();
     int const mapHeight = 10;
     int const mapWidth = 10;
     int const worm_map_size = 2;
