@@ -7,7 +7,7 @@ class VisualWorker : public WorldWorker {
 public:
 	VisualWorker();
 	virtual ~VisualWorker();
-	void work (World *world);
+	void work (World *world) override;
 };
 
 #endif /* WORKERS_VISUALWORKER_H_ */
