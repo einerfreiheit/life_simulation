@@ -2,6 +2,7 @@
 #include "Workers/AIWorker.h"
 #include "Workers/VisualWorker.h"
 #include "Workers/WaiterWorker.h"
+#include "Workers/VideoCapWorker.h"
 #include <iostream>
 
 
@@ -17,12 +18,16 @@ SimulationRunner::~SimulationRunner()
 
 void SimulationRunner::init(){
     world = new World();
+
     workers.push_back(new VisualWorker);
+    workers.push_back(new VideoCapWorker(world));
     workers.push_back(new AIWorker);
-    workers.push_back(new WaiterWorker(5000));
+    workers.push_back(new WaiterWorker(4000));
+
 }
 
 void SimulationRunner::run(){
+
     while (true){
         for (WorldWorker *worker: workers){
             std::cout << worker->getName() << std::endl;

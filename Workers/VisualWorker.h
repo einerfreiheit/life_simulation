@@ -8,6 +8,8 @@ public:
 	VisualWorker();
 	virtual ~VisualWorker();
 	void work (World *world) override;
+	void getImage(World *world);
+	void showImage(World *world);
 };
 
 #endif /* WORKERS_VISUALWORKER_H_ */

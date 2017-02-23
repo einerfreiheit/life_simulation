@@ -5,7 +5,10 @@ using namespace std;
 
 World::World()
 {
+
+
     init();
+
 }
 
 World::~World()
@@ -28,6 +31,7 @@ int World::getHeight() const
 
 void World::init()
 {
+
     map.resize(mapHeight);
     for (int y = 0; y < mapHeight; y++) {
         map[y].resize(mapWidth);
@@ -43,5 +47,7 @@ void World::init()
             map[y][x].getRes();
         }
     }
+    matrix = cv::Mat (mapHeight,mapWidth, CV_8UC3);
+    matrix= cv::Scalar(255,0,0);
 }
 
