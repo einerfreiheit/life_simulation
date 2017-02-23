@@ -14,6 +14,7 @@ public:
 private:
     std::vector<WorldWorker *> workers;
     World *world;
+
 };
 
 #endif // SIMULATIONRUNNER_H
