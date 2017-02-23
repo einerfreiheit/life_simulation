@@ -14,7 +14,6 @@ public:
     World();
     ~World();
     cv::Mat matrix ;
-    void getMatrix();
     int getHeight() const;
     int getWidth() const;
     void init();
