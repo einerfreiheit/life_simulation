@@ -11,6 +11,7 @@
 
 VisualWorker::VisualWorker() {
 	this->name = "VisualWorker";
+
 }
 void VisualWorker::work(World *world)
 {
@@ -38,11 +39,9 @@ void VisualWorker::getImage(World *world){
 
 	 for (int y = 0; y < mapHeight; y++) {
 	        for (int x = 0; x < mapWidth; x++) {
-	            cv::Vec3b bgr = world->matrix.at<cv::Vec3b>(cv::Point(y, x));
-	            bgr[1] = 255 - map[y][x].getColor();
-	            bgr[2] = 255 - map[y][x].getColor();
-	            bgr[0] = 255;
-	            world->matrix.at<cv::Vec3b>(cv::Point(y, x)) = bgr;
+	        	world->matrix.at<cv::Vec3b>(cv::Point(y, x))[1]=255 - map[y][x].getColor();
+				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[2] =255 - map[y][x].getColor();
+				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[0]= 255;
 
 	        }
 	    }
