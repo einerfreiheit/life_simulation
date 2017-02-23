@@ -19,7 +19,8 @@ void SimulationRunner::init(){
     world = new World();
     workers.push_back(new VisualWorker);
     workers.push_back(new AIWorker);
-    workers.push_back(new WaiterWorker(5000));
+    workers.push_back(new WaiterWorker(10000));
+
 }
 
 void SimulationRunner::run(){

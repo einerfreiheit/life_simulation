@@ -5,6 +5,8 @@ using namespace std;
 
 World::World()
 {
+
+
     init();
 }
 
@@ -28,6 +30,7 @@ int World::getHeight() const
 
 void World::init()
 {
+	matrix = cv::Mat (mapHeight,mapWidth, CV_8UC3);
     map.resize(mapHeight);
     for (int y = 0; y < mapHeight; y++) {
         map[y].resize(mapWidth);

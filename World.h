@@ -1,6 +1,6 @@
 #ifndef WORLD_H
 #define WORLD_H
-
+#include "CommonIncludes.h"
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -13,10 +13,11 @@ class World
 public:
     World();
     ~World();
+    cv::Mat matrix ;
+    void getMatrix();
     int getHeight() const;
     int getWidth() const;
     void init();
-    void getVis();
     int const mapHeight = 10;
     int const mapWidth = 10;
     int const worm_map_size = 2;
