@@ -13,7 +13,6 @@ class VideoCapWorker: public WorldWorker {
 public:
 	VideoCapWorker(World *world);
 	cv::VideoWriter writer;
-	void Open(World *world);
 	void work (World *world) override;
 	virtual ~VideoCapWorker();
 };

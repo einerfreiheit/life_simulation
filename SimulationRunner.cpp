@@ -3,6 +3,7 @@
 #include "Workers/VisualWorker.h"
 #include "Workers/WaiterWorker.h"
 #include "Workers/VideoCapWorker.h"
+#include "Workers/ResWorker.h"
 #include <iostream>
 
 
@@ -22,6 +23,7 @@ void SimulationRunner::init(){
     workers.push_back(new VisualWorker);
     workers.push_back(new VideoCapWorker(world));
     workers.push_back(new AIWorker);
+    workers.push_back(new ResWorker);
     workers.push_back(new WaiterWorker(4000));
 
 }

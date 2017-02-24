@@ -31,16 +31,16 @@ void VisualWorker::showImage(World *world){
 }
 
 void VisualWorker::getImage(World *world){
-	std::vector<worm> &worm_map = world->worm_map;
-	std::vector<std::vector<cell> > &map = world->map;
-	const int &mapHeight =world->mapHeight;
-	const int &mapWidth=world->mapWidth;
+		 worm_map =  (world->worm_map);
+		 map = (world->map);
+		 mapHeight =(world->mapHeight);
+		 mapWidth =(world->mapWidth);
 
 
 	 for (int y = 0; y < mapHeight; y++) {
 	        for (int x = 0; x < mapWidth; x++) {
-	        	world->matrix.at<cv::Vec3b>(cv::Point(y, x))[1]=255 - map[y][x].getColor();
-				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[2] =255 - map[y][x].getColor();
+	        	world->matrix.at<cv::Vec3b>(cv::Point(y, x))[1]=255 - map[y][x].life_res*255/100;
+				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[2] =255 -map[y][x].life_res*255/100;
 				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[0]= 255;
 
 	        }
