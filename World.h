@@ -13,7 +13,7 @@ class World
 public:
     World();
     ~World();
-    cv::Mat matrix ;
+    cv::Mat matrix;
     int getHeight() const;
     int getWidth() const;
     void init();

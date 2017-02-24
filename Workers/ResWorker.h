@@ -9,7 +9,7 @@
 #define WORKERS_RESWORKER_H_
 #include "WorldWorker.h"
 
-class ResWorker: public WorldWorker {
+class ResWorker: public WorldWorker {//@ зачем так сокращать имена классов? Это может быть неочевидно.
 public:
 	ResWorker();
 	virtual ~ResWorker();

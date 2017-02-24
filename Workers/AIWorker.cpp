@@ -37,7 +37,7 @@ void AIWorker::work(World *world)
 }
 
 
-bool AIWorker::ishungry(World *world,int y,int x,int i){
+bool AIWorker::ishungry(World *world,int y,int x,int i){//@ лучше назвать метод isHungry (каждое слово с большой буквы, кроме первого
 
 	if (world->map[y][x].life_res==0.0){
 		hungry=true;
@@ -49,7 +49,7 @@ bool AIWorker::ishungry(World *world,int y,int x,int i){
 
 }
 
-bool AIWorker::Alive(World *world,int i){
+bool AIWorker::Alive(World *world,int i){//@ лучше назвать метод isAlive и подавать туда сразу червя
 	alive = true;
 	if (world->worm_map[i].worm_energy<=0){
 		alive=false;
@@ -60,7 +60,7 @@ bool AIWorker::Alive(World *world,int i){
 }
 
 void AIWorker::move(World *world,int y,int x,int i){
-
+//@ логику червей лучше вынести в отдельный класс всё-таки, тогда будет возможность делать червей с разной логикой
 	    if (world->worm_map[i].worm_hungry == true) {
 	        way=rand()%4;
 	        switch (way){
@@ -111,4 +111,4 @@ void AIWorker::eat(World *world,int y,int x,int i){
 
 
 
-}
+}//@ научись пользоваться хотя бы автоформаттером кода. В эклипсе горячие клавиши Ctrl+Shift+F
