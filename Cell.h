@@ -12,7 +12,7 @@ class cell
 {
 public:
     cell();
-    void getRes();
+    void getRes();//@ слово get подразумевает, что что-то должно возвращаться из метода, а метод возвращает void, то есть ничего. Нужно другое имя
     double life_res;
     virtual ~cell();
 };

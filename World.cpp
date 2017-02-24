@@ -42,7 +42,7 @@ void World::init()
             map[y][x].getRes();
         }
     }
-    matrix = cv::Mat (mapHeight,mapWidth, CV_8UC3);
+    matrix = cv::Mat(cv::Size(mapWidth, mapHeight), CV_8UC3);
     matrix= cv::Scalar(255,0,0);
 }
 

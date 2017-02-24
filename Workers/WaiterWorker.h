@@ -13,7 +13,7 @@
 class WaiterWorker: public WorldWorker {
 public:
 	WaiterWorker(int N);
-	int N;
+	int N;//@ имя переменной N не несёт в себе никакой информации о том, зачем она нужна - это плохо
 	virtual ~WaiterWorker();
 	void work (World *world) override;
 
