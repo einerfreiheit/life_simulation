@@ -19,7 +19,6 @@ public:
     void init();
     int const mapHeight = 10;
     int const mapWidth = 10;
-    int const worm_map_size = 2;
     std::vector<std::vector<cell> > map;
     std::vector<worm> worm_map;
 };

@@ -16,6 +16,8 @@ public:
     void work(World *world) override;
     int mapHeight;
     int mapWidth;
+    int rand_y;
+    int rand_x;
 
 };
 

@@ -11,13 +11,14 @@ class worm
 {
 public:
     worm();
-    int worm_id;
+
     int worm_x;
     int worm_y;
     bool worm_hungry;
+    double worm_energy;
     int getAdressY();
     int getAdressX();
-    void createWorm(int, int, int);
+    void createWorm( int, int);
     virtual ~worm();
     void eat();
 };
