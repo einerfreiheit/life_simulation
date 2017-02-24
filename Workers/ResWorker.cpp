@@ -16,7 +16,10 @@ ResWorker::ResWorker() {
 void ResWorker::work(World *world){
 	mapHeight =world->mapHeight;
 	mapWidth = world->mapWidth;
-	world->map[rand()%mapHeight][rand()%mapWidth].life_res =+ rand()%10;
+	rand_x=rand()%mapWidth;
+	rand_y=rand()%mapHeight;
+	if (world->map[rand_y][rand_x].life_res<=90)
+		world->map[rand_y][rand_x].life_res=world->map[rand_y][rand_x].life_res+0.0;
 
 
 }

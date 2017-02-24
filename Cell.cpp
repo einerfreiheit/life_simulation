@@ -14,7 +14,7 @@ cell::cell()
 }
 void cell::getRes()
 {
-    this->life_res = rand() % 100;
+    this->life_res = rand() % 70;
 }
 
 

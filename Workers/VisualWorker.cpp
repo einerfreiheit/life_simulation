@@ -39,13 +39,19 @@ void VisualWorker::getImage(World *world){
 
 	 for (int y = 0; y < mapHeight; y++) {
 	        for (int x = 0; x < mapWidth; x++) {
-	        	world->matrix.at<cv::Vec3b>(cv::Point(y, x))[1]=255 - map[y][x].life_res*255/100;
-				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[2] =255 -map[y][x].life_res*255/100;
+	        	int color_delta;
+	        	if (map[y][x].life_res>=100){
+	        		color_delta=255;
+	        	}
+	        	else
+	        		color_delta= map[y][x].life_res*255/100;
+	        	world->matrix.at<cv::Vec3b>(cv::Point(y, x))[1]=255- color_delta;
+				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[2] =255 -color_delta;
 				world->matrix.at<cv::Vec3b>(cv::Point(y, x))[0]= 255;
 
 	        }
 	    }
-	    for (int i = 0; i < world->worm_map_size; i++) {
+	    for (int i = 0; i < world->worm_map.size(); i++) {
 	    	world->matrix.at<cv::Vec3b>(cv::Point(worm_map[i].worm_y, worm_map[i].worm_x))[2] =
 	            255;
 	    	world->matrix.at<cv::Vec3b>(cv::Point(worm_map[i].worm_y, worm_map[i].worm_x))[0] =
