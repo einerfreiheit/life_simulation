@@ -5,7 +5,7 @@
  *      Author: daniil
  */
 
-#include "worm.h"
+#include "Creature.h"
 worm::worm()
 {
     worm_id = 0;

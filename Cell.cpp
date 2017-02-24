@@ -4,8 +4,9 @@
  *  Created on: 16.02.2017
  *      Author: daniil
  */
+#include "Cell.h"
+
 #include <cstdlib>
-#include "cell.h"
 
 cell::cell()
 {

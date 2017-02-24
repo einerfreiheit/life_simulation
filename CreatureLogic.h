@@ -5,8 +5,8 @@
  *      Author: daniil
  */
 
-#ifndef WORMLOGIC_H_
-#define WORMLOGIC_H_
+#ifndef CREATURELOGIC_H_
+#define CREATURELOGIC_H_
 
 class wormlogic
 {
@@ -28,4 +28,4 @@ public:
     virtual ~wormlogic();
 };
 
-#endif /* WORMLOGIC_H_ */
+#endif /* CREATURELOGIC_H_ */

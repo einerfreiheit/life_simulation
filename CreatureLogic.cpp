@@ -5,8 +5,9 @@
  *  Created on: 17.02.2017
  *      Author: daniil
  */
+#include "CreatureLogic.h"
+
 #include <cstdlib>
-#include "wormlogic.h"
 
 wormlogic::wormlogic(int y,int x)
 {

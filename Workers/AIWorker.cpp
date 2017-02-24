@@ -1,5 +1,6 @@
 #include "AIWorker.h"
-#include "wormlogic.h"
+
+#include "../CreatureLogic.h"
 
 AIWorker::AIWorker()
 {

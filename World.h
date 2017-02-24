@@ -5,8 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <cstdio>
-#include "cell.h"
-#include "worm.h"
+#include "Cell.h"
+#include "Creature.h"
 
 class World
 {

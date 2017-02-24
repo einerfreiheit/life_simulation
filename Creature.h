@@ -4,8 +4,8 @@
  *  Created on: 17.02.2017
  *      Author: daniil
  */
-#ifndef WORM_H_
-#define WORM_H_
+#ifndef CREATURE_H_
+#define CREATURE_H_
 
 class worm
 {
@@ -22,4 +22,4 @@ public:
     void eat();
 };
 
-#endif /* WORM_H_ */
+#endif /* CREATURE_H_ */
