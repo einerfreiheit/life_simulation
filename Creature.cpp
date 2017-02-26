@@ -40,8 +40,12 @@ double Creature::getEnergy() {
 	return this->energy;
 
 }
-void Creature::setEnergy(double setEnergy) {
-	this->energy=setEnergy;
+void Creature::setEnergy(double setEnergy) {//@ не очень здорово называть переменную так же, как называется метод
+	this->energy=setEnergy; //@ и переменная - это нечто, что-то, = существительное
+	//@ а setEnergy в свою очередь звучит как глагол (так звучат методы - сделай что-то)
+	//@ поэтому такое название не очень удачное
+	//@ если не хочется придумывать названий, можешь писать this->energy = _energy;
+	//@ другие варианты: toSet, energyToSet, value, quantity - заметь, все звучат как существительные
 
 }
 

@@ -50,9 +50,11 @@ void CreatureLogic::move(Creature &creature,int borderY, int borderX) {
 		}
 	}
 
-	creature.x =(x);
+	creature.x =(x);//@ зачем тут бесполезные скобки?
 	creature.y =(y);
 	creature.energy = creature.energy  - 5;
+        //@ можно писать вот так:
+        //@ creature.energy -= 5;
 }
 
 
