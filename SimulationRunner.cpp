@@ -3,11 +3,10 @@
 #include "Workers/VisualWorker.h"
 #include "Workers/WaiterWorker.h"
 #include "Workers/CreatureSpawnWorker.h"
-#include <iostream>
-#include <time.h>
-
 #include "Workers/ResourseWorker.h"
 #include "Workers/VideoWriterWorker.h"
+#include <iostream>
+#include <time.h>
 
 SimulationRunner::SimulationRunner()
 {
@@ -22,8 +21,6 @@ SimulationRunner::~SimulationRunner()
 void SimulationRunner::init(){
     srand(7*clock() + time(NULL));//@ добавил инициализацию генератора случайных чисел. Погугли про это
     world = new World();
-//    CreatureSpawnWorker spawner;//@ для изначального спауна червей лучше сделать инициализатор мира, а не воркер; воркер больше подойдёт для спауна червей в процессе жизни мира
-//    spawner.work(world);
 
     workers.push_back(new VideoWriterWorker(world));
     workers.push_back(new AIWorker);
