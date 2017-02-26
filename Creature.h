@@ -13,7 +13,7 @@ public:
 	virtual ~Creature();
 	int x;
 	int y;
-	bool isHungry;
+	bool isHungry();
 	double energy;
 	bool getHungry();
 	double getEnergy();
