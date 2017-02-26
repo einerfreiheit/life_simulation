@@ -8,7 +8,7 @@ public:
 	VisualWorker();
 	virtual ~VisualWorker();
 	void work (World *world) override;
-	void computingImage(World *world);//@ опять в имени метода есть слово get, а он возвращает void
+	void computingImage(World *world);
 	void showImage(World *world);
 	std::vector<Creature> worm_map ;
 	std::vector<std::vector<Cell> > map;

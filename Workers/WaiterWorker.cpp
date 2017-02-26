@@ -17,7 +17,5 @@ void WaiterWorker::work(World *world){
 	usleep(waitingTime);
 }
 WaiterWorker::~WaiterWorker() {
-	// TODO Auto-generated destructor stub
-    //@ бесполезные эклипсовые комменты лучше удаляй, они не несут пользы (удаляй везде, а не только тут)
 }
 
