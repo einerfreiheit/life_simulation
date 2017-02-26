@@ -10,8 +10,9 @@ public:
     AIWorker();
     ~AIWorker();
     void eat(Creature &creature, World *world,int y,int x );
-    bool isHungry(World *world,int y,int x);//@ а если кто-нибудь заглянет в хедер и увидит эти int, int, int, он разберётся, что каждый int должен означать?
     bool isAlive(World *world,Creature &creature);
+    double energyFromFood =10;
+    double creatureOneBait =5.0;
     CreatureLogic logic;
 
 
