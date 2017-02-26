@@ -16,7 +16,7 @@ AIWorker::~AIWorker() {
 }
 
 void AIWorker::work(World *world) {
-
+	int pos=0;
 	for (auto &creature:world->worm_map) {
 		int x = creature.getPosX();
 		int y = creature.getPosY();
@@ -24,12 +24,17 @@ void AIWorker::work(World *world) {
 		logic.move(creature,world->mapHeight,world->mapWidth);
 
 		eat(creature,world, y, x);
+		if (isAlive(world,creature)==false){
+			world->worm_map.erase(world->worm_map.begin() +pos);
+			std::vector<Creature>(world->worm_map).swap(world->worm_map);
+
+		}
 //*		if (Alive(world, i) == false) {
 //			world->worm_map.erase(world->worm_map.begin() + i);
 //			std::vector<Creature>(world->worm_map).swap(world->worm_map);
 
 //		}
-
+		pos++;
 	}
 }
 
@@ -44,13 +49,14 @@ bool AIWorker::ishungry(World *world, int y, int x) { //@ лучше назва�
 
 }
 
-bool AIWorker::Alive(World *world, int i) { //@ лучше назвать метод isAlive и подавать туда сразу червя
-	alive = true;
-	if (world->worm_map[i].energy <= 0) {
-		alive = false;
+bool AIWorker::isAlive(World *world, Creature &creature) { //@ лучше назвать метод isAlive и подавать туда сразу червя
+
+	if (creature.energy <= 0) {
+		return false;
 
 	}
-	return alive;
+	else
+		return true;
 
 }
 

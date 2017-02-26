@@ -12,7 +12,7 @@ public:
     void move(World *world,int,int,int );
     void eat(Creature &creature, World *world,int,int );
     bool ishungry(World *world,int,int);//@ а если кто-нибудь заглянет в хедер и увидит эти int, int, int, он разберётся, что каждый int должен означать?
-    bool Alive(World *world,int);
+    bool isAlive(World *world,Creature &creature);
     CreatureLogic logic;
 
     bool hungry;
