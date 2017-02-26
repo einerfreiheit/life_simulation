@@ -13,7 +13,7 @@ CreatureLogic::CreatureLogic() {
 CreatureLogic::~CreatureLogic() {
 
 }
-void CreatureLogic::move(Creature &creature,int borderY, int borderX) {
+void CreatureLogic::move(Creature &creature, int borderY, int borderX) {
 	int y = creature.y;
 	int x = creature.x;
 	if (creature.isHungry == true) {
@@ -41,7 +41,7 @@ void CreatureLogic::move(Creature &creature,int borderY, int borderX) {
 			break;
 		}
 		case WT_RIGHT: {
-			if (x < borderX- 1)
+			if (x < borderX - 1)
 				x = x + 1;
 			else
 				x = x - 1;
@@ -50,11 +50,17 @@ void CreatureLogic::move(Creature &creature,int borderY, int borderX) {
 		}
 	}
 
-	creature.x =(x);//@ зачем тут бесполезные скобки?
-	creature.y =(y);
-	creature.energy = creature.energy  - 5;
-        //@ можно писать вот так:
-        //@ creature.energy -= 5;
+	creature.setPosX(x);
+	creature.setPosY(y);
+	creature.energy -= 5;
 }
 
+bool CreatureLogic::isAlive(Creature &creature) {
 
+	if (creature.energy <= 0) {
+		return false;
+
+	} else
+		return true;
+
+}
