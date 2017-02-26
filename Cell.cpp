@@ -8,18 +8,14 @@
 
 #include <cstdlib>
 
-cell::cell()
-{
-    life_res = 0;
-}
-void cell::getRes()
-{
-    this->life_res = rand() % 70;
+Cell::Cell() {
 }
 
+void Cell::setCellFood() {
+	this->food = rand() % 100;
 
-cell::~cell()
-{
+}
+Cell::~Cell() {
 
 }
 

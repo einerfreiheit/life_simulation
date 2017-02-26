@@ -9,12 +9,12 @@
 #ifndef WORKERS_VIDEOCAPWORKER_H_
 #define WORKERS_VIDEOCAPWORKER_H_
 
-class VideoCapWorker: public WorldWorker {//@ надо класс переименовать, он не захватывает видео, а записывает
+class VideoWriterWorker: public WorldWorker {
 public:
-	VideoCapWorker(World *world);
+	VideoWriterWorker(World *world);
 	cv::VideoWriter writer;
 	void work (World *world) override;
-	virtual ~VideoCapWorker();
+	virtual ~VideoWriterWorker();
 };
 
 #endif /* WORKERS_VIDEOCAPWORKER_H_ */
