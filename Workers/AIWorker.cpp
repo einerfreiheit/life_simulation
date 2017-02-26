@@ -20,32 +20,25 @@ void AIWorker::work(World *world) {
 	for (auto &creature:world->worm_map) {
 		int x = creature.getPosX();
 		int y = creature.getPosY();
-		creature.isHungry=ishungry(world,y,x);
-		logic.move(creature,world->mapHeight,world->mapWidth);
 
+		creature.isHungry=isHungry(world,y,x);
+		logic.move(creature,world->mapHeight,world->mapWidth);
 		eat(creature,world, y, x);
+
 		if (isAlive(world,creature)==false){
 			world->worm_map.erase(world->worm_map.begin() +pos);
 			std::vector<Creature>(world->worm_map).swap(world->worm_map);
 
 		}
-//*		if (Alive(world, i) == false) {
-//			world->worm_map.erase(world->worm_map.begin() + i);
-//			std::vector<Creature>(world->worm_map).swap(world->worm_map);
-
-//		}
 		pos++;
 	}
 }
 
-bool AIWorker::ishungry(World *world, int y, int x) { //@ лучше назвать метод isHungry (каждое слово с большой буквы, кроме первого
-
+bool AIWorker::isHungry(World *world, int y, int x) { //@ лучше назвать метод isHungry (каждое слово с большой буквы, кроме первого
 	if (world->map[y][x].food <= 1.0) {
-		hungry = true;
+		return true;
 	} else
-		hungry = false;
-
-	return hungry;
+		return false;
 
 }
 
