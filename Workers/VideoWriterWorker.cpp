@@ -10,7 +10,7 @@
 #include "CommonIncludes.h"
 
 VideoWriterWorker::VideoWriterWorker(World *world) {
-	this->name = "VideoOuputWorker";//@ надо указывать актуальное имя класса VideoWriterWorker, чтобы потом было проще разбираться, где упало
+	this->name = "VideoWriterWorker";
 
 	writer.open("./1.avi",CV_FOURCC('M','J','P','G'),25.0,world->matrix.size()*10,true);
 
