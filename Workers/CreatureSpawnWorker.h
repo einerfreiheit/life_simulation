@@ -15,9 +15,6 @@ public:
 	CreatureSpawnWorker();
 	virtual ~CreatureSpawnWorker();
 	void work(World *world) override;
-	int spawn_y;
-	int spawn_x;
-	int number;
 
 };
 

@@ -8,17 +8,14 @@
 #include "WaiterWorker.h"
 #include <unistd.h>
 
-WaiterWorker::WaiterWorker(int time) {//@ имя time плохо использовать для переменной. Как минимум потому, что есть функция time в time.h
-    //@ нужно переименовать как-нибудь вроде waitTime - ты одновременно показываешь, что это время, а ещё и говоришь доп инфу
+WaiterWorker::WaiterWorker(int setWaitingTime) {
 	this->name = "WaiterWorker";
-	this->N=time;
+	this->waitingTime=setWaitingTime;
 }
 
 void WaiterWorker::work(World *world){
-	usleep(N);
+	usleep(waitingTime);
 }
 WaiterWorker::~WaiterWorker() {
-	// TODO Auto-generated destructor stub
-    //@ бесполезные эклипсовые комменты лучше удаляй, они не несут пользы (удаляй везде, а не только тут)
 }
 

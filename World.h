@@ -19,8 +19,8 @@ public:
     void init();
     int const mapHeight = 10;
     int const mapWidth = 10;
-    std::vector<std::vector<cell> > map;
-    std::vector<worm> worm_map;
+    std::vector<std::vector<Cell> > map;
+    std::vector<Creature> worm_map {2};
 };
 
 #endif // WORLD_H

@@ -6,40 +6,52 @@
  */
 
 #include "Creature.h"
-worm::worm()
-{
-    worm_x = 0;
-    worm_y = 0;
-   worm_hungry = false;
-   worm_energy=50.0;
+Creature::Creature() {
 
-
-}
-int  worm::getAdressX()
-{
-
-    return this->worm_x;
+	this->isHungry = false;
+	this->energy = 50.0;
+	this->x = 0;
+	this->y = 0;
 
 }
-int  worm::getAdressY()
-{
-    return this->worm_y;
+void Creature::setPosX(int setX) {
+
+	x = setX;
+}
+void Creature::setPosY(int setY) {
+	y = setY;
 
 }
-void worm::createWorm( int worm_y, int worm_x)
-{
-    this->worm_x = worm_x;
-    this->worm_y = worm_y;
-    this->worm_energy = 50.0;
+int Creature::getPosX() {
 
-
+	return this->x;
+}
+int Creature::getPosY() {
+	return this->y;
 
 }
 
+bool Creature::isHungry() {
+	if (this->energy <=lowEnergyLevel){
+		return true;
+
+	}
+	else
+		return false;
 
 
-worm::~worm()
-{
+}
+
+double Creature::getEnergy() {
+	return this->energy;
+
+}
+void Creature::setEnergy(double energyToSet) {
+	this->energy = energyToSet;
+
+}
+
+Creature::~Creature() {
 
 }
 
