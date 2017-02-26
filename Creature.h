@@ -21,7 +21,7 @@ public:
 	int getPosX();
 	void setPosY(int setY);
 	void setPosX(int setX);
-	void setEnergy(double setEnergy);
+	void setEnergy(double energyToSet);
 
 
 };
