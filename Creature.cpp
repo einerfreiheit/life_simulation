@@ -31,8 +31,14 @@ int Creature::getPosY() {
 
 }
 
-bool Creature::getHungry() {
-	return this->isHungry;
+bool Creature::isHungry() {
+	if (this->energy <=lowEnergyLevel){
+		return true;
+
+	}
+	else
+		return false;
+
 
 }
 

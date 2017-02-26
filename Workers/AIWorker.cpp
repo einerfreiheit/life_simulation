@@ -34,11 +34,9 @@ void AIWorker::eat(Creature &creature, World *world, int y, int x) {
 	if (world->map[y][x].food > creatureOneBait) {
 		world->map[y][x].food -= creatureOneBait;
 		creature.energy += energyFromFood;
-		creature.isHungry = false;
 
 	} else {
 		world->map[y][x].food = 0.0;
-		creature.isHungry = true;
 	}
 
 }

@@ -17,11 +17,13 @@ public:
 	double energy;
 	bool getHungry();
 	double getEnergy();
+	double lowEnergyLevel=50.0;
 	int getPosY();
 	int getPosX();
 	void setPosY(int setY);
 	void setPosX(int setX);
 	void setEnergy(double energyToSet);
+
 
 
 };
