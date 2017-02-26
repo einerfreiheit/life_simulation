@@ -9,8 +9,8 @@ public:
 	void move(Creature  &creature, int borderY, int borderX);
 
 	int way;
-	enum {
-		down = 0, up, left, right
+	enum WAY_TYPE{
+		WT_DOWN = 0, WT_UP, WT_LEFT, WT_RIGHT
 	};
 
 };

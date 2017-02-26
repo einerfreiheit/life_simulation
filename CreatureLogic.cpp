@@ -19,28 +19,28 @@ void CreatureLogic::move(Creature &creature,int borderY, int borderX) {
 	if (creature.isHungry == true) {
 		way = rand() % 4;
 		switch (way) {
-		case down: {
+		case WT_DOWN: {
 			if (y > 0)
 				y = y - 1;
 			else
 				y = y + 1;
 			break;
 		}
-		case up: {
+		case WT_UP: {
 			if (y < borderY - 1)
 				y = y + 1;
 			else
 				y = y - 1;
 			break;
 		}
-		case left: {
+		case WT_LEFT: {
 			if (x > 0)
 				x = x - 1;
 			else
 				x = x + 1;
 			break;
 		}
-		case right: {
+		case WT_RIGHT: {
 			if (x < borderX- 1)
 				x = x + 1;
 			else
