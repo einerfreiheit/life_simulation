@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include "Creature.h"
 CreatureSpawnWorker::CreatureSpawnWorker() {
+	this->name = "CreatureSpawnWorker";
 
 }
 

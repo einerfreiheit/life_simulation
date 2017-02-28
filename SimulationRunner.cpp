@@ -26,8 +26,9 @@ void SimulationRunner::init(){
     workers.push_back(new AIWorker);
     workers.push_back(new ResourseWorker);
     workers.push_back(new VisualWorker);
-    workers.push_back(new WaiterWorker(10000));
     workers.push_back(new CreatureSpawnWorker);
+    workers.push_back(new WaiterWorker(10000));
+
 
 
 }

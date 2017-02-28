@@ -9,6 +9,7 @@
 #include <cstdlib>
 
 Cell::Cell() {
+	food=0;
 }
 
 void Cell::setCellFood() {
