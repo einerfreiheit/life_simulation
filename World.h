@@ -20,7 +20,7 @@ public:
     int const mapHeight = 17;
     int const mapWidth = 18;
     std::vector<std::vector<Cell> > map;
-    std::vector<Creature> worm_map {2};
+    std::vector<Creature> worm_map;
 };
 
 #endif // WORLD_H

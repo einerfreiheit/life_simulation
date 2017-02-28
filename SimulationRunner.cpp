@@ -22,12 +22,15 @@ void SimulationRunner::init(){
     srand(7*clock() + time(NULL));//@ добавил инициализацию генератора случайных чисел. Погугли про это
     world = new World();
 
-    workers.push_back(new VideoWriterWorker(world));
-    workers.push_back(new AIWorker);
-    workers.push_back(new ResourseWorker);
-    workers.push_back(new VisualWorker);
-    workers.push_back(new CreatureSpawnWorker);
-    workers.push_back(new WaiterWorker(10000));
+   workers.push_back(new VideoWriterWorker(world));
+   workers.push_back(new AIWorker);
+   workers.push_back(new CreatureSpawnWorker);
+
+   workers.push_back(new ResourseWorker);
+
+   workers.push_back(new VisualWorker);
+
+   workers.push_back(new WaiterWorker(250000));
 
 
 

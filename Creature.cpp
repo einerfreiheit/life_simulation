@@ -9,17 +9,17 @@
 Creature::Creature() {
 
 
-	this->energy = 50.0;
-	this->x = 0;
-	this->y = 0;
+	energy = 100.0;
+	x = 1;
+	y = 1;
 
 }
 void Creature::setPosX(int setX) {
 
-	x = setX;
+	this->x = setX;
 }
 void Creature::setPosY(int setY) {
-	y = setY;
+	this->y = setY;
 
 }
 int Creature::getPosX() {
