@@ -17,7 +17,7 @@ public:
 	double energy;
 	bool getHungry();
 	double getEnergy();
-	double lowEnergyLevel=50.0;
+	double lowEnergyLevel=100.0;
 	int getPosY();
 	int getPosX();
 	void setPosY(int setY);

@@ -8,7 +8,7 @@
 #include "Creature.h"
 Creature::Creature() {
 
-	this->isHungry = false;
+
 	this->energy = 50.0;
 	this->x = 0;
 	this->y = 0;

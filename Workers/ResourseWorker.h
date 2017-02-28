@@ -14,7 +14,7 @@ public:
 	ResourseWorker();
 	virtual ~ResourseWorker();
     void work(World *world) override;
-    double gainResourse =0.0;
+    double gainResourse =5.0;
     int mapHeight;
     int mapWidth;
     int rand_y;

@@ -40,7 +40,7 @@ void VisualWorker::computingImage(World *world) {
 		//@ Worm worm;
 		//@ а из-за мелкобуквенности не могу, в том числе в цикле переменная у меня поэтому currentWorm, а не просто worm
 		cv::Vec3b &pixel = visual.at<cv::Vec3b>(creature.y, creature.x);
-		pixel[2] = creature.isHungry ? 0 : 255; //@ а это тернарный оператор сравнения и присвоения, он по-своему коварен, но позволяет иногда избежать графомании
+		pixel[2] = creature.isHungry() ? creature.energy * 255.0 / 100.0 : 255; //@ а это тернарный оператор сравнения и присвоения, он по-своему коварен, но позволяет иногда избежать графомании
 		pixel[0] = 0;
 		pixel[1] = 0;
 	}
