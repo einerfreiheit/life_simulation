@@ -24,7 +24,6 @@ void AIWorker::work(World *world) {
 
 		if (logic.isAlive(creature) == false) {
 			world->worm_map.erase(world->worm_map.begin() + pos);
-			std::vector<Creature>(world->worm_map).swap(world->worm_map);
 
 		}
 		pos++;
