@@ -14,7 +14,9 @@ CreatureLogic::~CreatureLogic() {
 
 }
 
-void CreatureLogic::eat(Creature &creature, World *world, int &y, int &x) {
+void CreatureLogic::eat(Creature &creature, World *world) {
+	int y = creature.getPosY();
+	int x = creature.getPosX();
 	Cell &cell = world->map[y][x];
 	if (cell.food > creatureOneBait) {
 		cell.food -= creatureOneBait;
@@ -24,11 +26,13 @@ void CreatureLogic::eat(Creature &creature, World *world, int &y, int &x) {
 		cell.food = 0.0;
 	}
 }
-void CreatureLogic::move(World *world,Creature &creature, int borderY, int borderX) {
-	int &y = creature.y;
-	int &x = creature.x;
+void CreatureLogic::move(World *world, Creature &creature) {
+	int y = creature.getPosY();
+	int x = creature.getPosX();
+	int borderY = world->mapHeight;
+	int borderX = world->mapWidth;
 	Cell &cell = world->map[y][x];
-	if (cell.food<creatureOneBait ) {
+	if (cell.food < creatureOneBait) {
 		way = rand() % 4;
 		switch (way) {
 		case WT_DOWN: {
@@ -62,14 +66,8 @@ void CreatureLogic::move(World *world,Creature &creature, int borderY, int borde
 		}
 	}
 	creature.energy -= 5;
+	creature.setPosX(x);
+	creature.setPosY(y);
 }
 
-bool CreatureLogic::isAlive(Creature &creature) {
 
-	if (creature.energy <= 0) {
-		return false;
-
-	} else
-		return true;
-
-}
