@@ -11,19 +11,18 @@ World::~World() {
 }
 
 int World::getWidth() const {
-	if (map.size()) {
-		return map.front().size();
-	}
-	return 0;
+	return mapWidth;
+
 }
 
 int World::getHeight() const {
-	return map.size();
+	return mapHeight;
 }
 
 void World::init() {
 
 	map.resize(mapHeight);
+
 	for (int y = 0; y < mapHeight; y++) {
 		map[y].resize(mapWidth);
 	}
@@ -34,7 +33,6 @@ void World::init() {
 		}
 	}
 
-	matrix = cv::Mat(cv::Size(mapWidth, mapHeight), CV_8UC3);
-	matrix = cv::Scalar(255, 0, 0);
+	matrix = cv::Mat(cv::Size(mapWidth,mapHeight), CV_8UC3,cv::Scalar(0, 0, 0));
 	}
 

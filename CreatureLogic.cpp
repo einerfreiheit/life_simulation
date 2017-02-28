@@ -4,7 +4,7 @@
  *  Created on: 26 февр. 2017 г.
  *      Author: lenovo
  */
-
+#include "World.h"
 #include "CreatureLogic.h"
 #include <cstdlib>
 CreatureLogic::CreatureLogic() {
@@ -13,10 +13,22 @@ CreatureLogic::CreatureLogic() {
 CreatureLogic::~CreatureLogic() {
 
 }
-void CreatureLogic::move(Creature &creature, int borderY, int borderX) {
-	int y = creature.y;
-	int x = creature.x;
-	if (creature.isHungry == true) {
+
+void CreatureLogic::eat(Creature &creature, World *world, int &y, int &x) {
+	Cell &cell = world->map[y][x];
+	if (cell.food > creatureOneBait) {
+		cell.food -= creatureOneBait;
+		creature.energy += energyFromFood;
+
+	} else {
+		cell.food = 0.0;
+	}
+}
+void CreatureLogic::move(World *world,Creature &creature, int borderY, int borderX) {
+	int &y = creature.y;
+	int &x = creature.x;
+	Cell &cell = world->map[y][x];
+	if (cell.food<creatureOneBait ) {
 		way = rand() % 4;
 		switch (way) {
 		case WT_DOWN: {
@@ -49,9 +61,6 @@ void CreatureLogic::move(Creature &creature, int borderY, int borderX) {
 		}
 		}
 	}
-
-	creature.setPosX(x);
-	creature.setPosY(y);
 	creature.energy -= 5;
 }
 

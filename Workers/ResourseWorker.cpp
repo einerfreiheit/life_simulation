@@ -14,14 +14,17 @@ ResourseWorker::ResourseWorker() {
 }
 
 void ResourseWorker::work(World *world) {
-	rand_x = rand() % world->mapHeight;
-	;
-	rand_y = rand() % world->mapWidth;
-	if (world->map[rand_y][rand_x].food <= 90)
-		world->map[rand_y][rand_x].food = world->map[rand_y][rand_x].food
-				+ gainResourse;
+
+
+		rand_y = rand() % world->mapHeight;
+		rand_x = rand() % world->mapWidth;
+
+		if (world->map[rand_y][rand_x].food < (100-gainResourse)){
+			world->map[rand_y][rand_x].food += gainResourse;
+		}
+
+
 }
 ResourseWorker::~ResourseWorker() {
-	// TODO Auto-generated destructor stub
 }
 

@@ -1,10 +1,3 @@
-/*
- * ResWorker.h
- *
- *  Created on: 24 февр. 2017 г.
- *      Author: lenovo
- */
-
 #ifndef WORKERS_RESOURSEWORKER_H_
 #define WORKERS_RESOURSEWORKER_H_
 #include "WorldWorker.h"
@@ -14,7 +7,7 @@ public:
 	ResourseWorker();
 	virtual ~ResourseWorker();
     void work(World *world) override;
-    double gainResourse =0.0;
+    double gainResourse =15.0;
     int mapHeight;
     int mapWidth;
     int rand_y;
