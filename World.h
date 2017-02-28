@@ -17,8 +17,8 @@ public:
     int getHeight() const;
     int getWidth() const;
     void init();
-    int const mapHeight = 10;
-    int const mapWidth = 10;
+    int const mapHeight = 17;
+    int const mapWidth = 18;
     std::vector<std::vector<Cell> > map;
     std::vector<Creature> worm_map {2};
 };

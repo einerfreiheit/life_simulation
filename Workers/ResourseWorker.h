@@ -1,10 +1,3 @@
-/*
- * ResWorker.h
- *
- *  Created on: 24 февр. 2017 г.
- *      Author: lenovo
- */
-
 #ifndef WORKERS_RESOURSEWORKER_H_
 #define WORKERS_RESOURSEWORKER_H_
 #include "WorldWorker.h"
