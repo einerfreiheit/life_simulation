@@ -22,9 +22,12 @@ void ResourseWorker::setGainResourse(double gainResoureToSet){
 
 	this->gainResourse=gainResoureToSet;
 }
+void ResourseWorker:: setNuberOfCellToGainResourses (int numberOfCellToGain){
+	this->numberOfGainCell=numberOfCellToGain;
+}
 void ResourseWorker::work(World *world) {
 
-	for (int i = 0; i <= 10; i++) {
+	for (int i = 0; i <= numberOfGainCell; i++) {
 		setRandomXY(world);
 		if (world->map[rand_y][rand_x].food < (100.0 - gainResourse)) {
 			world->map[rand_y][rand_x].food += gainResourse;

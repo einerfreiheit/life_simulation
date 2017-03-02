@@ -26,6 +26,7 @@ void SimulationRunner::init() {
 
 	ResourseWorker *resourseWorker = new ResourseWorker;
 	resourseWorker->setGainResourse(2.0);
+	resourseWorker->setNuberOfCellToGainResourses(4);
 	workers.push_back(resourseWorker);
 
 	workers.push_back(new VisualWorker);

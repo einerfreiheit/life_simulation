@@ -9,9 +9,12 @@ public:
     void work(World *world) override;
     double gainResourse =0.0;
     void setGainResourse(double gainResoureToSet);
+    int numberOfGainCell;
+    void setNuberOfCellToGainResourses (int numberOfCellToGain);
 	void setRandomXY(World* world);
     int rand_y;
     int rand_x;
+
 
 };
 
