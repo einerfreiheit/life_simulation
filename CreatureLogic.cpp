@@ -71,3 +71,5 @@ void CreatureLogic::move(World *world, Creature &creature) {
 }
 
 
+
+

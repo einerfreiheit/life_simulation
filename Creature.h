@@ -15,6 +15,7 @@ public:
 	int y;
 	bool isHungry();
 	double energy;
+
 	bool getHungry();
 	double getEnergy();
 	double lowEnergyLevel=100.0;

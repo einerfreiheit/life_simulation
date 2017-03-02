@@ -7,7 +7,8 @@ public:
 	ResourseWorker();
 	virtual ~ResourseWorker();
     void work(World *world) override;
-    double gainResourse =5.0;
+    double gainResourse =0.0;
+    void setGainResourse(double gainResoureToSet);
 	void setRandomXY(World* world);
     int rand_y;
     int rand_x;

@@ -17,6 +17,7 @@ public:
 	void work(World *world) override;
 	double lossFromFission = 100;
 	double energyFissionThreshold=600;
+	std::vector<Creature *> creatures;
 
 };
 

@@ -18,6 +18,10 @@ void ResourseWorker::setRandomXY(World *world) {
 	rand_x = rand() % world->mapWidth;
 
 }
+void ResourseWorker::setGainResourse(double gainResoureToSet){
+
+	this->gainResourse=gainResoureToSet;
+}
 void ResourseWorker::work(World *world) {
 
 	for (int i = 0; i <= 10; i++) {

@@ -9,11 +9,12 @@
 Creature::Creature() {
 
 
-	energy = 100.0;
-	x = 1;
-	y = 1;
+	energy = 0.0;
+	x = 0;
+	y = 0;
 
 }
+
 void Creature::setPosX(int setX) {
 
 	this->x = setX;

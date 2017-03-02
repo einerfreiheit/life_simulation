@@ -10,6 +10,8 @@
 
 Cell::Cell() {
 	food=0;
+	isCreatureHere=false;
+
 }
 
 void Cell::setCellFood() {

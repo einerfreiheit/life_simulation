@@ -8,11 +8,15 @@
 #include "WaiterWorker.h"
 #include <unistd.h>
 
-WaiterWorker::WaiterWorker(int setWaitingTime) {
+WaiterWorker::WaiterWorker() {
 	this->name = "WaiterWorker";
-	this->waitingTime=setWaitingTime;
-}
 
+}
+void WaiterWorker::setWaitingTime(int timeToWait){
+	this->waitingTime=timeToWait;
+
+
+}
 void WaiterWorker::work(World *world){
 	usleep(waitingTime);
 }
