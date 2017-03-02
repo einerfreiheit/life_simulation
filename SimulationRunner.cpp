@@ -8,43 +8,43 @@
 #include <iostream>
 #include <time.h>
 
-SimulationRunner::SimulationRunner()
-{
+SimulationRunner::SimulationRunner() {
 
 }
 
-SimulationRunner::~SimulationRunner()
-{
+SimulationRunner::~SimulationRunner() {
 
 }
 
-void SimulationRunner::init(){
-    srand(7*clock() + time(NULL));//@ добавил инициализацию генератора случайных чисел. Погугли про это
-    world = new World();
+void SimulationRunner::init() {
+	srand(7 * clock() + time(NULL));
+	world = new World();
 
-   workers.push_back(new VideoWriterWorker(world));
-   workers.push_back(new AIWorker);
-   workers.push_back(new CreatureSpawnWorker);
+	workers.push_back(new VideoWriterWorker(world));
+	workers.push_back(new AIWorker);
+	workers.push_back(new CreatureSpawnWorker());
 
-   workers.push_back(new ResourseWorker);
+	ResourseWorker *resourseWorker = new ResourseWorker;
+	resourseWorker->setGainResourse(2.0);
+	resourseWorker->setNuberOfCellToGainResourses(4);
+	workers.push_back(resourseWorker);
 
-   workers.push_back(new VisualWorker);
+	workers.push_back(new VisualWorker);
+	WaiterWorker *waiterWorker = new WaiterWorker;
+	waiterWorker->setWaitingTime(10000);
 
-   workers.push_back(new WaiterWorker(250000));
-
-
+	workers.push_back(waiterWorker);
 
 }
 
-void SimulationRunner::run(){
+void SimulationRunner::run() {
 
-    while (true){
-        for (WorldWorker *worker: workers){
-            std::cout << worker->getName() << std::endl;
-            worker->work(world);
+	while (true) {
+		for (WorldWorker *worker : workers) {
+			std::cout << worker->getName() << std::endl;
+			worker->work(world);
 
+		}
 
-        }
-
-    }
+	}
 }

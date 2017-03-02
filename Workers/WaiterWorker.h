@@ -12,10 +12,11 @@
 
 class WaiterWorker: public WorldWorker {
 public:
-	WaiterWorker(int setWaitingTime);
+	WaiterWorker();
+	void setWaitingTime(int timeToWait);
 	virtual ~WaiterWorker();
-	void work (World *world) override;
 	int waitingTime;
+	void work (World *world) override;
 
 };
 

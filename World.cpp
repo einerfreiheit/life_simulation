@@ -35,7 +35,8 @@ void World::init() {
 
 	matrix = cv::Mat(cv::Size(mapWidth,mapHeight), CV_8UC3,cv::Scalar(0, 0, 0));
 	worm_map.resize(1);
-	Creature newCreature;
-	worm_map.push_back(newCreature);
+	worm_map[0].setEnergy(500);
+	worm_map[0].setPosX(1);
+	worm_map[0].setPosY(1);
 	}
 
