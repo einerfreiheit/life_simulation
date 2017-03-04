@@ -13,14 +13,14 @@ class World
 public:
     World();
     ~World();
-    cv::Mat matrix;
+    cv::Mat visualization;
     int getHeight() const;
     int getWidth() const;
     void init();
-    int const mapHeight = 10;
-    int const mapWidth = 10;
+    int const mapHeight = 30;
+    int const mapWidth = 30;
     std::vector<std::vector<Cell> > map;
-    std::vector<Creature> worm_map;
+    std::vector<Creature *> creatures;//@ worm_map - плохое название, потому что это совсем не map
 };
 
 #endif // WORLD_H

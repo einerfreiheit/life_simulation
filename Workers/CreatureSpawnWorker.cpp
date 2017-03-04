@@ -8,52 +8,45 @@
 #include "CreatureSpawnWorker.h"
 #include <cstdlib>
 #include "Creature.h"
-CreatureSpawnWorker::CreatureSpawnWorker() {
-	this->name = "CreatureSpawnWorker";
+#include "../Factories/CreatureBuilder.h"
+
+CreatureSpawnWorker::CreatureSpawnWorker()
+{
+    this->name = "CreatureSpawnWorker";
 
 }
 
-void CreatureSpawnWorker::work(World *world) {
-	if (world->worm_map.size() > 0) {
-		int index = world->worm_map.size() - 1;
-		int i = 0;
-		while (i < world->worm_map.size()) {
+void CreatureSpawnWorker::work(World *world)
+{
+    if (!world->creatures.size()) {
+        return;
+    }
+    
+    int lastId = (int)world->creatures.size() - 1;
+    int i = 0;
+    while (i <= lastId) {
+        Creature *current = world->creatures[i];
+        if (current->getEnergy() <= 0) {
+            delete current;
+            world->creatures[i] = world->creatures[lastId];
+            lastId--;
+        }else{
+            i++;
+        }
+    }
+    world->creatures.resize(lastId + 1);
 
-			if (world->worm_map[i].getEnergy() <= 0) {
-
-				world->worm_map[i] = world->worm_map[index];
-				index--;
-				i--;
-				if (index < 0)
-					break;
-
-			}
-			i++;
-
-		}
-		if (index != world->worm_map.size() - 1)
-			world->worm_map.resize(index+1);
-
-		i=0;
-		while (i<world->worm_map.size()){
-			Creature & creature=world->worm_map[i];
-			if (creature.getEnergy() > energyFissionThreshold){
-				creature.setEnergy(creature.getEnergy()-lossFromFission);
-				Creature secondCreature;
-				secondCreature.setEnergy(100);
-				secondCreature.setPosX(creature.getPosX());
-				secondCreature.setPosY(creature.getPosY());
-				world->worm_map.push_back(secondCreature);
-
-
-
-			}
-
-			i++;
-		}
-
-	}
+    for (int i = 0; i <= lastId; i++){
+        Creature *current = world->creatures[i];
+        if (current->getEnergy() > energyFissionThreshold) {
+            current->setEnergy(current->getEnergy() - lossFromFission);
+            Creature *second = CreatureBuilder::build(current->getPosX(), current->getPosY());
+            world->creatures.push_back(second);
+        }
+    }
 }
-CreatureSpawnWorker::~CreatureSpawnWorker() {
+
+CreatureSpawnWorker::~CreatureSpawnWorker()
+{
 }
 

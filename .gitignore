@@ -1,0 +1,17 @@
+*.d
+*.o
+*.png
+*.dbg
+*.jpg
+*.PNG
+*.BMP
+*.JPG
+*.*~
+*language.settings.xml
+*metadata*
+*Release*
+*Debug*
+.settings/
+RemoteSystemsTempFiles
+*.pro.user
+*build*
