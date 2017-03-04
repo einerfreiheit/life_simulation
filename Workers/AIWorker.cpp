@@ -15,10 +15,10 @@ AIWorker::~AIWorker() {
 
 void AIWorker::work(World *world) {
 
-	for (auto &creature : world->worm_map) {
-		logic.eat(creature,world);
-		logic.move(world,creature);
-		std::cout<<creature.energy<<std::endl;
+	for (auto creature : world->creatures) {
+		logic.eat(*creature,world);
+		logic.move(world,*creature);
+		std::cout<<creature->energy<<std::endl;
 
 	}
 }

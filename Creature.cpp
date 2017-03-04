@@ -6,53 +6,66 @@
  */
 
 #include "Creature.h"
-Creature::Creature() {
+Creature::Creature(int _id): id(_id)
+{
+    energy = 0.0;
+    x = 0;
+    y = 0;
+}
 
+void Creature::setPosX(int setX)
+{
 
-	energy = 0.0;
-	x = 0;
-	y = 0;
+    this->x = setX;
+}
+void Creature::setPosY(int setY)
+{
+    this->y = setY;
+
+}
+int Creature::getPosX() const
+{
+
+    return this->x;
+}
+int Creature::getPosY() const
+{
+    return this->y;
 
 }
 
-void Creature::setPosX(int setX) {
-
-	this->x = setX;
-}
-void Creature::setPosY(int setY) {
-	this->y = setY;
-
-}
-int Creature::getPosX() {
-
-	return this->x;
-}
-int Creature::getPosY() {
-	return this->y;
-
+int Creature::getId() const{
+   return id;
 }
 
-bool Creature::isHungry() {
-	if (this->energy <=lowEnergyLevel){
-		return true;
+bool Creature::isHungry() const
+{
+    /*
+    if (this->energy <=lowEnergyLevel){
+    	return true;
 
-	}
-	else
-		return false;
-
-
+    }
+    else
+    	return false;
+        */
+    //@ так никто не пишет
+    //@ гораздо приятнее написать сразу
+    return this->energy <= lowEnergyLevel;
 }
 
-double Creature::getEnergy() {
-	return this->energy;
+double Creature::getEnergy() const
+{
+    return this->energy;
 
 }
-void Creature::setEnergy(double energyToSet) {
-	this->energy = energyToSet;
+void Creature::setEnergy(double energyToSet)
+{
+    this->energy = energyToSet;
 
 }
 
-Creature::~Creature() {
+Creature::~Creature()
+{
 
 }
 

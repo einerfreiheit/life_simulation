@@ -7,26 +7,26 @@
 #ifndef CREATURE_H_
 #define CREATURE_H_
 
-class Creature {
+class Creature
+{
 public:
-	Creature();
-	virtual ~Creature();
-	int x;
-	int y;
-	bool isHungry();
-	double energy;
+    Creature(int id);
+    virtual ~Creature();
+    bool isHungry() const;
+    double energy;
 
-	bool getHungry();
-	double getEnergy();
-	double lowEnergyLevel=100.0;
-	int getPosY();
-	int getPosX();
-	void setPosY(int setY);
-	void setPosX(int setX);
-	void setEnergy(double energyToSet);
-
-
-
+    double lowEnergyLevel = 100.0;
+    int getPosY() const;
+    int getPosX() const;
+    void setPosY(int setY);
+    void setPosX(int setX);
+    void setEnergy(double energyToSet);
+    double getEnergy() const;
+    int getId() const;
+protected:
+    int x;
+    int y;
+    int id;
 };
 
 #endif /* CREATURE_H_ */

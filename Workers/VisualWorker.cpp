@@ -15,13 +15,13 @@ void VisualWorker::work(World *world) {
 void VisualWorker::showImage(World *world) {
 	cv::namedWindow("123", CV_WINDOW_NORMAL);
 	cv::resizeWindow("123", 300, 300);
-	cv::imshow("123", world->matrix);
+	cv::imshow("123", world->visualization);
 	cv::waitKey(10);
 
 }
 
 void VisualWorker::computingImage(World *world) {
-	cv::Mat &visual = world->matrix;
+	cv::Mat &visual = world->visualization;
 
 	for (int y =0; y<world->mapHeight; y++) {
 		for (int x = 0; x<world->mapWidth; x++) {
@@ -33,9 +33,9 @@ void VisualWorker::computingImage(World *world) {
 			pixel[0] = 255;
 		}
 	}
-	for (auto &creature : world->worm_map) {
-		cv::Vec3b &pixel = visual.at<cv::Vec3b>(creature.y, creature.x);
-		pixel[2] = creature.isHungry() ? creature.energy * 255.0 / 100.0 : 255;
+	for (auto creature : world->creatures) {
+		cv::Vec3b &pixel = visual.at<cv::Vec3b>(creature->getPosY(), creature->getPosX());
+		pixel[2] = creature->isHungry() ? creature->energy * 255.0 / 100.0 : 255;
 		pixel[0] = 0;
 		pixel[1] = 0;
 	}
