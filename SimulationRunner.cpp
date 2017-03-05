@@ -27,8 +27,7 @@ void SimulationRunner::init() {
 	workers.push_back(new CreatureRemoveWorker());
 
 	ResourceWorker *resourceWorker = new ResourceWorker;
-	resourceWorker->setGainResource(2.0);
-	resourceWorker->setNuberOfCellToGainResources(4);
+	resourceWorker->setAverageGainPerCell(0.25);
 	workers.push_back(resourceWorker);
 
 	workers.push_back(new VisualWorker);

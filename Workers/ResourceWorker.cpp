@@ -1,6 +1,7 @@
 #include "ResourceWorker.h"
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 
 ResourceWorker::ResourceWorker() {
 	this->name = "ResourceWorker";
@@ -11,19 +12,18 @@ void ResourceWorker::setRandomXY(World *world) {
 	rand_x = rand() % world->mapWidth;
 
 }
-void ResourceWorker::setGainResource(double gainResourceToSet) {
+void ResourceWorker::setAverageGainPerCell(double gainPerCellToSet) {
 
-	this->gainResource = gainResourceToSet;
+	this->gainPerCell = gainPerCellToSet;
 }
-void ResourceWorker::setNuberOfCellToGainResources(int numberOfCellToGain) {
-	this->numberOfGainCell = numberOfCellToGain;
-}
+
 void ResourceWorker::work(World *world) {
-
-	for (int i = 0; i <= numberOfGainCell; i++) {
+	int cellNumber = (int )(sqrt(world->mapHeight*world->mapWidth));
+	double cellGain = (world->mapHeight*world->mapWidth)*gainPerCell/cellNumber;
+	for (int i = 0; i <= cellNumber; i++) {
 		setRandomXY(world);
-		if (world->map[rand_y][rand_x].food < (100.0 - gainResource)) {
-			world->map[rand_y][rand_x].food += gainResource;
+		if (world->map[rand_y][rand_x].food < (100.0 - cellGain)) {
+			world->map[rand_y][rand_x].food += cellGain;
 		}
 
 	}
