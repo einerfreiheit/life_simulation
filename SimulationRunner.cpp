@@ -3,11 +3,11 @@
 #include "Workers/VisualWorker.h"
 #include "Workers/WaiterWorker.h"
 #include "Workers/CreatureSpawnWorker.h"
-#include "Workers/ResourseWorker.h"
 #include "Workers/VideoWriterWorker.h"
 #include "Workers/CreatureRemoveWorker.h"
 #include <iostream>
 #include <time.h>
+#include "Workers/ResourceWorker.h"
 
 SimulationRunner::SimulationRunner() {
 
@@ -26,10 +26,10 @@ void SimulationRunner::init() {
 	workers.push_back(new CreatureSpawnWorker());
 	workers.push_back(new CreatureRemoveWorker());
 
-	ResourseWorker *resourseWorker = new ResourseWorker;
-	resourseWorker->setGainResourse(2.0);
-	resourseWorker->setNuberOfCellToGainResourses(4);
-	workers.push_back(resourseWorker);
+	ResourceWorker *resourceWorker = new ResourceWorker;
+	resourceWorker->setGainResource(2.0);
+	resourceWorker->setNuberOfCellToGainResources(4);
+	workers.push_back(resourceWorker);
 
 	workers.push_back(new VisualWorker);
 	WaiterWorker *waiterWorker = new WaiterWorker;
