@@ -5,6 +5,7 @@
 #include "Workers/CreatureSpawnWorker.h"
 #include "Workers/ResourseWorker.h"
 #include "Workers/VideoWriterWorker.h"
+#include "Workers/CreatureRemoveWorker.h"
 #include <iostream>
 #include <time.h>
 
@@ -23,6 +24,7 @@ void SimulationRunner::init() {
 	workers.push_back(new VideoWriterWorker(world));
 	workers.push_back(new AIWorker);
 	workers.push_back(new CreatureSpawnWorker());
+	workers.push_back(new CreatureRemoveWorker());
 
 	ResourseWorker *resourseWorker = new ResourseWorker;
 	resourseWorker->setGainResourse(2.0);
