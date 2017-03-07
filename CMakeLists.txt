@@ -19,4 +19,4 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3")
 
 add_executable(LifeSim ${SOURCE})
-target_link_libraries(LifeSim opencv_core opencv_highgui opencv_video opencv_imgproc)
+target_link_libraries(LifeSim opencv_core opencv_highgui opencv_video opencv_imgproc boost_program_options)
