@@ -1,5 +1,5 @@
-#include "WorkerVectorFactory.h"
-#include <vector>
+#include "WorkerFactory.h"
+#include "Workers/VisualWorker.h"
 
 void WorkerFactory::build(){
 	WorldWorker *worker;
@@ -12,10 +12,6 @@ void WorkerFactory::build(){
 }
 WorkerFactory::WorkerFactory(){
 	this->workers;
-
-
-
-
 }
 
 
