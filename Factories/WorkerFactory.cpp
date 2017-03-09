@@ -1,6 +1,6 @@
 #include "WorkerFactory.h"
-#include "Workers/VisualWorker.h"
-
+#include "../Workers/VisualWorker.h"
+#include <vector>
 void WorkerFactory::build(){
 	WorldWorker *worker;
 	worker =new VisualWorker;

@@ -1,5 +1,6 @@
 #include "SimulationRunner.h"
-
+#include <time.h>
+#include <cstdlib>
 using namespace std;
 
 SimulationRunner::SimulationRunner() {

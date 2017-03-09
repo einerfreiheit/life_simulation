@@ -1,6 +1,5 @@
 #ifndef SIMULATIONRUNNER_H
 #define SIMULATIONRUNNER_H
-#include "SimulationRunner.h"
 #include "Workers/WorldWorker.h"
 #include "Factories/WorkerFactory.h"
 #include "SimulationData.h"
@@ -12,9 +11,8 @@
 #include "Workers/VideoWriterWorker.h"
 #include "Workers/CreatureRemoveWorker.h"
 #include <iostream>
-#include <time.h>
+
 #include "Workers/ResourceWorker.h"
-#include "SimulationData.h"
 #include <cstdlib>
 class SimulationRunner
 {
