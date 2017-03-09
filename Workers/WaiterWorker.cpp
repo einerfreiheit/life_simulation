@@ -10,13 +10,11 @@
 
 WaiterWorker::WaiterWorker() {
 	this->name = "WaiterWorker";
+	this->isAvailable=SimulationData::getInst()->WaiterWorkerIsAvailable;
+	this->waitingTime=SimulationData::getInst()->timeToWait;
 
 }
-void WaiterWorker::setWaitingTime(int timeToWait){
-	this->waitingTime=timeToWait;
 
-
-}
 void WaiterWorker::work(World *world){
 	usleep(waitingTime);
 }

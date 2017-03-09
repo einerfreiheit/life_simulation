@@ -1,10 +1,3 @@
-/*
- * worm.cpp
- *
- *  Created on: 17.02.2017
- *      Author: daniil
- */
-
 #include "Creature.h"
 Creature::Creature(int _id): id(_id)
 {
@@ -40,16 +33,7 @@ int Creature::getId() const{
 
 bool Creature::isHungry() const
 {
-    /*
-    if (this->energy <=lowEnergyLevel){
-    	return true;
 
-    }
-    else
-    	return false;
-        */
-    //@ так никто не пишет
-    //@ гораздо приятнее написать сразу
     return this->energy <= lowEnergyLevel;
 }
 

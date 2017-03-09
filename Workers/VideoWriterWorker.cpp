@@ -9,8 +9,10 @@
 
 #include "CommonIncludes.h"
 
-VideoWriterWorker::VideoWriterWorker(World *world) {
+VideoWriterWorker::VideoWriterWorker() {
 	this->name = "VideoWriterWorker";
+	this->isAvailable=SimulationData::getInst()->VideoWriterWorkerIsAvailable;
+	World *world=SimulationData::getInst()->world;
 
 	writer.open("./1.avi",CV_FOURCC('M','J','P','G'),25.0,world->visualization.size()*10,true);
 

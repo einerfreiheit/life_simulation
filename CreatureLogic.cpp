@@ -1,9 +1,3 @@
-/*
- * CreatureLogic.cpp
- *
- *  Created on: 26 февр. 2017 г.
- *      Author: lenovo
- */
 #include "World.h"
 #include "CreatureLogic.h"
 #include <cstdlib>
@@ -14,7 +8,7 @@ CreatureLogic::~CreatureLogic() {
 
 }
 
-void CreatureLogic::eat(Creature &creature, World *world) {
+void CreatureLogic::eat( World *world,Creature &creature) {
 	int y = creature.getPosY();
 	int x = creature.getPosX();
 	Cell &cell = world->map[y][x];
