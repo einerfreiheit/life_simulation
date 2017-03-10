@@ -13,8 +13,8 @@ AIWorker::~AIWorker() {
 
 void AIWorker::work(World *world) {
 	for (auto creature : world->creatures) {
-		eat.Act(world, *creature);
-		move.Act(world, *creature);
+		eat.act(world, *creature);
+		move.act(world, *creature);
 		std::cout << creature->energy << std::endl;
 
 	}

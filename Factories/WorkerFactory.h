@@ -7,7 +7,7 @@ public:
 	WorkerFactory();
 	~WorkerFactory();
 	std::vector<WorldWorker *> workers;
-	void build(WorldWorker *worker);
+	void build( WorldWorker *worker);
 
 };
 
