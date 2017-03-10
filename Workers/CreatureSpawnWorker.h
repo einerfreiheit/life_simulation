@@ -9,7 +9,7 @@ public:
 	CreatureSpawnWorker();
 	virtual ~CreatureSpawnWorker();
 	void work(World *world) override;
-	double lossFromFission = 100;
+	double lossFromFission = 300;
 	double energyFissionThreshold = 600;
 
 };
