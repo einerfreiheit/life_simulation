@@ -11,13 +11,12 @@ public:
 			inst = new SimulationData;
 		return inst;
 	}
+	World * world;
 
 	int mapHeightToSet;
 	int mapWidthToSet;
 	int timeToWait;
 	double gainResourcePerCell;
-	World * world;
-
 	bool AIWorkerIsAvailable ;
 	bool CreatureRemoveWorkerIsAvailable;
 	bool CreatureSpawnWorkerIsAvailable;

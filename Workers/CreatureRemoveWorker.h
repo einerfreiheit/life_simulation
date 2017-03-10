@@ -2,8 +2,7 @@
 #define WORKERS_CREATUREREMOVEWORKER_H_
 #include "WorldWorker.h"
 
-
-class CreatureRemoveWorker : public WorldWorker{
+class CreatureRemoveWorker: public WorldWorker {
 public:
 	CreatureRemoveWorker();
 	void work(World *world) override;

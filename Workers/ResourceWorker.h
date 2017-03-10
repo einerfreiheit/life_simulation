@@ -7,11 +7,9 @@ public:
 	ResourceWorker();
 	virtual ~ResourceWorker();
     void work(World *world) override;
+private:
     double gainPerCell;
-    void setAverageGainPerCell(double gainPerCellToSet);
-
 	void setRandomXY(World* world);
-	private:
     int rand_y;
     int rand_x;
 

@@ -1,8 +1,6 @@
 #include "ResourceWorker.h"
-#include <iostream>
-#include <cstdlib>
 #include <cmath>
-
+#include <cstdlib>
 ResourceWorker::ResourceWorker() {
 	this->name = "ResourceWorker";
 	this->isAvailable=SimulationData::getInst()->ResourceWorkerIsAvailable;
