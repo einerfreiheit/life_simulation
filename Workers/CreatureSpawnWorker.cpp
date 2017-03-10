@@ -1,19 +1,9 @@
-/*
- * CreatureSpawnWorker.cpp
- *
- *  Created on: 24 февр. 2017 г.
- *      Author: lenovo
- */
-
 #include "CreatureSpawnWorker.h"
-#include <cstdlib>
-#include "Creature.h"
-#include "../Factories/CreatureBuilder.h"
 
 CreatureSpawnWorker::CreatureSpawnWorker() {
 	this->name = "CreatureSpawnWorker";
-	this->isAvailable=SimulationData::getInst()->CreatureSpawnWorkerIsAvailable;
-
+	this->isAvailable =
+			SimulationData::getInst()->CreatureSpawnWorkerIsAvailable;
 
 }
 

@@ -16,6 +16,7 @@ void SimulationRunner::init() {
 	srand(7 * clock() + time(NULL));
 	SimulationData::getInst();
 	world = SimulationData::getInst()->world;
+
 	factory.build(new AIWorker);
 	factory.build(new CreatureRemoveWorker);
 	factory.build(new CreatureSpawnWorker);
@@ -24,16 +25,11 @@ void SimulationRunner::init() {
 	factory.build(new VisualWorker);
 	factory.build(new WaiterWorker);
 
-
-
-
-
-
 }
 
 void SimulationRunner::run() {
 	while (true) {
-		for (WorldWorker *worker :factory.workers) {
+		for (WorldWorker *worker : factory.workers) {
 			std::cout << worker->getName() << std::endl;
 			worker->work(world);
 

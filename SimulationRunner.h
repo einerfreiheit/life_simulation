@@ -11,23 +11,19 @@
 #include "Workers/VideoWriterWorker.h"
 #include "Workers/CreatureRemoveWorker.h"
 #include <iostream>
-
 #include "Workers/ResourceWorker.h"
 #include <cstdlib>
-class SimulationRunner
-{
+class SimulationRunner {
 public:
-    SimulationRunner();
-    ~SimulationRunner();
-    std::vector<WorldWorker *>  workers;
+	SimulationRunner();
+	~SimulationRunner();
+	std::vector<WorldWorker *> workers;
 	WorkerFactory factory;
 
-
-    void init();
-    void run();
+	void init();
+	void run();
 private:
-    World *world;
-
+	World *world;
 
 };
 

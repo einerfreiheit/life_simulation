@@ -3,19 +3,16 @@
 #include "../World.h"
 #include "SimulationData.h"
 
-class WorldWorker
-{
+class WorldWorker {
 public:
-    virtual void work(World *world) = 0;
-    std::string getName() const;
-    bool isAvailable=true;
-
-
+	virtual void work(World *world) = 0;
+	std::string getName() const;
+	bool isAvailable = true;
 
 protected:
 
-    std::string name;
+	std::string name;
 
 };
 
-#endif // WORLDWORKER_H
+#endif
