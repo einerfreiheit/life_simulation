@@ -12,6 +12,8 @@
 
 CreatureSpawnWorker::CreatureSpawnWorker() {
 	this->name = "CreatureSpawnWorker";
+	this->isAvailable=SimulationData::getInst()->CreatureSpawnWorkerIsAvailable;
+
 
 }
 

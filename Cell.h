@@ -5,9 +5,7 @@ class Cell {
 public:
 	Cell();
 	double food;
-	bool isCreatureHere;
 	virtual ~Cell();
-	void setCellFood();
 };
 
-#endif /* CELL_H_ */
+#endif

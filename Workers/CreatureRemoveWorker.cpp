@@ -2,6 +2,7 @@
 
 CreatureRemoveWorker::CreatureRemoveWorker() {
 	this->name = "CreatureRemoveWorker";
+	this->isAvailable=SimulationData::getInst()->CreatureRemoveWorkerIsAvailable;
 
 }
 

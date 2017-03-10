@@ -6,7 +6,7 @@ public:
 	CreatureLogic();
 	virtual ~CreatureLogic();
 	void move(World *world, Creature &creature);
-	void eat(Creature &creature, World *world);
+	void eat( World *world,Creature &creature);
 	double energyFromFood = 10;
 	double creatureOneBait = 5.0;
 

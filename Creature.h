@@ -14,7 +14,6 @@ public:
     virtual ~Creature();
     bool isHungry() const;
     double energy;
-
     double lowEnergyLevel = 100.0;
     int getPosY() const;
     int getPosX() const;

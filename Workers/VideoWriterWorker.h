@@ -11,7 +11,7 @@
 
 class VideoWriterWorker: public WorldWorker {
 public:
-	VideoWriterWorker(World *world);
+	VideoWriterWorker();
 	cv::VideoWriter writer;
 	void work (World *world) override;
 	virtual ~VideoWriterWorker();

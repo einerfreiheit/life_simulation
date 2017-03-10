@@ -5,16 +5,14 @@
 
 ResourceWorker::ResourceWorker() {
 	this->name = "ResourceWorker";
+	this->isAvailable=SimulationData::getInst()->ResourceWorkerIsAvailable;
+	this->gainPerCell=SimulationData::getInst()->gainResourcePerCell;
 
 }
 void ResourceWorker::setRandomXY(World *world) {
 	rand_y = rand() % world->mapHeight;
 	rand_x = rand() % world->mapWidth;
 
-}
-void ResourceWorker::setAverageGainPerCell(double gainPerCellToSet) {
-
-	this->gainPerCell = gainPerCellToSet;
 }
 
 void ResourceWorker::work(World *world) {
