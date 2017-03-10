@@ -22,7 +22,7 @@ public:
     void setEnergy(double energyToSet);
     double getEnergy() const;
     int getId() const;
-    double energyFromFood = 10;
+    double energyFromFood = 5.0;
     double creatureOneBait = 5.0;
     double energyToMove=5.0;
 protected:

@@ -4,13 +4,18 @@
 #include "WorldWorker.h"
 #include "../Actions/Eat.h"
 #include "../Actions/Move.h"
+#include "../Logics/SimpleLogics.h"
+#include "../Logics/CreatureLogic.h"
+
 
 class AIWorker: public WorldWorker {
 public:
 	AIWorker();
 	~AIWorker();
-	Eat eat;
-	Move move;
+	SimpleLogics simplelogic;
+
+//	Eat eat;
+//	Move move;
 	void work(World *world) override;
 };
 
