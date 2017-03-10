@@ -6,8 +6,10 @@ class WorkerFactory {
 public:
 	WorkerFactory();
 	~WorkerFactory();
-	void build();
 	std::vector <WorldWorker *> workers;
+	void build(WorldWorker *worker);
+//	std::vector <WorldWorker *> workers;
+	int q;
 
 };
 

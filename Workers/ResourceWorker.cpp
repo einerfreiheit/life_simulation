@@ -6,7 +6,7 @@
 ResourceWorker::ResourceWorker() {
 	this->name = "ResourceWorker";
 	this->isAvailable=SimulationData::getInst()->ResourceWorkerIsAvailable;
-	this->workerParameter=SimulationData::getInst()->gainResourcePerCell;
+	this->gainPerCell=SimulationData::getInst()->gainResourcePerCell;
 
 }
 void ResourceWorker::setRandomXY(World *world) {

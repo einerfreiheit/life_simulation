@@ -10,8 +10,6 @@ public:
     AIWorker();
     ~AIWorker();
     CreatureLogic logic;
-
-
     void work(World *world) override;
 };
 

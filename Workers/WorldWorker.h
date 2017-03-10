@@ -7,15 +7,14 @@ class WorldWorker
 {
 public:
     virtual void work(World *world) = 0;
-    
     std::string getName() const;
     bool isAvailable=true;
+
 
 
 protected:
 
     std::string name;
-    double workerParameter=-1;
 
 };
 

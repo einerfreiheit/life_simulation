@@ -19,7 +19,7 @@ class SimulationRunner
 public:
     SimulationRunner();
     ~SimulationRunner();
-    std::vector<WorldWorker *> workers  {10};
+    std::vector<WorldWorker *>  workers;
 	WorkerFactory factory;
 
 

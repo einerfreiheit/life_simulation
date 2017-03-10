@@ -1,5 +1,6 @@
 #include "SimulationRunner.h"
 #include <time.h>
+#include "../Factories/WorkerFactory.h"
 #include <cstdlib>
 using namespace std;
 
@@ -15,20 +16,24 @@ void SimulationRunner::init() {
 	srand(7 * clock() + time(NULL));
 	SimulationData::getInst();
 	world = SimulationData::getInst()->world;
+	factory.build(new AIWorker);
+	factory.build(new CreatureRemoveWorker);
+	factory.build(new CreatureSpawnWorker);
+	factory.build(new ResourceWorker);
+	factory.build(new VideoWriterWorker);
+	factory.build(new VisualWorker);
+	factory.build(new WaiterWorker);
 
-//	workers.push_back(new AIWorker);
-//	workers.push_back(new VisualWorker);
-	WorkerFactory factory;
-//	WorldWorker *worker= new AIWorker;
-//	workers.push_back(worker);
-		factory.build();
-//	workers=factory.workers;
+
+
+
+
 
 }
 
 void SimulationRunner::run() {
 	while (true) {
-		for (WorldWorker *worker : workers) {
+		for (WorldWorker *worker :factory.workers) {
 			std::cout << worker->getName() << std::endl;
 			worker->work(world);
 

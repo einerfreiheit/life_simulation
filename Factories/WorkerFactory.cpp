@@ -1,17 +1,15 @@
 #include "WorkerFactory.h"
 #include "../Workers/VisualWorker.h"
 #include <vector>
-void WorkerFactory::build(){
-	WorldWorker *worker;
-	worker =new VisualWorker;
-	if (worker->isAvailable==true){
+void WorkerFactory::build(WorldWorker *worker) {
+	if (worker->isAvailable == true) {
 		this->workers.push_back(worker);
 
 	}
-
 }
-WorkerFactory::WorkerFactory(){
-	this->workers;
+WorkerFactory::WorkerFactory() {
+	this->workers.reserve(10);
 }
 
-
+WorkerFactory::~WorkerFactory() {
+}
