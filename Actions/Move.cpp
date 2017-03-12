@@ -3,8 +3,8 @@
 Move::Move() {
 }
 void Move::act(World *world, Creature &creature) {
-	int y = creature.getPosY();
-	int x = creature.getPosX();
+	int y = creature.getPosY();//@ в идеале в классе Move уже должна содержаться инфа о том, куда хочет двинуться червь
+	int x = creature.getPosX();//@ а направление движения должна логика заполнять
 	int borderY = world->mapHeight;
 	int borderX = world->mapWidth;
 	Cell &cell = world->map[y][x];

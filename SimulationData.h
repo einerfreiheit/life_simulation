@@ -3,10 +3,12 @@
 #include "World.h"
 
 
+//@ этот класс плох тем, что соединяет в себе напрямую и мир, и поля конфигурации
+//@ лучше все действия с конфигурацией вынести в отдельный класс, а после его тут прописать
 class SimulationData {
 public:
 	static const SimulationData *getInst() {
-		static SimulationData *inst;
+		static SimulationData *inst;//@ хорошо было бы проинициализировать этот указатель NULL
 		if (!inst)
 			inst = new SimulationData;
 		return inst;
@@ -22,9 +24,9 @@ public:
 	bool CreatureSpawnWorkerIsAvailable;
 	bool ResourceWorkerIsAvailable;
 	bool VideoWriterWorkerIsAvailable;
-	bool VisualWorkerIsAvailable ;
-	bool WaiterWorkerIsAvailable;
-
+	bool VisualWorkerIsAvailable ;//@ плохие названия: долгие, вводят в заблуждение
+	bool WaiterWorkerIsAvailable;//@ IsAvailable может подразумевать, что объект может стать доступен, в то время как поля решают, будет ли вообще построен объект
+//@ лучше было бы makeWaiterWorker, useWaiterWorker, buildWaiterWorker etc
 private:
 	void readConfigParameters();
 	SimulationData();
