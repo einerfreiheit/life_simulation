@@ -7,7 +7,7 @@
 #include "Creature.h"
 class World {
 public:
-	World(const int mapHeightToSet, const int mapWidthToSet);
+	World(const int mapHeightToSet, const int mapWidthToSet);//@ тут const не имеет смысла
 	~World();
 	cv::Mat visualization;
 	int mapHeight;

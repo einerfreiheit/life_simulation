@@ -2,8 +2,8 @@
 #include "CreatureLogic.h"
 
 SimpleLogics::SimpleLogics() {
-this->actions.reserve(2);
-
+this->actions.reserve(2);//@ резервировать малые размеры тут нет особого смысла
+//@ есть смысл резервировать тогда, когда много раз этот код будет запускаться, и каждый раз в вектор будет писаться много всего
 }
 void SimpleLogics::findFood(World*world,Creature& creature){
 	int y = creature.getPosY();

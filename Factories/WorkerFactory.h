@@ -7,7 +7,7 @@ public:
 	WorkerFactory();
 	~WorkerFactory();
 	std::vector<WorldWorker *> workers;
-	void build( WorldWorker *worker);
+	void build( WorldWorker *worker);//@ переоборудуй таможню в фабрику, пусть метод build будет статичным и будет возвращать через ссылку вектор воркеров
 
 };
 

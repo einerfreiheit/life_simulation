@@ -16,6 +16,7 @@ SimulationData::SimulationData(){
 
 }
 
+//@ можно написать изящнее
 void SimulationData::readConfigParameters() {
 	std::string config_filename = "config.ini";
 		options_description desc;
