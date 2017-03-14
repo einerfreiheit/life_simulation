@@ -4,7 +4,6 @@
 
 VisualWorker::VisualWorker() {
 	this->name = "VisualWorker";
-	this->isAvailable = SimulationData::getInst()->VisualWorkerIsAvailable;
 
 }
 void VisualWorker::work(World *world) {

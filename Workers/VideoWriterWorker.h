@@ -8,6 +8,8 @@ public:
 	VideoWriterWorker();
 	void work (World *world) override;
 	virtual ~VideoWriterWorker();
+	cv::Mat output;
+
 private:cv::VideoWriter writer;
 };
 

@@ -10,9 +10,11 @@ class SimpleLogics : public CreatureLogic {
 public:
 	SimpleLogics();
 	virtual ~SimpleLogics();
-	std::vector <Action *> actions;
-	std::vector <Action *> getActions();//@ если уж пишешь так, то лучше возвращать вектор по ссылке - так он не будет перекопироваться
-	void findFood(World*world,Creature &creature) override;
+//	std::vector <Action *> actions;
+//	std::vector <Action *>  &getActions(){
+//		return this->actions;
+//	}
+	void findFood(World*world,Creature &creature,std::vector<Action*> &actions) override;
 
 };
 

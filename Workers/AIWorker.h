@@ -12,10 +12,11 @@ class AIWorker: public WorldWorker {
 public:
 	AIWorker();
 	~AIWorker();
+//	std::vector<Action> &actions;
+
 	SimpleLogics simplelogic;
 
-//	Eat eat;
-//	Move move;
+
 	void work(World *world) override;
 };
 

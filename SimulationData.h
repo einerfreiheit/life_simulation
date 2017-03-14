@@ -8,7 +8,7 @@
 class SimulationData {
 public:
 	static const SimulationData *getInst() {
-		static SimulationData *inst;//@ хорошо было бы проинициализировать этот указатель NULL
+		static SimulationData *inst=nullptr;//@ хорошо было бы проинициализировать этот указатель NULL
 		if (!inst)
 			inst = new SimulationData;
 		return inst;
@@ -19,14 +19,13 @@ public:
 	int mapWidthToSet;
 	int timeToWait;
 	double gainResourcePerCell;
-	bool AIWorkerIsAvailable ;
-	bool CreatureRemoveWorkerIsAvailable;
-	bool CreatureSpawnWorkerIsAvailable;
-	bool ResourceWorkerIsAvailable;
-	bool VideoWriterWorkerIsAvailable;
-	bool VisualWorkerIsAvailable ;//@ плохие названия: долгие, вводят в заблуждение
-	bool WaiterWorkerIsAvailable;//@ IsAvailable может подразумевать, что объект может стать доступен, в то время как поля решают, будет ли вообще построен объект
-//@ лучше было бы makeWaiterWorker, useWaiterWorker, buildWaiterWorker etc
+	bool useAIWorker ;
+	bool useCreatureRemoveWorker;
+	bool useCreatureSpawnWorker;
+	bool useResourceWorker;
+	bool useVideoWriterWorker;
+	bool useVisualWorker ;
+	bool useWaiterWorker;
 private:
 	void readConfigParameters();
 	SimulationData();

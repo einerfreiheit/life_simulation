@@ -3,7 +3,6 @@
 #include <cstdlib>
 ResourceWorker::ResourceWorker() {
 	this->name = "ResourceWorker";
-	this->isAvailable=SimulationData::getInst()->ResourceWorkerIsAvailable;
 	this->gainPerCell=SimulationData::getInst()->gainResourcePerCell;
 
 }

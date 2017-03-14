@@ -2,10 +2,11 @@
 #define CREATURELOGIC_H_
 #include "../Creature.h"
 #include "../World.h"
+#include "../Actions/Action.h"
 class CreatureLogic {
 public:
 
-	virtual void findFood (World*world,Creature &creature)=0;
+	virtual void findFood (World*world,Creature &creature,std::vector<Action*> &actions)=0;
 
 };
 
