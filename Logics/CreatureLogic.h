@@ -6,7 +6,9 @@
 class CreatureLogic {
 public:
 
-	virtual void findFood (World*world,Creature &creature,std::vector<Action*> &actions)=0;
+	CreatureLogic();
+	virtual ~CreatureLogic();
+	virtual void findFood (World*world,Creature &creature)=0;
 
 };
 

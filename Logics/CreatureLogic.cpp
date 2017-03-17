@@ -3,5 +3,6 @@
 
 
 
-
+CreatureLogic::CreatureLogic(){}
+CreatureLogic::~CreatureLogic(){}
 
