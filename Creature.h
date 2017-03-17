@@ -1,17 +1,15 @@
-/*
- * worm.h
- *
- *  Created on: 17.02.2017
- *      Author: daniil
- */
 #ifndef CREATURE_H_
 #define CREATURE_H_
+#include "Actions/SimpleAction.h"
+#include <vector>
 
 class Creature
 {
 public:
     Creature(int id);
     virtual ~Creature();
+    std::vector <SimpleAction*> creatureActions;
+
     bool isHungry() const;
     double energy;
     double lowEnergyLevel = 100.0;

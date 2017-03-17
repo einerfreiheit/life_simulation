@@ -9,6 +9,7 @@
 #include "Workers/VideoWriterWorker.h"
 #include "Workers/CreatureRemoveWorker.h"
 #include "Workers/ResourceWorker.h"
+#include "Workers/CreatureActionWorker.h"
 
 
 void WorkerFactory::build(std::vector<WorldWorker*>&workers) {
@@ -19,6 +20,7 @@ void WorkerFactory::build(std::vector<WorldWorker*>&workers) {
 	addWorker <CreatureRemoveWorker>(workers,SimulationData::getInst()->useCreatureRemoveWorker);
 	addWorker <VideoWriterWorker>(workers,SimulationData::getInst()->useVideoWriterWorker);
 	addWorker <WaiterWorker>(workers,SimulationData::getInst()->useWaiterWorker);
+	addWorker<CreatureActionWorker>(workers,SimulationData::getInst()->useCreatureActionWorker);
 
 
 }

@@ -17,6 +17,7 @@ void SimulationData::readConfigParameters() {
 	("World.height", value<int>(&mapHeightToSet)->default_value(5))
 	("World.width", value<int>(&mapWidthToSet)->default_value(5))
 	("AIWorker.use", value<bool>(&useAIWorker)->default_value(true))
+	("CreatureActionWorker.use", value<bool>(&useCreatureActionWorker)->default_value(true))
 	("CreatureRemoveWorker.use",value<bool>(&useCreatureRemoveWorker)->default_value(true))
 	("CreatureSpawnWorker.use",value<bool>(&useCreatureSpawnWorker)->default_value(true))
 	("ResourceWorker.use",value<bool>(&useResourceWorker)->default_value(true))

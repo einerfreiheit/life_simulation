@@ -13,7 +13,7 @@ public:
 			inst = new SimulationData;
 		return inst;
 	}
-	World * world;
+//	World * world;
 
 	int mapHeightToSet;
 	int mapWidthToSet;
@@ -26,6 +26,7 @@ public:
 	bool useVideoWriterWorker;
 	bool useVisualWorker ;
 	bool useWaiterWorker;
+	bool useCreatureActionWorker;
 private:
 	void readConfigParameters();
 	SimulationData();

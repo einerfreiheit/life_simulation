@@ -2,6 +2,7 @@
 #define ACTIONS_EAT_H_
 #include "Action.h"
 #include "../Cell.h"
+#include "World.h"
 
 class Eat: public  Action
 {
