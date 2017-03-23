@@ -9,7 +9,8 @@ public:
 	CreatureLogic();
 	virtual ~CreatureLogic();
 	virtual void findFood (World*world,Creature &creature)=0;
-
+	virtual void logicMove(World*world,Creature&creature) =0;
+	virtual void logicEat(Creature &creature)=0;
 };
 
 #endif
