@@ -2,6 +2,7 @@
 
 AIWorker::AIWorker() {
 	this->name = "AIWorker";
+	this->creaturelogic = new SimpleLogics;
 
 }
 
@@ -13,7 +14,7 @@ void AIWorker::work(World *world) {
 
 	for (auto creature : world->creatures) {
 
-		simplelogic.findFood(world, *creature);
+		creaturelogic->logicActions(world,*creature);
 
 	}
 }

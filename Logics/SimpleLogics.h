@@ -2,8 +2,7 @@
 #define LOGICS_SIMPLELOGICS_H_
 #include "CreatureLogic.h"
 #include "Creature.h"
-#include "Actions/SimpleAction.h"
-#include "../Actions/Action.h"
+#include "World.h"
 
 #include <vector>
 
@@ -11,9 +10,9 @@ class SimpleLogics: public CreatureLogic {
 public:
 	SimpleLogics();
 	virtual ~SimpleLogics();
-	void findFood(World*world, Creature &creature) override;
 	void logicMove(World*world, Creature&creature) override;
 	void logicEat(Creature &creature) override;
+//	void logicActions (World *world,Creature &creature);
 
 	int side;
 			enum WAY_TYPE {
