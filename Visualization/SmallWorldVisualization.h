@@ -6,7 +6,6 @@ class SmallWorldVisualization :public Visualization {
 public:
 	SmallWorldVisualization();
 	virtual ~SmallWorldVisualization();
-	void visualize(World *world) override;
 	void computeImage(World *world) override;
 	void showImage(World *world) override;
 };

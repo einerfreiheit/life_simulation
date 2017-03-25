@@ -2,6 +2,7 @@
 #define ACTIONS_ACTION_H_
 #include "../World.h"
 #include "SimpleAction.h"
+#include "SimulationData.h"
 class Action :public SimpleAction {
 public:
 	Action();

@@ -2,6 +2,8 @@
 #define AIWORKER_H
 #include "WorldWorker.h"
 #include "Logics/SimpleLogics.h"
+#include "Logics/CreatureLogic.h"
+
 
 
 
@@ -9,8 +11,8 @@ class AIWorker: public WorldWorker {
 public:
 	AIWorker();
 	virtual ~AIWorker();
-	SimpleLogics simplelogic;
-
+//	SimpleLogics simplelogic;
+	CreatureLogic *creaturelogic;
 	void work(World *world) override;
 };
 

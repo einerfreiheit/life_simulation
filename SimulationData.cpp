@@ -25,7 +25,12 @@ void SimulationData::readConfigParameters() {
 	("Workers.useVideoWriterWorker",value<bool>(&useVideoWriterWorker)->default_value(true))
 	("Workers.useWaiterWorker",value<bool>(&useWaiterWorker)->default_value(true))
 	("WaitingTime.timeToWait", value<int>(&timeToWait)->default_value(1000))
-	("Resources.gainPerCell", value<double>(&gainResourcePerCell)->default_value(0.0));
+	("Resources.gainPerCell", value<double>(&gainResourcePerCell)->default_value(0.0))
+	("CreatureParameters.creatureOneBait",value<double>(&creatureOneBait)->default_value(1.0))
+	("CreatureParameters.energyToMove",value<double>(&energyToMove)->default_value(1.0))
+	("CreatureParameters.energyFromFood",value<double>(&energyFromFood)->default_value(1.0));
+
+
 	variables_map vm;
 	std::ifstream config_stream(config_filename.c_str());
 	store(parse_config_file(config_stream, desc), vm);

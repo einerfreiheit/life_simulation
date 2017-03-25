@@ -16,6 +16,9 @@ public:
 	int mapWidthToSet;
 	int timeToWait;
 	double gainResourcePerCell;
+    double energyFromFood;
+    double creatureOneBait;
+    double energyToMove;
 	bool useAIWorker ;
 	bool useCreatureRemoveWorker;
 	bool useCreatureSpawnWorker;

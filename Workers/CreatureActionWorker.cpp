@@ -23,7 +23,6 @@ void CreatureActionWorker::work(World *world) {
 
 			}
 
-    creature->energy-=creature->lossEnergyInIddle;
  	creature->creatureActions.erase(creature->creatureActions.begin(),creature->creatureActions.end());
 
 	}
