@@ -12,4 +12,4 @@ public:
 	void act(World *world,Creature &creature) override;
 };
 
-#endif /* ACTIONS_EAT_H_ */
+#endif

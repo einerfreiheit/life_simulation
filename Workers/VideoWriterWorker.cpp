@@ -4,8 +4,6 @@
 VideoWriterWorker::VideoWriterWorker() {
 	this->name = "VideoWriterWorker";
 
-//@ лучше сделать отложенную инициализацию записывалки видео
-//@ а вдруг мы world->visualization не определим?
 }
 void VideoWriterWorker::init(World *world) {
 	writer.open("./1.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25.0,

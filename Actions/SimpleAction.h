@@ -8,4 +8,4 @@ public:
 
 };
 
-#endif /* ACTIONS_SIMPLEACTION_H_ */
+#endif
