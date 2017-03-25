@@ -20,10 +20,6 @@ public:
     void setEnergy(double energyToSet);
     double getEnergy() const;
     int getId() const;
-    double energyFromFood = 10;
-    double lossEnergyInIddle=2.5;
-    double creatureOneBait = 5.0;
-    double energyToMove=5.0;
 protected:
     int x;
     int y;

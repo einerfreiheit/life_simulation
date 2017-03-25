@@ -49,7 +49,7 @@ void Move::act(World *world, Creature &creature) {
 	}
 
 	if (isMoved) {
-		creature.energy = creature.energy - creature.energyToMove;
+		creature.energy = creature.energy - SimulationData::getInst()->energyToMove;
 		creature.setPosX(nextX);
 		creature.setPosY(nextY);
 
