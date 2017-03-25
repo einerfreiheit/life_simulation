@@ -1,12 +1,9 @@
 #include "SmallWorldVisualization.h"
 SmallWorldVisualization::SmallWorldVisualization() {
-	// TODO Auto-generated constructor stub
 
 }
 
-SmallWorldVisualization::~SmallWorldVisualization() {
-	// TODO Auto-generated destructor stub
-}
+SmallWorldVisualization::~SmallWorldVisualization() {}
 
 void SmallWorldVisualization::showImage(World *world) {
 	cv::namedWindow("123", CV_WINDOW_NORMAL);
@@ -15,11 +12,7 @@ void SmallWorldVisualization::showImage(World *world) {
 	cv::waitKey(10);
 
 }
-void SmallWorldVisualization::visualize(World *world){
 
-	computeImage(world);
-	showImage(world);
-}
 
 void SmallWorldVisualization::computeImage(World *world) {
 	cv::Mat &visual = world->visualization;
