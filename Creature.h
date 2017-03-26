@@ -7,6 +7,8 @@
 #ifndef CREATURE_H_
 #define CREATURE_H_
 
+#include "Genetics/Genome.h"
+
 class Creature
 {
 public:
@@ -25,10 +27,13 @@ public:
     double energyFromFood = 5.0;
     double creatureOneBait = 5.0;
     double energyToMove=5.0;
+    void setGenome(GenomePtr genome);
 protected:
     int x;
     int y;
     int id;
+    
+    GenomePtr genome = NULL;
 };
 
 #endif /* CREATURE_H_ */

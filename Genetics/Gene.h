@@ -23,11 +23,11 @@ class Gene
 {
 public:
     Gene();
-    Gene(GENE_TYPE type, float value1, float value2);
+    Gene(GENE_TYPE type, float allel1, float allel2);
 
     GENE_TYPE type;
-    float value1;
-    float value2;
+    float allel1;
+    float allel2;
 };
 
 #endif // GENE_H
