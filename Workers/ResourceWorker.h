@@ -7,11 +7,9 @@ public:
 	ResourceWorker();
 	virtual ~ResourceWorker();
     void work(World *world) override;
+    static inline void getRandom(int&value,int border);
 private:
     double gainPerCell;
-	void setRandomXY(World* world);
-    int rand_y;
-    int rand_x;
 
 };
 

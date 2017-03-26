@@ -2,6 +2,7 @@
 #define ACTIONS_EAT_H_
 #include "Action.h"
 #include "../Cell.h"
+#include "World.h"
 
 class Eat: public  Action
 {
@@ -11,4 +12,4 @@ public:
 	void act(World *world,Creature &creature) override;
 };
 
-#endif /* ACTIONS_EAT_H_ */
+#endif

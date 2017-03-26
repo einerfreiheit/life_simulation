@@ -1,11 +1,7 @@
-/*
- * worm.h
- *
- *  Created on: 17.02.2017
- *      Author: daniil
- */
 #ifndef CREATURE_H_
 #define CREATURE_H_
+#include "Actions/SimpleAction.h"
+#include <vector>
 
 #include "Genetics/Genome.h"
 
@@ -14,6 +10,8 @@ class Creature
 public:
     Creature(int id);
     virtual ~Creature();
+    std::vector <SimpleAction*> creatureActions;
+
     bool isHungry() const;
     double energy;
     double lowEnergyLevel = 100.0;
@@ -24,9 +22,6 @@ public:
     void setEnergy(double energyToSet);
     double getEnergy() const;
     int getId() const;
-    double energyFromFood = 5.0;
-    double creatureOneBait = 5.0;
-    double energyToMove=5.0;
     void setGenome(GenomePtr genome);
 protected:
     int x;

@@ -3,7 +3,7 @@
 
 WaiterWorker::WaiterWorker() {
 	this->name = "WaiterWorker";
-	this->waitingTime = SimulationData::getInst()->timeToWait;//@ вот тут всё здорово в этой строчке, для этого конфиг-синглтон и нужен
+	this->waitingTime = SimulationData::getInst()->timeToWait;
 
 }
 

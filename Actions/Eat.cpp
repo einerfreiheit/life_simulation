@@ -6,9 +6,14 @@ void Eat::act(World *world, Creature &creature) {
 	int y = creature.getPosY();
 	int x = creature.getPosX();
 	Cell &cell = world->map[y][x];
+	double energyFromFood=SimulationData::getInst()->energyFromFood;
+	double creatureOneBait=SimulationData::getInst()->creatureOneBait;
 
-	cell.food -= creature.creatureOneBait;//@ в самих действиях должны быть проверки на возможность их осуществить, а в логике могут быть просто хотелки
-	creature.energy += creature.energyFromFood;
+
+	if (cell.food > energyFromFood) {
+		cell.food -=creatureOneBait;
+		creature.energy +=energyFromFood;
+	}
 
 }
 Eat::~Eat() {

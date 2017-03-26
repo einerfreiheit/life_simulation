@@ -3,22 +3,22 @@
 #include "World.h"
 
 
-//@ этот класс плох тем, что соединяет в себе напрямую и мир, и поля конфигурации
-//@ лучше все действия с конфигурацией вынести в отдельный класс, а после его тут прописать
 class SimulationData {
 public:
 	static const SimulationData *getInst() {
-		static SimulationData *inst=nullptr;//@ хорошо было бы проинициализировать этот указатель NULL
+		static SimulationData *inst=nullptr;
 		if (!inst)
 			inst = new SimulationData;
 		return inst;
 	}
-	World * world;
 
 	int mapHeightToSet;
 	int mapWidthToSet;
 	int timeToWait;
 	double gainResourcePerCell;
+    double energyFromFood;
+    double creatureOneBait;
+    double energyToMove;
 	bool useAIWorker ;
 	bool useCreatureRemoveWorker;
 	bool useCreatureSpawnWorker;
@@ -26,6 +26,7 @@ public:
 	bool useVideoWriterWorker;
 	bool useVisualWorker ;
 	bool useWaiterWorker;
+	bool useCreatureActionWorker;
 private:
 	void readConfigParameters();
 	SimulationData();
