@@ -11,9 +11,11 @@ public:
     
 private:
     static cv::Scalar getAllelColor(float allel);
+    static void drawGene(const Gene &gene, cv::Mat &vis, int posX, int posY);
     
     static const int geneWidth = 40;
     static const int geneHeight = 20;
+    static const int chromosomesOffset = 10;
 };
 
 #endif // GENOMEVISUALIZER_H

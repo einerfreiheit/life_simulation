@@ -10,7 +10,7 @@ GenomePtr GenomeBuilder::build(int complexity)
     for (size_t i = 0; i < result->chromosomes.size(); i++){
         int usedComplexity = std::min(complexity, complexityPerChromosome);
         complexity -= usedComplexity;
-        ChromosomePtr chromosome = result->chromosomes[i];
+        ChromosomePtr &chromosome = result->chromosomes[i];//@ очень сильное колдунство - ссылка на указатель, главное ногу не прострелить
         chromosome = new Chromosome;
         chromosome->genes.resize(usedComplexity);
     }
