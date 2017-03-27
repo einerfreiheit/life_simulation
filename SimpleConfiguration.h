@@ -13,7 +13,7 @@ protected:
     virtual void addParams();
     
     template<typename T> void add(std::string paramName, T &ret, T def){
-        params.add_options()(section + "." + paramName, boost::program_options::value<T>(&ret)->default_value(def));
+        params.add_options()((section + "." + paramName).c_str(), boost::program_options::value<T>(&ret)->default_value(def)); 
     }
 private:
     void readParams(std::string pathToConfig);

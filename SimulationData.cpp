@@ -2,6 +2,9 @@
 #include <boost/program_options.hpp>
 #include <fstream>
 #include <iostream>
+#include "SimulationConfig.h"
+
+
 using namespace boost::program_options;
 using namespace std;
 SimulationData::SimulationData() {
@@ -28,8 +31,10 @@ void SimulationData::readConfigParameters() {
 	("Resources.gainPerCell", value<double>(&gainResourcePerCell)->default_value(0.0))
 	("CreatureParameters.creatureOneBait",value<double>(&creatureOneBait)->default_value(1.0))
 	("CreatureParameters.energyToMove",value<double>(&energyToMove)->default_value(1.0))
-	("CreatureParameters.energyFromFood",value<double>(&energyFromFood)->default_value(1.0));
+        ("CreatureParameters.energyFromFood",value<double>(&energyFromFood)->default_value(1.0));
 
+        SimulationConfig config;//@ потом надо выпилить, но вот пример того, что я считаю изящным
+        config.load("config.ini");
 
 	variables_map vm;
 	std::ifstream config_stream(config_filename.c_str());
