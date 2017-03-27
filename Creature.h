@@ -3,6 +3,8 @@
 #include "Actions/SimpleAction.h"
 #include <vector>
 
+#include "Genetics/Genome.h"
+
 class Creature
 {
 public:
@@ -20,10 +22,13 @@ public:
     void setEnergy(double energyToSet);
     double getEnergy() const;
     int getId() const;
+    void setGenome(GenomePtr genome);
 protected:
     int x;
     int y;
     int id;
+    
+    GenomePtr genome = NULL;
 };
 
 #endif /* CREATURE_H_ */

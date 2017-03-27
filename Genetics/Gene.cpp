@@ -5,11 +5,11 @@
 Gene::Gene()
 {
     type = static_cast<GENE_TYPE>(rand() % GT_ENUM_END);
-    value1 = GeneticsUtils::rangedRandom(-1, 1);
-    value2 = GeneticsUtils::rangedRandom(-1, 1);
+    allel1 = GeneticsUtils::rangedRandom(-1, 1);
+    allel2 = GeneticsUtils::rangedRandom(-1, 1);
 }
 
-Gene::Gene(GENE_TYPE type, float value1, float value2) : type(type), value1(value1), value2(value2)
+Gene::Gene(GENE_TYPE type, float allel1, float allel2) : type(type), allel1(allel1), allel2(allel2)
 {
 
 }

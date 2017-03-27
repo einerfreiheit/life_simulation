@@ -5,6 +5,8 @@ class GeneticsUtils
 {
 public:
     static float rangedRandom(float minValue, float maxValue);
+    
+    
 };
 
 #endif // GENETICSUTILS_H

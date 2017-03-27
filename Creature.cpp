@@ -49,8 +49,15 @@ void Creature::setEnergy(double energyToSet)
 
 }
 
+
+void Creature::setGenome(GenomePtr _genome){
+    this->genome = _genome;
+}
+
 Creature::~Creature()
 {
-
+    if (genome){
+        delete genome;
+    }
 }
 

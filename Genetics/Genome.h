@@ -9,7 +9,9 @@ public:
     Genome();
     ~Genome();
     
-    std::vector<Chromosome> chromosomes;
+    std::vector<ChromosomePtr> chromosomes;
 };
+
+typedef Genome * GenomePtr;
 
 #endif // GENOME_H
