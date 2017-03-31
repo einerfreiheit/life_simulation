@@ -32,7 +32,7 @@ void SmallWorldVisualization::computeImage(World *world) {
 			cv::Vec3b &pixel = visual.at<cv::Vec3b>(y, x);
 			pixel[1] = std::max(color,colorDelta);
 			pixel[2] = std::max(color,colorDelta);
-			pixel[0]=255;
+			pixel[0]=std::max(color,colorDelta);
 
 		}
 	}

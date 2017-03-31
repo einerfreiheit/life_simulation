@@ -48,11 +48,12 @@ void HeightsBuilder::setCorners(int height, int witdth) {
 	}
 	for (int y = 0; y < height; y += step) {
 		for (int x = 0; x < width; x += step) {
-			world->map[y][x].heightValue = 20;
+			world->map[y][x].heightValue = cornerHeight;
 
 		}
 	}
-	step=16;
+	step=step/firstStepDecrease;
+
 }
 bool HeightsBuilder::checkBorders(int y, int x) {
 	return (x >= 0 && x < width && y >= 0 && y < height);
@@ -136,10 +137,10 @@ void HeightsBuilder::DiamondSquare(float range) {
 		}
 	}
 	step /= 2;
-	DiamondSquare(range / 1.5);
+	DiamondSquare(range / smooth);
 
 }
-double HeightsBuilder::rangedRandom() {
+float HeightsBuilder::rangedRandom() {
 	return 2*(float) rand() / RAND_MAX-1;
 
 }
