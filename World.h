@@ -13,6 +13,8 @@ public:
 	cv::Mat visualization;
 	int mapHeight;
 	int mapWidth;
+	float maxH;
+	float minH;
 	std::vector<std::vector<Cell> > map;
 	std::vector<Creature *> creatures;
 private:

@@ -3,6 +3,8 @@
 #include "../Factories/WorkerFactory.h"
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
+#include "Heights.h"
 
 SimulationRunner::SimulationRunner() {
 	init();
@@ -17,6 +19,11 @@ void SimulationRunner::init() {
 	srand(7 * clock() + time(NULL));
 	world = new World(SimulationData::getInst()->mapHeightToSet,
 			SimulationData::getInst()->mapWidthToSet);
+
+	Heights heights(world);
+	heights.DiamondSquare(25.0);
+
+	heights.getDepth(world->maxH, world->minH);
 
 }
 
