@@ -2,7 +2,6 @@
 #include <boost/program_options.hpp>
 #include <fstream>
 #include <iostream>
-#include "SimulationConfig.h"
 
 SimulationData::SimulationData() {
 	load("config.ini");
