@@ -1,9 +1,10 @@
 #ifndef SIMULATIONDATA_H_
 #define SIMULATIONDATA_H_
 #include "World.h"
+#include "SimpleConfiguration.h"
 
 
-class SimulationData {
+class SimulationData : public SimpleConfiguration {
 public:
 	static const SimulationData *getInst() {
 		static SimulationData *inst=nullptr;
@@ -27,8 +28,9 @@ public:
 	bool useVisualWorker ;
 	bool useWaiterWorker;
 	bool useCreatureActionWorker;
+protected:
+    void addParams() override;
 private:
-	void readConfigParameters();
 	SimulationData();
 	SimulationData(const SimulationData& root);
 	SimulationData& operator=(const SimulationData&);

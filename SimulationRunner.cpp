@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include "Heights.h"
+#include "Factories/HeightsBuilder.h"
 
 SimulationRunner::SimulationRunner() {
 	init();
@@ -20,7 +20,7 @@ void SimulationRunner::init() {
 	world = new World(SimulationData::getInst()->mapHeightToSet,
 			SimulationData::getInst()->mapWidthToSet);
 
-	Heights heights(world);
+	HeightsBuilder heights(world);
 	heights.DiamondSquare(25.0);
 
 	heights.getDepth(world->maxH, world->minH);

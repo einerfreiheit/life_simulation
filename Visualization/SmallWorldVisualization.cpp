@@ -28,26 +28,15 @@ void SmallWorldVisualization::computeImage(World *world) {
 			} else {
 				color = 128 + 127 * height / depth;
 			}
-
+			int colorDelta = std::min(255.0, food * 255.0 / 100.0);
 			cv::Vec3b &pixel = visual.at<cv::Vec3b>(y, x);
-			pixel[1] = color;
-			pixel[2] = color;
+			pixel[1] = std::max(color,colorDelta);
+			pixel[2] = std::max(color,colorDelta);
 			pixel[0]=255;
 
 		}
 	}
-	/*	for (int y = 0; y < world->mapHeight; y++) {
-	 for (int x = 0; x < world->mapWidth; x++) {
-	 double food = world->map[y][x].food;
-	 int colorDelta = std::min(255.0, food * 255.0 / 100.0);
-	 cv::Vec3b &pixel = visual.at<cv::Vec3b>(y, x);
-	 pixel[1] = 255 - colorDelta;
-	 pixel[2] = 255 - colorDelta;
-	 pixel[0] = 255;
 
-	 }
-
-	 }*/
 	for (auto creature : world->creatures) {
 		cv::Vec3b &pixel = visual.at<cv::Vec3b>(creature->getPosY(),
 				creature->getPosX());

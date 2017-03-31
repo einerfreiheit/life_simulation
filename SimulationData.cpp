@@ -4,43 +4,33 @@
 #include <iostream>
 #include "SimulationConfig.h"
 
-
-using namespace boost::program_options;
-using namespace std;
 SimulationData::SimulationData() {
-	readConfigParameters();
+	load("config.ini");
 
 }
+void SimulationData::addParams(){
+    setSection("World");
+    add<int>("height", mapHeightToSet, 5);
+    add<int>("width", mapWidthToSet, 5);
 
-//@ можно написать изящнее
-void SimulationData::readConfigParameters() {
-	std::string config_filename = "config.ini";
-	options_description desc;
-	desc.add_options()
-	("World.height", value<int>(&mapHeightToSet)->default_value(5))
-	("World.width", value<int>(&mapWidthToSet)->default_value(5))
-	("Workers.useAIWorker", value<bool>(&useAIWorker)->default_value(true))
-	("Workers.useCreatureActionWorker", value<bool>(&useCreatureActionWorker)->default_value(true))
-	("Workers.useCreatureRemoveWorker",value<bool>(&useCreatureRemoveWorker)->default_value(true))
-	("Workers.useCreatureSpawnWorker",value<bool>(&useCreatureSpawnWorker)->default_value(true))
-	("Workers.useResourceWorker",value<bool>(&useResourceWorker)->default_value(true))
-	("Workers.useVisualWorker",value<bool>(&useVisualWorker)->default_value(true))
-	("Workers.useVideoWriterWorker",value<bool>(&useVideoWriterWorker)->default_value(true))
-	("Workers.useWaiterWorker",value<bool>(&useWaiterWorker)->default_value(true))
-	("WaitingTime.timeToWait", value<int>(&timeToWait)->default_value(1000))
-	("Resources.gainPerCell", value<double>(&gainResourcePerCell)->default_value(0.0))
-	("CreatureParameters.creatureOneBait",value<double>(&creatureOneBait)->default_value(1.0))
-	("CreatureParameters.energyToMove",value<double>(&energyToMove)->default_value(1.0))
-        ("CreatureParameters.energyFromFood",value<double>(&energyFromFood)->default_value(1.0));
+    setSection("Workers");
+    add<bool>("useAIWorker", useAIWorker, true);
+    add<bool>("useCreatureActionWorker", useCreatureActionWorker, true);
+    add<bool>("useCreatureRemoveWorker", useCreatureRemoveWorker, true);
+    add<bool>("useCreatureSpawnWorker", useCreatureSpawnWorker, true);
+    add<bool>("useResourceWorker", useResourceWorker, true);
+    add<bool>("useVisualWorker", useVisualWorker, true);
+    add<bool>("useVideoWriterWorker", useVideoWriterWorker, true);
+    add<bool>("useWaiterWorker", useWaiterWorker, true);
 
-        SimulationConfig config;//@ потом надо выпилить, но вот пример того, что я считаю изящным
-        config.load("config.ini");
+    setSection("WaitingTime");
+    add<int>("timeToWait", timeToWait, 1000);
 
-	variables_map vm;
-	std::ifstream config_stream(config_filename.c_str());
-	store(parse_config_file(config_stream, desc), vm);
-	notify(vm);
+    setSection("Resources");
+    add<double>("gainPerCell", gainResourcePerCell, 0.0);
 
-
+    setSection("CreatureParameters");
+    add<double>("creatureOneBait", creatureOneBait, 1.0);
+    add<double>("energyToMove", energyToMove, 1.0);
+    add<double>("energyFromFood", energyFromFood, 1.0);
 }
-

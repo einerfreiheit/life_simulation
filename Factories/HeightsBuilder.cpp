@@ -1,10 +1,11 @@
-#include "Heights.h"
 #include <vector>
 #include <cstdlib>
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
-Heights::Heights(World *world) {
+
+#include "HeightsBuilder.h"
+HeightsBuilder::HeightsBuilder(World *world) {
 	this->world = world;
 	height = world->mapHeight;
 	width = world->mapWidth;
@@ -13,11 +14,11 @@ Heights::Heights(World *world) {
 
 }
 
-Heights::~Heights() {
+HeightsBuilder::~HeightsBuilder() {
 
 }
 
-void Heights::getDepth(float &maxH, float&minH) {
+void HeightsBuilder::getDepth(float &maxH, float&minH) {
 	maxH = 0;
 	minH = 0;
 	for (int i = 0; i < width; i++) {
@@ -35,7 +36,7 @@ void Heights::getDepth(float &maxH, float&minH) {
 
 }
 
-void Heights::setCorners(int height, int witdth) {
+void HeightsBuilder::setCorners(int height, int witdth) {
 	int lesserSide = std::min(height, width);
 	float log = std::log2(lesserSide);
 	if (log - (int) log == 0) {
@@ -53,12 +54,12 @@ void Heights::setCorners(int height, int witdth) {
 	}
 	step=16;
 }
-bool Heights::checkBorders(int y, int x) {
+bool HeightsBuilder::checkBorders(int y, int x) {
 	return (x >= 0 && x < width && y >= 0 && y < height);
 
 }
 
-void Heights::diamondStep(int y, int x, float range) {
+void HeightsBuilder::diamondStep(int y, int x, float range) {
 	Cell &cell = world->map[y][x];
 	int n = 0;
 	float sumOfHeights = 0;
@@ -95,7 +96,7 @@ void Heights::diamondStep(int y, int x, float range) {
 	}
 
 }
-void Heights::DiamondSquare(float range) {
+void HeightsBuilder::DiamondSquare(float range) {
 	if (step < 2)
 		return;
 // diamonds
@@ -138,7 +139,7 @@ void Heights::DiamondSquare(float range) {
 	DiamondSquare(range / 1.5);
 
 }
-double Heights::rangedRandom() {
+double HeightsBuilder::rangedRandom() {
 	return 2*(float) rand() / RAND_MAX-1;
 
 }

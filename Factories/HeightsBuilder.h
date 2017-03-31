@@ -1,10 +1,10 @@
-#ifndef HEIGHTS_H_
-#define HEIGHTS_H_
+#ifndef HEIGHTSBUILDER_H_
+#define HEIGHTSBUILDER_H_
 #include "World.h"
-class Heights {
+class HeightsBuilder {
 public:
-	Heights(World *world);
-	virtual ~Heights();
+	HeightsBuilder(World *world);
+	virtual ~HeightsBuilder();
 	void getDepth(float &minH, float &maxH);
 	void DiamondSquare(float range);
 private:
