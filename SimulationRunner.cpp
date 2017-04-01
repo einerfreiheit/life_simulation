@@ -21,9 +21,7 @@ void SimulationRunner::init() {
 			SimulationData::getInst()->mapWidthToSet);
 
 	HeightsBuilder heights(world);
-	heights.firstStepDecrease=SimulationData::getInst()->firstStepDecrease;
-	heights.smooth=SimulationData::getInst()->smooth;
-	heights.cornerHeight=SimulationData::getInst()->cornerHeight;
+
 	heights.DiamondSquare(SimulationData::getInst()->scale);
 
 	heights.getDepth(world->maxH, world->minH);

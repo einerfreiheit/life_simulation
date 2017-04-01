@@ -7,15 +7,15 @@ public:
 	virtual ~HeightsBuilder();
 	void getDepth(float &minH, float &maxH);
 	void DiamondSquare(float range);
-	 float cornerHeight=1;
-	 float smooth=1;
-	 int firstStepDecrease=1;
+	float cornerHeight = 1;
+	float smooth = 1;
+	int firstStepDecrease = 1;
+	void setCorners();
+
 private:
 
 	float rangedRandom();
-	void setCorners(int height, int width);
 	int step;
-	bool checkBorders(int y, int x);
 	void diamondStep(int y, int x, float range);
 
 	World * world;

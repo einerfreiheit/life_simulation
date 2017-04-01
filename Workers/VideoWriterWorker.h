@@ -9,8 +9,12 @@ public:
 	void work(World *world) override;
 	virtual ~VideoWriterWorker();
 	void init(World *world);
+	bool initDone;
 private:
 	cv::VideoWriter writer;
+	cv::Mat output;
+
+
 };
 
 #endif /* WORKERS_VIDEOCAPWORKER_H_ */

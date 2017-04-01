@@ -18,8 +18,9 @@ void WorkerFactory::build(std::vector<WorldWorker*>&workers) {
 	addWorker<CreatureActionWorker>(workers,SimulationData::getInst()->useCreatureActionWorker);
 	addWorker <CreatureSpawnWorker>(workers,SimulationData::getInst()->useCreatureSpawnWorker);
 	addWorker <CreatureRemoveWorker>(workers,SimulationData::getInst()->useCreatureRemoveWorker);
-	addWorker <VideoWriterWorker>(workers,SimulationData::getInst()->useVideoWriterWorker);
 	addWorker<VisualWorker>(workers, SimulationData::getInst()->useVisualWorker);
+	addWorker <VideoWriterWorker>(workers,SimulationData::getInst()->useVideoWriterWorker);
+
 	addWorker <WaiterWorker>(workers,SimulationData::getInst()->useWaiterWorker);
 
 

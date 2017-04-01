@@ -30,9 +30,10 @@ void SmallWorldVisualization::computeImage(World *world) {
 			}
 			int colorDelta = std::min(255.0, food * 255.0 / 100.0);
 			cv::Vec3b &pixel = visual.at<cv::Vec3b>(y, x);
-			pixel[1] = std::max(color,colorDelta);
-			pixel[2] = std::max(color,colorDelta);
-			pixel[0]=std::max(color,colorDelta);
+			pixel[0]=pixel[1]=pixel[2]=color;
+//			pixel[1] = std::max(color,colorDelta);
+//			pixel[2] = std::max(color,colorDelta);
+//			pixel[0]=std::max(color,colorDelta);
 
 		}
 	}

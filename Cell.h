@@ -6,8 +6,8 @@ public:
 	Cell();
 	double food;
 	virtual ~Cell();
-	double heightValue=2;
-	bool heightComputed=false;
+	double heightValue=0;
+
 };
 
 #endif
