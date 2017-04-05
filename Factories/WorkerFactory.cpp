@@ -9,7 +9,7 @@
 #include "Workers/VideoWriterWorker.h"
 #include "Workers/CreatureRemoveWorker.h"
 #include "Workers/ResourceWorker.h"
-#include "Workers/CreatureActionWorker.h"
+#include "Workers/CreatureActionWorker.h"//@ мне больше нравятся нормальные относительные пути
 
 
 void WorkerFactory::build(std::vector<WorldWorker*>&workers) {

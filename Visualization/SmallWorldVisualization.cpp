@@ -6,21 +6,22 @@ SmallWorldVisualization::SmallWorldVisualization() {
 SmallWorldVisualization::~SmallWorldVisualization() {
 }
 
-void SmallWorldVisualization::showImage(World *world) {
+void SmallWorldVisualization::showImage(World *world) {//@ а этот метод лучше назвать display
 	cv::namedWindow("123", CV_WINDOW_NORMAL);
 	cv::resizeWindow("123", 640, 480);
-	cv::imshow("123", world->visualization);
-	cv::waitKey(10);
-
+	cv::imshow("123", world->visualization);//@ и cv::Mat visualization лучше хранить в самой визуализации, а не в мире
+	cv::waitKey(10);//@ можно унаследоваться вот так: Visualization <- OpenCVVisualization <- SimpleVisualization
+//@ чтобы OpenCVVisualization был при этом абстрактным классом, у которого есть protected cv::Mat поле с текущей визуализацией и геттер для взятия этого cv::Mat
+//@ это позволит обернуть весь зависимый от opencv код в макросы и сделать возможность собирать червя без opencv
 }
 
-void SmallWorldVisualization::computeImage(World *world) {
+void SmallWorldVisualization::computeImage(World *world) {//@ лучше назвать метод update (~ обновить визуализацию)
 	cv::Mat &visual = world->visualization;
 
 	for (int y = 0; y < world->mapHeight; y++) {
 		for (int x = 0; x < world->mapWidth; x++) {
 			double height = world->map[y][x].heightValue;
-			float depth = world->maxH - world->minH;
+			float depth = world->maxH - world->minH;//@ этот depth считается столько раз, какого размера карта, а можно посчитать его 1 раз вне цикла
 			double food = world->map[y][x].food;
 			int color;
 			if (height >= 0) {

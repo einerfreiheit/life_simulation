@@ -13,7 +13,7 @@ void Move::act(World *world, Creature &creature) {
 	int currentY = creature.getPosY();
 	int nextX = currentX;
 	int nextY = currentY;
-	bool isMoved = false;
+	bool isMoved = false;//@ лучше сделать метод bool canMove(World *world, int nextX, int nextY) и в него внести все проверки
 	if (!isMoved && dx > currentX) {
 		if (currentX < borderX) {
 			nextX++;
