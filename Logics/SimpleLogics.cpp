@@ -7,7 +7,7 @@
 
 void SimpleLogics::logicEat(Creature&creature) {
 	creature.creatureActions.push_back(new Eat);
-	std::cout << "added eat";
+	std::cout << "added eat";//@ дебажный вывод можно убрать
 
 }
 /*void SimpleLogics::logicActions(World *world, Creature&creature) {
@@ -48,7 +48,7 @@ void SimpleLogics::logicMove(World *world, Creature&creature) {
 	move->dy=y;
 
 	creature.creatureActions.push_back(move);
-	std::cout << "added move";
+	std::cout << "added move";//@ и тут тоже
 
 }
 
