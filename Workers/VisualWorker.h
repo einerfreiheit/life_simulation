@@ -1,8 +1,8 @@
 #ifndef WORKERS_VISUALWORKER_H_
 #define WORKERS_VISUALWORKER_H_
 #include "WorldWorker.h"
-#include "../Visualization/SmallWorldVisualization.h"
-#include "../Visualization/Visualization.h"
+#include "../Visualization/SimpleVisualization.h"
+//#include "../Visualization/Visualization.h"
 
 
 class VisualWorker : public WorldWorker {

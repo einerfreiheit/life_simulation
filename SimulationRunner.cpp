@@ -29,9 +29,10 @@ void SimulationRunner::init() {
 }
 
 void SimulationRunner::run() {
+	WorkerFactory::build(workers);
+
 	while (true) {
 
-		WorkerFactory::build(workers);
 		for (WorldWorker *worker : workers) {
 			std::cout << worker->getName() << std::endl;
 			worker->work(world);

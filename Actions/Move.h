@@ -5,9 +5,10 @@
 class Move: public Action {
 public:
 
-	Move();
-	virtual ~Move();
+	Move(int moveToY,int moveToX);
+	 ~Move();
 	void act(World *world, Creature &creature) override;
+private:
 	int dx;
 	int dy;
 

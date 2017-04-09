@@ -8,13 +8,9 @@
 
 class SimpleLogics: public CreatureLogic {
 public:
-	SimpleLogics();
-	virtual ~SimpleLogics();
 	void logicMove(World*world, Creature&creature) override;
 	void logicEat(Creature &creature) override;
-//	void logicActions (World *world,Creature &creature);
-
-	int side;
+	int side =0;
 			enum WAY_TYPE {
 				WT_DOWN = 0, WT_UP, WT_LEFT, WT_RIGHT
 			};

@@ -100,14 +100,14 @@ void HeightsBuilder::DiamondSquare(float range) {
 	for (int i = 0; i <= height; i += step) {//@ вот тут уже как минимум выход за границы массива может быть
 		for (int j = step / 2; j <= width - step / 2; j += step) {
 			diamondStep(i, j, range);
-			std::cout << i << j << std::endl;
+//			std::cout << i << j << std::endl;
 		}
 	}
 	for (int i = step / 2; i <= height - step / 2; i += step) {
 		for (int j = 0; j <= width; j += step) {//@ и тут тоже
 
 			diamondStep(i, j, range);
-			std::cout << i << j << std::endl;
+//			std::cout << i << j << std::endl;
 
 		}
 	}

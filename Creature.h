@@ -2,6 +2,7 @@
 #define CREATURE_H_
 #include "Actions/SimpleAction.h"
 #include <vector>
+#include <memory>
 
 #include "Genetics/Genome.h"
 
@@ -10,7 +11,8 @@ class Creature
 public:
     Creature(int id);
     virtual ~Creature();
-    std::vector <SimpleAction*> creatureActions;
+ std::vector <std::shared_ptr<SimpleAction> > creatureActions;
+//  std::vector <SimpleAction*> creatureActions;
 
     bool isHungry() const;
     double energy;

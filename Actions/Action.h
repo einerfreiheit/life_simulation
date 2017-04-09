@@ -6,7 +6,7 @@
 class Action :public SimpleAction {
 public:
 	Action();
-	virtual ~Action();
+	 ~Action();
 	virtual void act(World *world, Creature &creature) =0;
 
 };

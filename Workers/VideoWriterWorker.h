@@ -8,11 +8,14 @@ public:
 	VideoWriterWorker();
 	void work(World *world) override;
 	virtual ~VideoWriterWorker();
-	void init(World *world);
-	bool initDone;
+	 void init(World *world);
+	 bool initDone;
+	World *worldptr;
 private:
-	cv::VideoWriter writer;
-	cv::Mat output;
+	 cv::VideoWriter writer;
+		cv::Mat output;
+
+
 
 
 };

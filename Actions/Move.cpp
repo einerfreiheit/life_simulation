@@ -1,8 +1,9 @@
 #include "Move.h"
 #include<iostream>
 
-Move::Move() {
-
+Move::Move(int moveToY,int moveToX) {
+	this->dx=moveToX;
+	this->dy=moveToY;
 }
 
 
@@ -57,6 +58,9 @@ void Move::act(World *world, Creature &creature) {
 
 }
 Move::~Move() {
+
+//	std::cout<<"move deleted";
+
 
 }
 

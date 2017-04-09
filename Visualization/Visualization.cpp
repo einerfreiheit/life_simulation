@@ -1,14 +1,23 @@
 #include "Visualization.h"
-
+#include <iostream>
 Visualization::Visualization() {
+	init();
 
 }
 
 Visualization::~Visualization() {
 
 }
+void Visualization::visualize(World*world){
 
-void Visualization::visualize(World *world){
-	computeImage(world);
-	showImage(world);
+	update(world);
+	display(world);
+
+
+}
+
+void Visualization::init(){
+
+	std::cout<<"Visualization init";
+
 }

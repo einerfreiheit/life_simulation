@@ -6,7 +6,11 @@
 
 VisualWorker::VisualWorker() {
 	this->name = "VisualWorker";
-	visualization=new SmallWorldVisualization;
+//	SimpleVisualization vis;
+//	*visualization=vis;
+   this->visualization=new SimpleVisualization;
+   std::cout<<"VisualWorker is CReated";
+//	vis.init();
 
 
 }

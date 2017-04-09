@@ -6,15 +6,10 @@
 
 
 void SimpleLogics::logicEat(Creature&creature) {
-	creature.creatureActions.push_back(new Eat);
-	std::cout << "added eat";//@ дебажный вывод можно убрать
-
-}
-/*void SimpleLogics::logicActions(World *world, Creature&creature) {
+	creature.creatureActions.push_back(std::shared_ptr <Eat> (new Eat));
 
 }
 
-*/
 void SimpleLogics::logicMove(World *world, Creature&creature) {
 
 	int y = creature.getPosY();
@@ -43,19 +38,9 @@ void SimpleLogics::logicMove(World *world, Creature&creature) {
 
 
 
-	Move *move = new Move;
-	move->dx=x;
-	move->dy=y;
 
-	creature.creatureActions.push_back(move);
-	std::cout << "added move";//@ и тут тоже
+
+	creature.creatureActions.push_back(std::shared_ptr <Move> (new Move(y,x)));
 
 }
 
-SimpleLogics::SimpleLogics() {
-
-}
-;
-SimpleLogics::~SimpleLogics() {
-}
-;

@@ -1,23 +1,38 @@
 #include "VideoWriterWorker.h"
 #include "CommonIncludes.h"
+#include <iostream>
 
 VideoWriterWorker::VideoWriterWorker() {
 	this->name = "VideoWriterWorker";
 
 }
 void VideoWriterWorker::init(World *world) {
-	if (!initDone&&world->visualization.size>0) {
-		writer.open("./1.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25.0,
-				world->visualization.size() * 10, true);
-		initDone=true;
-	}
 
 }
 void VideoWriterWorker::work(World *world) {
-	init(world);
-	cv::resize(world->visualization, output, output.size(), 10, 10,
-			cv::INTER_NEAREST);
-	writer.write(output);
+//	output=world->visualization;
+//	cv::resize(world->visualization, output, cv::Size(), 1, 1,
+//			cv::INTER_NEAREST);
+
+	if (!initDone && !world->visualization.empty()) {
+
+		writer.open("./1.avi", CV_FOURCC('M', 'J', 'P', 'G'), 25.0,
+				world->visualization.size(), true);
+		initDone = true;
+		std::cout<<initDone<< "init done";
+
+	}
+
+//	std::cout<<world->visualization.size();
+
+
+//	writer.write(output);
+	writer <<world->visualization;
+//	output.release();
+//	writer.release();
+//	std::cout << writer.isOpened();
+
+
 
 }
 

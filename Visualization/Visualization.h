@@ -7,9 +7,10 @@ class Visualization {
 public:
 	Visualization();
 	virtual ~Visualization();
-	virtual void visualize(World *world);
-	virtual void computeImage(World *world)=0;
-	virtual void showImage(World *world)=0;
+	virtual void init();
+	virtual void display(World *world)=0;
+	virtual void update(World *world)=0;
+     void visualize(World *world);
 };
 
 #endif

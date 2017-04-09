@@ -1,5 +1,5 @@
 #include "Eat.h"
-
+#include <iostream>
 Eat::Eat() {
 }
 void Eat::act(World *world, Creature &creature) {
@@ -17,4 +17,6 @@ void Eat::act(World *world, Creature &creature) {
 
 }
 Eat::~Eat() {
+//	std::cout<<"eat deleted";
+
 }
