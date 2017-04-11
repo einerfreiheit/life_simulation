@@ -4,13 +4,12 @@
 
 class OpenCvVisualization: public Visualization {
 public:
-	void init() override;
 	OpenCvVisualization();
 	virtual ~OpenCvVisualization();
 
-//	virtual void display(World *world)=0;
-//	virtual void update(World *world)=0;
+	virtual void update(World *world)=0;
 
+	virtual cv::Mat*  getVisualisation()=0;
 protected:
 	cv::Mat visualization;
 };

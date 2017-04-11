@@ -2,25 +2,13 @@
 #include "../SimulationData.h"
 #include <iostream>
 #include "../CommonIncludes.h"
-void SimpleVisualization::display(World *world) {
-	cv::namedWindow("123", CV_WINDOW_NORMAL);
-	cv::resizeWindow("123", 640, 480);
-	std::cout << visualization.size();
-	cv::imshow("123", visualization);
-	cv::waitKey(10);
 
+
+cv::Mat* SimpleVisualization::getVisualisation(){
+
+	return &visualization;
 }
-void SimpleVisualization::init() {
-//	visualization(SimulationData::getInst()->mapWidthToSet,
-//			SimulationData::getInst()->mapHeightToSet);
-	visualization = cv::Mat::zeros(SimulationData::getInst()->mapWidthToSet,
-			SimulationData::getInst()->mapHeightToSet, CV_8UC3);
-	std::cout << "vis init is done ";
 
-
-
-
-}
 void SimpleVisualization::update(World *world) {
 	float depth = world->maxH - world->minH;
 
@@ -51,9 +39,11 @@ void SimpleVisualization::update(World *world) {
 	}
 }
 SimpleVisualization::SimpleVisualization() {
-	init();
+	visualization = cv::Mat::zeros(SimulationData::getInst()->mapWidthToSet,
+				SimulationData::getInst()->mapHeightToSet, CV_8UC3);
 
 }
 SimpleVisualization::~SimpleVisualization() {
+
 }
 

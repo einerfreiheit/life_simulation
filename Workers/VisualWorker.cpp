@@ -1,26 +1,30 @@
 #include "VisualWorker.h"
-#include "CommonIncludes.h"
 #include <iostream>
 
 
+#include"SubWorkers/VisualDisplayWorker.h"
+#include"SubWorkers/VisualVideoWorker.h"
 
 VisualWorker::VisualWorker() {
 	this->name = "VisualWorker";
-//	SimpleVisualization vis;
-//	*visualization=vis;
-   this->visualization=new SimpleVisualization;
-   std::cout<<"VisualWorker is CReated";
-//	vis.init();
+	this->visual = new SimpleVisualization;
+
+	visualSubWorkers.push_back(new VisualDisplayWorker);
+	visualSubWorkers.push_back(new VisualVideoWorker);
+
 
 
 }
 void VisualWorker::work(World *world) {
+	visual->update(world);
 
-	visualization->visualize(world);
+	for (VisualSubWorker * subWorker : visualSubWorkers) {
+		subWorker->work(visual->getVisualisation());
+	}
 
 }
 
-
 VisualWorker::~VisualWorker() {
+
 }
 

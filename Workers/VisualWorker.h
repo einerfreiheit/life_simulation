@@ -2,15 +2,19 @@
 #define WORKERS_VISUALWORKER_H_
 #include "WorldWorker.h"
 #include "../Visualization/SimpleVisualization.h"
-//#include "../Visualization/Visualization.h"
+#include "SubWorkers/VisualSubWorker.h"
 
 
-class VisualWorker : public WorldWorker {
+#include <vector>
+
+class VisualWorker: public WorldWorker {
 public:
 	VisualWorker();
 	virtual ~VisualWorker();
-	void work (World *world) override;
-	Visualization *visualization;
+	void work(World *world) override;
+private:
+	SimpleVisualization *visual;
+	std::vector<VisualSubWorker *> visualSubWorkers;
 
 
 };

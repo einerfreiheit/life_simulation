@@ -5,9 +5,9 @@ class SimpleVisualization :public OpenCvVisualization {
 public:
 	SimpleVisualization();
 	virtual ~SimpleVisualization();
-	void display(World *world) override;
+
 	void update(World *world) override;
-	void init() override;
+	cv::Mat*  getVisualisation() override;
 };
 
 #endif /* VISUALIZATION_SIMPLEVISUALIZATION_H_ */
