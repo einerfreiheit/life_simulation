@@ -2,24 +2,23 @@
 #include <iostream>
 
 
-#include"SubWorkers/VisualDisplayWorker.h"
-#include"SubWorkers/VisualVideoWorker.h"
+#include "../Visualization/SimpleDisplay.h"
+#include "../Visualization/SimpleVideoRecord.h"
 
 VisualWorker::VisualWorker() {
 	this->name = "VisualWorker";
-	this->visual = new SimpleVisualization;
 
-	visualSubWorkers.push_back(new VisualDisplayWorker);
-	visualSubWorkers.push_back(new VisualVideoWorker);
+	simpleVisualization = new SimpleVisualization;
 
-
+	visualOutput.push_back(new SimpleVideoRecord);
+	visualOutput.push_back(new SimpleDisplay);
 
 }
 void VisualWorker::work(World *world) {
-	visual->update(world);
+	simpleVisualization->update(world);
 
-	for (VisualSubWorker * subWorker : visualSubWorkers) {
-		subWorker->work(visual->getVisualisation());
+	for (VisualOutput * output : visualOutput) {
+		output->update(simpleVisualization->getVisualisation());
 	}
 
 }
