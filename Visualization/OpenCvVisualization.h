@@ -4,8 +4,12 @@
 
 class OpenCvVisualization: public Visualization {
 public:
-	OpenCvVisualization();
-	virtual ~OpenCvVisualization();
+	OpenCvVisualization() {
+	}
+	;
+	virtual ~OpenCvVisualization() {
+	}
+	;
 
 	virtual void update(World* world)=0;
 

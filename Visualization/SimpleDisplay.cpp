@@ -1,12 +1,10 @@
 #include "SimpleDisplay.h"
 
 SimpleDisplay::SimpleDisplay() {
-	// TODO Auto-generated constructor stub
 
 }
 
 SimpleDisplay::~SimpleDisplay() {
-	// TODO Auto-generated destructor stub
 }
 void SimpleDisplay::update(cv::Mat* visualization) {
 

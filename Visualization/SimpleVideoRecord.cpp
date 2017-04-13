@@ -9,18 +9,16 @@ SimpleVideoRecord::SimpleVideoRecord() {
 }
 
 SimpleVideoRecord::~SimpleVideoRecord() {
+	writer.release();
 }
 void SimpleVideoRecord::update(cv::Mat* visualization) {
 
 	cv::resize(*visualization, output, output.size(), 1, 1, cv::INTER_NEAREST);
-//	writer.write(output);
-
 
 //	cv::namedWindow("debug",CV_WINDOW_NORMAL);
 //		cv::resizeWindow("debug", 640, 480);
 //		cv::imshow("debug", output);
-		writer.write(output);
-//		cv::waitKey(10);
+	writer.write(output);
 	output.release();
 
 }

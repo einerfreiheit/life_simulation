@@ -1,4 +1,5 @@
 #include "AIWorker.h"
+#include "Logics/SimpleLogics.h"
 
 AIWorker::AIWorker() {
 	this->name = "AIWorker";
@@ -14,7 +15,7 @@ void AIWorker::work(World *world) {
 
 	for (auto creature : world->creatures) {
 
-		creaturelogic->logicActions(world,*creature);
+		creaturelogic->logicActions(world, *creature);
 
 	}
 }

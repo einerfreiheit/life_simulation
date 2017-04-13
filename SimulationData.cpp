@@ -25,6 +25,8 @@ void SimulationData::addParams(){
     add<bool>("useVisualWorker", useVisualWorker, true);
     add<bool>("useVideoWriterWorker", useVideoWriterWorker, true);
     add<bool>("useWaiterWorker", useWaiterWorker, true);
+    add<bool>("displayOutput",displayOutput,true);
+    add<bool>("videoRecord",videoRecord,false);
 
     setSection("WaitingTime");
     add<int>("timeToWait", timeToWait, 1000);
@@ -36,4 +38,6 @@ void SimulationData::addParams(){
     add<double>("creatureOneBait", creatureOneBait, 1.0);
     add<double>("energyToMove", energyToMove, 1.0);
     add<double>("energyFromFood", energyFromFood, 1.0);
+    add<double>("fissionLoss",fissionLoss,100);
+    add<double>("fissionThreshold",fissionThreshold,500);
 }
