@@ -1,3 +1,4 @@
+*.avi
 *.d
 *.o
 *.png
@@ -12,6 +13,9 @@
 *Release*
 *Debug*
 .settings/
+Makefile
+CMakeFiles/
+CMakeCash.txt
 RemoteSystemsTempFiles
 *.pro.user
 *build*
