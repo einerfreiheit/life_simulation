@@ -16,9 +16,4 @@ void CreatureLogic::logicActions(World *world, Creature &creature) {
 
 
 }
-void CreatureLogic::logicMove(World *world, Creature &creature) {
 
-}
-void CreatureLogic::logicEat( Creature &creature) {
-
-}

@@ -22,6 +22,10 @@ public:
 	double energyFromFood;
 	double creatureOneBait;
 	double energyToMove;
+	double fissionLoss;
+	double fissionThreshold;
+	bool displayOutput;
+	bool videoRecord;
 	bool useAIWorker;
 	bool useCreatureRemoveWorker;
 	bool useCreatureSpawnWorker;

@@ -1,7 +1,6 @@
 #ifndef ACTIONS_EAT_H_
 #define ACTIONS_EAT_H_
 #include "Action.h"
-#include "World.h"
 
 class Eat: public  Action
 {

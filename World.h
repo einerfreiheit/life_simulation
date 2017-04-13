@@ -10,11 +10,10 @@ public:
 	World( int mapHeightToSet,  int mapWidthToSet);
 	~World();
 
-	cv::Mat visualization;
 	int mapHeight;
 	int mapWidth;
-	float maxH;
-	float minH;
+	float heightsRange;
+
 	std::vector<std::vector<Cell> > map;
 	std::vector<Creature *> creatures;
 private:

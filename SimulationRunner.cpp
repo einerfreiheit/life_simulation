@@ -4,28 +4,20 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include "Factories/HeightsBuilder.h"
+#include "Workers/HeightsWorker.h"
 
 SimulationRunner::SimulationRunner() {
-	init();
-
-}
-
-SimulationRunner::~SimulationRunner() {
-
-}
-
-void SimulationRunner::init() {
 	srand(7 * clock() + time(NULL));
 	world = new World(SimulationData::getInst()->mapHeightToSet,
 			SimulationData::getInst()->mapWidthToSet);
 
-	HeightsBuilder heights(world);
+	HeightsWorker heightsWorker;
+	heightsWorker.work(world);
 
-	heights.DiamondSquare(SimulationData::getInst()->scale);
+}
 
-	heights.getDepth(world->maxH, world->minH);
-
+SimulationRunner::~SimulationRunner() {
+	delete world;
 }
 
 void SimulationRunner::run() {

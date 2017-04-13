@@ -2,8 +2,7 @@
 #define WORKERS_VISUALWORKER_H_
 #include "WorldWorker.h"
 #include "../Visualization/SimpleVisualization.h"
-#include "SubWorkers/VisualSubWorker.h"
-
+#include "../Visualization/VisualOutput.h"
 
 #include <vector>
 
@@ -13,8 +12,10 @@ public:
 	virtual ~VisualWorker();
 	void work(World *world) override;
 private:
-	SimpleVisualization *visual;
-	std::vector<VisualSubWorker *> visualSubWorkers;
+
+	SimpleVisualization *simpleVisualization;
+	std::vector<VisualOutput *> visualOutput;
+
 
 
 };
