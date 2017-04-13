@@ -8,6 +8,8 @@
 *.BMP
 *.JPG
 *.*~
+.project
+cmake_install.cmake
 *language.settings.xml
 *metadata*
 *Release*
@@ -15,7 +17,7 @@
 .settings/
 Makefile
 CMakeFiles/
-CMakeCash.txt
+CMakeCache.txt
 RemoteSystemsTempFiles
 *.pro.user
 *build*
