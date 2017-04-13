@@ -1,5 +1,4 @@
 #include "Eat.h"
-#include <iostream>
 Eat::Eat() {
 }
 void Eat::act(World *world, Creature &creature) {

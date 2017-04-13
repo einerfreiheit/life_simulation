@@ -11,6 +11,7 @@ public:
 private:
 	int dx;
 	int dy;
+	bool canMove(World *world, int nextX, int nextY);
 
 };
 
