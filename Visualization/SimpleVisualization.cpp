@@ -1,22 +1,21 @@
 #include "SimpleVisualization.h"
 #include "../SimulationData.h"
 #include <iostream>
-#include "../CommonIncludes.h"
 
 
-cv::Mat* SimpleVisualization::getVisualisation(){
+cv::Mat*const  SimpleVisualization::getVisualisation(){
 
 	return &visualization;
 }
 
-void SimpleVisualization::update(World *world) {
-	float depth = world->maxH - world->minH;
+void SimpleVisualization::update(World*world) {
+	float depth = world->heightsRange;
 
 	for (int y = 0; y < world->mapHeight; y++) {
 		for (int x = 0; x < world->mapWidth; x++) {
 			double height = world->map[y][x].heightValue;
 			double food = world->map[y][x].food;
-			int color;
+			int color=0;
 			if (height >= 0) {
 				color = 127 * height / depth + 128;
 			} else {
