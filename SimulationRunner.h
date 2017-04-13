@@ -8,8 +8,6 @@ public:
 	SimulationRunner();
 	~SimulationRunner();
 	std::vector<WorldWorker *> workers;
-
-	void init();
 	void run();
 private:
 	World *world;
