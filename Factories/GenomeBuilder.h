@@ -11,4 +11,4 @@ private:
     static const int complexityPerChromosome = 8;
 };
 
-#endif // GENOMEBUILDER_H
+#endif

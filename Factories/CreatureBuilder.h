@@ -11,4 +11,4 @@ private:
     static int nextId;
 };
 
-#endif // CREATUREBUILDER_H
+#endif

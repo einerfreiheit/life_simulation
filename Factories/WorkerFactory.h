@@ -1,7 +1,6 @@
 #ifndef FACTORIES_WORKERFACTORY_H_
 #define FACTORIES_WORKERFACTORY_H_
 #include "../Workers/WorldWorker.h"
-#include "../SimulationData.h"
 #include <vector>
 
 class WorkerFactory {

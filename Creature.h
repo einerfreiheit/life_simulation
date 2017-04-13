@@ -12,7 +12,6 @@ public:
     Creature(int id);
     virtual ~Creature();
  std::vector <std::shared_ptr<SimpleAction> > creatureActions;
-//  std::vector <SimpleAction*> creatureActions;
 
     bool isHungry() const;
     double energy;
