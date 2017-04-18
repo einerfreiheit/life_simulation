@@ -1,7 +1,7 @@
 #ifndef AIWORKER_H
 #define AIWORKER_H
 #include "WorldWorker.h"
-#include "Logics/CreatureLogic.h"
+#include "Logics/SimpleLogics.h"
 
 
 class AIWorker: public WorldWorker
@@ -12,7 +12,8 @@ public:
     void work ( World *world ) override;
 
 private:
-    CreatureLogic *creaturelogic;
+    SimpleLogics *simple;
+    
 
 };
 

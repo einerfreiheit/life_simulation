@@ -3,18 +3,25 @@
 #include "../Actions/Move.h"
 #include <iostream>
 
-
-
-void SimpleLogics::logicEat ( Creature&creature ) {
-    creature.creatureActions.push_back ( std::shared_ptr <Eat> ( new Eat ) );
-
+void SimpleLogics::willToEat ( Creature& creature ) {
+    creature.creatureActions.push_back ( new Eat );
     }
 
-void SimpleLogics::logicMove ( World *world, Creature&creature ) {
+
+void SimpleLogics::creatureWill ( World* world, Creature& creature ) {
+    willToEat ( creature );
+    int x = creature.getPosX();
+    int y = creature.getPosY();
+    if ( world->map[y][x].food <= SimulationData::getInst()->creatureOneBait ) {
+        willToMove ( world, creature );
+        }
+
+
+    }
+void SimpleLogics::willToMove ( World *world, Creature& creature ) {
 
     int y = creature.getPosY();
     int x = creature.getPosX();
-
     side = rand() % 4;
     switch ( side ) {
         case WT_DOWN: {
@@ -36,11 +43,7 @@ void SimpleLogics::logicMove ( World *world, Creature&creature ) {
 
         }
 
-
-
-
-
-    creature.creatureActions.push_back ( std::shared_ptr <Move> ( new Move ( y,x ) ) );
+    creature.creatureActions.push_back ( new Move ( y,x ));
 
     }
 
