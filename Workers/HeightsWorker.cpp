@@ -1,6 +1,8 @@
 #include "HeightsWorker.h"
 #include "../SimulationData.h"
 #include <cmath>
+#include <stdexcept>
+
 #include <iostream>
 HeightsWorker::HeightsWorker() {
 	mapHeight = 0;
@@ -11,7 +13,7 @@ HeightsWorker::HeightsWorker() {
 HeightsWorker::~HeightsWorker() {
 }
 
-void HeightsWorker::getDepth(World*world) {
+void HeightsWorker::setDepth(World*world) {
 
 	int maxH = 0;
 	int minH = 0;
@@ -36,7 +38,7 @@ void HeightsWorker::getDepth(World*world) {
 void HeightsWorker::work(World*world) {
 	init(world);
 	diamondSquare(world, SimulationData::getInst()->scale);
-	getDepth(world);
+	setDepth(world);
 
 }
 void HeightsWorker::init(World*world) {
@@ -55,14 +57,23 @@ void HeightsWorker::init(World*world) {
 		step = pow(2, (int) std::floor(rawStep));
 
 	}
-	for (int y = 0; y < mapHeight; y += step) {
-		for (int x = 0; x < mapWidth; x += step) {
-			world->map[y][x].heightValue = cornerHeight;
+	std::cout << step << " step;" << lesserSide << "lesser side;" << std::endl;
+	if (step > 0) {
+		for (int y = 0; y < mapHeight; y += step) {
+			for (int x = 0; x < mapWidth; x += step) {
+				world->map[y][x].heightValue = cornerHeight;
 
+			}
 		}
 	}
-	step = step / firstStepDecrease;
-	std::cout << step << " step;" << lesserSide << "lesser side;" << std::endl;
+	int firstStepDecerease=SimulationData::getInst()->firstStepDecrease;
+	if (!firstStepDecerease & (firstStepDecerease - 1)){
+		step = step / firstStepDecrease;
+
+	}
+	else{
+		throw  std::runtime_error("world side size  <=1 ");
+	}
 }
 
 void HeightsWorker::diamondStep(World *world, int y, int x, float range) {
@@ -105,7 +116,6 @@ void HeightsWorker::diamondSquare(World*world, float scale) {
 	for (int i = 0; i < borderY; i += step)
 		for (int j = 0; j < borderX; j += step) {
 			squareStep(world, i, j, scale);
-			std::cout << i << j << std::endl;
 
 		}
 

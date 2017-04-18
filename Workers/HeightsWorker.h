@@ -16,7 +16,8 @@ private:
 	void diamondStep(World* world, int y, int x, float scale);
 	void squareStep(World *world, int y, int x, float scale);
 	float rangedRandom();
-	void getDepth(World *world);
+	void setDepth(World *world);
+
 
 	int mapHeight;
 	int mapWidth;
