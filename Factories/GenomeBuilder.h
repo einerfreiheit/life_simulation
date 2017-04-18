@@ -6,7 +6,7 @@
 class GenomeBuilder
 {
 public:
-    static GenomePtr build(int complexity = 20);
+    static GenomePtr build ( int complexity = 20 );
 private:
     static const int complexityPerChromosome = 8;
 };

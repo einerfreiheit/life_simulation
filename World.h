@@ -5,19 +5,20 @@
 #include <vector>
 #include "Cell.h"
 #include "Creature.h"
-class World {
+class World
+{
 public:
-	World( int mapHeightToSet,  int mapWidthToSet);
-	~World();
+    World ( int mapHeightToSet,  int mapWidthToSet );
+    ~World();
 
-	int mapHeight;
-	int mapWidth;
-	float heightsRange;
+    int mapHeight;
+    int mapWidth;
+    float heightsRange;
 
-	std::vector<std::vector<Cell> > map;
-	std::vector<Creature *> creatures;
+    std::vector<std::vector<Cell> > map;
+    std::vector<Creature *> creatures;
 private:
-	void init();
+    void init();
 
 };
 

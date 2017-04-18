@@ -3,27 +3,28 @@
 
 #include "WorldWorker.h"
 
-class HeightsWorker: public WorldWorker {
+class HeightsWorker: public WorldWorker
+{
 public:
-	HeightsWorker();
-	virtual ~HeightsWorker();
+    HeightsWorker();
+    virtual ~HeightsWorker();
 
-	void work(World*world) override;
+    void work ( World*world ) override;
 
 private:
-	void diamondSquare(World*world, float scale);
-	void init(World *world);
-	void diamondStep(World* world, int y, int x, float scale);
-	void squareStep(World *world, int y, int x, float scale);
-	float rangedRandom();
-	void setDepth(World *world);
-	bool checkBorder(World *world,int y,int x);
+    void diamondSquare ( World*world, float scale );
+    void init ( World *world );
+    void diamondStep ( World* world, int y, int x, float scale );
+    void squareStep ( World *world, int y, int x, float scale );
+    float rangedRandom();
+    void setDepth ( World *world );
+    //bool checkBorder(World *world,int y,int x);
 
-	int mapHeight;
-	int mapWidth;
-	int step;
+    int  wrapIndex ( int index,int size );
+
+    int step;
 
 
 };
 
-#endif /* WORKERS_HEIGHTSWORKER_H_ */
+#endif

@@ -2,11 +2,11 @@
 #include <cstdlib>
 
 Cell::Cell() {
-	this->food = rand() % 100;
+    this->food = rand() % 100;
 
-}
+    }
 
 Cell::~Cell() {
 
-}
+    }
 

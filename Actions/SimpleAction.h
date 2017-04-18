@@ -1,10 +1,11 @@
 #ifndef ACTIONS_SIMPLEACTION_H_
 #define ACTIONS_SIMPLEACTION_H_
 
-class SimpleAction {
+class SimpleAction
+{
 public:
-	SimpleAction();
-	virtual ~SimpleAction();
+    SimpleAction();
+    virtual ~SimpleAction();
 
 };
 

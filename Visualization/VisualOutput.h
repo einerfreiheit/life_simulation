@@ -2,15 +2,16 @@
 #define VISUALIZATION_VISUALOUTPUT_H_
 #include "../CommonIncludes.h"
 
-class VisualOutput {
+class VisualOutput
+{
 public:
-	VisualOutput() {
-	}
+    VisualOutput() {
+    }
 
-	virtual ~VisualOutput() {
-	}
+    virtual ~VisualOutput() {
+    }
 
-	virtual void update(cv::Mat* visualization)=0;
+    virtual void update ( cv::Mat* visualization ) =0;
 };
 
 #endif /* VISUALIZATION_VISUALOUTPUT_H_ */

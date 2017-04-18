@@ -2,13 +2,14 @@
 #define WORKERS_WAITERWORKER_H_
 #include "WorldWorker.h"
 
-class WaiterWorker: public WorldWorker {
+class WaiterWorker: public WorldWorker
+{
 public:
-	WaiterWorker();
-	virtual ~WaiterWorker();
-	void work(World *world) override;
+    WaiterWorker();
+    virtual ~WaiterWorker();
+    void work ( World *world ) override;
 private:
-	int waitingTime;
+    int waitingTime;
 
 };
 

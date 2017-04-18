@@ -6,7 +6,7 @@
 class CreatureBuilder
 {
 public:
-    static Creature *build(int posX, int posY);
+    static Creature *build ( int posX, int posY );
 private:
     static int nextId;
 };

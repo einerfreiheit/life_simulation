@@ -8,7 +8,7 @@ class Genome
 public:
     Genome();
     ~Genome();
-    
+
     std::vector<ChromosomePtr> chromosomes;
 };
 
