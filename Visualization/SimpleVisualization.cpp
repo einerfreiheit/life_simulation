@@ -38,8 +38,8 @@ void SimpleVisualization::update(World*world) {
 	}
 }
 SimpleVisualization::SimpleVisualization() {
-	visualization = cv::Mat::zeros(SimulationData::getInst()->mapWidthToSet,
-				SimulationData::getInst()->mapHeightToSet, CV_8UC3);
+	visualization = cv::Mat::zeros(SimulationData::getInst()->mapHeightToSet,
+				SimulationData::getInst()->mapWidthToSet, CV_8UC3);
 
 }
 SimpleVisualization::~SimpleVisualization() {

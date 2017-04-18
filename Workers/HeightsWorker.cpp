@@ -1,6 +1,7 @@
 #include "HeightsWorker.h"
 #include "../SimulationData.h"
 #include <cmath>
+#include <iostream>
 HeightsWorker::HeightsWorker() {
 	mapHeight = 0;
 	mapWidth = 0;
@@ -14,15 +15,15 @@ void HeightsWorker::getDepth(World*world) {
 
 	int maxH = 0;
 	int minH = 0;
-	float heightValue = 0;
+	float cellHeight = 0;
 	for (int i = 0; i < mapWidth; i++) {
 		for (int j = 0; j < mapHeight; j++) {
-			heightValue = world->map[j][i].heightValue;
-			if (heightValue > maxH) {
-				maxH = heightValue;
+			cellHeight = world->map[j][i].heightValue;
+			if (cellHeight > maxH) {
+				maxH = cellHeight;
 			}
-			if (heightValue < minH) {
-				minH = heightValue;
+			if (cellHeight < minH) {
+				minH = cellHeight;
 			}
 
 		}
@@ -34,18 +35,19 @@ void HeightsWorker::getDepth(World*world) {
 
 void HeightsWorker::work(World*world) {
 	init(world);
-	diamondSquare(world,SimulationData::getInst()->scale);
+	diamondSquare(world, SimulationData::getInst()->scale);
 	getDepth(world);
 
 }
 void HeightsWorker::init(World*world) {
-	mapHeight = world->mapHeight;
-	mapWidth = world->mapWidth;
+	mapHeight = SimulationData::getInst()->mapHeightToSet;
+	mapWidth = SimulationData::getInst()->mapWidthToSet;
+
 	float cornerHeight = SimulationData::getInst()->cornerHeight;
 	int firstStepDecrease = SimulationData::getInst()->firstStepDecrease;
-
 	int lesserSide = std::min(mapHeight, mapWidth);
 	float rawStep = std::log2(lesserSide);
+
 	if (std::abs(rawStep) < 0.0001) {
 		step = pow(2, (int) (rawStep) - 1);
 
@@ -60,6 +62,7 @@ void HeightsWorker::init(World*world) {
 		}
 	}
 	step = step / firstStepDecrease;
+	std::cout << step << " step;" << lesserSide << "lesser side;" << std::endl;
 }
 
 void HeightsWorker::diamondStep(World *world, int y, int x, float range) {
@@ -84,11 +87,11 @@ void HeightsWorker::diamondStep(World *world, int y, int x, float range) {
 
 void HeightsWorker::squareStep(World *world, int y, int x, float scale) {
 
-	float a = world->map[y][x].heightValue;
-	float b = world->map[y + step][x].heightValue;
-	float c = world->map[y][x + step].heightValue;
-	float d = world->map[y + step][x + step].heightValue;
-	world->map[y + step / 2][x + step / 2].heightValue = (a + b + c + d) / 4
+	float sumOfHeights = world->map[y][x].heightValue;
+	sumOfHeights += world->map[y + step][x].heightValue;
+	sumOfHeights += world->map[y][x + step].heightValue;
+	sumOfHeights += world->map[y + step][x + step].heightValue;
+	world->map[y + step / 2][x + step / 2].heightValue = (sumOfHeights) / 4
 			+ rangedRandom() * scale;
 
 }
@@ -96,11 +99,13 @@ void HeightsWorker::squareStep(World *world, int y, int x, float scale) {
 void HeightsWorker::diamondSquare(World*world, float scale) {
 	if (step < 2)
 		return;
+	int borderY = mapHeight - step;
+	int borderX = mapWidth - step;
 
-	for (int i = 0; i < mapHeight - step; i += step)
-		for (int j = 0; j < mapWidth - step; j += step) {
-
+	for (int i = 0; i < borderY; i += step)
+		for (int j = 0; j < borderX; j += step) {
 			squareStep(world, i, j, scale);
+			std::cout << i << j << std::endl;
 
 		}
 

@@ -9,7 +9,6 @@ public:
 	void update(cv::Mat* visualization) override;
 private:
 	cv::VideoWriter writer;
-	cv::Mat output;
 };
 
 #endif /* VISUALIZATION_SIMPLEVIDEORECORD_H_ */
