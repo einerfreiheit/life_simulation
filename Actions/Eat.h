@@ -5,9 +5,9 @@
 class Eat: public  Action
 {
 public:
-	Eat();
-	 ~Eat();
-	void act(World *world,Creature &creature) override;
+    Eat();
+    ~Eat();
+    void act ( World *world,Creature &creature ) override;
 };
 
 #endif

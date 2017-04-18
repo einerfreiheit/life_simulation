@@ -4,32 +4,31 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include "Workers/HeightsWorker.h"
+#include "Factories/HeightsBuilder.h"
 
 SimulationRunner::SimulationRunner() {
-	srand(7 * clock() + time(NULL));
-	world = new World(SimulationData::getInst()->mapHeightToSet,
-			SimulationData::getInst()->mapWidthToSet);
+    srand ( 7 * clock() + time ( NULL ) );
+    world = new World ( SimulationData::getInst()->mapHeightToSet,
+                        SimulationData::getInst()->mapWidthToSet );
 
-	HeightsWorker heightsWorker;
-	heightsWorker.work(world);
-
-}
+    HeightsBuilder heightsbuilder;
+    heightsbuilder.build(world);
+    }
 
 SimulationRunner::~SimulationRunner() {
-	delete world;
-}
+    delete world;
+    }
 
 void SimulationRunner::run() {
-	WorkerFactory::build(workers);
+    WorkerFactory::build ( workers );
 
-	while (true) {
+    while ( true ) {
 
-		for (WorldWorker *worker : workers) {
-			std::cout << worker->getName() << std::endl;
-			worker->work(world);
+        for ( WorldWorker *worker : workers ) {
+            std::cout << worker->getName() << std::endl;
+            worker->work ( world );
 
-		}
+            }
 
-	}
-}
+        }
+    }

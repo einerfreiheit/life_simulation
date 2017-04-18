@@ -2,11 +2,12 @@
 #define VISUALIZATION_SIMPLEDISPLAY_H_
 #include "VisualOutput.h"
 
-class SimpleDisplay :public VisualOutput {
+class SimpleDisplay :public VisualOutput
+{
 public:
-	SimpleDisplay();
-	virtual ~SimpleDisplay();
-	void update(cv::Mat* visualization)override;
+    SimpleDisplay();
+    virtual ~SimpleDisplay();
+    void update ( cv::Mat* visualization ) override;
 };
 
 #endif /* VISUALIZATION_SIMPLEDISPLAY_H_ */

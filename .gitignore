@@ -9,6 +9,7 @@
 *.JPG
 *.*~
 .project
+config.ini
 cmake_install.cmake
 *language.settings.xml
 *metadata*

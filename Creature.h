@@ -9,26 +9,26 @@
 class Creature
 {
 public:
-    Creature(int id);
+    Creature ( int id );
     virtual ~Creature();
- std::vector <std::shared_ptr<SimpleAction> > creatureActions;
+    std::vector <std::shared_ptr<SimpleAction> > creatureActions;
 
     bool isHungry() const;
     double energy;
     double lowEnergyLevel = 100.0;
     int getPosY() const;
     int getPosX() const;
-    void setPosY(int setY);
-    void setPosX(int setX);
-    void setEnergy(double energyToSet);
+    void setPosY ( int setY );
+    void setPosX ( int setX );
+    void setEnergy ( double energyToSet );
     double getEnergy() const;
     int getId() const;
-    void setGenome(GenomePtr genome);
+    void setGenome ( GenomePtr genome );
 protected:
     int x;
     int y;
     int id;
-    
+
     GenomePtr genome = NULL;
 };
 

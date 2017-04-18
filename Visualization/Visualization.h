@@ -3,10 +3,11 @@
 #include"../CommonIncludes.h"
 #include "../World.h"
 
-class Visualization {
+class Visualization
+{
 public:
-	Visualization();
-	virtual ~Visualization();
+    Visualization();
+    virtual ~Visualization();
 
 
 };

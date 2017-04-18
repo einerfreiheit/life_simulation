@@ -1,9 +1,8 @@
 #include "SimulationRunner.h"
 
-int main()
-{
+int main() {
     SimulationRunner runner;
     runner.run();
     return 0;
-}
+    }
 

@@ -2,8 +2,8 @@
 
 SimpleAction::SimpleAction() {
 
-}
+    }
 
 SimpleAction::~SimpleAction() {
-}
+    }
 

@@ -1,16 +1,14 @@
-#ifndef WORKERS_HEIGHTSWORKER_H_
-#define WORKERS_HEIGHTSWORKER_H_
 
-#include "WorldWorker.h"
+#ifndef HEIGHTSBUILDER_H
+#define HEIGHTSBUILDER_H
+#include "../World.h"
 
-class HeightsWorker: public WorldWorker
+class HeightsBuilder
 {
 public:
-    HeightsWorker();
-    virtual ~HeightsWorker();
-
-    void work ( World*world ) override;
-
+    HeightsBuilder();
+    ~HeightsBuilder();
+     void build ( World*world );
 private:
     void diamondSquare ( World*world, float scale );
     void init ( World *world );
@@ -18,13 +16,9 @@ private:
     void squareStep ( World *world, int y, int x, float scale );
     float rangedRandom();
     void setDepth ( World *world );
-    //bool checkBorder(World *world,int y,int x);
-
     int  wrapIndex ( int index,int size );
-
     int step;
-
-
 };
 
-#endif
+#endif 
+

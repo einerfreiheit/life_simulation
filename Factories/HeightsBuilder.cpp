@@ -1,17 +1,15 @@
-#include "HeightsWorker.h"
+#include "HeightsBuilder.h"
 #include "../SimulationData.h"
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
 
-HeightsWorker::HeightsWorker() {
-
-
+HeightsBuilder::HeightsBuilder() {
     }
-HeightsWorker::~HeightsWorker() {
+HeightsBuilder::~HeightsBuilder() {
     }
 
-void HeightsWorker::setDepth ( World*world ) {
+void HeightsBuilder::setDepth ( World*world ) {
 
     int maxH = 0;
     int minH = 0;
@@ -30,13 +28,15 @@ void HeightsWorker::setDepth ( World*world ) {
     world->heightsRange = maxH - minH;
     }
 
-void HeightsWorker::work ( World*world ) {
+void HeightsBuilder::build ( World* world ) {
+
+
     init ( world );
     diamondSquare ( world, SimulationData::getInst()->scale );
     setDepth ( world );
 
     }
-void HeightsWorker::init ( World*world ) {
+void HeightsBuilder::init ( World*world ) {
     int mapHeight = world->mapHeight;
     int mapWidth = world->mapWidth;
 
@@ -76,7 +76,7 @@ void HeightsWorker::init ( World*world ) {
 
 
 
-void HeightsWorker::diamondStep ( World *world, int y, int x, float range ) {
+void HeightsBuilder::diamondStep ( World *world, int y, int x, float range ) {
     Cell &cell = world->map[y][x];
     float sumOfHeights = 0;
 
@@ -94,12 +94,12 @@ void HeightsWorker::diamondStep ( World *world, int y, int x, float range ) {
     cell.cellHeight = sumOfHeights / 4 + range * rangedRandom();
     }
 
-int  HeightsWorker::wrapIndex ( int index, int size ) {
+int  HeightsBuilder::wrapIndex ( int index, int size ) {
     return index<0 ? size - ( ( ~index ) +1 ) % size : index % size;;
 
 
     }
-void HeightsWorker::squareStep ( World *world, int y, int x, float scale ) {
+void HeightsBuilder::squareStep ( World *world, int y, int x, float scale ) {
 
     float sumOfHeights = world->map[y][x].cellHeight;
     sumOfHeights += world->map[y + step][x].cellHeight;
@@ -110,7 +110,7 @@ void HeightsWorker::squareStep ( World *world, int y, int x, float scale ) {
 
     }
 
-void HeightsWorker::diamondSquare ( World*world, float scale ) {
+void HeightsBuilder::diamondSquare ( World*world, float scale ) {
     if ( step < 2 ) {
         return;
         }
@@ -146,7 +146,7 @@ void HeightsWorker::diamondSquare ( World*world, float scale ) {
 
     }
 
-float HeightsWorker::rangedRandom() {
+float HeightsBuilder::rangedRandom() {
     return 2 * ( float ) rand() / RAND_MAX - 1;
 
     }

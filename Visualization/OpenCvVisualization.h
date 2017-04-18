@@ -2,19 +2,20 @@
 #define VISUALIZATION_OPENCVVISUALIZATION_H_
 #include "Visualization.h"
 
-class OpenCvVisualization: public Visualization {
+class OpenCvVisualization: public Visualization
+{
 public:
-	OpenCvVisualization() {
-	}
-	;
-	virtual ~OpenCvVisualization() {
-	}
-	;
+    OpenCvVisualization() {
+    }
+    ;
+    virtual ~OpenCvVisualization() {
+    }
+    ;
 
-	virtual void update(World* world)=0;
+    virtual void update ( World* world ) =0;
 
 protected:
-	cv::Mat visualization;
+    cv::Mat visualization;
 };
 
 #endif /* VISUALIZATION_OPENCVVISUALIZATION_H_ */

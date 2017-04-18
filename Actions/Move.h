@@ -2,16 +2,17 @@
 #define ACTIONS_MOVE_H_
 #include "Action.h"
 
-class Move: public Action {
+class Move: public Action
+{
 public:
 
-	Move(int moveToY,int moveToX);
-	 ~Move();
-	void act(World *world, Creature &creature) override;
+    Move ( int moveToY,int moveToX );
+    ~Move();
+    void act ( World *world, Creature &creature ) override;
 private:
-	int dx;
-	int dy;
-	bool canMove(World *world, int nextX, int nextY);
+    int dx;
+    int dy;
+    bool canMove ( World *world, int nextX, int nextY );
 
 };
 

@@ -3,14 +3,15 @@
 #include "Workers/WorldWorker.h"
 #include "Factories/WorkerFactory.h"
 #include "SimulationData.h"
-class SimulationRunner {
+class SimulationRunner
+{
 public:
-	SimulationRunner();
-	~SimulationRunner();
-	std::vector<WorldWorker *> workers;
-	void run();
+    SimulationRunner();
+    ~SimulationRunner();
+    std::vector<WorldWorker *> workers;
+    void run();
 private:
-	World *world;
+    World *world;
 
 };
 

@@ -2,10 +2,10 @@
 #include <iostream>
 Visualization::Visualization() {
 
-}
+    }
 
 Visualization::~Visualization() {
 
-}
+    }
 
 
