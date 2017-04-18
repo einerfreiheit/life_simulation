@@ -8,7 +8,7 @@
     - OpenCV: 
          -  sudo apt-get install libopencv-dev
     - boost program_option: 
-         - ~sudo apt-get install libboost-all-dev
+         - sudo apt-get install libboost-all-dev
 4.  собрать **Life Simulation**:
       -  cmake CMakeLists.txt
       -  make
