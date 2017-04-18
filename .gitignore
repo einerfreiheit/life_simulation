@@ -8,6 +8,7 @@
 *.BMP
 *.JPG
 *.*~
+*.k4dev
 .project
 config.ini
 cmake_install.cmake
