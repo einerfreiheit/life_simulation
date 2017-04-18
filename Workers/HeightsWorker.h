@@ -17,7 +17,7 @@ private:
 	void squareStep(World *world, int y, int x, float scale);
 	float rangedRandom();
 	void setDepth(World *world);
-
+	bool checkBorder(World *world,int y,int x);
 
 	int mapHeight;
 	int mapWidth;

@@ -42,8 +42,8 @@ void HeightsWorker::work(World*world) {
 
 }
 void HeightsWorker::init(World*world) {
-	mapHeight = SimulationData::getInst()->mapHeightToSet;
-	mapWidth = SimulationData::getInst()->mapWidthToSet;
+	mapHeight = world->mapHeight;
+	mapWidth = world->mapWidth;
 
 	float cornerHeight = SimulationData::getInst()->cornerHeight;
 	int firstStepDecrease = SimulationData::getInst()->firstStepDecrease;
@@ -57,7 +57,7 @@ void HeightsWorker::init(World*world) {
 		step = pow(2, (int) std::floor(rawStep));
 
 	}
-	std::cout << step << " step;" << lesserSide << "lesser side;" << std::endl;
+//	std::cout << step << " step;" << lesserSide << "lesser side;" << std::endl;
 	if (step > 0) {
 		for (int y = 0; y < mapHeight; y += step) {
 			for (int x = 0; x < mapWidth; x += step) {
@@ -66,33 +66,61 @@ void HeightsWorker::init(World*world) {
 			}
 		}
 	}
-	int firstStepDecerease=SimulationData::getInst()->firstStepDecrease;
-	if (!firstStepDecerease & (firstStepDecerease - 1)){
+	int firstStepDecerease = SimulationData::getInst()->firstStepDecrease;
+	if (firstStepDecrease==1 ||(!firstStepDecerease & (firstStepDecerease - 1)) ) {
 		step = step / firstStepDecrease;
 
+	} else {
+		throw std::runtime_error("firstStepDecrease must be 1 or power of 2 ");
 	}
-	else{
-		throw  std::runtime_error("world side size  <=1 ");
+	if (lesserSide<=1){
+		throw std::runtime_error("world's sides size must be greater than 1");
 	}
 }
 
+bool HeightsWorker::checkBorder(World *world, int y, int x) {
+	mapHeight = world->mapHeight;
+	mapWidth = world->mapWidth;
+	if (y >= 0 && x >= 00 && y < mapHeight && x < mapWidth)
+		return true;
+	else
+		return false;
+
+}
 void HeightsWorker::diamondStep(World *world, int y, int x, float range) {
 	Cell &cell = world->map[y][x];
 	int n = 0;
 	float sumOfHeights = 0;
 
-	for (int j = x - step / 2; j <= x + step / 2; j += step) {
-		if (j >= 0 && j <= mapWidth - 1) {
-			sumOfHeights += world->map[y][j].heightValue;
-			n++;
-		}
+	if (checkBorder(world, y, x - step / 2)) {
+		sumOfHeights += world->map[y][x - step / 2].heightValue;
+		n++;
 	}
-	for (int i = y - step / 2; i <= y + step / 2; i += step) {
-		if (i >= 0 && i <= mapHeight - 1) {
-			sumOfHeights += world->map[i][x].heightValue;
-			n++;
-		}
+	if (checkBorder(world, y, x + step / 2)) {
+		sumOfHeights += world->map[y][x + step / 2].heightValue;
+		n++;
 	}
+	if (checkBorder(world, y - step / 2, x)) {
+		sumOfHeights += world->map[y - step / 2][x].heightValue;
+		n++;
+	}
+	if (checkBorder(world, y + step / 2, x)) {
+		sumOfHeights += world->map[y + step / 2][x].heightValue;
+		n++;
+	}
+
+	/*	for (int j = x - step / 2; j <= x + step / 2; j += step) {
+	 if (j >= 0 && j <= mapWidth - 1) {
+	 sumOfHeights += world->map[y][j].heightValue;
+	 n++;
+	 }
+	 }
+	 for (int i = y - step / 2; i <= y + step / 2; i += step) {
+	 if (i >= 0 && i <= mapHeight - 1) {
+	 sumOfHeights += world->map[i][x].heightValue;
+	 n++;
+	 }
+	 }*/
 	cell.heightValue = sumOfHeights / n + range * rangedRandom();
 }
 
@@ -119,13 +147,17 @@ void HeightsWorker::diamondSquare(World*world, float scale) {
 
 		}
 
-	for (int i = 0; i < mapHeight; i += step) {
-		for (int j = step / 2; j < mapWidth - step / 2; j += step) {
+	borderY = mapHeight;
+	borderX = mapWidth - step / 2;
+	for (int i = 0; i < borderY; i += step) {
+		for (int j = step / 2; j < borderX; j += step) {
 			diamondStep(world, i, j, scale);
 		}
 	}
-	for (int i = step / 2; i < mapHeight - step / 2; i += step) {
-		for (int j = 0; j < mapWidth; j += step) {
+	borderY = mapHeight - step / 2;
+	borderX = mapWidth;
+	for (int i = step / 2; i < borderY; i += step) {
+		for (int j = 0; j < borderX; j += step) {
 
 			diamondStep(world, i, j, scale);
 
