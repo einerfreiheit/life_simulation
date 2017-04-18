@@ -10,6 +10,7 @@ public:
     }
     ;
     virtual ~Action() {
+      
     }
     ;
     virtual void act ( World *world, Creature &creature ) =0;
