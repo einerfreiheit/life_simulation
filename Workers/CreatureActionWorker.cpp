@@ -11,15 +11,22 @@ CreatureActionWorker::~CreatureActionWorker() {
 
 void CreatureActionWorker::work ( World *world ) {
     for ( auto creature : world->creatures ) {
-	
+
         for ( SimpleAction *simpleAction  : creature->creatureActions ) {
-	      Action *actionPtr= static_cast<Action*>(simpleAction);      
-	      actionPtr->act(world,*creature);
-	      delete simpleAction;
-	      
+            uint8_t gate=255;
+            Action *actionPtr= static_cast<Action*> ( simpleAction );
+
+            if ( gate!= ( gate & ( ~actionPtr->mask ) ) ) {
+                actionPtr->act ( world,*creature );
+                gate=gate & ~ actionPtr->mask;
+
+                }
+
+            delete simpleAction;
+
             }
         creature->creatureActions.clear();
-	
+
 
         }
 

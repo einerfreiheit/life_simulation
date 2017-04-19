@@ -13,7 +13,15 @@ public:
       
     }
     ;
+    
+              enum ACTION_TYPE  {AT_EAT=1,AT_MOVE=2};
+	      ACTION_TYPE type;
+	      uint8_t mask=0;
+
+    
     virtual void act ( World *world, Creature &creature ) =0;
+    
+    
 
 };
 

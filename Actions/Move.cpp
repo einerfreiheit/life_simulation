@@ -3,6 +3,8 @@
 Move::Move ( int moveToY, int moveToX ) {
     this->dx = moveToX;
     this->dy = moveToY;
+    type=AT_MOVE;
+    mask = 1<< ( type-1 );
     }
 
 bool Move::canMove ( World *world, int nextX, int nextY ) {

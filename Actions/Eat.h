@@ -8,6 +8,7 @@ public:
     Eat();
     ~Eat();
     void act ( World *world,Creature &creature ) override;
+  
 };
 
 #endif
