@@ -11,8 +11,7 @@ SimulationRunner::SimulationRunner() {
     world = new World ( SimulationData::getInst()->mapHeightToSet,
                         SimulationData::getInst()->mapWidthToSet );
 
-    HeightsBuilder heightsbuilder;
-    heightsbuilder.build(world);
+    HeightsBuilder::build(world);
     }
 
 SimulationRunner::~SimulationRunner() {
