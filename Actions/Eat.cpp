@@ -2,7 +2,6 @@
 Eat::Eat() {
 
     type=AT_EAT;
-    mask = 1<<(type-1);
 }
 void Eat::act ( World *world, Creature &creature ) {
 
