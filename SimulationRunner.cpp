@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "Factories/HeightsBuilder.h"
+#include "Factories/ResourseFactory.h"
 
 SimulationRunner::SimulationRunner() {
     srand ( 7 * clock() + time ( NULL ) );
@@ -12,6 +13,8 @@ SimulationRunner::SimulationRunner() {
                         SimulationData::getInst()->mapWidthToSet );
 
     HeightsBuilder::build(world);
+    ResourseFactory::addWater(world);
+    
     }
 
 SimulationRunner::~SimulationRunner() {

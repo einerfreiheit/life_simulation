@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 Cell::Cell() {
-    this->food = rand() % 100;
+    food = rand() % 100;
 
     }
 
