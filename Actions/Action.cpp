@@ -7,7 +7,7 @@ Action::~Action() {
 
     }
     
-const Action::ACTION_TYPE& Action::getType() {
+Action:: ACTION_TYPE const  & Action::getType() const{
     return type;
     }
 

@@ -3,9 +3,9 @@
 #include <iostream>
 
 
-cv::Mat*const  SimpleVisualization::getVisualisation() {
+ cv::Mat*   SimpleVisualization::getVisualisation()  {
 
-    return &visualization;
+    return  &visualization;
     }
 
 void SimpleVisualization::update ( World*world ) {

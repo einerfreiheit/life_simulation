@@ -32,7 +32,7 @@ void Move::act ( World *world, Creature &creature ) {
     int nextY = dy;
     if ( canMove ( world, nextX, nextY ) ) {
         creature.energy = creature.energy
-                          - SimulationData::getInst()->energyToMove;
+                          - creature.getPhenotype()->energyToMove;
         creature.setPosX ( nextX );
         creature.setPosY ( nextY );
 

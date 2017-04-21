@@ -1,10 +1,29 @@
 #include "Creature.h"
+#include "SimulationData.h"
 Creature::Creature ( int _id ) : id ( _id ) {
 
     energy = 0.0;
     x = 0;
     y = 0;
+    phenotype=new Phenotype;
+    setPhenotype(phenotype);
     }
+
+void Creature::setPhenotype ( Phenotype* phenotype ) {
+  // пока фенотип = конфигу
+    phenotype->creatureOneBait=SimulationData::getInst()->creatureOneBait;
+    phenotype->energyFromFood=SimulationData::getInst()->energyFromFood;
+    phenotype->energyToMove=SimulationData::getInst()->energyToMove;
+    phenotype->fissionLoss=SimulationData::getInst()->fissionLoss;
+    phenotype->fissionThreshold=SimulationData::getInst()->fissionThreshold;
+    phenotype->hungryEdge=100;
+
+    }
+    
+Phenotype* Creature::getPhenotype() const {
+     return phenotype;
+    }
+
 
 void Creature::setPosX ( int setX ) {
 
@@ -29,7 +48,7 @@ int Creature::getId() const {
 
 bool Creature::isHungry() const {
 
-    return this->energy <= lowEnergyLevel;
+    return this->energy <= getPhenotype()->hungryEdge;
     }
 
 double Creature::getEnergy() const {
@@ -50,5 +69,6 @@ Creature::~Creature() {
     if ( genome ) {
         delete genome;
         }
+        delete phenotype;
     }
 

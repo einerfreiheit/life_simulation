@@ -2,7 +2,6 @@
 #define ACTIONS_ACTION_H_
 #include "../World.h"
 #include "SimpleAction.h"
-#include "../SimulationData.h"
 class Action: public SimpleAction
 {
 public:
@@ -15,7 +14,7 @@ public:
     } ;
 
     virtual void act ( World *world, Creature &creature ) =0;
-    ACTION_TYPE const & getType();
+    ACTION_TYPE const  & getType() const;
 protected:
     ACTION_TYPE type;
 
