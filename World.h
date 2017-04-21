@@ -14,6 +14,8 @@ public:
     int mapHeight;
     int mapWidth;
     float heightsRange;
+    float maxHeight;
+    float minHeight;
 
     std::vector<std::vector<Cell> > map;
     std::vector<Creature *> creatures;

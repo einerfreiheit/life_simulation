@@ -4,8 +4,8 @@
 
 void HeightsBuilder::setDepth ( World*world ) {
 
-    int maxH = 0;
-    int minH = 0;
+    float maxH = 0;
+    float minH = 0;
     float cellHeight = 0;
     for ( int i = 0; i < world->mapWidth; i++ ) {
         for ( int j = 0; j < world->mapHeight; j++ ) {
@@ -19,6 +19,8 @@ void HeightsBuilder::setDepth ( World*world ) {
             }
         }
     world->heightsRange = maxH - minH;
+    world->maxHeight=maxH;
+    world->minHeight=minH;
     }
 
 void HeightsBuilder::build ( World* world ) {

@@ -15,7 +15,7 @@ private:
     void squareStep ( World *world, int y, int x, float scale );
     float rangedRandom();
     void setDepth ( World *world );
-    int  wrapIndex ( int index,int size );
+    bool  checkIndex ( int index,int size );
     int step;
 };
 

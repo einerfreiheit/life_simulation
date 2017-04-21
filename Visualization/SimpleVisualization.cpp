@@ -13,37 +13,46 @@ void SimpleVisualization::update ( World*world ) {
 
     for ( int y = 0; y < world->mapHeight; y++ ) {
         for ( int x = 0; x < world->mapWidth; x++ ) {
-            double height = world->map[y][x].cellHeight;
-            double food = world->map[y][x].food;
-            int color=0;
-            if ( height >= 0 ) {
-                color = 127 * height / depth + 128;
-                }
-            else {
-                color = 128 + 127 * height / depth;
-                }
-            int colorDelta = std::min ( 255.0, food * 255.0 / 100.0 );
-            cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( y, x );
-            pixel[0] = pixel[1] = pixel[2] = color;
 
+            float  height = world->map[y][x].cellHeight;
+            float food = world->map[y][x].food;
+	    
+            cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( y, x );
+
+            int color;
+            if ( height>=0 ) {
+                color =  255* height / ( world->maxHeight );
+                pixel[0] = color;
+                pixel[1] = color;
+                pixel[2] = color;
+
+                }
+
+            else {
+
+                color =((world->minHeight -height)/world->minHeight)*150;
+                pixel[0]=color;
+                pixel[1]=0;
+                pixel[2]=0;
+
+                }
+            }
+    }
+        for ( auto creature : world->creatures ) {
+            cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( creature->getPosY(),
+                               creature->getPosX() );
+            pixel[2] =
+                creature->isHungry() ? creature->energy * 255.0 / 100.0 : 255;
+            pixel[0] = 0;
+            pixel[1] = 0;
             }
         }
+    SimpleVisualization::SimpleVisualization() {
+        visualization = cv::Mat::zeros ( SimulationData::getInst()->mapHeightToSet,
+                                         SimulationData::getInst()->mapWidthToSet, CV_8UC3 );
 
-    for ( auto creature : world->creatures ) {
-        cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( creature->getPosY(),
-                           creature->getPosX() );
-        pixel[2] =
-            creature->isHungry() ? creature->energy * 255.0 / 100.0 : 255;
-        pixel[0] = 0;
-        pixel[1] = 0;
         }
-    }
-SimpleVisualization::SimpleVisualization() {
-    visualization = cv::Mat::zeros ( SimulationData::getInst()->mapHeightToSet,
-                                     SimulationData::getInst()->mapWidthToSet, CV_8UC3 );
+    SimpleVisualization::~SimpleVisualization() {
 
-    }
-SimpleVisualization::~SimpleVisualization() {
-
-    }
+        }
 

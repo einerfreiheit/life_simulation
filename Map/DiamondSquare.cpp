@@ -8,7 +8,7 @@ DiamondSquare::DiamondSquare(World*world) {
  
       init(world);
       diamondSquare(world,SimulationData::getInst()->scale);
-
+      
     }
 
 DiamondSquare::~DiamondSquare() {
@@ -40,7 +40,7 @@ void DiamondSquare::init ( World* world ) {int mapHeight = world->mapHeight;
             }
         }
     int firstStepDecerease = SimulationData::getInst()->firstStepDecrease;
-    if ( firstStepDecrease==1 || ( !firstStepDecerease & ( firstStepDecerease - 1 ) ) ) {
+    if ( firstStepDecrease==1 || (( firstStepDecerease & ( firstStepDecerease - 1 ) ) ==0)) {
         step = step / firstStepDecrease;
 
         }
@@ -55,23 +55,34 @@ void DiamondSquare::init ( World* world ) {int mapHeight = world->mapHeight;
 void DiamondSquare::diamondStep ( World *world, int y, int x, float range ) {
     Cell &cell = world->map[y][x];
     float sumOfHeights = 0;
-
-    int leftPointX=wrapIndex ( x-step/2,world->mapWidth );
-    int rightPointX=wrapIndex ( x+step/2,world->mapWidth );
-    int upperPoint=wrapIndex ( y-step/2,world->mapHeight );
-    int lowerPoint=wrapIndex ( y+step/2,world->mapHeight );
-
-
-    sumOfHeights += world->map[y][leftPointX].cellHeight;
-    sumOfHeights += world->map[y][rightPointX].cellHeight;
-    sumOfHeights+=world->map[upperPoint][x].cellHeight;
-    sumOfHeights+=world->map[lowerPoint][x].cellHeight;
-
-    cell.cellHeight = sumOfHeights / 4 + range * rangedRandom();
+    int pointCount=0;
+    int leftPointX=x-step/2;
+    int rightPointX=x+step/2;
+    int upperPointY=y+step/2;
+    int lowerPointY=y-step/2;
+    if (checkIndex(leftPointX,world->mapWidth)){
+      sumOfHeights += world->map[y][leftPointX].cellHeight;
+      pointCount++;
+    }
+      if (checkIndex(rightPointX,world->mapWidth)){
+      sumOfHeights += world->map[y][rightPointX].cellHeight;
+      pointCount++;
+    }
+      if (checkIndex(upperPointY,world->mapHeight)){
+      sumOfHeights += world->map[upperPointY][x].cellHeight;
+      pointCount++;
+    }
+      if (checkIndex(lowerPointY,world->mapHeight)){
+      sumOfHeights += world->map[lowerPointY][x].cellHeight;
+      pointCount++;
     }
 
-int  DiamondSquare::wrapIndex ( int index, int size ) {
-    return index<0 ? size - ( ( ~index ) +1 ) % size : index % size;;
+
+    cell.cellHeight = sumOfHeights / pointCount + range * rangedRandom();
+    }
+
+bool  DiamondSquare::checkIndex ( int index, int size ) {
+    return (index>=0 && index<size);
 
 
     }
