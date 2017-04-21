@@ -11,6 +11,7 @@
         double fissionLoss;
         double fissionThreshold;
 	double hungryEdge;
+	double corpseSize;
     };
 
 class Creature

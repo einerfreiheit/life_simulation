@@ -13,6 +13,10 @@ void CreatureRemoveWorker::work ( World *world ) {
     while ( i <= lastId ) {
         Creature *current = world->creatures[i];
         if ( current->getEnergy() <= 0 ) {
+	   int x= current->getPosX();
+	   int y=current->getPosY();
+	   world->map[y][x].food=current->getPhenotype()->corpseSize;
+	    
             delete current;
             world->creatures[i] = world->creatures[lastId];
             lastId--;

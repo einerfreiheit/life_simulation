@@ -17,6 +17,7 @@ void Creature::setPhenotype ( Phenotype* phenotype ) {
     phenotype->fissionLoss=SimulationData::getInst()->fissionLoss;
     phenotype->fissionThreshold=SimulationData::getInst()->fissionThreshold;
     phenotype->hungryEdge=100;
+    phenotype->corpseSize=50;
 
     }
     
