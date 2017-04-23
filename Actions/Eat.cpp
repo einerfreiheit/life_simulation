@@ -6,9 +6,9 @@ Eat::Eat() {
 void Eat::act ( World *world, Creature &creature ) {
 
     Cell &cell = world->map[creature.getPosY()][creature.getPosX()];
-    if ( cell.food > creature.getPhenotype()->creatureOneBait ) {
-        cell.food -=creature.getPhenotype()->creatureOneBait;
-        creature.energy +=creature.getPhenotype()->energyFromFood;
+    if ( cell.food > creature.phenotype->creatureOneBait ) {
+        cell.food -=creature.phenotype->creatureOneBait;
+        creature.energy +=creature.phenotype->energyFromFood;
         }
 
     }

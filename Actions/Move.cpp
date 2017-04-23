@@ -40,11 +40,11 @@ double Move::energyToMove ( World *world, Creature & creature ) {
     double heightDifference =world->map[currentY][currentX].cellHeight-world->map[nextY][nextX].cellHeight;
     double requariedEnergy=0;
     if ( heightDifference>=0 ) {
-        requariedEnergy=creature.getPhenotype()->energyToMove* (getPath(heightDifference) );
+        requariedEnergy=creature.phenotype->energyToMove* (getPath(heightDifference) );
         }
     else {
 
-        requariedEnergy=creature.getPhenotype()->energyToMove* getPath(heightDifference) *creature.energy/100;
+        requariedEnergy=creature.phenotype->energyToMove* getPath(heightDifference) *creature.energy/100;
 
         }
     return requariedEnergy;

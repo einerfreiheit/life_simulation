@@ -12,7 +12,7 @@ void SimpleLogics::creatureWill ( World* world, Creature& creature ) {
     willToEat ( creature );
     int x = creature.getPosX();
     int y = creature.getPosY();
-    if ( world->map[y][x].food <= creature.getPhenotype()->creatureOneBait ) {
+    if ( world->map[y][x].food <= creature.phenotype->creatureOneBait ) {
         willToMove ( world, creature );
         }
 

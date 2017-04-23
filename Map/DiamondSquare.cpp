@@ -56,10 +56,12 @@ void DiamondSquare::diamondStep ( World *world, int y, int x, float range ) {
     Cell &cell = world->map[y][x];
     float sumOfHeights = 0;
     int pointCount=0;
+    
     int leftPointX=x-step/2;
     int rightPointX=x+step/2;
     int upperPointY=y+step/2;
     int lowerPointY=y-step/2;
+    
     if (checkIndex(leftPointX,world->mapWidth)){
       sumOfHeights += world->map[y][leftPointX].cellHeight;
       pointCount++;

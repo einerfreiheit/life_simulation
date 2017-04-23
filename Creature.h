@@ -4,26 +4,15 @@
 #include <vector>
 #include <memory>
 #include "Genetics/Genome.h"
- struct Phenotype {
-        double energyFromFood;
-        double creatureOneBait;
-        double energyToMove;
-        double fissionLoss;
-        double fissionThreshold;
-	double hungryEdge;
-	double corpseSize;
-    };
+#include "Phenotype.h"
+
 
 class Creature
 {
 public:
     Creature ( int id );
-    virtual ~Creature();
-    
-    Phenotype* getPhenotype() const;
-    
+    virtual ~Creature();    
     std::vector<SimpleAction*> creatureActions;
-
     bool isHungry() const;
     double energy;
     double lowEnergyLevel = 100.0;
@@ -35,6 +24,9 @@ public:
     double getEnergy() const;
     int getId() const;
     void setGenome ( GenomePtr genome );
+    void setPhenotype (Phenotype *phenotype);
+    Phenotype *phenotype;
+
 protected:
     int x;
     int y;
@@ -42,8 +34,6 @@ protected:
 
     GenomePtr genome = NULL;
     
-    Phenotype *phenotype= nullptr;
-    void setPhenotype(Phenotype *phenotype);
 };
 
 #endif /* CREATURE_H_ */
