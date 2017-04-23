@@ -13,6 +13,7 @@ public:
         double fissionThreshold;
 	double hungryEdge;
 	double corpseSize;
+	double energyToClimb;
 };
 
 #endif // PHENOTYPE_H

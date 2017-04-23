@@ -10,6 +10,7 @@ Phenotype* PhenotypeBuilder::build ( GenomePtr genome ) {
     result->fissionLoss=SimulationData::getInst()->fissionLoss;
     result->fissionThreshold=SimulationData::getInst()->fissionThreshold;
     result->hungryEdge=100;
+    result->energyToClimb=result->energyToMove*2;
     return result;
   
   

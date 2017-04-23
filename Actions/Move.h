@@ -12,8 +12,12 @@ public:
 private:
     int dx;
     int dy;
-    bool canMove ( World *world, int nextX, int nextY, double energyRequaried, double creatureEnergy );
-    double energyToMove(World *world, Creature & creature);
+    bool canMove ( World *world, Creature &creature, int nextX, int nextY, double & requariedEnergy );
+    bool checkBorder(World *world, int nextX, int nextY);
+    double energyRequaried(double currentHeight, double nextHeight,double energyToCLimb, double energyToMove);
+    bool checkEnergy(double energyRequaried, double creatureEnergy );
+    
+   
     double getPath(double height);
 
 };

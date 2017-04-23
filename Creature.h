@@ -24,6 +24,7 @@ public:
     double getEnergy() const;
     int getId() const;
     void setGenome ( GenomePtr genome );
+    GenomePtr getGenome();
     void setPhenotype (Phenotype *phenotype);
     Phenotype *phenotype;
 

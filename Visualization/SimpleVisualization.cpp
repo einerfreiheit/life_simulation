@@ -16,6 +16,7 @@ void SimpleVisualization::update ( World*world ) {
 
             float  height = world->map[y][x].cellHeight;
             float food = world->map[y][x].food;
+	    float water =world->map[y][x].water;
             cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( y, x );
 
             int color;

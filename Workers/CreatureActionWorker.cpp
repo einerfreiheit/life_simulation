@@ -15,6 +15,7 @@ void CreatureActionWorker::work ( World *world ) {
 	
         for ( SimpleAction *simpleAction  : creature->creatureActions ) {
             Action *actionPtr= static_cast<Action*> ( simpleAction );
+	    
             if ( gate!= ( gate | actionPtr->getType() ) ) {
                 actionPtr->act ( world,*creature );
                 gate |=actionPtr->getType();

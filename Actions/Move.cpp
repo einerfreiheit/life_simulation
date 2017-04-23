@@ -1,20 +1,19 @@
 #include "Move.h"
 #include <cmath>
+#include <iostream>
 Move::Move ( int moveToY, int moveToX ) {
     this->dx = moveToX;
     this->dy = moveToY;
     type=AT_MOVE;
     }
-
-bool Move::canMove ( World *world, int nextX, int nextY, double energyRequaried, double creatureEnergy ) {
-
+bool Move::checkBorder ( World* world, int nextX, int nextY ) {
     int borderY = world->mapHeight;
     int borderX = world->mapWidth;
     if ( nextX < 0 || nextX >= borderX ) {
         return false;
         }
     else {
-        if ( nextY < 0 || nextY >= borderY || creatureEnergy<energyRequaried ) {
+        if ( nextY < 0 || nextY >= borderY ) {
             return false;
             }
         else {
@@ -25,42 +24,44 @@ bool Move::canMove ( World *world, int nextX, int nextY, double energyRequaried,
         }
 
     }
+double Move::energyRequaried ( double currentHeight, double nextHeight,double energyToClimb, double energyToMove ) {
 
-double Move::getPath ( double height ) {
+    return currentHeight<nextHeight? ( nextHeight-currentHeight ) *energyToClimb + energyToMove : energyToMove;
 
-      return sqrt(1+pow(height,2));
     }
 
-  
-double Move::energyToMove ( World *world, Creature & creature ) {
-    int currentX = creature.getPosX();
-    int currentY = creature.getPosY();
-    int nextX = dx;
-    int nextY = dy;
-    double heightDifference =world->map[currentY][currentX].cellHeight-world->map[nextY][nextX].cellHeight;
-    double requariedEnergy=0;
-    if ( heightDifference>=0 ) {
-        requariedEnergy=creature.phenotype->energyToMove* (getPath(heightDifference) );
+
+bool Move::canMove ( World *world, Creature &creature, int nextX, int nextY, double &requariedEnergy ) {
+    if ( checkBorder ( world,nextX,nextY ) ) {
+        int currentX=creature.getPosX();
+        int currentY=creature.getPosY();
+        double currentHeight=world->map[currentY][currentX].cellHeight;
+        double nextHeight = world->map[nextY][nextX].cellHeight;
+        double energyToClimb= creature.phenotype->energyToClimb;
+        double energyToMove = creature.phenotype->energyToMove;
+        requariedEnergy=energyRequaried ( currentHeight,nextHeight,energyToClimb,energyToMove );
+        if ( requariedEnergy<=creature.getEnergy() ) {
+            return true;
+            }
+        else {
+            return false;
+            }
         }
     else {
-
-        requariedEnergy=creature.phenotype->energyToMove* getPath(heightDifference) *creature.energy/100;
-
+        return false;
         }
-    return requariedEnergy;
-
     }
+
 
 void Move::act ( World *world, Creature &creature ) {
 
-    double energyReq= energyToMove ( world,creature );
-    if ( canMove ( world, dx, dy, energyReq, creature.getEnergy() ) ) {
-        creature.energy = creature.energy -energyReq;
+    double energyReq=0;
+    if ( canMove ( world, creature,dx,dy,energyReq ) ) {
+        creature.setEnergy ( creature.getEnergy()-energyReq );
         creature.setPosX ( dx );
         creature.setPosY ( dy );
 
         }
-
     }
 Move::~Move() {
 
