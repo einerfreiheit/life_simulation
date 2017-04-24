@@ -36,6 +36,7 @@ public:
     bool useVisualWorker;
     bool useWaiterWorker;
     bool useCreatureActionWorker;
+    bool useWaterWorker;
 protected:
     void addParams() override;
 private:

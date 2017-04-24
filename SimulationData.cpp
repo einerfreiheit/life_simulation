@@ -28,6 +28,7 @@ void SimulationData::addParams() {
     add<bool> ( "useWaiterWorker", useWaiterWorker, true );
     add<bool> ( "displayOutput",displayOutput,true );
     add<bool> ( "videoRecord",videoRecord,false );
+    add<bool>("useWaterWorker",useWaterWorker,false);
 
     setSection ( "WaitingTime" );
     add<int> ( "timeToWait", timeToWait, 1000 );

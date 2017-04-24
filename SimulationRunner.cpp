@@ -14,6 +14,8 @@ SimulationRunner::SimulationRunner() {
 
     HeightsBuilder::build(world);
     ResourseFactory::addWater(world);
+    world->map[0][0].water+=10;
+    //ResourseFactory::waterFlow(world,1);
     
     }
 

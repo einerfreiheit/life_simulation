@@ -12,7 +12,7 @@ void CreatureRemoveWorker::work ( World *world ) {
     int i = 0;
     while ( i <= lastId ) {
         Creature *current = world->creatures[i];
-        if ( current->getEnergy() <= 0 ) {
+        if ( current->getEnergy() <= current->phenotype->energyToMove ) {
 	   int x= current->getPosX();
 	   int y=current->getPosY();
 	   world->map[y][x].food=current->phenotype->corpseSize;
