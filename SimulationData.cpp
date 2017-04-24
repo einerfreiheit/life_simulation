@@ -11,6 +11,7 @@ void SimulationData::addParams() {
     setSection ( "World" );
     add<int> ( "height", mapHeightToSet, 5 );
     add<int> ( "width", mapWidthToSet, 5 );
+    setSection("WorldHeights");
     add<int> ( "firstStepDecrease",firstStepDecrease,1 );
     add<float> ( "cornerHeight",cornerHeight,0 );
     add<float> ( "smooth",smooth,2 );

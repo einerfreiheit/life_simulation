@@ -6,8 +6,10 @@ class Cell
 public:
     Cell();
     double food;
+    double water=0;
     virtual ~Cell();
     double cellHeight=0;
+    
 
 };
 

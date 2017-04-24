@@ -1,6 +1,5 @@
 #ifndef LOGICS_SIMPLELOGICS_H_
 #define LOGICS_SIMPLELOGICS_H_
-#include "Creature.h"
 #include "World.h"
 #include <vector>
 

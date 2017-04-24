@@ -3,7 +3,7 @@
 
 GenomePtr GenomeBuilder::build ( int complexity ) {
     GenomePtr result = new Genome;
-    size_t chromosomesNum = complexity / complexityPerChromosome + ( ( complexity % complexityPerChromosome ) > 0 );
+   size_t chromosomesNum = complexity / complexityPerChromosome + ( ( complexity % complexityPerChromosome ) > 0 );
     result->chromosomes.resize ( chromosomesNum );
 
     for ( size_t i = 0; i < result->chromosomes.size(); i++ ) {
@@ -15,3 +15,11 @@ GenomePtr GenomeBuilder::build ( int complexity ) {
         }
     return result;
     }
+GenomePtr GenomeBuilder::build ( Creature & creature) {
+      GenomePtr parentGenome = creature.getGenome();
+      // пока так
+  return parentGenome;
+  
+    }
+
+

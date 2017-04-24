@@ -1,12 +1,14 @@
 #include "Eat.h"
 Eat::Eat() {
-    }
+
+    type=AT_EAT;
+}
 void Eat::act ( World *world, Creature &creature ) {
 
     Cell &cell = world->map[creature.getPosY()][creature.getPosX()];
-    if ( cell.food > SimulationData::getInst()->energyFromFood ) {
-        cell.food -=SimulationData::getInst()->creatureOneBait;
-        creature.energy +=SimulationData::getInst()->energyFromFood;
+    if ( cell.food > creature.phenotype->creatureOneBait ) {
+        cell.food -=creature.phenotype->creatureOneBait;
+        creature.energy +=creature.phenotype->energyFromFood;
         }
 
     }

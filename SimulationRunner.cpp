@@ -5,14 +5,16 @@
 #include <iostream>
 #include <fstream>
 #include "Factories/HeightsBuilder.h"
+#include "Factories/ResourseFactory.h"
 
 SimulationRunner::SimulationRunner() {
     srand ( 7 * clock() + time ( NULL ) );
     world = new World ( SimulationData::getInst()->mapHeightToSet,
                         SimulationData::getInst()->mapWidthToSet );
 
-    HeightsBuilder heightsbuilder;
-    heightsbuilder.build(world);
+    HeightsBuilder::build(world);
+    ResourseFactory::addWater(world);
+    
     }
 
 SimulationRunner::~SimulationRunner() {

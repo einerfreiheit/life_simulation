@@ -7,7 +7,7 @@ public:
     void update ( World *world ) override;
     SimpleVisualization();
     virtual ~SimpleVisualization();
-    cv::Mat* const getVisualisation();
+    cv::Mat*  getVisualisation() ;
 
 };
 

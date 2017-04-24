@@ -1,6 +1,5 @@
 #include "Creature.h"
 Creature::Creature ( int _id ) : id ( _id ) {
-
     energy = 0.0;
     x = 0;
     y = 0;
@@ -29,7 +28,7 @@ int Creature::getId() const {
 
 bool Creature::isHungry() const {
 
-    return this->energy <= lowEnergyLevel;
+    return this->energy <= phenotype->hungryEdge;
     }
 
 double Creature::getEnergy() const {
@@ -41,14 +40,23 @@ void Creature::setEnergy ( double energyToSet ) {
 
     }
 
+void Creature::setPhenotype ( Phenotype* _phenotype ) {
+    this->phenotype=_phenotype;
+
+    }
+
 
 void Creature::setGenome ( GenomePtr _genome ) {
     this->genome = _genome;
+    }
+GenomePtr Creature::getGenome()  {
+      return genome;
     }
 
 Creature::~Creature() {
     if ( genome ) {
         delete genome;
         }
+        delete phenotype;
     }
 

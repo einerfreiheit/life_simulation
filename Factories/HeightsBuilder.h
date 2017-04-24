@@ -6,18 +6,10 @@
 class HeightsBuilder
 {
 public:
-    HeightsBuilder();
-    ~HeightsBuilder();
-     void build ( World*world );
-private:
-    void diamondSquare ( World*world, float scale );
-    void init ( World *world );
-    void diamondStep ( World* world, int y, int x, float scale );
-    void squareStep ( World *world, int y, int x, float scale );
-    float rangedRandom();
-    void setDepth ( World *world );
-    int  wrapIndex ( int index,int size );
-    int step;
+   
+     static void build ( World*world );
+     static void setDepth(World *world);
+   
 };
 
 #endif 

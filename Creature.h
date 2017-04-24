@@ -3,16 +3,16 @@
 #include "Actions/SimpleAction.h"
 #include <vector>
 #include <memory>
-
 #include "Genetics/Genome.h"
+#include "Phenotype.h"
+
 
 class Creature
 {
 public:
     Creature ( int id );
-    virtual ~Creature();
+    virtual ~Creature();    
     std::vector<SimpleAction*> creatureActions;
-
     bool isHungry() const;
     double energy;
     double lowEnergyLevel = 100.0;
@@ -24,12 +24,17 @@ public:
     double getEnergy() const;
     int getId() const;
     void setGenome ( GenomePtr genome );
+    GenomePtr getGenome();
+    void setPhenotype (Phenotype *phenotype);
+    Phenotype *phenotype;
+
 protected:
     int x;
     int y;
     int id;
 
     GenomePtr genome = NULL;
+    
 };
 
 #endif /* CREATURE_H_ */
