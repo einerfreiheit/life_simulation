@@ -16,7 +16,7 @@ void SimpleVisualization::update ( World*world ) {
 
             float  height = world->map[y][x].cellHeight;
             float food = world->map[y][x].food;
-	    float water =world->map[y][x].water;
+	    double water =world->map[y][x].water;
             cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( y, x );
 
             int color;
@@ -30,7 +30,8 @@ void SimpleVisualization::update ( World*world ) {
 
             else {
 
-                color =((world->minHeight -height)/world->minHeight)*150;
+//                 color =((world->minHeight -height)/world->minHeight)*150;
+	        color =std::max(255+ water*255/world->minHeight, 25.0);
                 pixel[0]=color;
                 pixel[1]=0;
                 pixel[2]=0;
