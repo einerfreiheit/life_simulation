@@ -1,4 +1,5 @@
 #include "Creature.h"
+#include <iostream>
 Creature::Creature ( int _id ) : id ( _id ) {
     energy = 0.0;
     x = 0;
@@ -57,6 +58,10 @@ Creature::~Creature() {
     if ( genome ) {
         delete genome;
         }
-        delete phenotype;
+     if (phenotype){
+//         delete phenotype;
+     }
+         std::cout<<getId()<< "creature deleted"<<std::endl;
+
     }
 

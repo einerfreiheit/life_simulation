@@ -28,12 +28,16 @@ void SimulationData::addParams() {
     add<bool> ( "useWaiterWorker", useWaiterWorker, true );
     add<bool> ( "displayOutput",displayOutput,true );
     add<bool> ( "videoRecord",videoRecord,false );
+    add<bool>("useWaterWorker",useWaterWorker,false);
 
     setSection ( "WaitingTime" );
     add<int> ( "timeToWait", timeToWait, 1000 );
 
     setSection ( "Resources" );
     add<double> ( "gainPerCell", gainResourcePerCell, 0.0 );
+    add<double> ("allWaterAmount",allWaterAmount,0);
+    add<double> ("soilWater", soilWater,0.01);
+    
 
     setSection ( "CreatureParameters" );
     add<double> ( "creatureOneBait", creatureOneBait, 1.0 );

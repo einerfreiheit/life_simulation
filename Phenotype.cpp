@@ -9,6 +9,8 @@ Phenotype::Phenotype() {
     fissionThreshold=SimulationData::getInst()->fissionThreshold;
     hungryEdge=100;
     corpseSize=50;
+    healthPoints=SimulationData::getInst()->creatureHealthPoints;
+    attackPower=SimulationData::getInst()->creatureAttackPower;
 
     }
 

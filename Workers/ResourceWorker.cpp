@@ -13,7 +13,7 @@ ResourceWorker::ResourceWorker() {
     }
 
 int ResourceWorker::getRandom ( int border ) {
-    return rand() % border;
+    return (int )rand() % border;
 
     }
 
@@ -24,7 +24,7 @@ void ResourceWorker::work ( World *world ) {
 
         int rY=getRandom ( height );
         int rX=getRandom ( width );
-        if ( world->map[getRandom ( rY )][rX].food <= ( 100.0 - cellGain ) ) {
+        if ( world->map[ rY ][rX].food <= ( 100.0 - cellGain ) ) {
             world->map[rY][rX].food += cellGain;
             }
 

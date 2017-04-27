@@ -1,49 +1,60 @@
 #include "SimpleLogics.h"
 #include "../Actions/Eat.h"
 #include "../Actions/Move.h"
+#include "../Actions/Attack.h"
 #include <iostream>
 
-void SimpleLogics::willToEat ( Creature& creature ) {
-    creature.creatureActions.push_back ( new Eat );
+void SimpleLogics::willToEat ( CreaturePtr creature ) {
+    creature->creatureActions.push_back ( new Eat );
+    
     }
 
 
-void SimpleLogics::creatureWill ( World* world, Creature& creature ) {
+void SimpleLogics::creatureWill ( World* world,CreaturePtr creature) {
     willToEat ( creature );
-    int x = creature.getPosX();
-    int y = creature.getPosY();
-    if ( world->map[y][x].food <= creature.phenotype->creatureOneBait ) {
+    int x = creature->getPosX();
+    int y = creature->getPosY();
+    if ( world->map[y][x].food <= creature->phenotype->creatureOneBait ) {
         willToMove ( world, creature );
+	
         }
-
+    willToAttack(creature);
 
     }
-void SimpleLogics::willToMove ( World *world, Creature& creature ) {
+void SimpleLogics::willToAttack ( CreaturePtr creature ) {
+    creature->creatureActions.push_back(new Attack);
+      
+    }
 
-    int y = creature.getPosY();
-    int x = creature.getPosX();
-    side = rand() % 4;
+void SimpleLogics::willToMove ( World *world,CreaturePtr creature ) {
+    
+    int y = creature->getPosY();
+    int x = creature->getPosX();
+    int  side = rand() % 4;
     switch ( side ) {
-        case WT_DOWN: {
+        case 0: {
             y--;
             break;
             }
-        case WT_UP: {
+        case 1: {
             y++;
             break;
             }
-        case WT_LEFT: {
+        case 2: {
             x--;
             break;
             }
-        case WT_RIGHT: {
+        case 3: {
             x++;
             break;
             }
 
         }
-
-    creature.creatureActions.push_back ( new Move ( y,x ));
+        
+        
+    Move *movePtr= new Move;
+    movePtr->setXandY(x,y);
+    creature->creatureActions.push_back (movePtr);
 
     }
 

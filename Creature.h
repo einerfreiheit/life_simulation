@@ -26,7 +26,7 @@ public:
     void setGenome ( GenomePtr genome );
     GenomePtr getGenome();
     void setPhenotype (Phenotype *phenotype);
-    Phenotype *phenotype;
+    Phenotype *phenotype = NULL;
 
 protected:
     int x;
@@ -36,5 +36,5 @@ protected:
     GenomePtr genome = NULL;
     
 };
-
+typedef  std::shared_ptr<Creature> CreaturePtr;
 #endif /* CREATURE_H_ */

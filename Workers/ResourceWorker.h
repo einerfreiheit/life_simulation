@@ -17,7 +17,6 @@ private:
     double cellGain;
     int height;
     int width;
-    double amountOFWater=1000;
 
 };
 

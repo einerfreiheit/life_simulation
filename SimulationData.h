@@ -20,12 +20,16 @@ public:
     int mapHeightToSet;
     int mapWidthToSet;
     int timeToWait;
+    double creatureHealthPoints=100;
+    double creatureAttackPower=1;
     double gainResourcePerCell;
     double energyFromFood;
     double creatureOneBait;
     double energyToMove;
     double fissionLoss;
     double fissionThreshold;
+    double allWaterAmount;
+    double soilWater;
     bool displayOutput;
     bool videoRecord;
     bool useAIWorker;
@@ -36,6 +40,7 @@ public:
     bool useVisualWorker;
     bool useWaiterWorker;
     bool useCreatureActionWorker;
+    bool useWaterWorker;
 protected:
     void addParams() override;
 private:

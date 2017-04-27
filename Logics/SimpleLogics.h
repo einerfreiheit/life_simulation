@@ -6,13 +6,11 @@
 class SimpleLogics
 {
 public:
-    void willToMove ( World*world, Creature&creature ) ;
-    void willToEat ( Creature &creature ) ;
-    void creatureWill(World * world, Creature & creature);
-    int side =0;
-    enum WAY_TYPE {
-        WT_DOWN = 0, WT_UP, WT_LEFT, WT_RIGHT
-    };
+    void willToMove ( World *world, CreaturePtr creature ) ;
+    void willToEat ( CreaturePtr creature );
+    void willToAttack(CreaturePtr creature);
+    void creatureWill(World *world, CreaturePtr creature);
+
 };
 
 
