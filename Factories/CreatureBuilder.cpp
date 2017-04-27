@@ -19,8 +19,9 @@ CreaturePtr CreatureBuilder::build (World *world, int posX, int posY ) {
     
     result->setGenome ( genome );
     result->setPhenotype(phenotype);
-    world->map[posY][posX].creaturesInCell.push_back(result);
     
+    world->map[posY][posX].creaturesInCell.push_back(result);
+//     std::cout<<  world->map[posY][posX].creaturesInCell.size()<<" size "<<std::endl;
     cv::Mat vis = GenomeVisualizer::visualize ( genome );
     cv::imwrite ( "genomes/" + std::to_string ( nextId ) + ".png", vis );
 
@@ -40,6 +41,9 @@ CreaturePtr  CreatureBuilder::build (World *world, CreaturePtr parent ) {
     
     result->setGenome ( genome );
     result->setPhenotype(phenotype);
+    
+//     std::cout<<  world->map[posY][posX].creaturesInCell.size()<<" size "<<std::endl;
+
     world->map[posY][posX].creaturesInCell.push_back(result);
 
     cv::Mat vis = GenomeVisualizer::visualize ( genome );

@@ -15,7 +15,7 @@ void CreatureSpawnWorker::work ( World *world ) {
       //     CreaturePtr second = CreatureBuilder::build (creature->getPosX(),creature->getPosY());
  	     CreaturePtr second = CreatureBuilder::build (world,creature);
             world->creatures.push_back ( second );
-	    std::cout<<world->creatures.size()<< std::endl;
+	//    std::cout<<world->creatures.size()<< std::endl;
 	    if (world->creatures.size()>=100){
 	     throw std::runtime_error ("creatures more than 100"); 
 	    }

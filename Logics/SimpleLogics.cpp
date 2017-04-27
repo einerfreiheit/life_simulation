@@ -11,6 +11,7 @@ void SimpleLogics::willToEat ( CreaturePtr creature ) {
 
 
 void SimpleLogics::creatureWill ( World* world,CreaturePtr creature) {
+     willToAttack(creature);
     willToEat ( creature );
     int x = creature->getPosX();
     int y = creature->getPosY();
@@ -18,7 +19,7 @@ void SimpleLogics::creatureWill ( World* world,CreaturePtr creature) {
         willToMove ( world, creature );
 	
         }
-    willToAttack(creature);
+  
 
     }
 void SimpleLogics::willToAttack ( CreaturePtr creature ) {
