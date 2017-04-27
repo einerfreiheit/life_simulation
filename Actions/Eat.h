@@ -8,7 +8,7 @@ class Eat: public  Action
 public:
     Eat();
    virtual  ~Eat();
-    void act ( World *world,Creature &creature ) override;
+    void act ( World *world, CreaturePtr creature) override;
   
 };
 

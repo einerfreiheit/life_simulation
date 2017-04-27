@@ -19,6 +19,5 @@ void World::init() {
 
 
     creatures.reserve ( 100 );
-    creatures.push_back ( CreatureBuilder::build ( 1, 1 ) );
     }
 

@@ -9,13 +9,14 @@ AIWorker::AIWorker() {
     }
 
 AIWorker::~AIWorker() {
+  delete simple;
 
     }
 
 void AIWorker::work ( World *world ) {
 
-    for ( auto creature : world->creatures ) {
-	  simple->creatureWill(world,*creature);
+    for ( CreaturePtr creature : world->creatures ) {
+	  simple->creatureWill(world,creature);
 
         }
     }

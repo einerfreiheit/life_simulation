@@ -7,8 +7,8 @@
 
 int CreatureBuilder::nextId = 0;
 
-Creature *CreatureBuilder::build ( int posX, int posY ) {
-    Creature *result = new Creature ( nextId++ );
+CreaturePtr CreatureBuilder::build (World *world, int posX, int posY ) {
+    CreaturePtr result = std::shared_ptr<Creature>(new Creature ( nextId++ ));
     result->setPosX ( posX );
     result->setPosY ( posY );
     result->setEnergy ( 100 );
@@ -19,23 +19,29 @@ Creature *CreatureBuilder::build ( int posX, int posY ) {
     
     result->setGenome ( genome );
     result->setPhenotype(phenotype);
+    world->map[posY][posX].creaturesInCell.push_back(result);
+    
     cv::Mat vis = GenomeVisualizer::visualize ( genome );
     cv::imwrite ( "genomes/" + std::to_string ( nextId ) + ".png", vis );
 
     return result;
     }
 
-Creature* CreatureBuilder::build ( Creature& parentCreature ) {
+CreaturePtr  CreatureBuilder::build (World *world, CreaturePtr parent ) {
   
-   Creature *result = new Creature ( nextId++ );
-    result->setPosX ( parentCreature.getPosX() );
-    result->setPosY ( parentCreature.getPosY() );
+  CreaturePtr result = std::shared_ptr<Creature>(new Creature ( nextId++ ));
+    int posX=parent->getPosX();
+    int posY=parent->getPosY();
+    result->setPosX ( posX );
+    result->setPosY ( posY);
     result->setEnergy ( 100 );
-     GenomePtr genome = GenomeBuilder::build ( parentCreature );
+    GenomePtr genome = GenomeBuilder::build ( parent );
     Phenotype *phenotype = PhenotypeBuilder::build(genome);
     
     result->setGenome ( genome );
     result->setPhenotype(phenotype);
+    world->map[posY][posX].creaturesInCell.push_back(result);
+
     cv::Mat vis = GenomeVisualizer::visualize ( genome );
     cv::imwrite ( "genomes/" + std::to_string ( nextId ) + ".png", vis );
 

@@ -1,6 +1,5 @@
 #ifndef WORLD_H
 #define WORLD_H
-#include "Factories/CreatureBuilder.h"
 #include "CommonIncludes.h"
 #include <vector>
 #include "Cell.h"
@@ -18,7 +17,7 @@ public:
     float minHeight;
 
     std::vector<std::vector<Cell> > map;
-    std::vector<Creature *> creatures;
+    std::vector<CreaturePtr> creatures;
 private:
     void init();
 

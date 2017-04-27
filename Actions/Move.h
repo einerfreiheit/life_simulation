@@ -6,19 +6,17 @@ class Move: public Action
 {
 public:
 
-    Move ( int moveToY,int moveToX );
+    Move ( );
     ~Move();
-    void act ( World *world, Creature &creature ) override;
+    void act ( World *world, CreaturePtr creature) override;
+    void setXandY(int x,int y);
 private:
     int dx;
     int dy;
-    bool canMove ( World *world, Creature &creature, int nextX, int nextY, double & requariedEnergy );
+    bool canMove ( World *world,CreaturePtr creature, int nextX, int nextY);
     bool checkBorder(World *world, int nextX, int nextY);
     double energyRequaried(double currentHeight, double nextHeight,double energyToCLimb, double energyToMove);
-    bool checkEnergy(double energyRequaried, double creatureEnergy );
-    
-   
-    double getPath(double height);
+
 
 };
 

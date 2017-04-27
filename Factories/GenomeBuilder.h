@@ -7,7 +7,7 @@ class GenomeBuilder
 {
 public:
     static GenomePtr build ( int complexity = 20 );
-    static GenomePtr build (Creature& creature);
+    static GenomePtr build (CreaturePtr creature);
     
 
 private:

@@ -13,7 +13,7 @@ public:
       AT_END=4      
     } ;
 
-    virtual void act ( World *world, Creature &creature ) =0;
+    virtual void act ( World *world, CreaturePtr creature) =0;
     ACTION_TYPE const  & getType() const;
 protected:
     ACTION_TYPE type;

@@ -1,13 +1,13 @@
 #ifndef CREATUREBUILDER_H
 #define CREATUREBUILDER_H
-
 #include "../Creature.h"
+#include "../World.h"
 
 class CreatureBuilder
 {
 public:
-    static Creature *build ( int posX, int posY );
-    static Creature *build (Creature &parentCreature);
+    static CreaturePtr build (World *world, int posX, int posY );
+    static CreaturePtr build (World *world, CreaturePtr parent);
 private:
     static int nextId;
 };

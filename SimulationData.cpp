@@ -35,6 +35,9 @@ void SimulationData::addParams() {
 
     setSection ( "Resources" );
     add<double> ( "gainPerCell", gainResourcePerCell, 0.0 );
+    add<double> ("allWaterAmount",allWaterAmount,0);
+    add<double> ("soilWater", soilWater,0.01);
+    
 
     setSection ( "CreatureParameters" );
     add<double> ( "creatureOneBait", creatureOneBait, 1.0 );

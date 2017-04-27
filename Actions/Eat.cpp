@@ -3,12 +3,12 @@ Eat::Eat() {
 
     type=AT_EAT;
 }
-void Eat::act ( World *world, Creature &creature ) {
+void Eat::act ( World *world, CreaturePtr creature) {
 
-    Cell &cell = world->map[creature.getPosY()][creature.getPosX()];
-    if ( cell.food > creature.phenotype->creatureOneBait ) {
-        cell.food -=creature.phenotype->creatureOneBait;
-        creature.energy +=creature.phenotype->energyFromFood;
+    Cell &cell = world->map[creature->getPosY()][creature->getPosX()];
+    if ( cell.food > creature->phenotype->creatureOneBait ) {
+        cell.food -=creature->phenotype->creatureOneBait;
+        creature->energy +=creature->phenotype->energyFromFood;
         }
 
     }

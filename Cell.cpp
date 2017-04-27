@@ -3,6 +3,7 @@
 
 Cell::Cell() {
     food = rand() % 100;
+    creaturesInCell.reserve(10);
 
     }
 

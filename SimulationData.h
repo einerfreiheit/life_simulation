@@ -26,6 +26,8 @@ public:
     double energyToMove;
     double fissionLoss;
     double fissionThreshold;
+    double allWaterAmount;
+    double soilWater;
     bool displayOutput;
     bool videoRecord;
     bool useAIWorker;

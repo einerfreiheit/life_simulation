@@ -1,14 +1,17 @@
-
 #include "WaterWorker.h"
+#include "../SimulationData.h"
 
 WaterWorker::WaterWorker() {
+    this->name="WaterWorker";
+    soilWater=SimulationData::getInst()->soilWater;
+
 
     }
-bool WaterWorker::canFlow ( double currentHeight, double nextHeight, double currentWater, double nextCellWater, double soiledWater, double waterQuant ) {
+bool WaterWorker::canFlow ( double currentHeight, double nextHeight, double currentWater, double nextCellWater, double soilWater, double waterQuant ) {
     double sumOfWater = currentWater+nextCellWater;
     double waterLevelInCurrentCell=currentHeight+currentWater;
     double waterLevelInNextCell=nextCellWater+nextHeight;
-    return ( ( sumOfWater>2*soiledWater ) && ( ( waterLevelInCurrentCell-waterLevelInNextCell > waterQuant ) || ( waterLevelInNextCell-waterLevelInCurrentCell > waterQuant ) ) );
+    return ( ( sumOfWater>2*soilWater ) && ( ( waterLevelInCurrentCell-waterLevelInNextCell > waterQuant ) || ( waterLevelInNextCell-waterLevelInCurrentCell > waterQuant ) ) );
     }
 
 void WaterWorker::flow ( double& currentCellWater, double& nextCellWater, double curentHeight, double nextHeight, double waterQuant ) {
@@ -28,9 +31,11 @@ void WaterWorker::flow ( double& currentCellWater, double& nextCellWater, double
 
 
 
+
 void WaterWorker::work ( World* world ) {
-    double soiledWater =0.01;
     double waterQuant=0.01;
+    soilWater=SimulationData::getInst()->soilWater;
+
     int height =world->mapHeight;
     int width =world->mapWidth;
     for ( int y=0; y<height-1; y++ ) {
@@ -44,12 +49,12 @@ void WaterWorker::work ( World* world ) {
             double downCellHeight = world->map[y+1][x].cellHeight;
             double &downCellWater=world->map[y+1][x].water;
 
-            if ( canFlow ( currentHeight,rightCellHeight,currentWater,rightCellWater,soiledWater,waterQuant ) ) {
+            if ( canFlow ( currentHeight,rightCellHeight,currentWater,rightCellWater,soilWater,waterQuant ) ) {
                 flow ( currentWater,rightCellWater,currentHeight,rightCellHeight,waterQuant );
 
 
                 }
-            if ( canFlow ( currentHeight,downCellHeight,currentWater,downCellWater,soiledWater,waterQuant ) ) {
+            if ( canFlow ( currentHeight,downCellHeight,currentWater,downCellWater,soilWater,waterQuant ) ) {
                 flow ( currentWater,downCellWater,currentHeight,downCellHeight,waterQuant );
 
 

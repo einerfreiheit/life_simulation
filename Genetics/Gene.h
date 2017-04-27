@@ -24,7 +24,7 @@ class Gene
 public:
     Gene();
     Gene ( GENE_TYPE type, float allel1, float allel2 );
-
+    virtual ~Gene ();
     GENE_TYPE type;
     float allel1;
     float allel2;
