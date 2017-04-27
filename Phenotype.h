@@ -14,6 +14,9 @@ public:
 	double hungryEdge;
 	double corpseSize;
 	double energyToClimb;
+	double healthPoints;
+	double attackPower;
+	
 };
 
 #endif // PHENOTYPE_H

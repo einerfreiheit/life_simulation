@@ -12,7 +12,7 @@ void CreatureRemoveWorker::work ( World *world ) {
     int i = 0;
     while ( i <= lastId ) {
 
-        if ( world->creatures[i]->getEnergy() <= 0 ) {
+        if ( world->creatures[i]->getEnergy() <= 0 || world->creatures[i]->phenotype->healthPoints<=0 ) {
 
             int x=world->creatures[i]->getPosX();
             int y=world->creatures[i]->getPosY();

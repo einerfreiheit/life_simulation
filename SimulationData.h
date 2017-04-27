@@ -20,6 +20,8 @@ public:
     int mapHeightToSet;
     int mapWidthToSet;
     int timeToWait;
+    double creatureHealthPoints=100;
+    double creatureAttackPower=1;
     double gainResourcePerCell;
     double energyFromFood;
     double creatureOneBait;

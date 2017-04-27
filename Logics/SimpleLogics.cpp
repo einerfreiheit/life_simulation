@@ -1,6 +1,7 @@
 #include "SimpleLogics.h"
 #include "../Actions/Eat.h"
 #include "../Actions/Move.h"
+#include "../Actions/Attack.h"
 #include <iostream>
 
 void SimpleLogics::willToEat ( CreaturePtr creature ) {
@@ -17,9 +18,14 @@ void SimpleLogics::creatureWill ( World* world,CreaturePtr creature) {
         willToMove ( world, creature );
 	
         }
-
+    willToAttack(creature);
 
     }
+void SimpleLogics::willToAttack ( CreaturePtr creature ) {
+    creature->creatureActions.push_back(new Attack);
+      
+    }
+
 void SimpleLogics::willToMove ( World *world,CreaturePtr creature ) {
     
     int y = creature->getPosY();

@@ -10,7 +10,8 @@ public:
     enum ACTION_TYPE  {
       AT_EAT=1,
       AT_MOVE=2,
-      AT_END=4      
+      AT_ATTACK=4,
+      AT_END =8
     } ;
 
     virtual void act ( World *world, CreaturePtr creature) =0;

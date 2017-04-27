@@ -8,6 +8,7 @@ class SimpleLogics
 public:
     void willToMove ( World *world, CreaturePtr creature ) ;
     void willToEat ( CreaturePtr creature );
+    void willToAttack(CreaturePtr creature);
     void creatureWill(World *world, CreaturePtr creature);
 
 };
