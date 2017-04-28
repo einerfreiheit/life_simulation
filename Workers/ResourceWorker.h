@@ -8,9 +8,9 @@ public:
     ResourceWorker();
     virtual ~ResourceWorker();
     void work ( World *world ) override;
-    static inline int getRandom (int border );
-   
-    
+    static inline int getRandom ( int border );
+
+
 private:
     double gainPerCell;
     int cellNumber;

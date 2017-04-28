@@ -11,7 +11,7 @@ class Creature
 {
 public:
     Creature ( int id );
-    virtual ~Creature();    
+    virtual ~Creature();
     std::vector<SimpleAction*> creatureActions;
     bool isHungry() const;
     double energy;
@@ -25,7 +25,7 @@ public:
     int getId() const;
     void setGenome ( GenomePtr genome );
     GenomePtr getGenome();
-    void setPhenotype (Phenotype *phenotype);
+    void setPhenotype ( Phenotype *phenotype );
     Phenotype *phenotype = NULL;
 
 protected:
@@ -34,7 +34,7 @@ protected:
     int id;
 
     GenomePtr genome = NULL;
-    
+
 };
 typedef  std::shared_ptr<Creature> CreaturePtr;
 #endif /* CREATURE_H_ */

@@ -12,8 +12,8 @@ Phenotype* PhenotypeBuilder::build ( GenomePtr genome ) {
     result->hungryEdge=100;
     result->energyToClimb=result->energyToMove*2;
     return result;
-  
-  
- 
+
+
+
     }
 

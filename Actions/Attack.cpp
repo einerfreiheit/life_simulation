@@ -9,17 +9,17 @@ Attack::~Attack() {
 
 
     }
-void Attack::attack ( CreaturePtr actor, CreaturePtr victim ) {
-  
+void Attack::attack ( CreaturePtr aggressor, CreaturePtr victim ) {
+
     double &victimHealthPoints=victim->phenotype->healthPoints;
-    double attackPower= actor->phenotype->attackPower;
+    double attackPower= aggressor->phenotype->attackPower;
     victimHealthPoints-=attackPower;
-    std::cout<<"creature id: "<<victim->getId()<<"  hp :"<<victim->phenotype->healthPoints<<" attacked by creature id:"<<actor->getId()<<std::endl;
-    
+    std::cout<<"creature id: "<<victim->getId() <<"  hp :"<<victim->phenotype->healthPoints<<" attacked by creature id:"<<aggressor->getId() <<std::endl;
+
     }
 
 void Attack::act ( World* world, CreaturePtr creature ) {
-    int x = creature->getPosX();
+    int x =creature->getPosX();
     int y= creature->getPosY();
     int currentCreature = creature->getId();
     Cell& cell = world->map[y][x];
@@ -27,10 +27,9 @@ void Attack::act ( World* world, CreaturePtr creature ) {
     int numberOfCreatures =cell.creaturesInCell.size();
     std::cout<<numberOfCreatures<<" number of creatures in"<<y<<" "<<x<<std::endl;
 
-    
-    for (int i=0; i<numberOfCreatures; i++ ) {
-	//std::cout<<numberOfCreatures<<" number of creatures in"<<y<<" "<<x<<std::endl;
-	//std::cout<<"creatures in here: id"<<cell.creaturesInCell[i]->getId()<< std::endl;
+
+    for ( int i=0; i<numberOfCreatures; i++ ) {
+     
         if ( cell.creaturesInCell[i]->getId() !=currentCreature ) {
             attack ( creature, cell.creaturesInCell[i] );
             }

@@ -6,7 +6,7 @@ class SimpleAction
 public:
     SimpleAction();
     virtual ~SimpleAction();
-	
+
 
 
 };

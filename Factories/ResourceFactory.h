@@ -6,9 +6,9 @@
 class ResourceFactory
 {
 public:
-    static void addWater(World * world);
+    static void addWater ( World * world );
     static double amountOfWater;
-    
+
 };
 
-#endif 
+#endif

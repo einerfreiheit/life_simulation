@@ -18,7 +18,7 @@ void WorkerFactory::build ( std::vector<WorldWorker*>&workers ) {
     addWorker<ResourceWorker> ( workers,SimulationData::getInst()->useResourceWorker );
     addWorker<VisualWorker> ( workers, SimulationData::getInst()->useVisualWorker );
     addWorker <WaiterWorker> ( workers,SimulationData::getInst()->useWaiterWorker );
-    addWorker<WaterWorker>(workers,SimulationData::getInst()->useWaterWorker);
+    addWorker<WaterWorker> ( workers,SimulationData::getInst()->useWaterWorker );
 
 
     }

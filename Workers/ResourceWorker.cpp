@@ -8,12 +8,12 @@ ResourceWorker::ResourceWorker() {
     width = SimulationData::getInst()->mapWidthToSet;
     cellNumber = ( int ) ( sqrt ( height * width ) );
     cellGain = height * width * gainPerCell / cellNumber;
-    
+
 
     }
 
 int ResourceWorker::getRandom ( int border ) {
-    return (int )rand() % border;
+    return ( int ) rand() % border;
 
     }
 

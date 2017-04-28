@@ -6,8 +6,8 @@ Action::Action() {
 Action::~Action() {
 
     }
-    
-Action:: ACTION_TYPE const  & Action::getType() const{
+
+Action:: ACTION_TYPE const  & Action::getType() const {
     return type;
     }
 

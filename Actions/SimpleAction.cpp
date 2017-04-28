@@ -5,6 +5,6 @@ SimpleAction::SimpleAction() {
     }
 
 SimpleAction::~SimpleAction() {
-  
+
     }
 

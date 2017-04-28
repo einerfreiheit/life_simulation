@@ -4,12 +4,12 @@
 #include "Action.h"
 class Attack : public Action
 {
-public: 
+public:
     Attack();
     virtual ~Attack();
-     void act ( World *world, CreaturePtr creature) override;
+    void act ( World *world, CreaturePtr creature ) override;
 private:
-     void attack(CreaturePtr actor, CreaturePtr victim);
+    void attack ( CreaturePtr aggressor, CreaturePtr victim );
 
 };
 

@@ -21,14 +21,14 @@ void CreatureActionWorker::work ( World *world ) {
                 actionPtr->act ( world,creature );
                 gate |=actionPtr->getType();
                 }
-             delete simpleAction;
+            delete simpleAction;
 
 
             }
         double creatureEnergy = creature->getEnergy()-0.1;
-	creature->setEnergy(creatureEnergy);
+        creature->setEnergy ( creatureEnergy );
 
-     
+
         creature->creatureActions.clear();
 
         }

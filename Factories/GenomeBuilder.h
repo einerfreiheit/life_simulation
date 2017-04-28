@@ -7,8 +7,8 @@ class GenomeBuilder
 {
 public:
     static GenomePtr build ( int complexity = 20 );
-    static GenomePtr build (CreaturePtr creature);
-    
+    static GenomePtr build ( CreaturePtr creature );
+
 
 private:
     static const int complexityPerChromosome = 8;

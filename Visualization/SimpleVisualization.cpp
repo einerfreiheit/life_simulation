@@ -33,16 +33,16 @@ void SimpleVisualization::update ( World*world ) {
 
                 }
             }
-    }
-    
-for ( auto creature : world->creatures ) {
-    cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( creature->getPosY(),
-                       creature->getPosX() );
-    pixel[2] =
-        creature->isHungry() ? creature->energy * 255.0 / 100.0 : 255;
-    pixel[0] = 0;
-    pixel[1] = 0;
-    }
+        }
+
+    for ( auto creature : world->creatures ) {
+        cv::Vec3b &pixel = visualization.at<cv::Vec3b> ( creature->getPosY(),
+                           creature->getPosX() );
+        pixel[2] =
+            creature->isHungry() ? creature->energy * 255.0 / 100.0 : 255;
+        pixel[0] = 0;
+        pixel[1] = 0;
+        }
     }
 SimpleVisualization::SimpleVisualization() {
     visualization = cv::Mat::zeros ( SimulationData::getInst()->mapHeightToSet,

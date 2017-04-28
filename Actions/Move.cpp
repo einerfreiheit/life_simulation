@@ -67,8 +67,8 @@ void Move::act ( World *world, CreaturePtr creature ) {
             if ( currentCell.creaturesInCell.size() >1 ) {
                 for ( int i=0; i<creaturesInCurrentCellSize; i++ ) {
                     if ( creatureId==currentCell.creaturesInCell[i]->getId() ) {
-                        nextCell.creaturesInCell.push_back ( currentCell.creaturesInCell[i]);
-			
+                        nextCell.creaturesInCell.push_back ( currentCell.creaturesInCell[i] );
+
                         currentCell.creaturesInCell[i]= currentCell.creaturesInCell[creaturesInCurrentCellSize-1];
                         currentCell.creaturesInCell.resize ( creaturesInCurrentCellSize-1 );
                         break;
@@ -79,8 +79,8 @@ void Move::act ( World *world, CreaturePtr creature ) {
                     }
                 }
             else {
-	      
-                nextCell.creaturesInCell.push_back(currentCell.creaturesInCell[0]);
+
+                nextCell.creaturesInCell.push_back ( currentCell.creaturesInCell[0] );
                 currentCell.creaturesInCell.resize ( 0 );
 
                 }
