@@ -15,7 +15,7 @@ void Attack::attack ( CreaturePtr aggressor, CreaturePtr victim ) {
     double attackPower= aggressor->phenotype->attackPower;
     victimHealthPoints-=attackPower;
     std::cout<<"creature id: "<<victim->getId() <<"  hp :"<<victim->phenotype->healthPoints<<" attacked by creature id:"<<aggressor->getId() <<std::endl;
-
+    victim->hasBeenAttaked=true;
     }
 
 void Attack::act ( World* world, CreaturePtr creature ) {

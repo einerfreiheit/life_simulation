@@ -27,6 +27,7 @@ public:
     GenomePtr getGenome();
     void setPhenotype ( Phenotype *phenotype );
     Phenotype *phenotype = NULL;
+    bool hasBeenAttaked=false;
 
 protected:
     int x;
