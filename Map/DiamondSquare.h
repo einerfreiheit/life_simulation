@@ -5,9 +5,9 @@
 class DiamondSquare
 {
 public:
-    DiamondSquare(World*world);
+    DiamondSquare ( World*world );
     ~DiamondSquare();
-    
+
 private:
     void diamondSquare ( World*world, float scale );
     void init ( World *world );

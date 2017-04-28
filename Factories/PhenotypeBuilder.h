@@ -7,11 +7,11 @@ class PhenotypeBuilder
 
 {
 public:
-  static Phenotype* build(GenomePtr genome);
+    static Phenotype* build ( GenomePtr genome );
 
-    
- 
-  
+
+
+
 };
 
 #endif // PHENOTYPEBUILDER_H

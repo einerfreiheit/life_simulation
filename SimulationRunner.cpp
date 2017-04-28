@@ -13,11 +13,11 @@ SimulationRunner::SimulationRunner() {
     world = new World ( SimulationData::getInst()->mapHeightToSet,
                         SimulationData::getInst()->mapWidthToSet );
 
-    HeightsBuilder::build(world);
-    ResourceFactory::addWater(world);
+    HeightsBuilder::build ( world );
+    ResourceFactory::addWater ( world );
     world->map[0][0].water+=10;
-    world->creatures.push_back(CreatureBuilder::build(world,1,1));
-    
+    world->creatures.push_back ( CreatureBuilder::build ( world,1,1 ) );
+
     }
 
 SimulationRunner::~SimulationRunner() {

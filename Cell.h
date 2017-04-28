@@ -4,15 +4,15 @@
 #include <vector>
 class Cell
 {
-   public:
+public:
     Cell();
     double food;
     double water=0;
     virtual ~Cell();
     double cellHeight=0;
-    
+
     std::vector<CreaturePtr> creaturesInCell;
-    
+
 
 };
 

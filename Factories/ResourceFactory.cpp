@@ -8,7 +8,7 @@ void ResourceFactory::addWater ( World* world ) {
     for ( int y=0; y<height; y++ ) {
         for ( int x=0; x<width; x++ ) {
             if ( world->map[y][x].cellHeight<0 ) {
-                world->map[y][x].water=SimulationData::getInst()->allWaterAmount/(height*width);
+                world->map[y][x].water=SimulationData::getInst()->allWaterAmount/ ( height*width );
 
 
 

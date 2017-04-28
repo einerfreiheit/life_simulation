@@ -2,7 +2,6 @@
 #include <iostream>
 CreatureRemoveWorker::CreatureRemoveWorker() {
     this->name = "CreatureRemoveWorker";
-
     }
 
 void CreatureRemoveWorker::work ( World *world ) {
@@ -16,21 +15,22 @@ void CreatureRemoveWorker::work ( World *world ) {
 
             int x=world->creatures[i]->getPosX();
             int y=world->creatures[i]->getPosY();
+	    
             int currentId= world->creatures[i]->getId();
+	    
             Cell &currentCell = world->map[y][x];
-            int creaturesInCellSize=currentCell.creaturesInCell.size();
-            currentCell.food+=world->creatures[i]->phenotype->corpseSize;
-            if ( creaturesInCellSize=1 ) {
-                currentCell.creaturesInCell.resize ( 0 );
+	    currentCell.food+=world->creatures[i]->phenotype->corpseSize;
 
-
+            int creaturesInCellNum=currentCell.creaturesInCell.size();
+	    
+            if ( creaturesInCellNum==1 ) {
+		currentCell.creaturesInCell.clear();
                 }
             else {
-                for ( int j=0; j<creaturesInCellSize; j++ ) {
-                    if ( currentCell.creaturesInCell[j]->getId()==currentId ) {
-                        currentCell.creaturesInCell[i]= currentCell.creaturesInCell[creaturesInCellSize-1];
-                        currentCell.creaturesInCell.resize ( creaturesInCellSize-1 );
-
+                for ( int j=0; j<creaturesInCellNum; j++ ) {
+                    if (currentCell.creaturesInCell[j]->getId() ==currentId ) {
+                        currentCell.creaturesInCell[j]= currentCell.creaturesInCell[creaturesInCellNum-1];
+                        currentCell.creaturesInCell.resize ( creaturesInCellNum-1 );
                         }
 
                     }

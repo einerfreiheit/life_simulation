@@ -51,17 +51,17 @@ void Creature::setGenome ( GenomePtr _genome ) {
     this->genome = _genome;
     }
 GenomePtr Creature::getGenome()  {
-      return genome;
+    return genome;
     }
 
 Creature::~Creature() {
     if ( genome ) {
         delete genome;
         }
-     if (phenotype){
+    if ( phenotype ) {
 //         delete phenotype;
-     }
-         std::cout<<getId()<< "creature deleted"<<std::endl;
+        }
+    std::cout<<getId() << "creature deleted"<<std::endl;
 
     }
 

@@ -24,6 +24,6 @@ void HeightsBuilder::setDepth ( World*world ) {
     }
 
 void HeightsBuilder::build ( World* world ) {
-    DiamondSquare diamondSquare(world);
-    HeightsBuilder::setDepth(world);
+    DiamondSquare diamondSquare ( world );
+    HeightsBuilder::setDepth ( world );
     }

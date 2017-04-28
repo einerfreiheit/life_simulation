@@ -11,7 +11,7 @@ void SimulationData::addParams() {
     setSection ( "World" );
     add<int> ( "height", mapHeightToSet, 5 );
     add<int> ( "width", mapWidthToSet, 5 );
-    setSection("WorldHeights");
+    setSection ( "WorldHeights" );
     add<int> ( "firstStepDecrease",firstStepDecrease,1 );
     add<float> ( "cornerHeight",cornerHeight,0 );
     add<float> ( "smooth",smooth,2 );
@@ -28,16 +28,16 @@ void SimulationData::addParams() {
     add<bool> ( "useWaiterWorker", useWaiterWorker, true );
     add<bool> ( "displayOutput",displayOutput,true );
     add<bool> ( "videoRecord",videoRecord,false );
-    add<bool>("useWaterWorker",useWaterWorker,false);
+    add<bool> ( "useWaterWorker",useWaterWorker,false );
 
     setSection ( "WaitingTime" );
     add<int> ( "timeToWait", timeToWait, 1000 );
 
     setSection ( "Resources" );
     add<double> ( "gainPerCell", gainResourcePerCell, 0.0 );
-    add<double> ("allWaterAmount",allWaterAmount,0);
-    add<double> ("soilWater", soilWater,0.01);
-    
+    add<double> ( "allWaterAmount",allWaterAmount,0 );
+    add<double> ( "soilWater", soilWater,0.01 );
+
 
     setSection ( "CreatureParameters" );
     add<double> ( "creatureOneBait", creatureOneBait, 1.0 );
