@@ -10,8 +10,7 @@ public:
     virtual ~WaterWorker();
     void work ( World * world ) override;
 private:
-    bool canFlow ( double currentHeight, double nextHeight, double currentWater, double nextCellWater, double soildWater, double waterQuant );
-    void flow ( double &currentCellWater, double &nextCellWater,double curentHeight, double nextHeight, double waterQuant );
+    void flow ( Cell &current, Cell &next, double waterQuant );
     double soilWater;
 
 };
