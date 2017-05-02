@@ -1,31 +1,33 @@
 #include "WaterWorker.h"
 #include "../SimulationData.h"
-
+#include <cmath>
+#include <iostream>
 WaterWorker::WaterWorker() {
     this->name="WaterWorker";
     soilWater=SimulationData::getInst()->soilWater;
 
 
     }
-bool WaterWorker::canFlow ( double currentHeight, double nextHeight, double currentWater, double nextCellWater, double soilWater, double waterQuant ) {
-    double sumOfWater = currentWater+nextCellWater;
-    double waterLevelInCurrentCell=currentHeight+currentWater;
-    double waterLevelInNextCell=nextCellWater+nextHeight;
-    return ( ( sumOfWater>2*soilWater ) && ( ( waterLevelInCurrentCell-waterLevelInNextCell > waterQuant ) || ( waterLevelInNextCell-waterLevelInCurrentCell > waterQuant ) ) );
-    }
 
-void WaterWorker::flow ( double& currentCellWater, double& nextCellWater, double curentHeight, double nextHeight, double waterQuant ) {
-    if ( currentCellWater+curentHeight>nextCellWater+nextHeight ) {
-        currentCellWater-=waterQuant;
-        nextCellWater+=waterQuant;
 
+void WaterWorker::flow ( Cell &current, Cell &next, double waterQuant ) {
+
+    double waterLevelCurrent=current.cellHeight+current.water;
+    double waterLevelNext=next.cellHeight+next.water;
+    
+    if ( std::abs ( waterLevelCurrent-waterLevelNext ) >waterQuant ) {
+        if ( ( current.water>soilWater ) && ( waterLevelCurrent>waterLevelNext ) ) {
+            current.water-=waterQuant;
+            next.water+=waterQuant;
+
+            }
+        if ( ( next.water>soilWater ) && ( waterLevelNext>waterLevelCurrent ) ) {
+            current.water+=waterQuant;
+            next.water-=waterQuant;
+            }
         }
-    else {
-        currentCellWater+=waterQuant;
-        nextCellWater-=waterQuant;
 
 
-        }
 
     }
 
@@ -33,32 +35,21 @@ void WaterWorker::flow ( double& currentCellWater, double& nextCellWater, double
 
 
 void WaterWorker::work ( World* world ) {
-    double waterQuant=0.01;
-    soilWater=SimulationData::getInst()->soilWater;
-
+    double waterQuant=soilWater/2;
     int height =world->mapHeight;
     int width =world->mapWidth;
     for ( int y=0; y<height-1; y++ ) {
         for ( int x=0; x<width-1; x++ ) {
-            double currentHeight=world->map[y][x].cellHeight;
-            double &currentWater = world->map[y][x].water;
+            Cell &current = world->map[y][x];
+            Cell &right = world->map[y][x+1];
+            Cell &diag = world->map[y+1][x+1];
+            Cell& down = world->map[y+1][x];
 
-            double rightCellHeight = world->map[y][x+1].cellHeight;
-            double &rightCellWater=world->map[y][x+1].water;
-
-            double downCellHeight = world->map[y+1][x].cellHeight;
-            double &downCellWater=world->map[y+1][x].water;
-
-            if ( canFlow ( currentHeight,rightCellHeight,currentWater,rightCellWater,soilWater,waterQuant ) ) {
-                flow ( currentWater,rightCellWater,currentHeight,rightCellHeight,waterQuant );
+            flow ( current,right,waterQuant );
+            flow ( current,diag,waterQuant );
+            flow ( current,down,waterQuant );
 
 
-                }
-            if ( canFlow ( currentHeight,downCellHeight,currentWater,downCellWater,soilWater,waterQuant ) ) {
-                flow ( currentWater,downCellWater,currentHeight,downCellHeight,waterQuant );
-
-
-                }
 
 
             }

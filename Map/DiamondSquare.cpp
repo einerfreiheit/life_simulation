@@ -53,9 +53,9 @@ void DiamondSquare::init ( World* world ) {
         }
     }
 
-void DiamondSquare::diamondStep ( World *world, int y, int x, float range ) {
+void DiamondSquare::diamondStep ( World *world, int y, int x, double range ) {
     Cell &cell = world->map[y][x];
-    float sumOfHeights = 0;
+    double sumOfHeights = 0;
     int pointCount=0;
 
     int leftPointX=x-step/2;
@@ -89,9 +89,9 @@ bool  DiamondSquare::checkIndex ( int index, int size ) {
 
 
     }
-void DiamondSquare::squareStep ( World *world, int y, int x, float scale ) {
+void DiamondSquare::squareStep ( World *world, int y, int x, double scale ) {
 
-    float sumOfHeights = world->map[y][x].cellHeight;
+    double sumOfHeights = world->map[y][x].cellHeight;
     sumOfHeights += world->map[y + step][x].cellHeight;
     sumOfHeights += world->map[y][x + step].cellHeight;
     sumOfHeights += world->map[y + step][x + step].cellHeight;
@@ -100,7 +100,7 @@ void DiamondSquare::squareStep ( World *world, int y, int x, float scale ) {
 
     }
 
-void DiamondSquare::diamondSquare ( World*world, float scale ) {
+void DiamondSquare::diamondSquare ( World*world, double scale ) {
     if ( step < 2 ) {
         return;
         }
@@ -136,8 +136,8 @@ void DiamondSquare::diamondSquare ( World*world, float scale ) {
 
     }
 
-float DiamondSquare::rangedRandom() {
-    return 2 * ( float ) rand() / RAND_MAX - 1;
+double DiamondSquare::rangedRandom() {
+    return 2 * ( double ) rand() / RAND_MAX - 1;
 
     }
 
