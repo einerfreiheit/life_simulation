@@ -1,6 +1,7 @@
 #include "HeightsBuilder.h"
 #include "../SimulationData.h"
 #include "../Map/DiamondSquare.h"
+#include "../Map/Ply.h"
 
 void HeightsBuilder::setDepth ( World*world ) {
 
@@ -26,4 +27,6 @@ void HeightsBuilder::setDepth ( World*world ) {
 void HeightsBuilder::build ( World* world ) {
     DiamondSquare diamondSquare ( world );
     HeightsBuilder::setDepth ( world );
+    Ply ply(world);
+    ply.~Ply();
     }
