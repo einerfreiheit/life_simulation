@@ -16,6 +16,9 @@ SimulationRunner::SimulationRunner() {
     HeightsBuilder::build ( world );
     ResourceFactory::addWater ( world );
     world->creatures.push_back ( CreatureBuilder::build ( world,1,1 ) );
+    
+   
+    
 
     }
 
