@@ -2,8 +2,6 @@
 #define WORKERS_VISUALWORKER_H_
 #include "WorldWorker.h"
 #include "../Visualization/SimpleVisualization.h"
-#include "../Visualization/VisualOutput.h"
-
 #include <vector>
 
 class VisualWorker: public WorldWorker
@@ -15,8 +13,7 @@ public:
 private:
 
     SimpleVisualization *simpleVisualization;
-    std::vector<VisualOutput *> visualOutput;
-    
+    std::vector<OpenCvVisualization*> outputUnits;
 
 
 

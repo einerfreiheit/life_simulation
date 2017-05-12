@@ -8,7 +8,7 @@ SimpleDisplay::SimpleDisplay()
 SimpleDisplay::~SimpleDisplay()
 {
 }
-void SimpleDisplay::update (  cv::Mat* visualization )
+void SimpleDisplay::update ( const cv::Mat* visualization )
 {
 
   cv::namedWindow ( "123", CV_WINDOW_NORMAL );
@@ -17,4 +17,8 @@ void SimpleDisplay::update (  cv::Mat* visualization )
 
 
   cv::waitKey ( 10 );
+}
+void SimpleDisplay::update (World *world){
+ return; 
+  
 }

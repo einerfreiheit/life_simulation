@@ -12,12 +12,12 @@ VisualWorker::VisualWorker()
   simpleVisualization = new SimpleVisualization;
   if ( SimulationData::getInst()->videoRecord )
     {
-      visualOutput.push_back ( new SimpleVideoRecord );
+      outputUnits.push_back ( new SimpleVideoRecord );
      
     }
   if ( SimulationData::getInst()->displayOutput )
     {
-      visualOutput.push_back ( new SimpleDisplay );
+      outputUnits.push_back ( new SimpleDisplay );
     
 
     }
@@ -28,7 +28,7 @@ void VisualWorker::work ( World *world )
   simpleVisualization->update ( world );
   
 
-  for ( VisualOutput * output : visualOutput )
+  for ( OpenCvVisualization * output : outputUnits )
     {
      
        output->update ( simpleVisualization->getVisualisation() );

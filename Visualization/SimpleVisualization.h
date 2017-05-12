@@ -5,9 +5,10 @@ class SimpleVisualization: public OpenCvVisualization
 {
 public:
     void update ( World *world ) override;
+    void update (const cv::Mat* visualisationPtr) override;
     SimpleVisualization();
     virtual ~SimpleVisualization();
-    cv::Mat*  getVisualisation() ;
+    const cv::Mat*  getVisualisation() ;
 
 };
 
