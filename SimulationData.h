@@ -2,6 +2,7 @@
 #define SIMULATIONDATA_H_
 #include "World.h"
 #include "SimpleConfiguration.h"
+#include <string>
 
 class SimulationData: public SimpleConfiguration
 {
@@ -13,6 +14,7 @@ public:
         }
         return inst;
     }
+    const std::string outputPath="./output/";
     int firstStepDecrease;
     float cornerHeight;
     float smooth;
@@ -41,6 +43,7 @@ public:
     bool useWaiterWorker;
     bool useCreatureActionWorker;
     bool useWaterWorker;
+    
 protected:
     void addParams() override;
 private:
