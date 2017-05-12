@@ -40,6 +40,6 @@ cv::Scalar GenomeVisualizer::getAllelColor ( float allel )
     }
   else
     {
-      return cv::Scalar ( 0, 0, -allel*255 );
+      return cv::Scalar ( 0, -allel*255,0 );
     }
 }

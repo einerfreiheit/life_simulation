@@ -14,7 +14,7 @@ public:
         }
         return inst;
     }
-    const std::string outputPath="./output/";
+    std::string outputPath="./output/";
     int firstStepDecrease;
     float cornerHeight;
     float smooth;

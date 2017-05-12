@@ -16,6 +16,7 @@ private:
 
     SimpleVisualization *simpleVisualization;
     std::vector<VisualOutput *> visualOutput;
+    
 
 
 

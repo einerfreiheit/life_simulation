@@ -47,4 +47,7 @@ void SimulationData::addParams()
   add<double> ( "energyFromFood", energyFromFood, 1.0 );
   add<double> ( "fissionLoss",fissionLoss,100 );
   add<double> ( "fissionThreshold",fissionThreshold,500 );
+  
+  setSection("Output");
+  add <std::string>("outputPath", outputPath,"./");
 }

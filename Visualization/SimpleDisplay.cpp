@@ -8,7 +8,7 @@ SimpleDisplay::SimpleDisplay()
 SimpleDisplay::~SimpleDisplay()
 {
 }
-void SimpleDisplay::update ( cv::Mat* visualization )
+void SimpleDisplay::update (  cv::Mat* visualization )
 {
 
   cv::namedWindow ( "123", CV_WINDOW_NORMAL );
