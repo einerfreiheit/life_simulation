@@ -9,7 +9,7 @@ public:
     PhenotypeWorker();
     ~PhenotypeWorker();
     void work(World *world) override;
-private: void changePhenotype( CreaturePtr creature);
+private: void updatePhenotype( CreaturePtr creature);
 };
 
 #endif // PHENOTYPEWORKER_H

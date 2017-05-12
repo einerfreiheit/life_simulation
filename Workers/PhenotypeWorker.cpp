@@ -11,7 +11,7 @@ void PhenotypeWorker::work ( World* world )
   for ( CreaturePtr creature: world->creatures )
     {
 
-      changePhenotype ( creature );
+      updatePhenotype ( creature );
     }
 }
 
@@ -20,7 +20,7 @@ PhenotypeWorker::~PhenotypeWorker()
 
 }
 
-void PhenotypeWorker::changePhenotype ( CreaturePtr creature )
+void PhenotypeWorker::updatePhenotype ( CreaturePtr creature )
 {
   GenomePtr genome=creature->getGenome();
   size_t chromosomesNumber=genome->chromosomes.size();
@@ -28,7 +28,7 @@ void PhenotypeWorker::changePhenotype ( CreaturePtr creature )
     {
       size_t genesNumber= genome->chromosomes[i]->genes.size();
       for (size_t j=0; j<genesNumber;j++){
-	  std::cout<<genome->chromosomes[i]->genes[j].allel1;
+	  std::cout<<genome->chromosomes[i]->genes[j].type<< ' ';
       }
 
     }
