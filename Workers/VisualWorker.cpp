@@ -4,30 +4,40 @@
 #include "../Visualization/SimpleDisplay.h"
 #include "../Visualization/SimpleVideoRecord.h"
 
-VisualWorker::VisualWorker() {
-    this->name = "VisualWorker";
 
-    simpleVisualization = new SimpleVisualization;
+VisualWorker::VisualWorker()
+{
+  this->name = "VisualWorker";
 
-    if ( SimulationData::getInst()->videoRecord ) {
-        visualOutput.push_back ( new SimpleVideoRecord );
-        }
-    if ( SimulationData::getInst()->displayOutput ) {
-        visualOutput.push_back ( new SimpleDisplay );
-
-        }
-
+  simpleVisualization = new SimpleVisualization;
+  if ( SimulationData::getInst()->videoRecord )
+    {
+      visualOutput.push_back ( new SimpleVideoRecord );
+     
     }
-void VisualWorker::work ( World *world ) {
-    simpleVisualization->update ( world );
-
-    for ( VisualOutput * output : visualOutput ) {
-        output->update ( simpleVisualization->getVisualisation() );
-        }
+  if ( SimulationData::getInst()->displayOutput )
+    {
+      visualOutput.push_back ( new SimpleDisplay );
+    
 
     }
 
-VisualWorker::~VisualWorker() {
+}
+void VisualWorker::work ( World *world )
+{
+  simpleVisualization->update ( world );
+  
 
+  for ( VisualOutput * output : visualOutput )
+    {
+     
+       output->update ( simpleVisualization->getVisualisation() );
     }
+
+}
+
+VisualWorker::~VisualWorker()
+{
+
+}
 
