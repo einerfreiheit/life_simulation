@@ -14,7 +14,7 @@ SimpleVideoRecord::SimpleVideoRecord()
 SimpleVideoRecord::~SimpleVideoRecord()
 {
 }
-void SimpleVideoRecord::update ( cv::Mat* visualization )
+void SimpleVideoRecord::update (const  cv::Mat* visualization )
 {
   cv::Mat output;
   cv::resize ( *visualization, output, visualization->size(), 1, 1,
@@ -22,5 +22,9 @@ void SimpleVideoRecord::update ( cv::Mat* visualization )
 
   writer.write ( output );
 
+}
+void SimpleVideoRecord::update(World *world){
+ return; 
+  
 }
 

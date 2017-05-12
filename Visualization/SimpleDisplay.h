@@ -1,13 +1,14 @@
 #ifndef VISUALIZATION_SIMPLEDISPLAY_H_
 #define VISUALIZATION_SIMPLEDISPLAY_H_
-#include "VisualOutput.h"
-
-class SimpleDisplay :public VisualOutput
+#include "OpenCvVisualization.h"
+class SimpleDisplay :public OpenCvVisualization
 {
 public:
     SimpleDisplay();
     virtual ~SimpleDisplay();
-    void update ( cv::Mat* visualization ) override;
+    void update (const cv::Mat* visualization ) override;
+    void update (World*world) override;
+
 };
 
 #endif /* VISUALIZATION_SIMPLEDISPLAY_H_ */

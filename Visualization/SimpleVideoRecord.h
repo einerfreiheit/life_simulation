@@ -1,13 +1,14 @@
 #ifndef VISUALIZATION_SIMPLEVIDEORECORD_H_
 #define VISUALIZATION_SIMPLEVIDEORECORD_H_
-#include "VisualOutput.h"
+#include "OpenCvVisualization.h"
 
-class SimpleVideoRecord: public VisualOutput
+class SimpleVideoRecord: public OpenCvVisualization
 {
 public:
     SimpleVideoRecord();
     virtual ~SimpleVideoRecord();
-    void update ( cv::Mat* visualization ) override;
+    void update ( const cv::Mat* visualization ) override;
+    void update (World*world) override;
 private:
     cv::VideoWriter writer;
 };

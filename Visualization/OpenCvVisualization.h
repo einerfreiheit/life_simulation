@@ -13,6 +13,7 @@ public:
     ;
 
     virtual void update ( World* world ) =0;
+    virtual void update (const cv::Mat *visualizationPtr)=0;
 
 protected:
     cv::Mat visualization;
