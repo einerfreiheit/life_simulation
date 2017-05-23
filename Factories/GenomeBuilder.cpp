@@ -14,7 +14,15 @@ GenomePtr GenomeBuilder::build ( int complexity )
       ChromosomePtr &chromosome = result->chromosomes[i];//@ очень сильное колдунство - ссылка на указатель, главное ногу не прострелить
       chromosome = new Chromosome;
       chromosome->genes.resize ( usedComplexity );
+  
+      
+      
     }
+    
+    
+  
+    
+    
   return result;
 }
 GenomePtr GenomeBuilder::build ( CreaturePtr creature )
@@ -31,12 +39,8 @@ GenomePtr GenomeBuilder::build ( CreaturePtr creature )
       chromosome = new Chromosome;
       genesNum=result->chromosomes[i]->genes.size();
       chromosome->genes.resize ( genesNum );
-      chromosome->genes=parentGenome->chromosomes[i]->genes;
-      //  for (size_t j=0;j<genesNum;j++){
-
-      //result->chromosomes[i]->genes[j]=parentGenome->chromosomes[i]->genes[j];
-      //}
-
+//       chromosome->genes=parentGenome->chromosomes[i]->genes;
+   
 
 
     }

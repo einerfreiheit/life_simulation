@@ -6,7 +6,7 @@
 #include <string>
 #include "./SimulationData.h"
 
- std::string CreatureBuilder::path = SimulationData::getInst()->outputPath;
+std::string CreatureBuilder::path = SimulationData::getInst()->outputPath;
 int CreatureBuilder::nextId = 0;
 
 CreaturePtr CreatureBuilder::build ( World *world, int posX, int posY )
@@ -23,15 +23,23 @@ CreaturePtr CreatureBuilder::build ( World *world, int posX, int posY )
 
   result->setGenome ( genome );
   result->setPhenotype ( phenotype );
-
+  
+  for (ChromosomePtr chromosome :result->getGenome()->chromosomes){
+      for (Gene &gene: chromosome->genes){
+	result->phenotype->cellReceptor+=std::to_string (gene.type);
+	
+      }
+    
+    
+  }
+  
   world->map[posY][posX].creaturesInCell.push_back ( resultInCell );
 
   cv::Mat vis = GenomeVisualizer::visualize ( genome );
-//   path+= std::to_string ( nextId ) + ".png";
   
    cv::imwrite (path+std::to_string ( nextId ) + ".png", vis );
-
-  return result;
+   std::cout<<result->phenotype->cellReceptor<<std::endl;
+   return result;
 }
 
 CreaturePtr  CreatureBuilder::build ( World *world, CreaturePtr parent )
@@ -54,7 +62,7 @@ CreaturePtr  CreatureBuilder::build ( World *world, CreaturePtr parent )
   world->map[posY][posX].creaturesInCell.push_back ( resultInCell );
 
   cv::Mat vis = GenomeVisualizer::visualize ( genome );
-  cv::imwrite ( "genomes/" + std::to_string ( nextId ) + ".png", vis );
+  cv::imwrite ( path+ std::to_string ( nextId ) + ".png", vis );
 
   return result;
 

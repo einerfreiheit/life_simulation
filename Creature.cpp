@@ -5,6 +5,7 @@ Creature::Creature ( int _id ) : id ( _id )
   energy = 0.0;
   x = 0;
   y = 0;
+  
 }
 
 void Creature::setPosX ( int setX )

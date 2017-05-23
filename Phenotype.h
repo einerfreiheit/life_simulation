@@ -1,5 +1,6 @@
 #ifndef PHENOTYPE_H
 #define PHENOTYPE_H
+#include <string>
 
 class Phenotype
 {
@@ -16,6 +17,14 @@ public:
     double energyToClimb;
     double healthPoints;
     double attackPower;
+    double creatureSize;
+    int geneTranslationNumber=1;
+    double maxHealthPoints=100.0;
+    
+    std::string cellReceptor;
+    
+    
+    
 
 };
 
