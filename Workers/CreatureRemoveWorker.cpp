@@ -23,7 +23,7 @@ void CreatureRemoveWorker::work ( World *world )
           int currentId= world->creatures[i]->getId();
 
           Cell &currentCell = world->map[y][x];
-          currentCell.food+=world->creatures[i]->phenotype->corpseSize;
+          currentCell.food+=world->creatures[i]->phenotype->creatureSize;
 
           int creaturesInCellNum=currentCell.creaturesInCell.size();
 

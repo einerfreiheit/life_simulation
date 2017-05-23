@@ -3,6 +3,7 @@
 #include "Actions/SimpleAction.h"
 #include <vector>
 #include <memory>
+#include <iterator>
 #include "Genetics/Genome.h"
 #include "Phenotype.h"
 
@@ -28,7 +29,12 @@ public:
     void setPhenotype ( Phenotype *phenotype );
     Phenotype *phenotype = NULL;
     bool hasBeenAttaked=false;
-
+  
+    
+    Gene *currentGene = NULL;
+    
+    size_t currentGeneIndex=0;
+   
 protected:
     int x;
     int y;

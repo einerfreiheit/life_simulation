@@ -2,28 +2,17 @@
 #define GENE_H
 
 enum GENE_TYPE {
-    GT_AFFINITY = 0,
-    GT_DURABILITY = 1,
-    GT_SYNTHESIS = 2,
-    GT_MOVABILITY = 3,
-    GT_MEMORY = 4,
-    GT_VISION = 5,
-    GT_CONSUMESY = 6,
-    GT_REGENERATION = 7,
-    GT_TASTE = 8,
-    GT_TOXICITY = 9,
-    GT_CAMOUFLAGE = 10,
-    GT_SCENT = 11,
-    GT_ECONOMY = 12,
-    GT_COMPLEXITY = 13,
-    GT_ENUM_END = 14
+    GT_TRANSLATION=0,
+    GT_GROW = 1,
+    GT_REGENERATION=2,
+    GT_ENUM_END = 3
 };
 
 class Gene
 {
 public:
     Gene();
-    Gene ( GENE_TYPE type, float allel1, float allel2 );
+     Gene ( GENE_TYPE type, float allel1, float allel2 );
     virtual ~Gene ();
     GENE_TYPE type;
     float allel1;
