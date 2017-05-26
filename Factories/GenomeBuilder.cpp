@@ -1,5 +1,6 @@
 #include "GenomeBuilder.h"
-
+#include <stdlib.h>
+#include "../SimulationData.h"
 
 GenomePtr GenomeBuilder::build ( int complexity )
 {
@@ -14,15 +15,12 @@ GenomePtr GenomeBuilder::build ( int complexity )
       ChromosomePtr &chromosome = result->chromosomes[i];//@ очень сильное колдунство - ссылка на указатель, главное ногу не прострелить
       chromosome = new Chromosome;
       chromosome->genes.resize ( usedComplexity );
-  
-      
-      
     }
-    
-    
-  
-    
-    
+
+
+
+
+
   return result;
 }
 GenomePtr GenomeBuilder::build ( CreaturePtr creature )
@@ -39,15 +37,45 @@ GenomePtr GenomeBuilder::build ( CreaturePtr creature )
       chromosome = new Chromosome;
       genesNum=result->chromosomes[i]->genes.size();
       chromosome->genes.resize ( genesNum );
-//       chromosome->genes=parentGenome->chromosomes[i]->genes;
-   
-
+      chromosome->genes=parentGenome->chromosomes[i]->genes;
 
     }
+    
+  int numberOfCrossingOver=SimulationData::getInst()->numberOfMitoseCrossingOver;
+  while ( numberOfCrossingOver>0 )
+    {
+      Gene &randomGene = GenomeBuilder::getRandomGene(result);
+     
+      double allel1Temp = randomGene.allel1;
+      randomGene.allel1=randomGene.allel2;
+      randomGene.allel2=allel1Temp;
+      numberOfCrossingOver--;
+    }
 
-  // пока так
   return result;
 
 }
+
+void GenomeBuilder::buildPlasmide ( GenomePtr genome, int plasmideSize )
+{
+  ChromosomePtr plasmide = new Chromosome;
+ for (int currentPlasmideSize =0; currentPlasmideSize< plasmideSize; currentPlasmideSize ++){
+    
+    plasmide->genes.push_back(Gene( getRandomGene(genome)) ); 
+   
+ }
+ genome->plasmide = plasmide;
+}
+
+
+Gene& GenomeBuilder::getRandomGene ( GenomePtr genome )
+{
+  int chromosomeNumber = genome->chromosomes.size();
+  int randomChromosome = rand() % chromosomeNumber;
+  int randomGene = rand() % genome->chromosomes[randomChromosome]->genes.size();
+  return genome->chromosomes[randomChromosome]->genes[randomGene];
+  
+}
+
 
 

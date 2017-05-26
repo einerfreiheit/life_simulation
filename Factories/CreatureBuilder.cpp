@@ -26,6 +26,12 @@ CreaturePtr CreatureBuilder::build ( World *world, int posX, int posY )
   
   for (ChromosomePtr chromosome :result->getGenome()->chromosomes){
       for (Gene &gene: chromosome->genes){
+	
+	for (Gene &gene :chromosome->genes) {
+	 
+	 
+	
+      }
 	result->phenotype->cellReceptor+=std::to_string (gene.type);
 	
       }

@@ -1,6 +1,5 @@
 #ifndef CHROMOSOME_H
 #define CHROMOSOME_H
-
 #include <vector>
 #include <cstdlib>
 #include "Gene.h"

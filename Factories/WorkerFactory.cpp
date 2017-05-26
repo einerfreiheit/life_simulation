@@ -8,8 +8,7 @@
 #include "../Workers/VisualWorker.h"
 #include "../Workers/WaiterWorker.h"
 #include "../Workers/WaterWorker.h"
-#include "../Workers/PhenotypeWorker.h"
-#include "../Workers/GenomeWorker.h"
+#include "../Workers/MetabolismWorker.h"
 
 
 void WorkerFactory::build ( std::vector<WorldWorker*>&workers )
@@ -23,8 +22,7 @@ void WorkerFactory::build ( std::vector<WorldWorker*>&workers )
   addWorker <WaiterWorker> ( workers,SimulationData::getInst()->useWaiterWorker );
   addWorker<WaterWorker> ( workers,SimulationData::getInst()->useWaterWorker );
   
-  addWorker<PhenotypeWorker>(workers,true);
-  addWorker<GenomeWorker>(workers,true);
+  addWorker<MetabolismWorker>(workers,true);
 
 
 }

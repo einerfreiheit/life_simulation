@@ -23,7 +23,7 @@ void CreatureRemoveWorker::work ( World *world )
           int currentId= world->creatures[i]->getId();
 
           Cell &currentCell = world->map[y][x];
-          currentCell.food+=world->creatures[i]->phenotype->creatureSize;
+//           currentCell.food+=world->creatures[i]->phenotype->creatureSize;
 
           int creaturesInCellNum=currentCell.creaturesInCell.size();
 
@@ -59,9 +59,12 @@ void CreatureRemoveWorker::work ( World *world )
     {
 
       std::cout<<world->creatures.size() <<" to "<<lastId+1<<std::endl;
+      std::cout<<"c";
       world->creatures.resize ( lastId + 1 ); //@ надо почитать или протестировать ресайз. Что будет, если ресайз идёт к тому же самому размеру? Медленно ли это?
+      std::cout<<"a";
       for ( CreaturePtr creature: world->creatures )
         {
+	  std::cout<<"b";
           std::cout<< creature->getId() <<"id "<<std::endl;
 
         }

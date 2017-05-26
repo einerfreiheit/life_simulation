@@ -17,3 +17,7 @@ Gene::~Gene()
 {
 
 }
+Gene::Gene ( const Gene& gene ) : type (gene.type), allel1(gene.allel1), allel2(gene.allel2)
+{
+
+}

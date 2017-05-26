@@ -14,4 +14,7 @@ Genome::~Genome()
           delete chromosomes[i];
         }
     }
+    if (plasmide->genes.size()){
+        delete plasmide;
+    }
 }
