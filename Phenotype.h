@@ -18,8 +18,17 @@ public:
     double healthPoints;
     double attackPower;
     double creatureSize;
+    double conjugateEnergy=50.0;
+    
+    bool isAggresive=false;
+    
+    
+    double geneTranslationSpeed=1.0;
+    int  maxGeneTranslationNumber=5;
     int geneTranslationNumber=1;
+    
     double maxHealthPoints=100.0;
+    
     
     std::string cellReceptor;
     

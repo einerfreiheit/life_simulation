@@ -1,13 +1,13 @@
-#include "PhenotypeWorker.h"
+#include "MetabolismWorker.h"
 #include "../Phenotype.h"
 #include "../Genetics/Genome.h"
 #include "../Genetics/Gene.h"
 #include <iostream>
-PhenotypeWorker::PhenotypeWorker()
+MetabolismWorker::MetabolismWorker()
 {
-  this->name="PhenotypeWorker";
+  this->name="MetabolismWorker";
 }
-void PhenotypeWorker::work ( World* world )
+void MetabolismWorker::work ( World* world )
 {
   for ( CreaturePtr creature: world->creatures )
     {
@@ -16,17 +16,17 @@ void PhenotypeWorker::work ( World* world )
     }
 }
 
-PhenotypeWorker::~PhenotypeWorker()
+MetabolismWorker::~MetabolismWorker()
 {
 
 }
 
-bool PhenotypeWorker::canTranslate ( CreaturePtr creature, Gene& gene )
+bool MetabolismWorker::canTranslate ( CreaturePtr creature, Gene& gene )
 {
   return (gene.allel1>0.0 && creature->getEnergy()>=gene.allel1);
 }
 
-void PhenotypeWorker::regenerate ( CreaturePtr creature, Gene& gene )
+void MetabolismWorker::regenerate ( CreaturePtr creature, Gene& gene )
 {
   if ( canTranslate(creature,gene) && creature->phenotype->maxHealthPoints > creature->phenotype->healthPoints )
     {
@@ -37,7 +37,7 @@ void PhenotypeWorker::regenerate ( CreaturePtr creature, Gene& gene )
 }
 
 
-void PhenotypeWorker::grow ( CreaturePtr creature, Gene &gene )
+void MetabolismWorker::grow ( CreaturePtr creature, Gene &gene )
 {
   if (canTranslate(creature,gene))
     {
@@ -47,25 +47,12 @@ void PhenotypeWorker::grow ( CreaturePtr creature, Gene &gene )
     }
 }
 
-void PhenotypeWorker::changeTranslationSpeed ( CreaturePtr creature, Gene& gene )
-{
-  int &translationSpeed = creature->phenotype->geneTranslationNumber;
-  
-  gene.allel1>0.0 ? translationSpeed++ : translationSpeed--;
-  if (translationSpeed<=0){
-   translationSpeed=1; // временно. 
-  }
-  
-  if (translationSpeed>5){
-   translationSpeed=5; 
-  }
-  
-  std::cout<<"creature id"<<creature->getId() <<"has changed its translation speed to "<<translationSpeed<<std::endl;
-
-}
 
 
-void PhenotypeWorker::updatePhenotype ( CreaturePtr creature )
+
+
+
+void MetabolismWorker::updatePhenotype ( CreaturePtr creature )
 {
   int chromosomeIndex=0;
   for ( ChromosomePtr chromosome : creature->getGenome()->chromosomes )
@@ -97,12 +84,10 @@ void PhenotypeWorker::updatePhenotype ( CreaturePtr creature )
               break;
 
             }
-            case GT_TRANSLATION:
-            {
-              changeTranslationSpeed ( creature,currentGene );
-
-            }
-            }
+           
+            
+	   
+	}
 
 
           chromosome->position++;

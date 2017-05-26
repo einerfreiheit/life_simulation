@@ -8,8 +8,9 @@ class Genome
 public:
     Genome();
     ~Genome();
-
+    
     std::vector<ChromosomePtr> chromosomes;
+    ChromosomePtr plasmide;
 };
 
 typedef Genome * GenomePtr;

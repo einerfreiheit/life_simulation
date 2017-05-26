@@ -35,6 +35,7 @@ void SimpleLogics::creatureWill ( World* world,CreaturePtr creature )
 }
 void SimpleLogics::willToAttack ( CreaturePtr creature )
 {
+  if (creature->phenotype->isAggresive)
   creature->creatureActions.push_back ( new Attack );
 
 }

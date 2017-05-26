@@ -22,6 +22,10 @@ public:
     int mapHeightToSet;
     int mapWidthToSet;
     int timeToWait;
+    
+    int numberOfMitoseCrossingOver=1;
+    
+    
     double creatureHealthPoints=100;
     double creatureAttackPower=1;
     double gainResourcePerCell;

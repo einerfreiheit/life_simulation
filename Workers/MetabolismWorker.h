@@ -1,21 +1,21 @@
 
-#ifndef PHENOTYPEWORKER_H
-#define PHENOTYPEWORKER_H
+#ifndef METABOLISMWORKER_H
+#define METABOLISMWORKER_H
 #include "WorldWorker.h"
 #include"../Genetics/Gene.h"
-class PhenotypeWorker: public WorldWorker
+class MetabolismWorker: public WorldWorker
 {
 public:
-    PhenotypeWorker();
-    ~PhenotypeWorker();
+    MetabolismWorker();
+    ~MetabolismWorker();
     void work ( World *world ) override;
 
 private:
     void updatePhenotype ( CreaturePtr creature );
     void grow ( CreaturePtr creature, Gene& gene );
-    void changeTranslationSpeed ( CreaturePtr creature, Gene& gene );
     void regenerate ( CreaturePtr creature, Gene& gene );
     bool canTranslate(CreaturePtr creature, Gene& gene);
+    void readAgressionLevel(CreaturePtr creature, Gene& gene);
 };
 
-#endif // PHENOTYPEWORKER_H
+#endif 
