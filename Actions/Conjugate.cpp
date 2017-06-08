@@ -111,7 +111,7 @@ void Conjugate::changeAllels ( Gene& geneFirst, Gene& geneSecond )
     }
     else {
       
-       geneSecond.allel1=geneFirst.allel1;
+      geneSecond.allel1=geneFirst.allel1;
       geneSecond.allel2=geneFirst.allel2;
     }
 }

@@ -2,6 +2,7 @@
 #include "../Actions/Eat.h"
 #include "../Actions/Move.h"
 #include "../Actions/Attack.h"
+#include "../Actions/Conjugate.h"
 #include <iostream>
 
 void SimpleLogics::willToEat ( CreaturePtr creature )
@@ -15,6 +16,7 @@ void SimpleLogics::creatureWill ( World* world,CreaturePtr creature )
 {
   willToAttack ( creature );
   willToEat ( creature );
+  creature->creatureActions.push_back ( new Conjugate );
 
   if ( creature->hasBeenAttaked && creature->phenotype->healthPoints<=50 )
     {
