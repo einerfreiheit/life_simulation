@@ -32,8 +32,9 @@ void HeightsBuilder::setDepth ( World*world )
 
 void HeightsBuilder::build ( World* world )
 {
-
-  DiamondSquare diamondSquare ( world );
+    MapGeneration mapGen;
+    mapGen.makeNoise(world);
+//   DiamondSquare diamondSquare ( world );
   HeightsBuilder::setDepth ( world );
   Ply ply ( world );
   ply.~Ply();
