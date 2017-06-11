@@ -1,5 +1,6 @@
 #ifndef WORKERS_CREATURESPAWNWORKER_H_
 #define WORKERS_CREATURESPAWNWORKER_H_
+
 #include "WorldWorker.h"
 #include "Creature.h"
 #include "../Factories/CreatureBuilder.h"

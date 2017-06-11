@@ -1,5 +1,6 @@
 #ifndef WORKERS_RESOURCEWORKER_H_
 #define WORKERS_RESOURCEWORKER_H_
+
 #include "WorldWorker.h"
 
 class ResourceWorker: public WorldWorker
@@ -15,7 +16,7 @@ private:
     double gainPerCell;
     int cellNumber;
     double cellGain;
-    int height;
+    int height;//@ избыточно, есть в World
     int width;
 
 };

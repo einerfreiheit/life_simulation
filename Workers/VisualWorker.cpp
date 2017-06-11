@@ -13,16 +13,13 @@ VisualWorker::VisualWorker()
   if ( SimulationData::getInst()->videoRecord )
     {
       outputUnits.push_back ( new SimpleVideoRecord );
-     
     }
   if ( SimulationData::getInst()->displayOutput )
     {
       outputUnits.push_back ( new SimpleDisplay );
-    
-
     }
-
 }
+
 void VisualWorker::work ( World *world )
 {
   simpleVisualization->update ( world );

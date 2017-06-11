@@ -8,9 +8,8 @@ Attack::Attack()
 
 Attack::~Attack()
 {
-
-
 }
+
 void Attack::attack ( CreaturePtr aggressor, CreaturePtr victim )
 {
 
@@ -31,7 +30,7 @@ void Attack::act ( World* world, CreaturePtr creature )
   int numberOfCreatures =cell.creaturesInCell.size();
   std::cout<<numberOfCreatures<<" number of creatures in"<<y<<" "<<x<<std::endl;
 
-
+//@ как в коньюгации запилить
   for ( int i=0; i<numberOfCreatures; i++ )
     {
 

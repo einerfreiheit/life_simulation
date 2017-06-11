@@ -1,8 +1,10 @@
 #ifndef SIMULATIONRUNNER_H
 #define SIMULATIONRUNNER_H
+
 #include "Workers/WorldWorker.h"
 #include "Factories/WorkerFactory.h"
 #include "SimulationData.h"
+
 class SimulationRunner
 {
 public:

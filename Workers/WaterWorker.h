@@ -1,7 +1,7 @@
-#include "WorldWorker.h"
-
 #ifndef WATERWORKER_H
 #define WATERWORKER_H
+
+#include "WorldWorker.h"
 
 class WaterWorker :public WorldWorker
 {

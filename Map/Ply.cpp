@@ -3,6 +3,7 @@
 #include "SimulationData.h"
 #include <locale>
 #include <string>
+
 class punct_facet: public std::numpunct<char>
 {
 protected:
@@ -14,16 +15,15 @@ protected:
 
 Ply::Ply ( World * world )
 {
-  std::string outputPath = SimulationData::getInst()->outputPath +"output.PLY";
+  std::string outputPath = SimulationData::getInst()->outputPath +"output.ply";
   std::ofstream out (outputPath);
+  if (!out.is_open()){//@ что-то сказать
+  }
   buildHeader ( out );
   out.imbue ( std::locale ( out.getloc(),new punct_facet ) );
   buildVertices ( world,out );
   buildFaces ( world, out );
   out.close();
-
-
-
 }
 
 void Ply::buildHeader ( std::ofstream& output )

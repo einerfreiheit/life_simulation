@@ -10,9 +10,9 @@ public:
     ~Genome();
     
     std::vector<ChromosomePtr> chromosomes;
-    ChromosomePtr plasmide;
+    std::vector<ChromosomePtr> plasmide;
 };
 
-typedef Genome * GenomePtr;
+typedef std::shared_ptr<Genome> GenomePtr;
 
 #endif // GENOME_H

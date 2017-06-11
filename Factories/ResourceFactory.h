@@ -1,6 +1,6 @@
-
 #ifndef RESOURCEFACTORY_H
 #define RESOURCEFACTORY_H
+
 #include "../World.h"
 
 class ResourceFactory

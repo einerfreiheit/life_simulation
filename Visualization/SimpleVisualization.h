@@ -1,6 +1,8 @@
 #ifndef VISUALIZATION_SIMPLEVISUALIZATION_H_
 #define VISUALIZATION_SIMPLEVISUALIZATION_H_
+
 #include "OpenCvVisualization.h"
+
 class SimpleVisualization: public OpenCvVisualization
 {
 public:
@@ -8,7 +10,7 @@ public:
     void update (const cv::Mat* visualisationPtr) override;
     SimpleVisualization();
     virtual ~SimpleVisualization();
-    const cv::Mat*  getVisualisation() ;
+    const cv::Mat*  getVisualisation();
 
 };
 

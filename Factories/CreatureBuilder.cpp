@@ -18,8 +18,7 @@ CreaturePtr CreatureBuilder::build ( World *world, int posX, int posY )
   //@ временно пусть будет так
   //@ можешь папку создать и посмотреть на выхлоп
   GenomePtr genome = GenomeBuilder::build ( 15 + rand() % 8 );
-  Phenotype *phenotype = PhenotypeBuilder::build ( genome );
-  CreaturePtr resultInCell = result;
+  PhenotypePtr phenotype = PhenotypeBuilder::build ( genome );
 
   result->setGenome ( genome );
   result->setPhenotype ( phenotype );
@@ -29,7 +28,7 @@ CreaturePtr CreatureBuilder::build ( World *world, int posX, int posY )
 	
 	for (Gene &gene :chromosome->genes) {
 	 
-	 
+	 //@ что?
 	
       }
 	result->phenotype->cellReceptor+=std::to_string (gene.type);
@@ -38,8 +37,8 @@ CreaturePtr CreatureBuilder::build ( World *world, int posX, int posY )
     
     
   }
-  
-  world->map[posY][posX].creaturesInCell.push_back ( resultInCell );
+
+  world->map[posY][posX].creaturesInCell.push_back ( result );
 
   cv::Mat vis = GenomeVisualizer::visualize ( genome );
   
@@ -52,7 +51,6 @@ CreaturePtr  CreatureBuilder::build ( World *world, CreaturePtr parent )
 {
 
   CreaturePtr result = std::shared_ptr<Creature> ( new Creature ( nextId++ ) );
-  CreaturePtr resultInCell = result;
 
   int posX=parent->getPosX();
   int posY=parent->getPosY();
@@ -60,12 +58,12 @@ CreaturePtr  CreatureBuilder::build ( World *world, CreaturePtr parent )
   result->setPosY ( posY );
   result->setEnergy ( 100 );
   GenomePtr genome = GenomeBuilder::build ( parent );
-  Phenotype *phenotype = PhenotypeBuilder::build ( genome );
+  PhenotypePtr phenotype = PhenotypeBuilder::build( genome );
 
   result->setGenome ( genome );
   result->setPhenotype ( phenotype );
 
-  world->map[posY][posX].creaturesInCell.push_back ( resultInCell );
+  world->map[posY][posX].creaturesInCell.push_back ( result );
 
   cv::Mat vis = GenomeVisualizer::visualize ( genome );
   cv::imwrite ( path+ std::to_string ( nextId ) + ".png", vis );

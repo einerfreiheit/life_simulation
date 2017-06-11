@@ -1,6 +1,8 @@
 #ifndef PHENOTYPE_H
 #define PHENOTYPE_H
+
 #include <string>
+#include <memory>
 
 class Phenotype
 {
@@ -22,19 +24,14 @@ public:
     
     bool isAggresive=false;
     
-    
     double geneTranslationSpeed=1.0;
     int  maxGeneTranslationNumber=5;
     int geneTranslationNumber=1;
     
     double maxHealthPoints=100.0;
     
-    
     std::string cellReceptor;
-    
-    
-    
-
 };
+typedef std::shared_ptr<Phenotype> PhenotypePtr;
 
 #endif // PHENOTYPE_H

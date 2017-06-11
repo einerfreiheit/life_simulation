@@ -12,6 +12,7 @@ void WaiterWorker::work ( World *world )
 {
   usleep ( waitingTime );
 }
+
 WaiterWorker::~WaiterWorker()
 {
 }

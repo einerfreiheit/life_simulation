@@ -1,5 +1,6 @@
 #ifndef WORLDWORKER_H
 #define WORLDWORKER_H
+
 #include "../World.h"
 #include "SimulationData.h"
 

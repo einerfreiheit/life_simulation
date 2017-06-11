@@ -1,5 +1,6 @@
 #ifndef VISUALIZATION_SIMPLEVIDEORECORD_H_
 #define VISUALIZATION_SIMPLEVIDEORECORD_H_
+
 #include "OpenCvVisualization.h"
 
 class SimpleVideoRecord: public OpenCvVisualization

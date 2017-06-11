@@ -4,10 +4,11 @@
 #include <iostream>
 
 
-const cv::Mat*   SimpleVisualization::getVisualisation()
+const cv::Mat* SimpleVisualization::getVisualisation()
 {
   return  &visualization;
 }
+
 void SimpleVisualization::update ( const cv::Mat* visualisationPtr )
 {
   return;
@@ -22,8 +23,7 @@ void SimpleVisualization::update ( World*world )
         {
 
           float  height = world->map[y][x].cellHeight;
-          //  float food = world->map[y][x].food;
-          double water =world->map[y][x].water;
+	  double water =world->map[y][x].water;
 
           uchar &blue=visualization.at<uchar> ( y,3*x );
           uchar &green=visualization.at<uchar> ( y,3*x+1 );
@@ -56,12 +56,14 @@ void SimpleVisualization::update ( World*world )
       green = 0;
     }
 }
+
 SimpleVisualization::SimpleVisualization()
 {
   visualization = cv::Mat::zeros ( SimulationData::getInst()->mapHeightToSet,
                                    SimulationData::getInst()->mapWidthToSet, CV_8UC3 );
 
 }
+
 SimpleVisualization::~SimpleVisualization()
 {
 

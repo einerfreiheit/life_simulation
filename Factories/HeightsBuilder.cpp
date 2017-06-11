@@ -15,14 +15,8 @@ void HeightsBuilder::setDepth ( World*world )
       for ( int j = 0; j < world->mapHeight; j++ )
         {
           cellHeight = world->map[j][i].cellHeight;
-          if ( cellHeight > maxH )
-            {
-              maxH = cellHeight;
-            }
-          if ( cellHeight < minH )
-            {
-              minH = cellHeight;
-            }
+	  maxH = std::max(maxH, cellHeight);
+	  minH = std::min(minH, cellHeight);
         }
     }
   world->heightsRange = maxH - minH;
@@ -32,10 +26,11 @@ void HeightsBuilder::setDepth ( World*world )
 
 void HeightsBuilder::build ( World* world )
 {
-    MapGeneration mapGen;
-    mapGen.makeNoise(world);
-//   DiamondSquare diamondSquare ( world );
+  //@ выбор типа генератора мира из конфига
+  MapGeneration mapGen;
+  mapGen.makeNoise(world);
+  //DiamondSquare diamondSquare ( world );//@ переписать diamond square
   HeightsBuilder::setDepth ( world );
   Ply ply ( world );
-  ply.~Ply();
+  ply.~Ply();//@ не делать так никогда вообще
 }

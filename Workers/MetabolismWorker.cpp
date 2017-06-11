@@ -3,10 +3,12 @@
 #include "../Genetics/Genome.h"
 #include "../Genetics/Gene.h"
 #include <iostream>
+
 MetabolismWorker::MetabolismWorker()
 {
   this->name="MetabolismWorker";
 }
+
 void MetabolismWorker::work ( World* world )
 {
   for ( CreaturePtr creature: world->creatures )
@@ -18,7 +20,6 @@ void MetabolismWorker::work ( World* world )
 
 MetabolismWorker::~MetabolismWorker()
 {
-
 }
 
 bool MetabolismWorker::canTranslate ( CreaturePtr creature, Gene& gene )
@@ -30,7 +31,7 @@ void MetabolismWorker::regenerate ( CreaturePtr creature, Gene& gene )
 {
   if ( canTranslate(creature,gene) && creature->phenotype->maxHealthPoints > creature->phenotype->healthPoints )
     {
-      creature->phenotype->healthPoints+=gene.allel1;
+      creature->phenotype->healthPoints += gene.allel1;
       creature->setEnergy ( creature->getEnergy()-gene.allel1 );
       std::cout<< "creature id"<<creature->getId() <<" regenerates to "<<creature->phenotype->healthPoints<<std::endl;
     }
@@ -47,10 +48,8 @@ void MetabolismWorker::grow ( CreaturePtr creature, Gene &gene )
     }
 }
 
-
-
-
-
+#define SWITCH_GENE_PROCESSING(geneType, action) \
+case geneType: { action; break; }
 
 void MetabolismWorker::updatePhenotype ( CreaturePtr creature )
 {
@@ -72,24 +71,13 @@ void MetabolismWorker::updatePhenotype ( CreaturePtr creature )
 
           switch ( currentGene.type )
             {
-            case GT_GROW:
-            {
-              grow ( creature,currentGene );
-              break;
-
-            }
-            case GT_REGENERATION:
-            {
-              regenerate ( creature,currentGene );
-              break;
-
-            }
-           
-            
-	   
-	}
-
-
+	      SWITCH_GENE_PROCESSING(GT_GROW, grow( creature, currentGene));
+	      SWITCH_GENE_PROCESSING(GT_REGENERATION, grow( creature, currentGene));
+	      
+	    default:
+	      std::cout << "unknown gene type: " << currentGene.type << std::endl;
+	      break;
+	    }
           chromosome->position++;
 
 

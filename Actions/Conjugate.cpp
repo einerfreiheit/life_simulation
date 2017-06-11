@@ -5,42 +5,34 @@
 
 Conjugate::Conjugate()
 {
-
+  type = AT_CONJUGATE;
 }
 
 Conjugate::~Conjugate()
 {
-
 }
 
 void Conjugate::act ( World* world, CreaturePtr creature )
 {
   int x =creature->getPosX();
   int y= creature->getPosY();
-  int currentCreature = creature->getId();
+  int id = creature->getId();
   Cell& cell = world->map[y][x];
 
-  int numberOfCreatures =cell.creaturesInCell.size();
-
-  for ( int i=0; i<numberOfCreatures; i++ )
-    {
-
-      if ( cell.creaturesInCell[i]->getId() !=currentCreature && canConjugate(creature,cell.creaturesInCell[i] ) )
-        {
-          conjugate ( creature, cell.creaturesInCell[i] );
-        }
-
-
+  for (auto otherCreature : cell.creaturesInCell){
+    if (creature->phenotype->conjugateEnergy < creature->getEnergy()){
+      break;
     }
-  
-  
-  
-  
+      if ( otherCreature->getId() != id && canConjugate(creature, otherCreature ) )
+       {
+          conjugate ( creature, otherCreature );
+       }
+    }
 }
 
 bool Conjugate::canConjugate ( CreaturePtr firstCreature, CreaturePtr secondCreature )
 {
-  return firstCreature->phenotype->conjugateEnergy < firstCreature->getEnergy() && secondCreature->getGenome()->plasmide->genes.empty();
+  return secondCreature->getGenome()->plasmide.size();
 }
 
 
@@ -53,20 +45,17 @@ void Conjugate::conjugate ( CreaturePtr firstCreature, CreaturePtr secondCreatur
   secondGenome->plasmide = firstGenome->plasmide;
   
   updateGenome(secondCreature);
- 
-  
-
 }
 
 void Conjugate::updateGenome ( CreaturePtr creature )
 {
     GenomePtr genome = creature->getGenome();
-    size_t plasmideSize = genome->plasmide->genes.size();
-    int &position = genome->plasmide-> position;
-    position=0;
+    size_t plasmideSize = genome->plasmide.front()->genes.size();
+    int &position = genome->plasmide.front()->position;
+    position = 0;
     
-   while (genome->plasmide->position != plasmideSize ){
-    replaceGene(genome,  genome->plasmide->genes[position]);
+   while (genome->plasmide.front()->position != plasmideSize ){
+    replaceGene(genome,  genome->plasmide.front()->genes[position]);
     position++;
      
    }
@@ -78,39 +67,31 @@ void Conjugate::updateGenome ( CreaturePtr creature )
 
 void Conjugate::replaceGene ( GenomePtr genome, Gene& plasmideGene )
 {
-    bool isReplaced = false;
     for (ChromosomePtr chromosome: genome->chromosomes){
 	for (Gene & gene : chromosome->genes){
 	 if (gene.type == plasmideGene.type){
 	 changeAllels(plasmideGene,gene);
-	   isReplaced=true;
-	   break;
-	   
+	   return;
 	   
 	 }
 	  
 	}
       
     }
-    
-    if (!isReplaced){
-      changeAllels(plasmideGene, GenomeBuilder::getRandomGene(genome));
-      
-    }
+    changeAllels(plasmideGene, GenomeBuilder::getRandomGene(genome));
 }
 
 
 
-void Conjugate::changeAllels ( Gene& geneFirst, Gene& geneSecond )
+void Conjugate::changeAllels ( Gene& geneFirst, Gene& geneSecond )//@ из названий не ясно, что и где меняется
 {
-    bool reverseAllel= rand()% 1;
+    bool reverseAllel= rand() % 2;
     if (reverseAllel){
       geneSecond.allel1=geneFirst.allel2;
       geneSecond.allel2=geneFirst.allel1;
       
     }
     else {
-      
       geneSecond.allel1=geneFirst.allel1;
       geneSecond.allel2=geneFirst.allel2;
     }

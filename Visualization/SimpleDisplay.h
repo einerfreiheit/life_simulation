@@ -1,6 +1,8 @@
 #ifndef VISUALIZATION_SIMPLEDISPLAY_H_
 #define VISUALIZATION_SIMPLEDISPLAY_H_
+
 #include "OpenCvVisualization.h"
+
 class SimpleDisplay :public OpenCvVisualization
 {
 public:

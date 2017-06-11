@@ -1,5 +1,6 @@
 #ifndef GENOMEBUILDER_H
 #define GENOMEBUILDER_H
+
 #include "../Genetics/Genome.h"
 #include "../Creature.h"
 

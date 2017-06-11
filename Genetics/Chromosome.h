@@ -1,8 +1,9 @@
 #ifndef CHROMOSOME_H
 #define CHROMOSOME_H
+
 #include <vector>
-#include <cstdlib>
 #include "Gene.h"
+#include <memory>
 
 class Chromosome
 {
@@ -13,6 +14,6 @@ public:
     std::vector<Gene> genes;
     int position = 0;
 };
-typedef Chromosome * ChromosomePtr;
+typedef std::shared_ptr<Chromosome> ChromosomePtr;
 
 #endif // CHROMOSOME_H
