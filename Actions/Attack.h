@@ -1,7 +1,8 @@
-
 #ifndef ATTACK_H
 #define ATTACK_H
+
 #include "Action.h"
+
 class Attack : public Action
 {
 public:

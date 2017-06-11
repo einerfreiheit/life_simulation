@@ -1,5 +1,6 @@
 #ifndef FACTORIES_WORKERFACTORY_H_
 #define FACTORIES_WORKERFACTORY_H_
+
 #include "../Workers/WorldWorker.h"
 #include <vector>
 

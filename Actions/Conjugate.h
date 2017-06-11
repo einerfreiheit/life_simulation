@@ -1,8 +1,8 @@
-
-
 #ifndef CONJUGATE_H
 #define CONJUGATE_H
+
 #include "Action.h"
+
 class Conjugate : public Action
 {
 public:

@@ -2,11 +2,10 @@
 #include "../SimulationData.h"
 #include <iostream>
 #include <random>
+
 MapGeneration::MapGeneration()
 {
-
 }
-
 
 MapGeneration::~MapGeneration()
 {
@@ -15,7 +14,7 @@ MapGeneration::~MapGeneration()
 
 float MapGeneration::smooth(const float& t)
 {
-     return t * t * (3 - 2 * t);
+    return t * t * (3 - 2 * t);
 }
 
 
@@ -24,7 +23,8 @@ float MapGeneration::smooth(const float& t)
     int height = SimulationData::getInst()->mapHeightToSet;
     int width = SimulationData::getInst()->mapWidthToSet;
     const int layersNumber =5;
-    keyValues = new float [keySize*keySize];
+    keyValues = new float [keySize*keySize];//@ написал new[] - задумался о delete[]
+    
     setKeyValues();
     
     for (int i=0; i<height; i++){
@@ -38,10 +38,8 @@ float MapGeneration::smooth(const float& t)
             amplitude*=2.0;
          }
          
-     }
-        
-    }
-    
+     }     
+   }
 }
 
  void MapGeneration::setKeyValues()
@@ -53,9 +51,9 @@ float MapGeneration::smooth(const float& t)
 }
 
 float MapGeneration::lerp(float a, float b, float possition){
- return a*(1.0-possition)  +b*possition;   
-    
+ return a*(1.0-possition)  +b*possition;  
 }
+
 float MapGeneration::getValue(int y, int x, float frequency, float amplitude)
 {
     float  ky = y  * frequency;
@@ -85,12 +83,4 @@ float MapGeneration::getValue(int y, int x, float frequency, float amplitude)
     float lerpResult = lerp(lerpPoint1, lerpPoint2, offsetY);
     
     return lerpResult*amplitude;
-    
-    
-    
-    
-    
-    
-   
-    
 }

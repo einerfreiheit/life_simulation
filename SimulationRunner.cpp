@@ -17,10 +17,6 @@ SimulationRunner::SimulationRunner()
   HeightsBuilder::build ( world );
   ResourceFactory::addWater ( world );
   world->creatures.push_back ( CreatureBuilder::build ( world,1,1 ) );
-
-
-
-
 }
 
 SimulationRunner::~SimulationRunner()
@@ -33,14 +29,11 @@ void SimulationRunner::run()
   WorkerFactory::build ( workers );
 
   while ( true )
+  {
+    for ( auto worker : workers )
     {
-
-      for ( WorldWorker *worker : workers )
-        {
-          std::cout << worker->getName() << std::endl;
-          worker->work ( world );
-
-        }
-
+      std::cout << worker->getName() << std::endl;
+      worker->work ( world );
     }
+  }
 }

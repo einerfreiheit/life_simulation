@@ -9,6 +9,7 @@
 #include "../Workers/WaiterWorker.h"
 #include "../Workers/WaterWorker.h"
 #include "../Workers/MetabolismWorker.h"
+#include "../Workers/OpenGLWorldRenderer.h"
 
 
 void WorkerFactory::build ( std::vector<WorldWorker*>&workers )
@@ -20,6 +21,7 @@ void WorkerFactory::build ( std::vector<WorldWorker*>&workers )
   addWorker<ResourceWorker> ( workers,SimulationData::getInst()->useResourceWorker );
   addWorker<VisualWorker> ( workers, SimulationData::getInst()->useVisualWorker );
   addWorker <WaiterWorker> ( workers,SimulationData::getInst()->useWaiterWorker );
+  addWorker<OpenGLWorldRenderer>(workers, false);
   addWorker<WaterWorker> ( workers,SimulationData::getInst()->useWaterWorker );
   
   addWorker<MetabolismWorker>(workers,true);

@@ -1,9 +1,12 @@
-
 #ifndef PLY_H
 #define PLY_H
+
 #include "World.h"
 #include <fstream>
 #include <locale>
+
+//@ сделать в общем видел ply-модель
+//@ сделать конвертер мира в ply-модель
 class Ply
 {
 public:

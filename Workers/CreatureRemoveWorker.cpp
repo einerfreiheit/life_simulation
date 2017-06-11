@@ -1,5 +1,6 @@
 #include "CreatureRemoveWorker.h"
 #include <iostream>
+
 CreatureRemoveWorker::CreatureRemoveWorker()
 {
   this->name = "CreatureRemoveWorker";
@@ -8,24 +9,24 @@ CreatureRemoveWorker::CreatureRemoveWorker()
 void CreatureRemoveWorker::work ( World *world )
 {
 
-  int lastId =  world->creatures.size() - 1;
+  int lastId =  (int)world->creatures.size() - 1;
   int lastIdBefore=lastId;
   int i = 0;
   while ( i <= lastId )
     {
-
-      if ( world->creatures[i]->getEnergy() <= 0 || world->creatures[i]->phenotype->healthPoints<=0 )
+      CreaturePtr c = world->creatures[i];
+      if ( c->getEnergy() <= 0 || c->phenotype->healthPoints<=0 )
         {
 
-          int x=world->creatures[i]->getPosX();
-          int y=world->creatures[i]->getPosY();
+          int x=c->getPosX();
+          int y=c->getPosY();
 
-          int currentId= world->creatures[i]->getId();
+          int currentId= c->getId();
 
           Cell &currentCell = world->map[y][x];
-//           currentCell.food+=world->creatures[i]->phenotype->creatureSize;
-
           int creaturesInCellNum=currentCell.creaturesInCell.size();
+	  //@ сделать у cell метод: removeCreature(id)
+	  //@ можно даже сделать эксептион, если такого ид не найдется
 
           if ( creaturesInCellNum==1 )
             {
@@ -60,7 +61,7 @@ void CreatureRemoveWorker::work ( World *world )
 
       std::cout<<world->creatures.size() <<" to "<<lastId+1<<std::endl;
       std::cout<<"c";
-      world->creatures.resize ( lastId + 1 ); //@ надо почитать или протестировать ресайз. Что будет, если ресайз идёт к тому же самому размеру? Медленно ли это?
+      world->creatures.resize ( lastId + 1 );
       std::cout<<"a";
       for ( CreaturePtr creature: world->creatures )
         {

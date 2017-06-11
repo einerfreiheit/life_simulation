@@ -1,5 +1,6 @@
 #ifndef WORKERS_VISUALWORKER_H_
 #define WORKERS_VISUALWORKER_H_
+
 #include "WorldWorker.h"
 #include "../Visualization/SimpleVisualization.h"
 #include <vector>
@@ -14,9 +15,6 @@ private:
 
     SimpleVisualization *simpleVisualization;
     std::vector<OpenCvVisualization*> outputUnits;
-
-
-
 };
 
 #endif

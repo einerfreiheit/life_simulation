@@ -34,12 +34,5 @@ void GenomeVisualizer::drawGene ( const Gene &gene, cv::Mat &vis, int posX, int 
 
 cv::Scalar GenomeVisualizer::getAllelColor ( float allel )
 {
-  if ( allel > 0 )
-    {
-      return cv::Scalar ( 0, allel*255, 0 );
-    }
-  else
-    {
-      return cv::Scalar ( 0, -allel*255,0 );
-    }
+  return (allel > 0) ? cv::Scalar ( 0, allel*255, 0 ) : cv::Scalar ( 0, -allel*255,0 );
 }

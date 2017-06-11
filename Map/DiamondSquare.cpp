@@ -166,5 +166,3 @@ double DiamondSquare::rangedRandom()
   return 2 * ( double ) rand() / RAND_MAX - 1;
 
 }
-
-

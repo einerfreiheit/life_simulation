@@ -1,5 +1,6 @@
 #ifndef ACTIONS_MOVE_H_
 #define ACTIONS_MOVE_H_
+
 #include "Action.h"
 
 class Move: public Action
@@ -15,7 +16,7 @@ private:
     int dy;
     bool canMove ( World *world,CreaturePtr creature, int nextX, int nextY );
     bool checkBorder ( World *world, int nextX, int nextY );
-    double energyRequaried ( double currentHeight, double nextHeight,double energyToCLimb, double energyToMove );
+    double energyRequired ( double currentHeight, double nextHeight,double energyToCLimb, double energyToMove );
 
 
 };

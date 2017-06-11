@@ -2,6 +2,7 @@
 #define DIAMONDSQUARE_H
 
 #include "../World.h"
+
 class DiamondSquare
 {
 public:
