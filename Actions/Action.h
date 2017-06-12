@@ -4,13 +4,12 @@
 #include "../World.h"
 #include "SimpleAction.h"
 
-class Action: public SimpleAction
-{
+class Action: public SimpleAction {
 public:
-    Action();
-    virtual ~Action();
-    enum ACTION_TYPE  {
-        AT_EAT=1,
+	Action();
+	virtual ~Action();
+	enum ACTION_TYPE {
+		AT_EAT=1,
         AT_MOVE=2,
         AT_ATTACK=4,
 	AT_CONJUGATE = 8,

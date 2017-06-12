@@ -3,12 +3,11 @@
 
 #include "Action.h"
 
-class Eat: public  Action
-{
+class Eat: public Action {
 public:
-    Eat();
-    virtual  ~Eat();
-    void act ( World *world, CreaturePtr creature ) override;
+	Eat();
+	virtual ~Eat();
+	void act(World *world, CreaturePtr creature) override;
 
 };
 

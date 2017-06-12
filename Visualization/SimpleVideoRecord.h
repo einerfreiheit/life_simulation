@@ -3,15 +3,14 @@
 
 #include "OpenCvVisualization.h"
 
-class SimpleVideoRecord: public OpenCvVisualization
-{
+class SimpleVideoRecord: public OpenCvVisualization {
 public:
-    SimpleVideoRecord();
-    virtual ~SimpleVideoRecord();
-    void update ( const cv::Mat* visualization ) override;
-    void update (World*world) override;
+	SimpleVideoRecord();
+	virtual ~SimpleVideoRecord();
+	void update(const cv::Mat* visualization) override;
+	void update(World*world) override;
 private:
-    cv::VideoWriter writer;
+	cv::VideoWriter writer;
 };
 
-#endif /* VISUALIZATION_SIMPLEVIDEORECORD_H_ */
+#endif

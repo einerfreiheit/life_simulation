@@ -4,18 +4,17 @@
 #include "Genome.h"
 #include <opencv2/opencv.hpp>
 
-class GenomeVisualizer
-{
+class GenomeVisualizer {
 public:
-    static cv::Mat visualize ( GenomePtr genome );
+	static cv::Mat visualize(GenomePtr genome);
 
 private:
-    static cv::Scalar getAllelColor ( float allel );
-    static void drawGene ( const Gene &gene, cv::Mat &vis, int posX, int posY );
+	static cv::Scalar getAllelColor(float allel);
+	static void drawGene(const Gene &gene, cv::Mat &vis, int posX, int posY);
 
-    static const int geneWidth = 40;
-    static const int geneHeight = 20;
-    static const int chromosomesOffset = 10;
+	static const int geneWidth = 40;
+	static const int geneHeight = 20;
+	static const int chromosomesOffset = 10;
 };
 
-#endif // GENOMEVISUALIZER_H
+#endif

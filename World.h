@@ -6,22 +6,21 @@
 #include "Cell.h"
 #include "Creature.h"
 
-class World
-{
+class World {
 public:
-    World ( int mapHeightToSet,  int mapWidthToSet );
-    ~World();
+	World(int mapHeightToSet, int mapWidthToSet);
+	~World();
 
-    int mapHeight;//@ инфа об этих двух полях содержится уже в map
-    int mapWidth;//@
-    float heightsRange;//@ ни нужна
-    float maxHeight;//@ можно хранить в классе для визуализациии
-    float minHeight;//@ и это тоже
+	int mapHeight; //@ инфа об этих двух полях содержится уже в map
+	int mapWidth; //@
+	float heightsRange; //@ ни нужна
+	float maxHeight; //@ можно хранить в классе для визуализациии
+	float minHeight; //@ и это тоже
 
-    std::vector<std::vector<Cell> > map;
-    std::vector<CreaturePtr> creatures;
+	std::vector<std::vector<Cell> > map;
+	std::vector<CreaturePtr> creatures;
 private:
-    void init();
+	void init();
 
 };
 

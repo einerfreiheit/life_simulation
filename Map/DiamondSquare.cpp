@@ -3,17 +3,14 @@
 #include <cmath>
 #include <stdexcept>
 
+DiamondSquare::DiamondSquare(World*world) {
 
-DiamondSquare::DiamondSquare ( World*world )
-{
-
-  init ( world );
-  diamondSquare ( world,SimulationData::getInst()->scale );
+	init(world);
+	diamondSquare(world, SimulationData::getInst()->scale);
 
 }
 
-DiamondSquare::~DiamondSquare()
-{
+DiamondSquare::~DiamondSquare() {
 
 }
 

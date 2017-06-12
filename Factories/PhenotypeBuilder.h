@@ -8,7 +8,7 @@ class PhenotypeBuilder
 
 {
 public:
-    static PhenotypePtr build ( GenomePtr genome );
+	static PhenotypePtr build(GenomePtr genome);
 };
 
-#endif // PHENOTYPEBUILDER_H
+#endif

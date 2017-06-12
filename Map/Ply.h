@@ -7,16 +7,15 @@
 
 //@ сделать в общем видел ply-модель
 //@ сделать конвертер мира в ply-модель
-class Ply
-{
+class Ply {
 public:
-    Ply ( World *world );
-    ~Ply();
-    void buildVertices ( World *world, std::ofstream & out );
-    std::ofstream* oPtr;
-    void buildFaces ( World *world, std::ofstream &out );
-    void buildHeader ( std::ofstream &out );
+	Ply(World *world);
+	~Ply();
+	void buildVertices(World *world, std::ofstream & out);
+	std::ofstream* oPtr;
+	void buildFaces(World *world, std::ofstream &out);
+	void buildHeader(std::ofstream &out);
 
 };
 
-#endif // PLY_H
+#endif

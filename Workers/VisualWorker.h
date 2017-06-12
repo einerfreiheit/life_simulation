@@ -5,16 +5,15 @@
 #include "../Visualization/SimpleVisualization.h"
 #include <vector>
 
-class VisualWorker: public WorldWorker
-{
+class VisualWorker: public WorldWorker {
 public:
-    VisualWorker();
-    virtual ~VisualWorker();
-    void work ( World *world ) override;
+	VisualWorker();
+	virtual ~VisualWorker();
+	void work(World *world) override;
 private:
 
-    SimpleVisualization *simpleVisualization;
-    std::vector<OpenCvVisualization*> outputUnits;
+	SimpleVisualization *simpleVisualization;
+	std::vector<OpenCvVisualization*> outputUnits;
 };
 
 #endif

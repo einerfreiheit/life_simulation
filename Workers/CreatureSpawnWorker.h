@@ -5,12 +5,11 @@
 #include "Creature.h"
 #include "../Factories/CreatureBuilder.h"
 
-class CreatureSpawnWorker: public WorldWorker
-{
+class CreatureSpawnWorker: public WorldWorker {
 public:
-    CreatureSpawnWorker();
-    virtual ~CreatureSpawnWorker();
-    void work ( World *world ) override;
+	CreatureSpawnWorker();
+	virtual ~CreatureSpawnWorker();
+	void work(World *world) override;
 
 };
 

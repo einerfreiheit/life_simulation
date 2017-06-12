@@ -3,24 +3,18 @@
 #include <cmath>
 #include <iostream>
 
-
-const cv::Mat* SimpleVisualization::getVisualisation()
-{
-  return  &visualization;
+const cv::Mat* SimpleVisualization::getVisualisation() {
+	return &visualization;
 }
 
-void SimpleVisualization::update ( const cv::Mat* visualisationPtr )
-{
-  return;
+void SimpleVisualization::update(const cv::Mat* visualisationPtr) {
+	return;
 }
 
-void SimpleVisualization::update ( World*world )
-{
+void SimpleVisualization::update(World*world) {
 
-  for ( int y = 0; y < world->mapHeight; y++ )
-    {
-      for ( int x = 0; x < world->mapWidth; x++ )
-        {
+	for (int y = 0; y < world->mapHeight; y++) {
+		for (int x = 0; x < world->mapWidth; x++) {
 
           float  height = world->map[y][x].cellHeight;
 	  double water =world->map[y][x].water;

@@ -4,17 +4,14 @@
 #include "../Map/Ply.h"
 #include "../Map/MapGeneration.h"
 
-void HeightsBuilder::setDepth ( World*world )
-{
+void HeightsBuilder::setDepth(World*world) {
 
-  double maxH = world->map[0][0].cellHeight;
-  double minH =  world->map[0][0].cellHeight;
-  double cellHeight = 0;
-  for ( int i = 0; i < world->mapWidth; i++ )
-    {
-      for ( int j = 0; j < world->mapHeight; j++ )
-        {
-          cellHeight = world->map[j][i].cellHeight;
+	double maxH = world->map[0][0].cellHeight;
+	double minH = world->map[0][0].cellHeight;
+	double cellHeight = 0;
+	for (int i = 0; i < world->mapWidth; i++) {
+		for (int j = 0; j < world->mapHeight; j++) {
+			cellHeight = world->map[j][i].cellHeight;
 	  maxH = std::max(maxH, cellHeight);
 	  minH = std::min(minH, cellHeight);
         }

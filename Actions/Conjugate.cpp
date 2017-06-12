@@ -3,18 +3,15 @@
 #include <vector>
 #include "../Factories/GenomeBuilder.h"
 
-Conjugate::Conjugate()
-{
-  type = AT_CONJUGATE;
+Conjugate::Conjugate() {
+	type = AT_CONJUGATE;
 }
 
-Conjugate::~Conjugate()
-{
+Conjugate::~Conjugate() {
 }
 
-void Conjugate::act ( World* world, CreaturePtr creature )
-{
-  int x =creature->getPosX();
+void Conjugate::act(World* world, CreaturePtr creature) {
+	int x = creature->getPosX();
   int y= creature->getPosY();
   int id = creature->getId();
   Cell& cell = world->map[y][x];

@@ -3,15 +3,14 @@
 
 #include "WorldWorker.h"
 
-class WaterWorker :public WorldWorker
-{
+class WaterWorker: public WorldWorker {
 public:
-    WaterWorker();
-    virtual ~WaterWorker();
-    void work ( World * world ) override;
+	WaterWorker();
+	virtual ~WaterWorker();
+	void work(World * world) override;
 private:
-    void flow ( Cell &current, Cell &next, double waterQuant );
-    double soilWater;
+	void flow(Cell &current, Cell &next, double waterQuant);
+	double soilWater;
 
 };
 

@@ -1,13 +1,11 @@
 #include "Attack.h"
 #include "iostream"
 
-Attack::Attack()
-{
-  type=AT_ATTACK;
+Attack::Attack() {
+	type = AT_ATTACK;
 }
 
-Attack::~Attack()
-{
+Attack::~Attack() {
 }
 
 void Attack::attack ( CreaturePtr aggressor, CreaturePtr victim )
