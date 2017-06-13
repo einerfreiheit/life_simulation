@@ -28,9 +28,6 @@ public:
 	double creatureHealthPoints = 100;
 	double creatureAttackPower = 1;
 
-	double minHeight;
-	double maxHeight;
-
 	double gainResourcePerCell;
 	double energyFromFood;
 	double creatureOneBait;

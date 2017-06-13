@@ -20,13 +20,12 @@ void Attack::attack ( CreaturePtr aggressor, CreaturePtr victim )
 
 void Attack::act ( World* world, CreaturePtr creature )
 {
-  int x =creature->getPosX();
-  int y= creature->getPosY();
+
   int currentCreature = creature->getId();
-  Cell& cell = world->map[y][x];
+  Cell& cell = world->map[creature->y][creature->x];
 
   int numberOfCreatures =cell.creaturesInCell.size();
-  std::cout<<numberOfCreatures<<" number of creatures in"<<y<<" "<<x<<std::endl;
+  std::cout<<numberOfCreatures<<" number of creatures in"<<creature->y<<" "<<creature->x<<std::endl;
 
 //@ как в коньюгации запилить
   for ( int i=0; i<numberOfCreatures; i++ )

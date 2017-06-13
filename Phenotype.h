@@ -33,4 +33,4 @@ public:
 };
 typedef std::shared_ptr<Phenotype> PhenotypePtr;
 
-#endif // PHENOTYPE_H
+#endif

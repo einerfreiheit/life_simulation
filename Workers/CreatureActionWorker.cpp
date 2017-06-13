@@ -24,9 +24,7 @@ void CreatureActionWorker::work(World *world) {
 			delete simpleAction;
 
 		}
-		double creatureEnergy = creature->getEnergy() - 0.1;
-		creature->setEnergy(creatureEnergy);
-
+		creature->energy -= 0.1;
 		creature->creatureActions.clear();
 	}
 }

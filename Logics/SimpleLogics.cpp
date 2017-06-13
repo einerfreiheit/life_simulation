@@ -19,8 +19,8 @@ void SimpleLogics::creatureWill(World* world, CreaturePtr creature) {
 		willToMove(world, creature);
 	}
 	else {
-		int x = creature->getPosX();
-		int y = creature->getPosY();
+		int x = creature->x;
+		int y = creature->y;
 
 		if (world->map[y][x].food <= creature->phenotype->creatureOneBait) {
 			willToMove(world, creature);
@@ -36,8 +36,8 @@ void SimpleLogics::willToAttack(CreaturePtr creature) {
 
 void SimpleLogics::willToMove(World *world, CreaturePtr creature) {
 
-	int y = creature->getPosY();
-	int x = creature->getPosX();
+	int y = creature->y;
+	int x = creature->x;
 	int side = rand() % 4;
 	switch (side) {
 	case 0: {

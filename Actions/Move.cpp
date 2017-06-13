@@ -29,8 +29,8 @@ void Move::act(World *world, CreaturePtr creature) {
 	double energyReq = 0;
 	if (checkBorder(world, dx, dy)) //@ сделать if (isOutOfBorder) return;
 					{
-		int currentX = creature->getPosX();
-		int currentY = creature->getPosY();
+		int currentX = creature->x;
+		int currentY = creature->y;
 
 		int creatureId = creature->getId();
 		double currentHeight = world->map[currentY][currentX].cellHeight;
@@ -39,11 +39,11 @@ void Move::act(World *world, CreaturePtr creature) {
 		double energyToMove = creature->phenotype->energyToMove;
 		energyReq = energyRequired(currentHeight, nextHeight, energyToClimb, energyToMove);
 
-		if (energyReq <= creature->getEnergy()) //@ сделать if (energyReq > getEnergy) return;
+		if (energyReq <= creature->energy) //@ сделать if (energyReq > getEnergy) return;
 				{
-			creature->setEnergy(creature->getEnergy() - energyReq);
-			creature->setPosX(dx);
-			creature->setPosY(dy);
+			creature->energy-=energyReq;
+			creature->x=dx;
+			creature->y=dy;
 
 			//@ вынести перемещение из клетки в клетку по id в метод move(cellFrom, cellTo, id)
 			Cell &currentCell = world->map[currentY][currentX];

@@ -17,9 +17,8 @@ protected:
 	}
 private:
 	void readParams(std::string pathToConfig);
-
 	boost::program_options::options_description params;
 	std::string section;
 };
 
-#endif // SIMPLECONFIGURATION_H
+#endif

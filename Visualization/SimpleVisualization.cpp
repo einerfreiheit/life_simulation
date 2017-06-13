@@ -38,8 +38,8 @@ void SimpleVisualization::update(World*world) {
 	}
 
 	for (auto creature : world->creatures) {
-		int y = creature->getPosY();
-		int x = creature->getPosX();
+		int y = creature->y;
+		int x = creature->x;
 		uchar &blue = visualization.at<uchar>(y, 3 * x);
 		uchar &green = visualization.at<uchar>(y, 3 * x + 1);
 		uchar &red = visualization.at<uchar>(y, 3 * x + 2);
