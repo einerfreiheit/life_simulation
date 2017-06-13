@@ -10,7 +10,11 @@ public:
 	SimpleVisualization();
 	virtual ~SimpleVisualization();
 	const cv::Mat* getVisualisation();
-
+private:
+	double minHeight;
+	double maxHeight;
+	void heightsRange(World *world);
+	bool rangeHasBeenComputed = false;
 };
 
 #endif

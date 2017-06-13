@@ -15,8 +15,8 @@ void Move::setXandY(int x, int y) //@ фигачить в конструктор
 
 bool Move::checkBorder(World* world, int nextX, int nextY) //@ лучше говорящие названия делать, вроде isOutOfBorder
 						{
-	int borderY = world->mapHeight;
-	int borderX = world->mapWidth;
+	int borderY = world->map.size();
+	int borderX = world->map[0].size();
 	return !(nextX < 0 || nextX >= borderX || nextY < 0 || nextY >= borderY);
 }
 

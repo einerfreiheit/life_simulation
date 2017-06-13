@@ -1,21 +1,13 @@
 #include "World.h"
 
 World::World(const int mapHeightToSet, const int mapWidthToSet) {
-	this->mapHeight = mapHeightToSet;
-	this->mapWidth = mapWidthToSet;
-	init();
+	map.resize(mapHeightToSet);
+	for (int y = 0; y < mapHeightToSet; y++) {
+		map[y].resize(mapWidthToSet);
+	}
+	creatures.reserve(100);
 }
 
 World::~World() {
-}
-
-void World::init() {
-
-	map.resize(mapHeight);
-
-	for (int y = 0; y < mapHeight; y++) {
-		map[y].resize(mapWidth);
-	}
-	creatures.reserve(100);
 }
 

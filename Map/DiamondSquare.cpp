@@ -16,8 +16,8 @@ DiamondSquare::~DiamondSquare() {
 
 void DiamondSquare::init ( World* world )
 {
-  int mapHeight = world->mapHeight;
-  int mapWidth = world->mapWidth;
+  int mapHeight = world->map.size();
+  int mapWidth = world->map[0].size();
 
   float cornerHeight = SimulationData::getInst()->cornerHeight;
   int firstStepDecrease = SimulationData::getInst()->firstStepDecrease;
@@ -72,22 +72,22 @@ void DiamondSquare::diamondStep ( World *world, int y, int x, double range )
   int upperPointY=y+step/2;
   int lowerPointY=y-step/2;
 
-  if ( checkIndex ( leftPointX,world->mapWidth ) )
+  if ( checkIndex ( leftPointX,world->map[0].size() ) )
     {
       sumOfHeights += world->map[y][leftPointX].cellHeight;
       pointCount++;
     }
-  if ( checkIndex ( rightPointX,world->mapWidth ) )
+  if ( checkIndex ( rightPointX,world->map[0].size()) )
     {
       sumOfHeights += world->map[y][rightPointX].cellHeight;
       pointCount++;
     }
-  if ( checkIndex ( upperPointY,world->mapHeight ) )
+  if ( checkIndex ( upperPointY,world->map.size()))
     {
       sumOfHeights += world->map[upperPointY][x].cellHeight;
       pointCount++;
     }
-  if ( checkIndex ( lowerPointY,world->mapHeight ) )
+  if ( checkIndex ( lowerPointY,world->map.size() ) )
     {
       sumOfHeights += world->map[lowerPointY][x].cellHeight;
       pointCount++;
@@ -121,8 +121,8 @@ void DiamondSquare::diamondSquare ( World*world, double scale )
     {
       return;
     }
-  int borderY = world->mapHeight - step;
-  int borderX = world->mapWidth - step;
+  int borderY = world->map.size() - step;
+  int borderX = world->map[0].size() - step;
 
   for ( int i = 0; i < borderY; i += step )
     for ( int j = 0; j < borderX; j += step )
@@ -131,8 +131,8 @@ void DiamondSquare::diamondSquare ( World*world, double scale )
 
       }
 
-  borderY= world->mapHeight;
-  borderX= world->mapWidth-step/2;
+  borderY= world->map.size();
+  borderX= world->map[0].size()-step/2;
   for ( int i = 0; i < borderY; i += step )
     {
       for ( int j = step / 2; j < borderX; j += step )
@@ -140,8 +140,8 @@ void DiamondSquare::diamondSquare ( World*world, double scale )
           diamondStep ( world, i, j, scale );
         }
     }
-  borderY= world->mapHeight-step/2;
-  borderX = world->mapWidth;
+  borderY= world->map.size()-step/2;
+  borderX = world->map[0].size();
   for ( int i = step / 2; i < borderY; i += step )
     {
       for ( int j = 0; j < borderX; j += step )

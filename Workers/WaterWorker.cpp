@@ -30,8 +30,8 @@ void WaterWorker::flow(Cell &current, Cell &next, double waterQuant) {
 
 void WaterWorker::work(World* world) {
 	double waterQuant = soilWater / 2; //@ всегда одно и то же, лучше закешировать в классе; убрать из запуска flow
-	int height = world->mapHeight;
-	int width = world->mapWidth;
+	int height = world->map.size();
+	int width = world->map[0].size();
 	for (int y = 0; y < height - 1; y++) {
 		for (int x = 0; x < width - 1; x++) {
 			Cell &current = world->map[y][x]; //@ getCell по координатам, вернуть указатель на клетку (мб NULL)

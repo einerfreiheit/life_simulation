@@ -3,6 +3,7 @@
 #include "SimulationData.h"
 #include <locale>
 #include <string>
+#include <stdexcept>
 
 class punct_facet: public std::numpunct<char> {
 protected:
@@ -17,7 +18,7 @@ Ply::Ply(World * world) {
 	if (!out.is_open()) { //@ что-то сказать
 	}
 	buildHeader(out);
-	out.imbue(std::locale(out.getloc(), new punct_facet));
+//	out.imbue(std::locale(out.getloc(), new punct_facet));
 	buildVertices(world, out);
 	buildFaces(world, out);
 	out.close();
@@ -49,10 +50,24 @@ void Ply::buildVertices(World* world, std::ofstream& output) {
 
 	int height = SimulationData::getInst()->mapHeightToSet;
 	int width = SimulationData::getInst()->mapWidthToSet;
+	double maxHeight = 0.0;
+	double minHeight = 0.0;
+	double cellHeight = world->map[0][0].cellHeight;
+	for (int i = 0; i < world->map.size(); i++) {
+		for (int j = 0; j < world->map[0].size(); j++) {
+			cellHeight = world->map[i][j].cellHeight;
+			maxHeight = std::max(maxHeight, cellHeight);
+			minHeight = std::min(minHeight, cellHeight);
+		}
+	}
+
+	if (maxHeight == minHeight) {
+		throw std::runtime_error("float map, all heights are equal");
+	}
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			int color = 255 * (world->map[y][x].cellHeight - world->minHeight) / world->heightsRange;
+			int color = 255 * (world->map[y][x].cellHeight - minHeight) / (maxHeight - minHeight);
 			int red = color;
 			int blue = 0;
 			int green = color / 2;

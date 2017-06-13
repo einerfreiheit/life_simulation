@@ -6,8 +6,6 @@
 class HeightsBuilder {
 public:
 	static void build(World*world);
-	static void setDepth(World *world);
-
 };
 
 #endif

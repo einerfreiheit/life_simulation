@@ -18,7 +18,6 @@ SimulationRunner::SimulationRunner() {
 }
 
 SimulationRunner::~SimulationRunner() {
-	delete world;
 }
 
 void SimulationRunner::run() {
