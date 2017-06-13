@@ -10,7 +10,7 @@ class World {
 public:
 	World(int mapHeightToSet, int mapWidthToSet);
 	~World();
-
+	Cell* getCell(int y,int x) ;
 	std::vector<std::vector<Cell> > map;
 	std::vector<CreaturePtr> creatures;
 

@@ -7,9 +7,9 @@ class WaterWorker: public WorldWorker {
 public:
 	WaterWorker();
 	virtual ~WaterWorker();
-	void work(World * world) override;
+	void work(World *world) override;
 private:
-	void flow(Cell &current, Cell &next, double waterQuant);
+	void flow(Cell *current, Cell *next, double waterQuant);
 	double soilWater;
 
 };

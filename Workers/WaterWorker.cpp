@@ -8,21 +8,21 @@ WaterWorker::WaterWorker() {
 	soilWater = SimulationData::getInst()->soilWater;
 }
 
-void WaterWorker::flow(Cell &current, Cell &next, double waterQuant) {
+void WaterWorker::flow(Cell *current, Cell *next, double waterQuant) {
 
-	double waterLevelCurrent = current.height + current.water;
-	double waterLevelNext = next.height + next.water;
+	double waterLevelCurrent = current->height + current->water;
+	double waterLevelNext = next->height + next->water;
 
 	if (std::abs(waterLevelCurrent - waterLevelNext) > waterQuant) //@ кванты заменить на величину, зависящую от дельты количеств воды
 			{
-		if ((current.water > soilWater) && (waterLevelCurrent > waterLevelNext)) {
-			current.water -= waterQuant;
-			next.water += waterQuant;
+		if ((current->water > soilWater) && (waterLevelCurrent > waterLevelNext)) {
+			current->water -= waterQuant;
+			next->water += waterQuant;
 
 		}
-		if ((next.water > soilWater) && (waterLevelNext > waterLevelCurrent)) {
-			current.water += waterQuant;
-			next.water -= waterQuant;
+		if ((next->water > soilWater) && (waterLevelNext > waterLevelCurrent)) {
+			current->water += waterQuant;
+			next->water -= waterQuant;
 		}
 	}
 
@@ -34,10 +34,10 @@ void WaterWorker::work(World* world) {
 	int width = world->map[0].size();
 	for (int y = 0; y < height - 1; y++) {
 		for (int x = 0; x < width - 1; x++) {
-			Cell &current = world->map[y][x]; //@ getCell по координатам, вернуть указатель на клетку (мб NULL)
-			Cell &right = world->map[y][x + 1];
-			Cell &diag = world->map[y + 1][x + 1];
-			Cell &down = world->map[y + 1][x];
+			Cell *current = world->getCell(y, x);
+			Cell *right = world->getCell(y, x + 1);
+			Cell *diag = world->getCell(y + 1, x + 1);
+			Cell *down = world->getCell(y + 1, x);
 
 			flow(current, right, waterQuant);
 			flow(current, diag, waterQuant);
