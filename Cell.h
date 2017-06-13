@@ -10,8 +10,8 @@ public:
 	virtual ~Cell();
 
 	double food;
-	double water = 0;
-	double cellHeight = 0; //@ оставить просто поле height
+	double water;
+	double height;
 
 	std::vector<CreaturePtr> creaturesInCell;
 };

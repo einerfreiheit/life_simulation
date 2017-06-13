@@ -33,8 +33,8 @@ void Move::act(World *world, CreaturePtr creature) {
 		int currentY = creature->y;
 
 		int creatureId = creature->getId();
-		double currentHeight = world->map[currentY][currentX].cellHeight;
-		double nextHeight = world->map[dy][dx].cellHeight;
+		double currentHeight = world->map[currentY][currentX].height;
+		double nextHeight = world->map[dy][dx].height;
 		double energyToClimb = creature->phenotype->energyToClimb;
 		double energyToMove = creature->phenotype->energyToMove;
 		energyReq = energyRequired(currentHeight, nextHeight, energyToClimb, energyToMove);

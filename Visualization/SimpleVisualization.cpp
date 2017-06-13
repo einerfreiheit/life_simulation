@@ -18,7 +18,7 @@ void SimpleVisualization::update(World*world) {
 	for (int y = 0; y < world->map.size(); y++) {
 		for (int x = 0; x < world->map[0].size(); x++) {
 
-			float height = world->map[y][x].cellHeight;
+			float height = world->map[y][x].height;
 			double water = world->map[y][x].water;
 
 			uchar &blue = visualization.at<uchar>(y, 3 * x);
@@ -59,12 +59,12 @@ SimpleVisualization::SimpleVisualization() {
 SimpleVisualization::~SimpleVisualization() {
 }
 void SimpleVisualization::heightsRange(World *world) {
-	maxHeight = world->map[0][0].cellHeight;
-	minHeight = world->map[0][0].cellHeight;
-	double cellHeight=world->map[0][0].cellHeight ;
+	maxHeight = world->map[0][0].height;
+	minHeight = world->map[0][0].height;
+	double cellHeight=world->map[0][0].height ;
 	for (int i = 0; i < world->map.size(); i++) {
 		for (int j = 0; j < world->map[0].size(); j++) {
-			cellHeight = world->map[i][j].cellHeight;
+			cellHeight = world->map[i][j].height;
 			maxHeight = std::max(maxHeight, cellHeight);
 			minHeight = std::min(minHeight, cellHeight);
 		}

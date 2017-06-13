@@ -10,8 +10,8 @@ WaterWorker::WaterWorker() {
 
 void WaterWorker::flow(Cell &current, Cell &next, double waterQuant) {
 
-	double waterLevelCurrent = current.cellHeight + current.water;
-	double waterLevelNext = next.cellHeight + next.water;
+	double waterLevelCurrent = current.height + current.water;
+	double waterLevelNext = next.height + next.water;
 
 	if (std::abs(waterLevelCurrent - waterLevelNext) > waterQuant) //@ кванты заменить на величину, зависящую от дельты количеств воды
 			{

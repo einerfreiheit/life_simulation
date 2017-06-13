@@ -1,9 +1,11 @@
 #include "Cell.h"
 #include <cstdlib>
 
-Cell::Cell() {
+Cell::Cell()  {
 	food = rand() % 100;
-	creaturesInCell.reserve(10);
+	water=0.0;
+	height=0.0;
+	creaturesInCell.reserve(5);
 
 }
 

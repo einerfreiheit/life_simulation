@@ -14,4 +14,4 @@ private:
 
 };
 
-#endif // WATERWORKER_H
+#endif

@@ -28,7 +28,7 @@ void MapGeneration::makeNoise(World* world) {
 			float amplitude = 1.0;
 			for (int q = 0; q < layersNumber; q++) {
 
-				world->map[i][j].cellHeight += getValue(i, j, frequency, amplitude);
+				world->map[i][j].height += getValue(i, j, frequency, amplitude);
 				frequency *= 0.5;
 				amplitude *= 2.0;
 			}

@@ -52,10 +52,10 @@ void Ply::buildVertices(World* world, std::ofstream& output) {
 	int width = SimulationData::getInst()->mapWidthToSet;
 	double maxHeight = 0.0;
 	double minHeight = 0.0;
-	double cellHeight = world->map[0][0].cellHeight;
+	double cellHeight = world->map[0][0].height;
 	for (int i = 0; i < world->map.size(); i++) {
 		for (int j = 0; j < world->map[0].size(); j++) {
-			cellHeight = world->map[i][j].cellHeight;
+			cellHeight = world->map[i][j].height;
 			maxHeight = std::max(maxHeight, cellHeight);
 			minHeight = std::min(minHeight, cellHeight);
 		}
@@ -67,11 +67,11 @@ void Ply::buildVertices(World* world, std::ofstream& output) {
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			int color = 255 * (world->map[y][x].cellHeight - minHeight) / (maxHeight - minHeight);
+			int color = 255 * (world->map[y][x].height - minHeight) / (maxHeight - minHeight);
 			int red = color;
 			int blue = 0;
 			int green = color / 2;
-			output << x << ' ' << y << ' ' << world->map[y][x].cellHeight << ' ' << red << ' ' << green << ' ' << blue
+			output << x << ' ' << y << ' ' << world->map[y][x].height << ' ' << red << ' ' << green << ' ' << blue
 					<< std::endl;
 		}
 	}

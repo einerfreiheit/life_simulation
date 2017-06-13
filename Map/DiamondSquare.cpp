@@ -40,7 +40,7 @@ void DiamondSquare::init ( World* world )
         {
           for ( int x = 0; x < mapWidth; x += step )
             {
-              world->map[y][x].cellHeight = cornerHeight;
+              world->map[y][x].height = cornerHeight;
 
             }
         }
@@ -74,27 +74,27 @@ void DiamondSquare::diamondStep ( World *world, int y, int x, double range )
 
   if ( checkIndex ( leftPointX,world->map[0].size() ) )
     {
-      sumOfHeights += world->map[y][leftPointX].cellHeight;
+      sumOfHeights += world->map[y][leftPointX].height;
       pointCount++;
     }
   if ( checkIndex ( rightPointX,world->map[0].size()) )
     {
-      sumOfHeights += world->map[y][rightPointX].cellHeight;
+      sumOfHeights += world->map[y][rightPointX].height;
       pointCount++;
     }
   if ( checkIndex ( upperPointY,world->map.size()))
     {
-      sumOfHeights += world->map[upperPointY][x].cellHeight;
+      sumOfHeights += world->map[upperPointY][x].height;
       pointCount++;
     }
   if ( checkIndex ( lowerPointY,world->map.size() ) )
     {
-      sumOfHeights += world->map[lowerPointY][x].cellHeight;
+      sumOfHeights += world->map[lowerPointY][x].height;
       pointCount++;
     }
 
 
-  cell.cellHeight = sumOfHeights / pointCount + range * rangedRandom();
+  cell.height = sumOfHeights / pointCount + range * rangedRandom();
 }
 
 bool  DiamondSquare::checkIndex ( int index, int size )
@@ -106,11 +106,11 @@ bool  DiamondSquare::checkIndex ( int index, int size )
 void DiamondSquare::squareStep ( World *world, int y, int x, double scale )
 {
 
-  double sumOfHeights = world->map[y][x].cellHeight;
-  sumOfHeights += world->map[y + step][x].cellHeight;
-  sumOfHeights += world->map[y][x + step].cellHeight;
-  sumOfHeights += world->map[y + step][x + step].cellHeight;
-  world->map[y + step / 2][x + step / 2].cellHeight = ( sumOfHeights ) / 4
+  double sumOfHeights = world->map[y][x].height;
+  sumOfHeights += world->map[y + step][x].height;
+  sumOfHeights += world->map[y][x + step].height;
+  sumOfHeights += world->map[y + step][x + step].height;
+  world->map[y + step / 2][x + step / 2].height = ( sumOfHeights ) / 4
       + rangedRandom() * scale;
 
 }
