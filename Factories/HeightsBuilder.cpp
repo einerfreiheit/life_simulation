@@ -9,5 +9,5 @@ void HeightsBuilder::build(World* world) {
 	MapGeneration mapGen;
 	mapGen.makeNoise(world);
 	//DiamondSquare diamondSquare ( world );//@ переписать diamond square
-	Ply ply(world);
+	//Ply ply(world);
 }

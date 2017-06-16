@@ -30,7 +30,7 @@ void SimpleVisualization::update(World*world) {
 			green = intensity;
 			red = intensity;
 
-			if (water > SimulationData::getInst()->soilWater) {
+			if (water > (SimulationData::getInst()->soilWater)) {
 				red = 0;
 				green = 0;
 			}
