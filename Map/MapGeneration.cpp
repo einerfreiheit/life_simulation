@@ -63,10 +63,10 @@ float MapGeneration::getValue(int y, int x, float frequency, float amplitude) {
 	int x0 = ix & keyMask;
 	int x1 = (ix + 1) & keyMask;
 
-	const float &point00 = keyValues[x0 + y0 * keyMask];
-	const float &point10 = keyValues[x1 + y0 * keyMask];
-	const float &point01 = keyValues[x0 + y1 * keyMask];
-	const float &point11 = keyValues[x1 + y1 * keyMask];
+	const float &point00 = keyValues[x0 + y0 * keySize];
+	const float &point10 = keyValues[x1 + y0 * keySize];
+	const float &point01 = keyValues[x0 + y1 * keySize];
+	const float &point11 = keyValues[x1 + y1 * keySize];
 
 	float lerpPoint1 = lerp(point00, point10, offsetX);
 	float lerpPoint2 = lerp(point01, point11, offsetX);

@@ -9,63 +9,64 @@ WaterWorker::WaterWorker() {
 	soilWater = SimulationData::getInst()->soilWater;
 }
 
-void WaterWorker::flow(World *world, int y1, int x1, int y2, int x2) {
-	if (!canFlow(world, y1, x1, y2, x2)) {
+void WaterWorker::flow(Cell *transmitter, Cell *receiver, bool &canFlow) {
+	if (!canFlow) {
 		return;
 	}
-	waterLevelsDelta = transmitterWaterLevel - recieverWaterLevel;
 	movableWater = transmitter->water - soilWater;
-	waterToMove = std::min(waterLevelsDelta / 2, movableWater);
+	if (movableWater <= 0.0) {
+		return;
+	}
+	waterToMove = std::min(0.5 * (transmitterWaterLevel - recieverWaterLevel), movableWater);
 	transmitter->water -= waterToMove;
 	receiver->water += waterToMove;
+
 }
 
 void WaterWorker::work(World* world) {
-	if (isRowsWave) {
-		for (int y = 0; y < world->map.size() - 1; y++) {
-			for (int x = 0; x < world->map[0].size(); x++) {
-				flow(world, y, x, y + 1, x);
 
-			}
+	for (int y = 0; y < world->map.size() - 1; y++) {
+		for (int x = 0; x < world->map[0].size(); x++) {
+			setTransmitterAndReciverPointers(world, y, x, y + 1, x, canFlow);
+			flow(transmitter, receiver, canFlow);
+
 		}
-		isRowsWave = false;
-		return;
 	}
+
 	for (int x = 0; x < world->map[0].size() - 1; x++) {
 		for (int y = 0; y < world->map.size(); y++) {
-			flow(world, y, x, y, x + 1);
-
+			setTransmitterAndReciverPointers(world, y, x, y, x + 1, canFlow);
+			flow(transmitter, receiver, canFlow);
 		}
 	}
 
 }
 
-bool WaterWorker::canFlow(World *world, int y1, int x1, int y2, int x2) {
-	firstCell = world->getCell(y1, x1);
-	secondCell = world->getCell(y2, x2);
-	if (!firstCell || !secondCell) {
-		return false;
-	}
-
-	firstCellWaterLevel = firstCell->height + firstCell->water;
-	secondCellWaterLevel = secondCell->water + secondCell->height;
-	if (firstCellWaterLevel > secondCellWaterLevel && firstCell->water > soilWater) {
-		transmitter = firstCell;
-		receiver = secondCell;
-		transmitterWaterLevel = firstCellWaterLevel;
-		recieverWaterLevel = secondCellWaterLevel;
-		return true;
-	}
-	if (secondCellWaterLevel > firstCellWaterLevel && secondCell->water > soilWater) {
-		transmitter = secondCell;
-		receiver = firstCell;
-		transmitterWaterLevel = secondCellWaterLevel;
-		recieverWaterLevel = firstCellWaterLevel;
-		return true;
-	}
-	return false;
-
-}
 WaterWorker::~WaterWorker() {
 }
 
+void WaterWorker::setTransmitterAndReciverPointers(World *world, int y1, int x1, int y2, int x2, bool &canFlow) {
+
+	transmitter = world->getCell(y1, x1);
+	transmitterWaterLevel = transmitter->height + transmitter->water;
+	bufferPointer = world->getCell(y2, x2);
+	bufferedWaterLevel = bufferPointer->height + bufferPointer->water;
+	if (bufferedWaterLevel == transmitterWaterLevel) {
+		canFlow = false;
+		return;
+	}
+	if (transmitterWaterLevel > bufferedWaterLevel) {
+		receiver = bufferPointer;
+		recieverWaterLevel = bufferedWaterLevel;
+	}
+	else {
+		receiver = transmitter;
+		transmitter = bufferPointer;
+		recieverWaterLevel = transmitterWaterLevel;
+		transmitterWaterLevel = bufferedWaterLevel;
+
+	}
+
+	canFlow = true;
+
+}

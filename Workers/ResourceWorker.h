@@ -8,14 +8,11 @@ public:
 	ResourceWorker();
 	virtual ~ResourceWorker();
 	void work(World *world) override;
-	static inline int getRandom(int border);
-
+	static inline Cell* getRandom(World *world);
 private:
 	double gainPerCell;
 	int cellNumber;
-	double cellGain;
-	int height; //@ избыточно, есть в World
-	int width;
+	Cell *randomCell = NULL;
 
 };
 
