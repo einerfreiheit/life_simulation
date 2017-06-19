@@ -13,6 +13,7 @@ public:
 	double water;
 	double height;
 
+	void removeCreature(int id);
 	std::vector<CreaturePtr> creaturesInCell;
 };
 

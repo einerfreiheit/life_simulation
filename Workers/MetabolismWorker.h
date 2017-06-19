@@ -12,10 +12,10 @@ public:
 
 private:
 	static void updatePhenotype(CreaturePtr creature);
-	static void grow(CreaturePtr creature, Gene& gene); //const Gene& везде, где ген не меняется
-	static void regenerate(CreaturePtr creature, Gene& gene);
-	static bool canTranslate(CreaturePtr creature, Gene& gene);
-	static void readAgressionLevel(CreaturePtr creature, Gene& gene);
+	static void grow(CreaturePtr creature, const Gene& gene);
+	static void regenerate(CreaturePtr creature, const Gene& gene);
+	static bool canTranslate(CreaturePtr creature, const Gene& gene);
+	static void readAgressionLevel(CreaturePtr creature, const Gene& gene);
 };
 
 #endif 

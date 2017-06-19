@@ -25,7 +25,7 @@ bool MetabolismWorker::canTranslate(CreaturePtr creature, Gene& gene) {
 void MetabolismWorker::regenerate(CreaturePtr creature, Gene& gene) {
 	if (canTranslate(creature, gene) && creature->phenotype->maxHealthPoints > creature->phenotype->healthPoints) {
 		creature->phenotype->healthPoints += gene.allel1;
-		creature->energy -=gene.allel1 ;
+		creature->energy -= gene.allel1;
 		std::cout << "creature id" << creature->getId() << " regenerates to " << creature->phenotype->healthPoints
 				<< std::endl;
 	}
@@ -34,7 +34,7 @@ void MetabolismWorker::regenerate(CreaturePtr creature, Gene& gene) {
 void MetabolismWorker::grow(CreaturePtr creature, Gene &gene) {
 	if (canTranslate(creature, gene)) {
 		creature->phenotype->creatureSize += gene.allel1;
-		creature->energy -=gene.allel1 ;
+		creature->energy -= gene.allel1;
 		std::cout << "creature id" << creature->getId() << " grows to size " << creature->phenotype->creatureSize
 				<< std::endl;
 	}
