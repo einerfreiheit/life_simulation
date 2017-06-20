@@ -5,6 +5,8 @@
 #include "ValueNoise.h"
 
 ValueNoise::ValueNoise() {
+	keyValues = new float[keySize * keySize];
+
 }
 
 ValueNoise::~ValueNoise() {
@@ -20,7 +22,6 @@ void ValueNoise::makeNoise(World* world) {
 	int height = SimulationData::getInst()->mapHeightToSet;
 	int width = SimulationData::getInst()->mapWidthToSet;
 	const int layersNumber = 5;
-	keyValues = new float[keySize * keySize];
 
 	setKeyValues();
 
