@@ -18,11 +18,11 @@ void MetabolismWorker::work(World* world) {
 MetabolismWorker::~MetabolismWorker() {
 }
 
-bool MetabolismWorker::canTranslate(CreaturePtr creature, Gene& gene) {
+bool MetabolismWorker::canTranslate(CreaturePtr creature, const  Gene& gene) {
 	return (gene.allel1 > 0.0 && creature->energy >= gene.allel1);
 }
 
-void MetabolismWorker::regenerate(CreaturePtr creature, Gene& gene) {
+void MetabolismWorker::regenerate(CreaturePtr creature,const Gene& gene) {
 	if (canTranslate(creature, gene) && creature->phenotype->maxHealthPoints > creature->phenotype->healthPoints) {
 		creature->phenotype->healthPoints += gene.allel1;
 		creature->energy -= gene.allel1;
@@ -31,7 +31,7 @@ void MetabolismWorker::regenerate(CreaturePtr creature, Gene& gene) {
 	}
 }
 
-void MetabolismWorker::grow(CreaturePtr creature, Gene &gene) {
+void MetabolismWorker::grow(CreaturePtr creature,const  Gene &gene) {
 	if (canTranslate(creature, gene)) {
 		creature->phenotype->creatureSize += gene.allel1;
 		creature->energy -= gene.allel1;

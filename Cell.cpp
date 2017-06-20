@@ -32,3 +32,4 @@ void Cell::removeCreature(int id) {
 		}
 
 	}
+}

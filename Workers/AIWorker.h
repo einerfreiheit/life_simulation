@@ -16,4 +16,4 @@ private:
 
 };
 
-#endif // AIWORKER_H
+#endif
