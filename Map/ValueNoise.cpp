@@ -1,30 +1,32 @@
-#include "MapGeneration.h"
 #include "../SimulationData.h"
 #include <iostream>
 #include <random>
+#include <cmath>
+#include "ValueNoise.h"
 
-MapGeneration::MapGeneration() {
+ValueNoise::ValueNoise() {
 }
 
-MapGeneration::~MapGeneration() {
+ValueNoise::~ValueNoise() {
+	delete []keyValues;
 
 }
 
-float MapGeneration::smooth(const float& t) {
+float ValueNoise::smooth(const float& t) {
 	return t * t * (3 - 2 * t);
 }
 
-void MapGeneration::makeNoise(World* world) {
+void ValueNoise::makeNoise(World* world) {
 	int height = SimulationData::getInst()->mapHeightToSet;
 	int width = SimulationData::getInst()->mapWidthToSet;
 	const int layersNumber = 5;
-	keyValues = new float[keySize * keySize]; //@ написал new[] - задумался о delete[]
+	keyValues = new float[keySize * keySize];
 
 	setKeyValues();
 
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			float frequency = 0.1; // нужно установить зависимость между частотой и размером карты
+			float frequency = 0.3;
 			float amplitude = 1.0;
 			for (int q = 0; q < layersNumber; q++) {
 
@@ -37,18 +39,18 @@ void MapGeneration::makeNoise(World* world) {
 	}
 }
 
-void MapGeneration::setKeyValues() {
+void ValueNoise::setKeyValues() {
 	srand48(2011);
 	for (int i = 0; i < keySize * keySize; i++) {
 		keyValues[i] = 0.5 - drand48();
 	}
 }
 
-float MapGeneration::lerp(float a, float b, float possition) {
+float ValueNoise::lerp(float a, float b, float possition) {
 	return a * (1.0 - possition) + b * possition;
 }
 
-float MapGeneration::getValue(int y, int x, float frequency, float amplitude) {
+float ValueNoise::getValue(int y, int x, float frequency, float amplitude) {
 	float ky = y * frequency;
 	float kx = x * frequency;
 

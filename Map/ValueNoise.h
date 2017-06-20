@@ -1,12 +1,12 @@
-#ifndef MAPGENERATION_H
-#define MAPGENERATION_H
+#ifndef VALUENIOSE_H
+#define VALUENOISE_H
 
 #include "../World.h"
 
-class MapGeneration {
+class ValueNoise {
 public:
-	MapGeneration();
-	~MapGeneration();
+	ValueNoise();
+	~ValueNoise();
 	void makeNoise(World *world);
 private:
 	void setKeyValues();

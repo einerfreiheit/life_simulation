@@ -2,12 +2,12 @@
 #include "../SimulationData.h"
 #include "../Map/DiamondSquare.h"
 #include "../Map/Ply.h"
-#include "../Map/MapGeneration.h"
+#include "../Map/ValueNoise.h"
 
 void HeightsBuilder::build(World* world) {
 	//@ выбор типа генератора мира из конфига
-	MapGeneration mapGen;
+	ValueNoise mapGen;
 	mapGen.makeNoise(world);
 	//DiamondSquare diamondSquare ( world );//@ переписать diamond square
-	//Ply ply(world);
+	Ply ply(world);
 }
