@@ -10,34 +10,33 @@ void SimpleLogics::willToEat(CreaturePtr creature) {
 
 }
 
-void SimpleLogics::creatureWill(World* world, CreaturePtr creature) {
+void SimpleLogics::creatureWill( World* world, CreaturePtr creature) {
 	willToAttack(creature);
 	willToEat(creature);
 	creature->creatureActions.push_back(new Conjugate);
 
 	if (creature->hasBeenAttaked && creature->phenotype->healthPoints <= 50) {
-		willToMove(world, creature);
+		willToMove(creature);
 	}
 	else {
-		int x = creature->x;
-		int y = creature->y;
+		Cell * cell = world->getCell(creature->y, creature->x);
 
-		if (world->map[y][x].food <= creature->phenotype->creatureOneBait) {
-			willToMove(world, creature);
+		if (cell->food <= creature->phenotype->creatureOneBait) {
+			willToMove( creature);
 		}
 
 	}
 	creature->hasBeenAttaked = false;
 }
 void SimpleLogics::willToAttack(CreaturePtr creature) {
-	if (creature->phenotype->isAggresive) creature->creatureActions.push_back(new Attack);
+	if (creature->phenotype->aggresion >0.0) creature->creatureActions.push_back(new Attack);
 
 }
 
-void SimpleLogics::willToMove(World *world, CreaturePtr creature) {
+void SimpleLogics::willToMove(CreaturePtr creature) {
 
-	int y = creature->y;
-	int x = creature->x;
+	int y = 0;
+	int x = 0;
 	int side = rand() % 4;
 	switch (side) {
 	case 0: {
@@ -59,9 +58,8 @@ void SimpleLogics::willToMove(World *world, CreaturePtr creature) {
 
 	}
 
-	Move *movePtr = new Move;
-	movePtr->setXandY(x, y);
-	creature->creatureActions.push_back(movePtr);
+
+	creature->creatureActions.push_back(new Move(y,x));
 
 }
 

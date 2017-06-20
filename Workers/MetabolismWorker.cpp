@@ -54,7 +54,7 @@ void MetabolismWorker::updatePhenotype(CreaturePtr creature) {
 				chromosome->position = 0;
 			}
 
-			Gene &currentGene = chromosome->genes[chromosome->position];
+			const Gene &currentGene = chromosome->genes[chromosome->position];
 			std::cout << "chromosome " << chromosomeIndex << " " << "gene " << chromosome->position << " type "
 					<< currentGene.type << "chromosome size: " << chromosome->genes.size() << std::endl;
 

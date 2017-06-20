@@ -1,9 +1,8 @@
 #include "PhenotypeBuilder.h"
 #include "../SimulationData.h"
 
-PhenotypePtr PhenotypeBuilder::build(GenomePtr genome) {
+PhenotypePtr PhenotypeBuilder::build(const GenomePtr genome) {
 	PhenotypePtr result(new Phenotype);
-	result->corpseSize = 50; //@ уже мертвый
 	result->creatureOneBait = SimulationData::getInst()->creatureOneBait;
 	result->energyFromFood = SimulationData::getInst()->energyFromFood;
 	result->energyToMove = SimulationData::getInst()->energyToMove;
@@ -14,27 +13,39 @@ PhenotypePtr PhenotypeBuilder::build(GenomePtr genome) {
 
 	for (const ChromosomePtr &chromosome : genome->chromosomes) {
 		for (const Gene &gene : chromosome->genes) {
-//@ сделать processGene(const Gene &, PhenotypePtr)
-			switch (gene.type) {
-			case GT_AGRESSION: {
-				if (gene.allel1 > 0.0 && result->isAggresive == false) {
-					result->isAggresive = true; //сделать не буль, а сумму всех агрессий, в том числе отрицательные тормозящие агрессии
-					break;
-				}
-			}
-			case GT_TRANSLATION: {
-				if (gene.allel1 > 0.0) {
-					result->geneTranslationSpeed += gene.allel1;
-					break;
-				}
-			}
-			default:
-				break;
-			}
+			PhenotypeBuilder::processGene(gene, result);
 		}
 	}
-	result->geneTranslationNumber = std::min(result->geneTranslationNumber, result->maxGeneTranslationNumber);
-
+	result->geneTranslationNumber = std::min((int) result->geneTranslationSpeed, result->maxGeneTranslationNumber);
+	result->geneTranslationNumber = std::max(result->geneTranslationNumber, 1);
+	PhenotypeBuilder::buildCreatureReceptor(genome, result);
 	return result;
 }
 
+void PhenotypeBuilder::processGene(const Gene& gene, PhenotypePtr phenotype) {
+	switch (gene.type) {
+	case GT_AGRESSION: {
+		phenotype->aggresion += gene.allel1;
+		break;
+	}
+	case GT_TRANSLATION: {
+		phenotype->geneTranslationSpeed += gene.allel1;
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void PhenotypeBuilder::buildCreatureReceptor(const GenomePtr genome, PhenotypePtr phenotype) {
+
+	for (auto chromosome : genome->chromosomes) {
+		for (auto gene : chromosome->genes) {
+			phenotype->cellReceptor += std::to_string(gene.type);
+		}
+
+	}
+	std::cout <<phenotype->cellReceptor << std::endl;
+
+
+}

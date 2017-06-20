@@ -14,14 +14,13 @@ public:
 	double fissionLoss;
 	double fissionThreshold;
 	double hungryEdge;
-	double corpseSize;
 	double energyToClimb;
 	double healthPoints;
 	double attackPower;
 	double creatureSize;
 	double conjugateEnergy = 50.0;
 
-	bool isAggresive = false;
+	double aggresion = 0.0;
 
 	double geneTranslationSpeed = 1.0;
 	int maxGeneTranslationNumber = 5;

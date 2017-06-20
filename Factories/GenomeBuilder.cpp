@@ -29,21 +29,21 @@ GenomePtr GenomeBuilder::build(CreaturePtr creature) {
 		chromosome.reset(new Chromosome);
 		chromosome->genes = parentGenome->chromosomes[i]->genes;
 	}
-
-	int numberOfCrossingOver = SimulationData::getInst()->numberOfMitoseCrossingOver;
-	while (numberOfCrossingOver) {
-		Gene &randomGene = GenomeBuilder::getRandomGene(result);
-
-		double allel1Temp = randomGene.allel1;
-		randomGene.allel1 = randomGene.allel2;
-		randomGene.allel2 = allel1Temp;
-		numberOfCrossingOver--;
-	}
+	GenomeBuilder::crossingOver(result);
 
 	return result;
 
 }
-
+void GenomeBuilder::crossingOver(GenomePtr genome) {
+	int numberOfCrossingOver = SimulationData::getInst()->numberOfMitoseCrossingOver;
+	while (numberOfCrossingOver) {
+		Gene &randomGene = GenomeBuilder::getRandomGene(genome);
+		double allel1 = randomGene.allel1;
+		randomGene.allel1 = randomGene.allel2;
+		randomGene.allel2 = allel1;
+		numberOfCrossingOver--;
+	}
+}
 void GenomeBuilder::buildPlasmide(GenomePtr genome, int plasmideSize) {
 	ChromosomePtr plasmide(new Chromosome);
 	for (int currentPlasmideSize = 0; currentPlasmideSize < plasmideSize; currentPlasmideSize++) {
