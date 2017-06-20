@@ -3,15 +3,11 @@
 #include <iostream>
 
 SimpleVideoRecord::SimpleVideoRecord() {
-	cv::Mat output; //@ убрать этот cv::Mat
-	output = cv::Mat::zeros(cv::Size(	SimulationData::getInst()->mapHeightToSet,
-										SimulationData::getInst()->mapWidthToSet),
-							CV_8UC3);
 	writer.open(SimulationData::getInst()->outputPath + "./output.avi",
 				CV_FOURCC('M', 'J', 'P', 'G'),
 				25.0,
-				output.size(),
-				true); //@ строить просто cv::Size
+				cv::Size(SimulationData::getInst()->mapHeightToSet, SimulationData::getInst()->mapWidthToSet),
+				true);
 }
 
 SimpleVideoRecord::~SimpleVideoRecord() {

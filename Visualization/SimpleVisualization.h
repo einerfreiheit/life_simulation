@@ -5,16 +5,17 @@
 
 class SimpleVisualization: public OpenCvVisualization {
 public:
-	void update(World *world) override;
-	void update(const cv::Mat* visualisationPtr) override;
 	SimpleVisualization();
 	virtual ~SimpleVisualization();
+	void update(World *world) override;
+	void update(const cv::Mat* visualisationPtr) override;
 	const cv::Mat* getVisualisation();
 private:
 	double minHeight;
 	double maxHeight;
-	void heightsRange(World *world);
 	bool rangeHasBeenComputed = false;
+	void heightsRange(World *world);
+
 };
 
 #endif
