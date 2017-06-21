@@ -3,6 +3,7 @@
 #include <iostream>
 
 SimpleVideoRecord::SimpleVideoRecord() {
+	output = new cv::Mat;
 	writer.open(SimulationData::getInst()->outputPath + "./output.avi",
 				CV_FOURCC('M', 'J', 'P', 'G'),
 				25.0,
@@ -11,13 +12,15 @@ SimpleVideoRecord::SimpleVideoRecord() {
 }
 
 SimpleVideoRecord::~SimpleVideoRecord() {
+	delete output;
 }
 
 void SimpleVideoRecord::update(const cv::Mat* visualization) {
-	cv::Mat output;
-	cv::resize(*visualization, output, visualization->size(), 1, 1, cv::INTER_NEAREST);
+	cv::resize(*visualization, *output, visualization->size(), 1, 1, cv::INTER_NEAREST);
 
-	writer.write(output);
+	writer.write(*output);
+	writer.release();
+	output->release();
 
 }
 

@@ -11,6 +11,8 @@ public:
 	void update(World*world) override;
 private:
 	cv::VideoWriter writer;
+	cv::Mat *output;
 };
+
 
 #endif
