@@ -1,7 +1,6 @@
 #include "HeightsBuilder.h"
 #include "../SimulationData.h"
 #include "../Map/DiamondSquare.h"
-#include "../Map/Ply.h"
 #include "../Map/ValueNoise.h"
 #include "../Map/PlyConverter.h"
 #include "../Map/PlyModel.h"
