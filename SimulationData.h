@@ -14,28 +14,12 @@ public:
 		}
 		return inst;
 	}
-	std::string outputPath = "./output/";
-	int firstStepDecrease;
-	float cornerHeight;
-	float smooth;
-	float scale;
+	std::string outputPath;
 	int mapHeightToSet;
 	int mapWidthToSet;
-	int timeToWait;
 
-	int numberOfMitoseCrossingOver = 1;
+	double firstLayerFrequency;
 
-	double creatureHealthPoints = 100;
-	double creatureAttackPower = 1;
-
-	double gainResourcePerCell;
-	double energyFromFood;
-	double creatureOneBait;
-	double energyToMove;
-	double fissionLoss;
-	double fissionThreshold;
-	double allWaterAmount;
-	double soilWater;
 	bool displayOutput;
 	bool videoRecord;
 	bool useAIWorker;
@@ -47,6 +31,22 @@ public:
 	bool useWaiterWorker;
 	bool useCreatureActionWorker;
 	bool useWaterWorker;
+
+	int timeToWait;
+
+	double soilWater;
+	double waterPerCell;
+	double foodGainPerCell;
+	double gainResourcePerCell;
+
+	double energyFromFood;
+	double creatureOneBait;
+	double energyToMove;
+	double fissionLoss;
+	double fissionThreshold;
+	int numberOfMitoseCrossingOver;
+	double creatureHealthPoints;
+	double creatureAttackPower;
 
 protected:
 	void addParams() override;

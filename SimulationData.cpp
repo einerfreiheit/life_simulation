@@ -12,10 +12,7 @@ void SimulationData::addParams() {
 	add<int>("height", mapHeightToSet, 5);
 	add<int>("width", mapWidthToSet, 5);
 	setSection("WorldHeights");
-	add<int>("firstStepDecrease", firstStepDecrease, 1);
-	add<float>("cornerHeight", cornerHeight, 0);
-	add<float>("smooth", smooth, 2);
-	add<float>("scale", scale, 10);
+	add<double>("firstLayerFrequency", firstLayerFrequency, 0.3);
 
 	setSection("Workers");
 	add<bool>("useAIWorker", useAIWorker, true);
@@ -34,8 +31,8 @@ void SimulationData::addParams() {
 	add<int>("timeToWait", timeToWait, 1000);
 
 	setSection("Resources");
-	add<double>("gainPerCell", gainResourcePerCell, 0.0);
-	add<double>("allWaterAmount", allWaterAmount, 0);
+	add<double>("foodGainPerCell", foodGainPerCell, 0.0);
+	add<double>("waterPerCell", waterPerCell, 0.0);
 	add<double>("soilWater", soilWater, 0.01);
 
 	setSection("CreatureParameters");
@@ -44,6 +41,9 @@ void SimulationData::addParams() {
 	add<double>("energyFromFood", energyFromFood, 1.0);
 	add<double>("fissionLoss", fissionLoss, 100);
 	add<double>("fissionThreshold", fissionThreshold, 500);
+	add<int>("numberOfMitoseCrossingOver", numberOfMitoseCrossingOver,1);
+	add<double>("creatureHealthPoints", creatureHealthPoints,100.0);
+	add<double>("creatureAttackPower", creatureAttackPower,1.0);
 
 	setSection("Output");
 	add<std::string>("outputPath", outputPath, "./");
