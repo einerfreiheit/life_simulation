@@ -8,7 +8,9 @@ class PhenotypeBuilder
 
 {
 public:
-    static PhenotypePtr build ( GenomePtr genome );
+	static PhenotypePtr build( const GenomePtr genome);
+	static void processGene(const Gene&, PhenotypePtr phenotype);
+	static void buildCreatureReceptor(const GenomePtr genome, PhenotypePtr phenotype);
 };
 
-#endif // PHENOTYPEBUILDER_H
+#endif

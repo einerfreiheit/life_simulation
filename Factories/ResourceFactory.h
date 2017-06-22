@@ -3,12 +3,9 @@
 
 #include "../World.h"
 
-class ResourceFactory
-{
+class ResourceFactory {
 public:
-    static void addWater ( World * world );
-    static double amountOfWater;
-
+	static void addWater(World * world);
 };
 
 #endif

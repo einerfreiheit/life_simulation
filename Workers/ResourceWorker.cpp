@@ -2,37 +2,25 @@
 #include <cmath>
 #include <cstdlib>
 
-ResourceWorker::ResourceWorker()
-{
-  this->name = "ResourceWorker";
-  this->gainPerCell = SimulationData::getInst()->gainResourcePerCell;
-  height =SimulationData::getInst()->mapHeightToSet;
-  width = SimulationData::getInst()->mapWidthToSet;
-  cellNumber = std::sqrt( height * width );
-  cellGain = height * width * gainPerCell / cellNumber;
+ResourceWorker::ResourceWorker() {
+	this->name = "ResourceWorker";
+	this->gainPerCell = SimulationData::getInst()->gainResourcePerCell;
+	int height = SimulationData::getInst()->mapHeightToSet;
+	int width = SimulationData::getInst()->mapWidthToSet;
+	cellNumber = std::sqrt(height * width);
 }
 
-int ResourceWorker::getRandom ( int border )
-{
-  return rand() % border;
+Cell *ResourceWorker::getRandom(World *world) {
+	return world->getCell(rand() % world->map.size(), rand() % world->map[0].size());
 }
+void ResourceWorker::work(World *world) {
 
+	while (cellNumber>0){
+		randomCell = getRandom(world);
+		randomCell->food+=gainPerCell;
+		cellNumber--;
 
-void ResourceWorker::work ( World *world )
-{
-
-  for ( int i = 0; i <= cellNumber; i++ )
-    {
-
-      int rY=getRandom ( height );//@ getCell
-      int rX=getRandom ( width );
-      if ( world->map[rY][rX].food <= ( 100.0 - cellGain ) )
-        {
-          world->map[rY][rX].food += cellGain;
-        }
-
-    }
+	}
 }
-ResourceWorker::~ResourceWorker()
-{
+ResourceWorker::~ResourceWorker() {
 }

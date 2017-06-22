@@ -4,14 +4,13 @@
 #include "../World.h"
 #include "SimulationData.h"
 
-class WorldWorker
-{
+class WorldWorker {
 public:
-    virtual void work ( World *world ) = 0;
-    std::string getName() const;
+	virtual void work(World *world) = 0;
+	std::string getName() const;
 protected:
 
-    std::string name;
+	std::string name;
 
 };
 

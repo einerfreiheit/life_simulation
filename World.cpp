@@ -1,27 +1,22 @@
 #include "World.h"
 
-World::World ( const int mapHeightToSet, const int mapWidthToSet )
-{
-  this->mapHeight = mapHeightToSet;
-  this->mapWidth = mapWidthToSet;
-  init();
+World::World(const int mapHeightToSet, const int mapWidthToSet) {
+	map.resize(mapHeightToSet);
+	for (int y = 0; y < mapHeightToSet; y++) {
+		map[y].resize(mapWidthToSet);
+	}
+	creatures.reserve(100);
 }
 
-World::~World()
-{
+World::~World() {
 }
 
-void World::init()
-{
+Cell* World::getCell(int y, int x) {
+	Cell *cellPtr = NULL;
+	if (y < map.size() && x < map[0].size()) {
+		cellPtr = &map[y][x];
+	}
 
-  map.resize ( mapHeight );
+	return cellPtr;
 
-  for ( int y = 0; y < mapHeight; y++ )
-    {
-      map[y].resize ( mapWidth );
-    }
-
-
-  creatures.reserve ( 100 );
 }
-

@@ -4,18 +4,18 @@
 #include "../Genetics/Genome.h"
 #include "../Creature.h"
 
-class GenomeBuilder
-{
+class GenomeBuilder {
 public:
-    static GenomePtr build ( int complexity = 20 );
-    static GenomePtr build ( CreaturePtr creature );
-    static void buildPlasmide( GenomePtr genome, int plasmideSize = 1);
-
-    static  Gene& getRandomGene(GenomePtr genome);
-
+	static GenomePtr build(int complexity = 20);
+	static GenomePtr build(CreaturePtr creature);
+	static void buildPlasmide(GenomePtr genome, int plasmideSize = 1);
+	static Gene& getRandomGene(GenomePtr genome);
 
 private:
-    static const int complexityPerChromosome = 8;
+
+	static void crossingOver(GenomePtr genome);
+
+	static const int complexityPerChromosome = 8;
 };
 
 #endif

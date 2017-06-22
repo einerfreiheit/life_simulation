@@ -5,15 +5,14 @@
 #include "Gene.h"
 #include <memory>
 
-class Chromosome
-{
+class Chromosome {
 public:
-    Chromosome();
-    ~Chromosome();
+	Chromosome();
+	~Chromosome();
 
-    std::vector<Gene> genes;
-    int position = 0;
+	std::vector<Gene> genes;
+	int position = 0;
 };
 typedef std::shared_ptr<Chromosome> ChromosomePtr;
 
-#endif // CHROMOSOME_H
+#endif

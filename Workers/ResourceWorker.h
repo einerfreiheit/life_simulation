@@ -3,21 +3,16 @@
 
 #include "WorldWorker.h"
 
-class ResourceWorker: public WorldWorker
-{
+class ResourceWorker: public WorldWorker {
 public:
-    ResourceWorker();
-    virtual ~ResourceWorker();
-    void work ( World *world ) override;
-    static inline int getRandom ( int border );
-
-
+	ResourceWorker();
+	virtual ~ResourceWorker();
+	void work(World *world) override;
+	static inline Cell* getRandom(World *world);
 private:
-    double gainPerCell;
-    int cellNumber;
-    double cellGain;
-    int height;//@ избыточно, есть в World
-    int width;
+	double gainPerCell;
+	int cellNumber;
+	Cell *randomCell = NULL;
 
 };
 

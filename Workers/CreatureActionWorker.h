@@ -3,11 +3,10 @@
 
 #include "WorldWorker.h"
 
-class CreatureActionWorker :public WorldWorker
-{
+class CreatureActionWorker: public WorldWorker {
 public:
-    CreatureActionWorker();
-    virtual ~CreatureActionWorker();
+	CreatureActionWorker();
+	virtual ~CreatureActionWorker();
     void work ( World *world ) override;
 
 };

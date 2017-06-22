@@ -4,17 +4,17 @@
 #include "Creature.h"
 #include <vector>
 
-class Cell
-{
+class Cell {
 public:
-    Cell();
-    virtual ~Cell();
-    
-    double food;
-    double water=0;
-    double cellHeight=0;//@ оставить просто поле height
+	Cell();
+	virtual ~Cell();
 
-    std::vector<CreaturePtr> creaturesInCell;
+	double food;
+	double water;
+	double height;
+
+	void removeCreature(int id);
+	std::vector<CreaturePtr> creaturesInCell;
 };
 
 #endif

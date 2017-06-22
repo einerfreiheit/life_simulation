@@ -2,61 +2,71 @@
 #include "../SimulationData.h"
 #include <cmath>
 #include <iostream>
+#include <vector>
 
-WaterWorker::WaterWorker()
-{
-  this->name="WaterWorker";
-  soilWater = SimulationData::getInst()->soilWater;
+WaterWorker::WaterWorker() {
+	this->name = "WaterWorker";
+	soilWater = SimulationData::getInst()->soilWater;
 }
 
-
-void WaterWorker::flow ( Cell &current, Cell &next, double waterQuant )
-{
-
-  double waterLevelCurrent=current.cellHeight+current.water;
-  double waterLevelNext=next.cellHeight+next.water;
-
-  if ( std::abs ( waterLevelCurrent-waterLevelNext ) >waterQuant )//@ кванты заменить на величину, зависящую от дельты количеств воды
-    {
-      if ( ( current.water>soilWater ) && ( waterLevelCurrent>waterLevelNext ) )
-        {
-          current.water-=waterQuant;
-          next.water+=waterQuant;
-
-        }
-      if ( ( next.water>soilWater ) && ( waterLevelNext>waterLevelCurrent ) )
-        {
-          current.water+=waterQuant;
-          next.water-=waterQuant;
-        }
-    }
-
-
+void WaterWorker::flow(Cell *transmitter, Cell *receiver, bool &canFlow) {
+	if (!canFlow) {
+		return;
+	}
+	movableWater = transmitter->water - soilWater;
+	if (movableWater <= 0.0) {
+		return;
+	}
+	waterToMove = std::min(0.5 * (transmitterWaterLevel - recieverWaterLevel), movableWater);
+	transmitter->water -= waterToMove;
+	receiver->water += waterToMove;
 
 }
 
-void WaterWorker::work ( World* world )
-{
-  double waterQuant=soilWater/2;//@ всегда одно и то же, лучше закешировать в классе; убрать из запуска flow
-  int height =world->mapHeight;
-  int width =world->mapWidth;
-  for ( int y=0; y<height-1; y++ )
-    {
-      for ( int x=0; x<width-1; x++ )
-        {
-          Cell &current = world->map[y][x];//@ getCell по координатам, вернуть указатель на клетку (мб NULL)
-          Cell &right = world->map[y][x+1];
-          Cell &diag = world->map[y+1][x+1];
-          Cell &down = world->map[y+1][x];
+void WaterWorker::work(World* world) {
 
-          flow ( current,right,waterQuant );
-          flow ( current,diag,waterQuant );
-          flow ( current,down,waterQuant );
-        }
-    }
+	for (int y = 0; y < world->map.size() - 1; y++) {
+		for (int x = 0; x < world->map[0].size(); x++) {
+			setTransmitterAndReciverPointers(world, y, x, y + 1, x, canFlow);
+			flow(transmitter, receiver, canFlow);
+
+		}
+	}
+
+	for (int x = 0; x < world->map[0].size() - 1; x++) {
+		for (int y = 0; y < world->map.size(); y++) {
+			setTransmitterAndReciverPointers(world, y, x, y, x + 1, canFlow);
+			flow(transmitter, receiver, canFlow);
+		}
+	}
+
 }
 
-WaterWorker::~WaterWorker()
-{
+WaterWorker::~WaterWorker() {
+}
+
+void WaterWorker::setTransmitterAndReciverPointers(World *world, int y1, int x1, int y2, int x2, bool &canFlow) {
+
+	transmitter = world->getCell(y1, x1);
+	transmitterWaterLevel = transmitter->height + transmitter->water;
+	bufferPointer = world->getCell(y2, x2);
+	bufferedWaterLevel = bufferPointer->height + bufferPointer->water;
+	if (bufferedWaterLevel == transmitterWaterLevel) {
+		canFlow = false;
+		return;
+	}
+	if (transmitterWaterLevel > bufferedWaterLevel) {
+		receiver = bufferPointer;
+		recieverWaterLevel = bufferedWaterLevel;
+	}
+	else {
+		receiver = transmitter;
+		transmitter = bufferPointer;
+		recieverWaterLevel = transmitterWaterLevel;
+		transmitterWaterLevel = bufferedWaterLevel;
+
+	}
+
+	canFlow = true;
 
 }

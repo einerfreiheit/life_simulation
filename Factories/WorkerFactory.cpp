@@ -11,11 +11,9 @@
 #include "../Workers/MetabolismWorker.h"
 #include "../Workers/OpenGLWorldRenderer.h"
 
-
-void WorkerFactory::build ( std::vector<WorldWorker*>&workers )
-{
-  addWorker <AIWorker> ( workers,SimulationData::getInst()->useAIWorker );
-  addWorker<CreatureActionWorker> ( workers,SimulationData::getInst()->useCreatureActionWorker );
+void WorkerFactory::build(std::vector<WorldWorker*>&workers) {
+	addWorker<AIWorker>(workers, SimulationData::getInst()->useAIWorker);
+	addWorker<CreatureActionWorker> ( workers,SimulationData::getInst()->useCreatureActionWorker );
   addWorker <CreatureSpawnWorker> ( workers,SimulationData::getInst()->useCreatureSpawnWorker );
   addWorker <CreatureRemoveWorker> ( workers,SimulationData::getInst()->useCreatureRemoveWorker );
   addWorker<ResourceWorker> ( workers,SimulationData::getInst()->useResourceWorker );

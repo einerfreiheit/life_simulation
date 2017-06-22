@@ -4,8 +4,7 @@
 #include "WorldWorker.h"
 #include "Logics/SimpleLogics.h"
 
-class AIWorker: public WorldWorker
-{
+class AIWorker: public WorldWorker {
 public:
     AIWorker();
     virtual ~AIWorker();
@@ -17,4 +16,4 @@ private:
 
 };
 
-#endif // AIWORKER_H
+#endif

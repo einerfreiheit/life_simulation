@@ -3,12 +3,11 @@
 
 #include <WorldWorker.h>
 
-class OpenGLWorldRenderer : public  WorldWorker
-{
+class OpenGLWorldRenderer: public WorldWorker {
 public:
-  OpenGLWorldRenderer();
-  
-  virtual void work(World* world);
+	OpenGLWorldRenderer();
+
+	virtual void work(World* world);
 };
 
 #endif // OPENGLWORLDRENDERER_H
