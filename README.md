@@ -7,6 +7,7 @@
 3.  установить cmake: 
     *  sudo apt-get install cmake
 4.  установить следующие библиотеки: 
+    - freeglut3-dev, libglew1.5-dev, libglu1-mesa-dev, libgl1-mesa-glx, libgl1-mesa-dev 
     - OpenCV: 
          -  sudo apt-get install libopencv-dev
     - boost program_option: 
