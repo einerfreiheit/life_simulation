@@ -5,6 +5,12 @@ World::World(const int mapHeightToSet, const int mapWidthToSet) {
 	for (int y = 0; y < mapHeightToSet; y++) {
 		map[y].resize(mapWidthToSet);
 	}
+	for (size_t y=0;y<map.size();y++){
+		for (size_t x=0; x<map[0].size();x++){
+			map[y][x].xCoordinate=x;
+			map[y][x].yCoordinate=y;
+		}
+	}
 	creatures.reserve(100);
 }
 

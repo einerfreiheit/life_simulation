@@ -20,7 +20,7 @@ private:
 	bool canFlow = false;
 	double bufferedWaterLevel = 0.0;
 	void setTransmitterAndReciverPointers(World *world, int y1, int x1, int y2, int x2, bool &canFlow);
-	void flow(Cell *transmitter, Cell *receiver, bool &canFlow);
+	void flow( bool &canFlow);
 
 };
 
