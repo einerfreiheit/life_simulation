@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+
 Move::Move(int _dy, int _dx) :
 		dy(_dy), dx(_dx) {
 	type = AT_MOVE;
@@ -41,6 +42,8 @@ void Move::act(World *world, CreaturePtr creature) {
 	creature->x=nextX;
 	creature->y=nextY;
 	move(cellFrom, cellTo, creature->getId());
+	creature->stats->updateDistanceMoved();
+
 
 }
 

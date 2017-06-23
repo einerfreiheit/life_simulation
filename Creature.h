@@ -7,6 +7,7 @@
 #include <iterator>
 #include "Genetics/Genome.h"
 #include "Phenotype.h"
+#include "CreatureStatistics.h"
 
 class Creature {
 public:
@@ -15,7 +16,7 @@ public:
 
 	std::vector<SimpleAction*> creatureActions;
 	bool isHungry() const;
-
+	CreatureStatistics *stats;
 	void setGenome(GenomePtr genome);
 	void setPhenotype(PhenotypePtr phenotype);
 	int getId() const;
