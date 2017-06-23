@@ -9,11 +9,8 @@ public:
 	~Conjugate();
 	void act(World *world, CreaturePtr creature) override;
 private:
-	void conjugate(CreaturePtr firstCreature, CreaturePtr secondCreature);
-	bool canConjugate(CreaturePtr firstCreature, CreaturePtr secondCreature);
-	void updateGenome(CreaturePtr creature);
-	void replaceGene(GenomePtr genome, Gene &gene);
-	void changeAllels(Gene& geneFirst, Gene& geneSecond);
+	void conjugate(CreaturePtr donor, CreaturePtr recipient);
+	bool canConjugate(CreaturePtr recipient);
 };
 
 #endif
