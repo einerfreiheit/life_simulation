@@ -18,7 +18,7 @@ public:
 	double healthPoints;
 	double attackPower;
 	double creatureSize;
-	double conjugateEnergy = 50.0;
+	double conjugateEnergy = 5.0;
 
 	double aggresion = 0.0;
 

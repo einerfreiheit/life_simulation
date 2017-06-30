@@ -9,7 +9,7 @@ public:
 	~Genome();
 
 	std::vector<ChromosomePtr> chromosomes;
-	std::vector<ChromosomePtr> plasmide;
+	std::vector<ChromosomePtr> plasmid;
 };
 
 typedef std::shared_ptr<Genome> GenomePtr;

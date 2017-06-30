@@ -1,7 +1,6 @@
 #include "PlyExporter.h"
 #include "../SimulationData.h"
 #include <iostream>
-using namespace std;
 void PlyExporter::exportPly(PlyModel *model) {
 
 	std::string outputPath = SimulationData::getInst()->outputPath + "output.ply";

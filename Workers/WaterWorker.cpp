@@ -9,15 +9,28 @@ WaterWorker::WaterWorker() {
 	soilWater = SimulationData::getInst()->soilWater;
 }
 
-void WaterWorker::flow(Cell *transmitter, Cell *receiver, bool &canFlow) {
+void WaterWorker::flow( bool &canFlow) {
 	if (!canFlow) {
 		return;
 	}
+
 	movableWater = transmitter->water - soilWater;
 	if (movableWater <= 0.0) {
 		return;
 	}
 	waterToMove = std::min(0.5 * (transmitterWaterLevel - recieverWaterLevel), movableWater);
+
+	if (!transmitter->creaturesInCell.empty() && waterToMove>0.01){
+
+		for (auto creature: transmitter->creaturesInCell){
+			creature->x=receiver->xCoordinate;
+			creature->y=receiver->yCoordinate;
+		}
+		std::vector<CreaturePtr> displacedCreatures = transmitter->creaturesInCell;
+		receiver->creaturesInCell.insert(receiver->creaturesInCell.end(),displacedCreatures.begin(), displacedCreatures.end());
+		transmitter->creaturesInCell.clear();
+	}
+
 	transmitter->water -= waterToMove;
 	receiver->water += waterToMove;
 
@@ -28,7 +41,7 @@ void WaterWorker::work(World* world) {
 	for (int y = 0; y < world->map.size() - 1; y++) {
 		for (int x = 0; x < world->map[0].size(); x++) {
 			setTransmitterAndReciverPointers(world, y, x, y + 1, x, canFlow);
-			flow(transmitter, receiver, canFlow);
+			flow(canFlow);
 
 		}
 	}
@@ -36,7 +49,7 @@ void WaterWorker::work(World* world) {
 	for (int x = 0; x < world->map[0].size() - 1; x++) {
 		for (int y = 0; y < world->map.size(); y++) {
 			setTransmitterAndReciverPointers(world, y, x, y, x + 1, canFlow);
-			flow(transmitter, receiver, canFlow);
+			flow( canFlow);
 		}
 	}
 

@@ -15,6 +15,8 @@ public:
 
 	void removeCreature(int id);
 	std::vector<CreaturePtr> creaturesInCell;
+	int xCoordinate;
+	int yCoordinate;
 };
 
 #endif

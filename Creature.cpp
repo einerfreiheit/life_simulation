@@ -6,6 +6,8 @@ Creature::Creature(int _id) :
 	energy = 0.0;
 	x = 0;
 	y = 0;
+	stats= new CreatureStatistics;
+	stats->setCreatureId(id);
 
 }
 
@@ -35,5 +37,7 @@ GenomePtr Creature::getGenome ( ) const {
 
 Creature::~Creature() {
 	std::cout << getId() << " creature deleted" << std::endl;
+	stats->updateGenomeComlexity(this->getGenome());
+	delete stats;
 }
 

@@ -8,8 +8,10 @@ class GenomeBuilder {
 public:
 	static GenomePtr build(int complexity = 20);
 	static GenomePtr build(CreaturePtr creature);
-	static void buildPlasmide(GenomePtr genome, int plasmideSize = 1);
-	static Gene& getRandomGene(GenomePtr genome);
+	static void buildPlasmid(const GenomePtr genome);
+	static Gene& getRandomGene(const GenomePtr genome);
+	static void insertPlasmidToGenome(GenomePtr genome);
+	static void replaceGene(GenomePtr recipient, Gene& plasmidGene);
 
 private:
 

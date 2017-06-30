@@ -12,6 +12,7 @@ void MetabolismWorker::work(World* world) {
 	for (CreaturePtr creature : world->creatures) {
 		std::cout << creature->getId() << "id" << std::endl;
 		updatePhenotype(creature);
+		creature->stats->updateLifetime();
 	}
 }
 
