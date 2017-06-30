@@ -8,7 +8,7 @@
 #include "Factories/ResourceFactory.h"
 #include "Factories/CreatureBuilder.h"
 #include "Genetics/XmlGenomeExporter.h"
-#include "Genetics/XmlGelomeLoader.h"
+#include "Genetics/XmlGenomeLoader.h"
 
 SimulationRunner::SimulationRunner() {
 	srand(7 * clock() + time( NULL));
@@ -16,10 +16,11 @@ SimulationRunner::SimulationRunner() {
 
 	HeightsBuilder::build(world);
 	ResourceFactory::addWater(world);
-	world->creatures.push_back(CreatureBuilder::build(world, 1, 1));
-	XmlGenomeExporter::buildXml(world->creatures[0]);
-	XmlGelomeLoader load;
-	load.readXml("genome_id_0.xml");
+
+	world->creatures.push_back(CreatureBuilder::build(world,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
+	//XmlGenomeExporter::buildXml(world->creatures[0]);
+
+
 }
 
 SimulationRunner::~SimulationRunner() {

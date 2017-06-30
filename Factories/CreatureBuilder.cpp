@@ -45,3 +45,22 @@ CreaturePtr CreatureBuilder::build(World *world, CreaturePtr parent) {
 	return result;
 
 }
+
+CreaturePtr CreatureBuilder::build(World *world, GenomePtr loadedGenome,int posX, int posY) {
+
+	CreaturePtr result = std::shared_ptr<Creature>(new Creature(nextId++));
+
+	result->energy = 100.0;
+	PhenotypePtr phenotype = PhenotypeBuilder::build(loadedGenome);
+
+	result->setGenome(loadedGenome);
+	result->setPhenotype(phenotype);
+
+	world->map[posY][posX].creaturesInCell.push_back(result);
+
+	cv::Mat vis = GenomeVisualizer::visualize(loadedGenome);
+	cv::imwrite(path + std::to_string(nextId) + ".png", vis);
+
+	return result;
+
+}

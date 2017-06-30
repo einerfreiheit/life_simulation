@@ -9,6 +9,7 @@ class CreatureBuilder {
 public:
 	static CreaturePtr build(World *world, int posX, int posY);
 	static CreaturePtr build(World *world, CreaturePtr parent);
+	static CreaturePtr build (World *world, GenomePtr loadedGenomem,int posX, int posY);
 private:
 	static int nextId;
 	static std::string path;
