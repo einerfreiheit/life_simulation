@@ -6,6 +6,10 @@
 #include <exception>
 #include <string>
 #include <iostream>
+#include <vector>
+
+#include "../Visualization/ShadersUtils.h"
+
 static GLFWwindow* window = NULL;
 static GLuint shaderProgram;
 static GLuint VAO, VBO, EBO, colorVBO;
@@ -33,47 +37,7 @@ void checkOpenGLError() {
 		throw std::runtime_error("OpenGL error:\n" + std::to_string(*gluErrorString(errorCode)));
 	}
 }
-void initShaders() {
-	GLint success;
-	GLchar infolog[512];
 
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-
-	if (!success) {
-		glGetShaderInfoLog(vertexShader, 512, NULL, infolog);
-		throw std::runtime_error("vertexShader compile error:\n" + std::to_string(*infolog));
-	}
-	std::cout << "vertex shader is ok\n";
-
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-
-	if (!success) {
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infolog);
-		throw std::runtime_error("fragmentShader compile error:\n" + std::to_string(*infolog));
-	}
-	std::cout << "fragment shader is ok\n";
-
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infolog);
-		throw std::runtime_error("shader program link error:\n" + std::to_string(*infolog));
-	}
-	std::cout << " shader program is ok\n";
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-
-}
 void init() {
 	if (glfwInit() != GL_TRUE) {
 		throw std::runtime_error("GLFW init failed");
@@ -99,50 +63,42 @@ void init() {
 
 }
 
-
-OpenGLWorldRenderer::OpenGLWorldRenderer() {
-
+OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 
 	init();
 	checkOpenGLError();
-	initShaders();
-
-
-	GLfloat vertices[] = { -0.5f,-0.5f,0.0f,
-	0.0f,0.5f,0.0f,
-	0.5f,-0.5f,0.0f,
-	0.0f,0.0f,1.0f
+	shaderProgram = ShadersUtils::loadShaders("./shaders/vertex_shader_1.glsl", "./shaders/fragment_shader_1.glsl");
+	std::vector<GLfloat> vertices = {
+	        -0.4f, 0.6f,
+	        0.4f, 0.6f,
+	        0.6f, 0.4f,
+	        0.6f, -0.4f,
+	        0.4f, -0.6f,
+	        -0.4f, -0.6f,
 	};
-	GLfloat colors[] = { 1.0f, 0.5f, 0.2f, 1.0f,
-			1.0f, 0.5f, 0.2f, 1.0f,
-			1.0f, 0.5f, 0.2f, 1.0f,
-			1.0f, 0.5f, 0.2f, 1.0f
+	std::vector<GLfloat> Points;
+	 for (int y = 0; y < world->map.size(); y++) {
+	 for (int x = 0; x < world->map[0].size(); x++) {
+	 Points.push_back(x);
+	 Points.push_back(y);
+	 Points.push_back(world->map[y][x].height);
 
-	};
-	GLuint indices[] = { 0, 1, 2, 0,1,3,1,2,3,0,2,3};
+
+	 }
+
+	 }
+
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER,vertices.size() * sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*) 0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*) 0);
 
-	glGenBuffers(1, &colorVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-
-
+	glDisableVertexAttribArray(0);
 	glBindVertexArray(0);
 
 }
@@ -150,12 +106,12 @@ OpenGLWorldRenderer::OpenGLWorldRenderer() {
 void OpenGLWorldRenderer::work(World* world) {
 	if (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
-
-
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+		glEnableVertexAttribArray(0);
+		glDrawArrays(GL_POINTS, 0, 6);
 
+		glDisableVertexAttribArray(0);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);

@@ -8,7 +8,7 @@
 
 class OpenGLWorldRenderer: public WorldWorker {
 public:
-	OpenGLWorldRenderer();
+	OpenGLWorldRenderer(World *world);
 
 	virtual void work(World* world);
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);

@@ -9,14 +9,16 @@
 #include "Factories/CreatureBuilder.h"
 #include "Genetics/XmlGenomeExporter.h"
 #include "Genetics/XmlGenomeLoader.h"
+#include "../Workers/OpenGLWorldRenderer.h"
 
 SimulationRunner::SimulationRunner() {
 	srand(7 * clock() + time( NULL));
 	world = new World(SimulationData::getInst()->mapHeightToSet, SimulationData::getInst()->mapWidthToSet);
 
+
 	HeightsBuilder::build(world);
 	ResourceFactory::addWater(world);
-
+	workers.push_back(new OpenGLWorldRenderer(world));
 	world->creatures.push_back(CreatureBuilder::build(world,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
 	//XmlGenomeExporter::buildXml(world->creatures[0]);
 
