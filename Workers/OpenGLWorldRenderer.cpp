@@ -2,34 +2,25 @@
 //#define  GL_GLEXT_PROTOTYPES
 #define GLEW_STATIC
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
+
+
 #include <stdio.h>
 #include <exception>
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 #include "../Visualization/ShadersUtils.h"
 
 static GLFWwindow* window = NULL;
 static GLuint shaderProgram;
 static GLuint VAO, VBO, EBO, colorVBO;
-
-const GLchar* vertexShaderSource = "# version 330 core\n"
-		"layout(location=0) in vec3 position;\n"
-		"layout(location=1)in vec4 vertexColor;"
-		"out vec4 ourColor;\n"
-		"void main()\n"
-		"{\n"
-		"gl_Position = vec4 (position.x,position.y,position.z,1.0);\n"
-		"ourColor = vertexColor;\n"
-		"}\n";
-const GLchar* fragmentShaderSource = "#version 330 core\n"
-		"in vec4 ourColor;\n"
-		"out vec4 color;\n"
-		"void main()\n"
-		"{\n"
-		"color = ourColor;\n"
-		"}\n";
+static float alfa = 0.0f;
+;
+static int numberX, numberY;
 
 void checkOpenGLError() {
 	GLenum errorCode = glGetError();
@@ -63,40 +54,48 @@ void init() {
 
 }
 
+
+
 OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 
 	init();
 	checkOpenGLError();
 	shaderProgram = ShadersUtils::loadShaders("./shaders/vertex_shader_1.glsl", "./shaders/fragment_shader_1.glsl");
-	std::vector<GLfloat> vertices = {
-	        -0.4f, 0.6f,
-	        0.4f, 0.6f,
-	        0.6f, 0.4f,
-	        0.6f, -0.4f,
-	        0.4f, -0.6f,
-	        -0.4f, -0.6f,
-	};
 	std::vector<GLfloat> Points;
-	 for (int y = 0; y < world->map.size(); y++) {
-	 for (int x = 0; x < world->map[0].size(); x++) {
-	 Points.push_back(x);
-	 Points.push_back(y);
-	 Points.push_back(world->map[y][x].height);
+	numberY = world->map.size();
+	numberX = world->map[0].size();
+	float num = world->map[0].size();
+	float z;
+	for (int y = 0; y < numberY; y++) {
+		for (int x = 0; x < numberX; x++) {
+			z = world->map[y][x].height;
 
+			Points.push_back((float) x);
+			Points.push_back((float) -y);
+			Points.push_back(z);
 
-	 }
+			Points.push_back((float) x);
+			Points.push_back((float) -y - 1);
+			Points.push_back(z);
 
-	 }
+			Points.push_back((float) x + 1);
+			Points.push_back((float) -y);
+			Points.push_back(z);
 
+			Points.push_back((float) x + 1);
+			Points.push_back((float) -y - 1);
+			Points.push_back(z);
+		}
+	}
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER,vertices.size() * sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, Points.size() * sizeof(Points), Points.data(), GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*) 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_TRUE, 3 * sizeof(GLfloat), (GLvoid*) 0);
 
 	glDisableVertexAttribArray(0);
 	glBindVertexArray(0);
@@ -104,12 +103,43 @@ OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 }
 
 void OpenGLWorldRenderer::work(World* world) {
+	alfa += 0.1f;
 	if (!glfwWindowShouldClose(window)) {
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glfwPollEvents();
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		glEnableVertexAttribArray(0);
-		glDrawArrays(GL_POINTS, 0, 6);
+
+		float scaleF = 1.0 / 128;
+
+		glm::vec3 mapCenter(-0.5 * numberX, 0.5 * numberY, 0.0f);
+
+		glm::mat4 modelMatrix(1.0f);
+
+		modelMatrix = glm::scale(modelMatrix, glm::vec3(scaleF, scaleF, scaleF)); // перенести в билдер матриц
+		modelMatrix = glm::translate(modelMatrix, mapCenter);
+		modelMatrix = glm::rotate(modelMatrix, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+
+		GLint modelLoc = glGetUniformLocation(shaderProgram, "modelMatrix");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+		glm::mat4 view(1.0f);
+		view = glm::lookAt(glm::vec3(0.0f, 1.0f, -3.2f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 projection(1.0f);
+		projection = glm::perspective(glm::radians(45.0), 4.0 / 3, 0.1, 100.0);
+
+		GLint viewLoc = glGetUniformLocation(shaderProgram, "view");
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+		GLint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		for (int i = 0; i <= numberX * numberY * 4; i += 4) {
+			glDrawArrays(GL_TRIANGLE_STRIP, i, 4);
+
+		}
 
 		glDisableVertexAttribArray(0);
 		glBindVertexArray(0);
