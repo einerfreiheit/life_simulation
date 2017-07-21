@@ -11,7 +11,7 @@ public:
 
 	double food;
 	double water;
-	double height;
+	float height;
 
 	void removeCreature(int id);
 	std::vector<CreaturePtr> creaturesInCell;
