@@ -1,6 +1,13 @@
 #version 330 
-precision mediump float;
+precision highp float;
 in float intensity_f;
+in vec2 TexCoord;
+out vec4 color;
+uniform sampler2D ourTexture1;
+uniform sampler2D ourTexture2;
+float value;
 void main() {
-gl_FragColor = vec4 (intensity_f, intensity_f /2.0 , 0.0, 1.0);
+
+	color = mix(texture(ourTexture1, TexCoord), texture(ourTexture2, TexCoord),intensity_f);
+	
 }
