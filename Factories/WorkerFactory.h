@@ -15,6 +15,7 @@ public:
 		}
 
 	}
+
 	static void build(std::vector<WorldWorker*>&workers);
 
 };
