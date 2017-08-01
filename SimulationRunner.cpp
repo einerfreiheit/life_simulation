@@ -19,6 +19,7 @@ SimulationRunner::SimulationRunner() {
 	HeightsBuilder::build(world);
 	ResourceFactory::addWater(world);
 	workers.push_back(new OpenGLWorldRenderer(world));
+	world->creatures.push_back(CreatureBuilder::build(world, 0,0));
 	//world->creatures.push_back(CreatureBuilder::build(world,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
 	//XmlGenomeExporter::buildXml(world->creatures[0]);
 
