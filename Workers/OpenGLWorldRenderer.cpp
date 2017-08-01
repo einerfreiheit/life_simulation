@@ -29,14 +29,35 @@ void OpenGLWorldRenderer::prepareCreaturesData(World *world) {
 	for (int y = 0; y < world->map.size(); y++) {
 		for (int x = 0; x < world->map[0].size(); x++) {
 			heightGain = 0;
+			float fx = (float) x;
+			float fy = (float) y;
+			cell = &world->map[y][x];
+			if (cell->water > 0.1) {
+				float waterZ = cell->water + cell->height;
+				water.push_back(fx);
+				water.push_back(fy);
+				water.push_back(waterZ);
+
+				water.push_back(fx + 1);
+				water.push_back(fy);
+				water.push_back(waterZ);
+
+				water.push_back(fx);
+				water.push_back(fy + 1);
+				water.push_back(waterZ);
+
+				water.push_back(fx + 1);
+				water.push_back(fy + 1);
+				water.push_back(waterZ);
+
+			}
 			if (world->map[y][x].creaturesInCell.size() > 0) {
 				cell = &world->map[y][x];
 				for (auto creature : cell->creaturesInCell) {
 					std::cout << x << " " << y << "creature x,y "
 							<< creature->getId();
-					creatureZ = world->map[y][x].height;
-					float fx = (float) x;
-					float fy = (float) y;
+					creatureZ = cell->height + cell->water;
+
 					creaturesData.push_back(fx);
 					creaturesData.push_back(fy);
 					creaturesData.push_back(creatureZ + heightGain);
@@ -63,11 +84,6 @@ void OpenGLWorldRenderer::prepareCreaturesData(World *world) {
 
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, creaturesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * creaturesData.size(),
-			&creaturesData[0],
-			GL_STATIC_DRAW);
-	creaturesData.clear();
 }
 
 void OpenGLWorldRenderer::init() {
@@ -99,9 +115,14 @@ void OpenGLWorldRenderer::init() {
 	glGenVertexArrays(1, &creaturesVAO);
 	glBindVertexArray(creaturesVAO);
 	glGenBuffers(1, &creaturesVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, creaturesVBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(3);
+	glBindVertexArray(0);
+	glGenVertexArrays(1, &waterVAO);
+	glBindVertexArray(waterVAO);
+	glGenBuffers(1, &waterVBO);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(3);
 	glBindVertexArray(0);
 
 }
@@ -189,18 +210,28 @@ void OpenGLWorldRenderer::prepareMapData(World *world) {
 			(GLvoid*) (4 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 	glBindVertexArray(0);
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
 OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 
 	this->name = "OpenGlr";
 	init();
 	checkOpenGLError();
+
 	shaderProgramMap = ShadersUtils::loadShaders(
 			"./shaders/vertex_shader_1.glsl",
 			"./shaders/fragment_shader_1.glsl");
 	shaderProgramCreature = ShadersUtils::loadShaders(
 			"./shaders/vertex_shader_2.glsl",
 			"./shaders/fragment_shader_2.glsl");
+	shaderProgramWater = ShadersUtils::loadShaders(
+			"./shaders/vertex_shader_2.glsl",
+			"./shaders/fragment_shader_2_1.glsl");
 
 	mapHeight = world->map.size();
 	mapWidth = world->map[0].size();
@@ -220,20 +251,52 @@ void OpenGLWorldRenderer::work(World* world) {
 
 		view = OpenGLControls::computeViewMatrix(window);
 		mvpMatrix = projection * view * model;
+
 		glUseProgram(shaderProgramCreature);
 		mvpMatrixID = glGetUniformLocation(shaderProgramCreature, "mvpMatrix");
 
 		prepareCreaturesData(world);
-
 		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, (&mvpMatrix[0][0]));
+
 		glBindVertexArray(creaturesVAO);
-		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, creaturesVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * creaturesData.size(),
+				&creaturesData[0],
+				GL_STATIC_DRAW);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(3);
 		for (int i = 0; i < world->creatures.size(); i++) {
-			glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
+			glDrawArrays(GL_TRIANGLE_STRIP, 4 * i, 4);
 
 		}
-		glDisableVertexAttribArray(0);
+
+		creaturesData.clear();
+
 		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		glUseProgram(shaderProgramWater);
+		mvpMatrixID = glGetUniformLocation(shaderProgramWater, "mvpMatrix");
+		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, (&mvpMatrix[0][0]));
+
+		glBindVertexArray(waterVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, waterVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * water.size(), &water[0],
+		GL_STATIC_DRAW);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(3);
+		glBindBuffer(GL_ARRAY_BUFFER, waterVBO);
+
+
+		for (int i = 0; i < water.size(); i += 4) {
+			glDrawArrays(GL_TRIANGLE_STRIP, i, 4);
+
+		}
+		glDisableVertexAttribArray(3);
+		water.clear();
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glUseProgram(shaderProgramMap);
 		mvpMatrixID = glGetUniformLocation(shaderProgramMap, "mvpMatrix");
@@ -244,17 +307,10 @@ void OpenGLWorldRenderer::work(World* world) {
 		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, (&mvpMatrix[0][0]));
 
 		glBindVertexArray(mapVAO);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
-
 		for (int i = 0; i < mapHeight; i++) {
 			glDrawArrays(GL_TRIANGLE_STRIP, i * mapWidth * 4,
 					(mapWidth - 1) * 4);
 		}
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(2);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);

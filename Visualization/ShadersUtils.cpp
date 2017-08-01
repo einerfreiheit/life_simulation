@@ -33,6 +33,9 @@ GLuint ShadersUtils::loadShaders(const char *vertexFilePath, const char *fragmen
 	GLuint program = glCreateProgram();
 	glAttachShader(program, vertexShader);
 	glAttachShader(program, fragmentShader);
+
+
+
 	glLinkProgram(program);
 	glGetProgramiv(program, GL_LINK_STATUS, &success);
 	if (!success) {
