@@ -16,6 +16,7 @@ public:
 	void work(World* world) override;
 
 private:
+	void updateWater(World *world);
 	void prepareMapData(World *world);
 	void setHeightDepth(World *world, float &maxHeight, float &minHeight);
 	void bindMatrices(GLuint shaderProgram);
@@ -32,8 +33,14 @@ private:
 	GLuint creaturesVAO,creaturesVBO;
 	GLuint shaderProgramMap;
 	GLuint shaderProgramCreature;
+	GLuint shaderProgramWater;
 	GLuint groundTexture;
 	GLuint snowTexture;
+	GLuint waterVAO;
+	GLuint waterVBO;
+
+
+
 	float *mapDataPtr=NULL;
 	int imageHeight;
 	int imageWidth;
@@ -41,7 +48,8 @@ private:
 	float minHeight;
 	float maxHeight;
 	std::vector <float> creaturesData;
-	std::vector<float> mapCenter { 2 };
+	std::vector <float> water;
+
 	GLuint mvpMatrixID;
 	glm::mat4 mvpMatrix;
 	glm::mat4 model;
