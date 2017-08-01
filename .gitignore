@@ -3,7 +3,6 @@
 *.o
 *.png
 *.dbg
-*.jpg
 *.PNG
 *.BMP
 *.JPG
@@ -17,6 +16,7 @@ cmake_install.cmake
 *Release*
 *Debug*
 .settings/
+./output
 Makefile
 CMakeFiles/
 CMakeCache.txt
