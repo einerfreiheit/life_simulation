@@ -5,7 +5,6 @@
 *.dbg
 *.PNG
 *.BMP
-*.JPG
 *.*~
 *.k4dev
 .project
