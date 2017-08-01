@@ -58,14 +58,11 @@ glm::mat4 OpenGLControls::computeViewMatrix(GLFWwindow *window) {
 
 	rotationXangle += glm::atan(deltaY, position.z) * mouseSpeed;
 	rotationYangle += glm::atan(deltaX, position.z) * mouseSpeed;
-	std::cout << rotationXangle << "rotation angle x " << rotationYangle << "rotation angle y" << std::endl;
-
 	glm::mat4 view = glm::lookAt(position, glm::vec3(position.x, position.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	view = glm::rotate(view, rotationXangle, glm::vec3(-1.0f, 0.0f, 0.0f));
 	view = glm::rotate(view, rotationYangle, glm::vec3(0.0f, -1.0f, 0.0f));
 	cursorLastX = cursorCurrentX;
 	cursorLastY = cursorCurrentY;
-	std::cout << "returning view";
 	return view;
 }
 

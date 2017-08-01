@@ -12,7 +12,6 @@
 #include "../Visualization/ShadersUtils.h"
 
 static GLFWwindow* window = NULL;
-static GLuint VAO, VBO;
 static int mapWidth, mapHeight;
 
 void checkOpenGLError() {
@@ -21,6 +20,54 @@ void checkOpenGLError() {
 		throw std::runtime_error(
 				"OpenGL error:\n" + std::to_string(*gluErrorString(errorCode)));
 	}
+}
+
+void OpenGLWorldRenderer::prepareCreaturesData(World *world) {
+	float creatureZ = 0.01;
+	Cell *cell = NULL;
+	int heightGain;
+	for (int y = 0; y < world->map.size(); y++) {
+		for (int x = 0; x < world->map[0].size(); x++) {
+			heightGain = 0;
+			if (world->map[y][x].creaturesInCell.size() > 0) {
+				cell = &world->map[y][x];
+				for (auto creature : cell->creaturesInCell) {
+					std::cout << x << " " << y << "creature x,y "
+							<< creature->getId();
+					creatureZ = world->map[y][x].height;
+					float fx = (float) x;
+					float fy = (float) y;
+					creaturesData.push_back(fx);
+					creaturesData.push_back(fy);
+					creaturesData.push_back(creatureZ + heightGain);
+
+					creaturesData.push_back(fx + 1);
+					creaturesData.push_back(fy);
+					creaturesData.push_back(creatureZ + heightGain);
+
+					creaturesData.push_back(fx);
+					creaturesData.push_back(fy + 1);
+					creaturesData.push_back(creatureZ + heightGain);
+
+					creaturesData.push_back(fx + 1);
+					creaturesData.push_back(fy + 1);
+					creaturesData.push_back(creatureZ + heightGain);
+
+					heightGain += 0.1;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, creaturesVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * creaturesData.size(),
+			&creaturesData[0],
+			GL_STATIC_DRAW);
+	creaturesData.clear();
 }
 
 void OpenGLWorldRenderer::init() {
@@ -48,6 +95,15 @@ void OpenGLWorldRenderer::init() {
 	glEnable(GL_DEPTH_TEST);
 	checkOpenGLError();
 	std::cout << "openGl init done";
+
+	glGenVertexArrays(1, &creaturesVAO);
+	glBindVertexArray(creaturesVAO);
+	glGenBuffers(1, &creaturesVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, creaturesVBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
+
 }
 
 void OpenGLWorldRenderer::createMatrices() {
@@ -63,18 +119,14 @@ void OpenGLWorldRenderer::createMatrices() {
 }
 void OpenGLWorldRenderer::bindMatrices(GLuint shaderProgram) {
 	mvpMatrixID = glGetUniformLocation(shaderProgram, "mvpMatrix");
-	mvpMatrix = projection * view * model;
 
 }
 
 void OpenGLWorldRenderer::prepareMapData(World *world) {
-	size_t size = 24 * mapHeight * mapWidth;
+	size_t sizeData = 24 * mapHeight * mapWidth;
 	std::vector<float> mapData;
-	mapData.resize(size);
+	mapData.resize(24 * mapHeight * mapWidth);
 
-	mapDataPtr = mapData.data();
-
-	std::cout << "allocated" << *mapDataPtr;
 	float vertexZ;
 	int offset;
 	float vertexPosX;
@@ -86,72 +138,72 @@ void OpenGLWorldRenderer::prepareMapData(World *world) {
 			intensity = (vertexZ - minHeight) / (maxHeight - minHeight);
 			vertexPosX = (float) x;
 			vertexPosY = (float) y;
-			*(mapDataPtr + offset) = vertexPosX;
-			*(mapDataPtr + offset + 1) = vertexPosY;
-			*(mapDataPtr + offset + 2) = vertexZ;
-			*(mapDataPtr + offset + 3) = intensity;
-			getTextureCoord(vertexPosX, vertexPosY, *(mapDataPtr + offset + 4),
-					*(mapDataPtr + offset + 5));
+			mapData[offset] = vertexPosX;
+			mapData[offset + 1] = vertexPosY;
+			mapData[offset + 2] = vertexZ;
+			mapData[offset + 3] = intensity;
+			getTextureCoord(vertexPosX, vertexPosY, mapData[offset + 4],
+					mapData[offset + 5]);
 
-			*(mapDataPtr + offset + 6) = vertexPosX;
-			*(mapDataPtr + offset + 7) = (vertexPosY + 1.0);
-			*(mapDataPtr + offset + 8) = vertexZ;
-			*(mapDataPtr + offset + 9) = intensity;
-			getTextureCoord(vertexPosX, vertexPosY + 1,
-					*(mapDataPtr + offset + 10), *(mapDataPtr + offset + 11));
+			mapData[offset + 6] = vertexPosX;
+			mapData[offset + 7] = (vertexPosY + 1.0);
+			mapData[offset + 8] = vertexZ;
+			mapData[offset + 9] = intensity;
+			getTextureCoord(vertexPosX, vertexPosY + 1, mapData[offset + 10],
+					mapData[offset + 11]);
 
-			*(mapDataPtr + offset + 12) = (vertexPosX + 1.0);
-			*(mapDataPtr + offset + 13) = vertexPosY;
-			*(mapDataPtr + offset + 14) = vertexZ;
-			*(mapDataPtr + offset + 15) = intensity;
-			getTextureCoord((vertexPosX + 1), vertexPosY,
-					*(mapDataPtr + offset + 16), *(mapDataPtr + offset + 17));
+			mapData[offset + 12] = (vertexPosX + 1.0);
+			mapData[offset + 13] = vertexPosY;
+			mapData[offset + 14] = vertexZ;
+			mapData[offset + 15] = intensity;
+			getTextureCoord((vertexPosX + 1), vertexPosY, mapData[offset + 16],
+					mapData[offset + 17]);
 
-			*(mapDataPtr + offset + 18) = (vertexPosX + 1.0);
-			*(mapDataPtr + offset + 19) = (vertexPosY + 1.0);
-			*(mapDataPtr + offset + 20) = vertexZ;
-			*(mapDataPtr + offset + 21) = intensity;
+			mapData[offset + 18] = (vertexPosX + 1.0);
+			mapData[offset + 19] = (vertexPosY + 1.0);
+			mapData[offset + 20] = vertexZ;
+			mapData[offset + 21] = intensity;
 			getTextureCoord((vertexPosX + 1), (vertexPosY + 1),
-					*(mapDataPtr + offset + 22), *(mapDataPtr + offset + 23));
+					mapData[offset + 22], mapData[offset + 23]);
 
 		}
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-		glBufferData(GL_ARRAY_BUFFER, mapData.size() * sizeof(float),
-				mapData.data(),
-				GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-				(GLvoid*) 0);
-		glEnableVertexAttribArray(0);
-
-		glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-				(GLvoid*) (3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-				(GLvoid*) (4 * sizeof(float)));
-		glEnableVertexAttribArray(2);
-
-		glBindVertexArray(0);
 
 	}
+	glGenVertexArrays(1, &mapVAO);
+	glBindVertexArray(mapVAO);
+	glGenBuffers(1, &mapVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, mapVBO);
 
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mapData.size(), &mapData[0],
+	GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+			(GLvoid*) 0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+			(GLvoid*) (3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+			(GLvoid*) (4 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	glBindVertexArray(0);
 }
 OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 
 	this->name = "OpenGlr";
-
 	init();
 	checkOpenGLError();
-	shaderProgram = ShadersUtils::loadShaders("./shaders/vertex_shader_1.glsl",
+	shaderProgramMap = ShadersUtils::loadShaders(
+			"./shaders/vertex_shader_1.glsl",
 			"./shaders/fragment_shader_1.glsl");
+	shaderProgramCreature = ShadersUtils::loadShaders(
+			"./shaders/vertex_shader_2.glsl",
+			"./shaders/fragment_shader_2.glsl");
+
 	mapHeight = world->map.size();
 	mapWidth = world->map[0].size();
-	bindMatrices(shaderProgram);
 	setHeightDepth(world, maxHeight, minHeight);
 	OpenGLControls::initControls(window);
 	createMatrices();
@@ -165,30 +217,45 @@ void OpenGLWorldRenderer::work(World* world) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.0f, 0.2, 0.0f, 1.0f);
 		glfwPollEvents();
-		glUseProgram(shaderProgram);
-		glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture1"), 0);
-		glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture2"), 1);
+
 		view = OpenGLControls::computeViewMatrix(window);
 		mvpMatrix = projection * view * model;
+		glUseProgram(shaderProgramCreature);
+		mvpMatrixID = glGetUniformLocation(shaderProgramCreature, "mvpMatrix");
+
+		prepareCreaturesData(world);
+
+		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, (&mvpMatrix[0][0]));
+		glBindVertexArray(creaturesVAO);
+		glEnableVertexAttribArray(0);
+		for (int i = 0; i < world->creatures.size(); i++) {
+			glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
+
+		}
+		glDisableVertexAttribArray(0);
+		glBindVertexArray(0);
+
+		glUseProgram(shaderProgramMap);
+		mvpMatrixID = glGetUniformLocation(shaderProgramMap, "mvpMatrix");
+
+		glUniform1i(glGetUniformLocation(shaderProgramMap, "ourTexture1"), 0);
+		glUniform1i(glGetUniformLocation(shaderProgramMap, "ourTexture2"), 1);
 
 		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, (&mvpMatrix[0][0]));
 
-		glBindVertexArray(VAO);
+		glBindVertexArray(mapVAO);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
+
 		for (int i = 0; i < mapHeight; i++) {
-
-
-		}
-		for (int i=0;i<mapHeight;i++){
-		glDrawArrays(GL_TRIANGLE_STRIP, i*mapWidth*4,(mapWidth-1)*4);
+			glDrawArrays(GL_TRIANGLE_STRIP, i * mapWidth * 4,
+					(mapWidth - 1) * 4);
 		}
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 		glBindVertexArray(0);
-
 
 		glfwSwapBuffers(window);
 	}

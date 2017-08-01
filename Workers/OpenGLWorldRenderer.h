@@ -15,7 +15,6 @@ public:
 	virtual ~OpenGLWorldRenderer();
 	void work(World* world) override;
 
-
 private:
 	void prepareMapData(World *world);
 	void setHeightDepth(World *world, float &maxHeight, float &minHeight);
@@ -26,18 +25,22 @@ private:
 			float &textureX, float &textureY);
 	void loadTexture(std::string filePath);
 	void bindTextures();
-
+	void prepareCreaturesData(World *world);
 	float textureX;
 	float textureY;
-	GLuint shaderProgram;
+	GLuint mapVAO, mapVBO;
+	GLuint creaturesVAO,creaturesVBO;
+	GLuint shaderProgramMap;
+	GLuint shaderProgramCreature;
 	GLuint groundTexture;
 	GLuint snowTexture;
-	GLfloat * mapDataPtr;
+	float *mapDataPtr=NULL;
 	int imageHeight;
 	int imageWidth;
 	GLfloat intensity;
 	float minHeight;
 	float maxHeight;
+	std::vector <float> creaturesData;
 	std::vector<float> mapCenter { 2 };
 	GLuint mvpMatrixID;
 	glm::mat4 mvpMatrix;
