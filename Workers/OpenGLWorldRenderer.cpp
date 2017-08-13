@@ -1,5 +1,6 @@
 #include "OpenGLWorldRenderer.h"
 #define GLEW_STATIC
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -17,8 +18,7 @@ static int mapWidth, mapHeight;
 void checkOpenGLError() {
 	GLenum errorCode = glGetError();
 	if (errorCode != GL_NO_ERROR) {
-		throw std::runtime_error(
-				"OpenGL error:\n" + std::to_string(*gluErrorString(errorCode)));
+		throw std::runtime_error("OpenGL error:\n" + std::to_string(*gluErrorString(errorCode)));
 	}
 }
 
@@ -54,8 +54,7 @@ void OpenGLWorldRenderer::prepareCreaturesData(World *world) {
 			if (world->map[y][x].creaturesInCell.size() > 0) {
 				cell = &world->map[y][x];
 				for (auto creature : cell->creaturesInCell) {
-					std::cout << x << " " << y << "creature x,y "
-							<< creature->getId();
+					std::cout << x << " " << y << "creature x,y " << creature->getId();
 					creatureZ = cell->height + cell->water;
 
 					creaturesData.push_back(fx);
@@ -133,8 +132,7 @@ void OpenGLWorldRenderer::createMatrices() {
 	model = glm::scale(model, glm::vec3(scaleF, scaleF, scaleF));
 	model = glm::translate(model, mapCenter);
 	model = glm::rotate(model, 0.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	view = glm::lookAt(glm::vec3(0.0f, 0.0f, 6.5f), glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f));
+	view = glm::lookAt(glm::vec3(0.0f, 0.0f, 6.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	projection = glm::perspective(glm::radians(45.0), 4.0 / 3, 0.1, 100.0);
 
 }
@@ -163,29 +161,25 @@ void OpenGLWorldRenderer::prepareMapData(World *world) {
 			mapData[offset + 1] = vertexPosY;
 			mapData[offset + 2] = vertexZ;
 			mapData[offset + 3] = intensity;
-			getTextureCoord(vertexPosX, vertexPosY, mapData[offset + 4],
-					mapData[offset + 5]);
+			getTextureCoord(vertexPosX, vertexPosY, mapData[offset + 4], mapData[offset + 5]);
 
 			mapData[offset + 6] = vertexPosX;
 			mapData[offset + 7] = (vertexPosY + 1.0);
 			mapData[offset + 8] = vertexZ;
 			mapData[offset + 9] = intensity;
-			getTextureCoord(vertexPosX, vertexPosY + 1, mapData[offset + 10],
-					mapData[offset + 11]);
+			getTextureCoord(vertexPosX, vertexPosY + 1, mapData[offset + 10], mapData[offset + 11]);
 
 			mapData[offset + 12] = (vertexPosX + 1.0);
 			mapData[offset + 13] = vertexPosY;
 			mapData[offset + 14] = vertexZ;
 			mapData[offset + 15] = intensity;
-			getTextureCoord((vertexPosX + 1), vertexPosY, mapData[offset + 16],
-					mapData[offset + 17]);
+			getTextureCoord((vertexPosX + 1), vertexPosY, mapData[offset + 16], mapData[offset + 17]);
 
 			mapData[offset + 18] = (vertexPosX + 1.0);
 			mapData[offset + 19] = (vertexPosY + 1.0);
 			mapData[offset + 20] = vertexZ;
 			mapData[offset + 21] = intensity;
-			getTextureCoord((vertexPosX + 1), (vertexPosY + 1),
-					mapData[offset + 22], mapData[offset + 23]);
+			getTextureCoord((vertexPosX + 1), (vertexPosY + 1), mapData[offset + 22], mapData[offset + 23]);
 
 		}
 
@@ -198,16 +192,13 @@ void OpenGLWorldRenderer::prepareMapData(World *world) {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mapData.size(), &mapData[0],
 	GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-			(GLvoid*) 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) 0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-			(GLvoid*) (3 * sizeof(float)));
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-			(GLvoid*) (4 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) (4 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 	glBindVertexArray(0);
 	glDisableVertexAttribArray(0);
@@ -223,20 +214,23 @@ OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 	init();
 	checkOpenGLError();
 
-	shaderProgramMap = ShadersUtils::loadShaders(
-			"./shaders/vertex_shader_1.glsl",
-			"./shaders/fragment_shader_1.glsl");
-	shaderProgramCreature = ShadersUtils::loadShaders(
-			"./shaders/vertex_shader_2.glsl",
-			"./shaders/fragment_shader_2.glsl");
-	shaderProgramWater = ShadersUtils::loadShaders(
-			"./shaders/vertex_shader_2.glsl",
-			"./shaders/fragment_shader_2_1.glsl");
+	shaderProgramMap = ShadersUtils::loadShaders("./shaders/vertex_shader_1.glsl", "./shaders/fragment_shader_1.glsl");
+	shaderProgramCreature = ShadersUtils::loadShaders(	"./shaders/vertex_shader_2.glsl",
+														"./shaders/fragment_shader_2.glsl");
+	shaderProgramWater = ShadersUtils::loadShaders(	"./shaders/vertex_shader_2.glsl",
+													"./shaders/fragment_shader_2_1.glsl");
 
 	mapHeight = world->map.size();
 	mapWidth = world->map[0].size();
 	setHeightDepth(world, maxHeight, minHeight);
-	OpenGLControls::initControls(window);
+
+	glfwSetKeyCallback(window, OpenGLControlsBase::controlsInstance->keyCallBackDispatch);
+	glfwSetCursorPosCallback(window, OpenGLControlsBase::controlsInstance->cursorCallBackDispatch);
+	controls = new OpenGLControlsDerived;
+	controls->setInstancePointer();
+	OpenGLControlsBase::init(window);
+
+
 	createMatrices();
 	bindTextures();
 	prepareMapData(world);
@@ -249,7 +243,7 @@ void OpenGLWorldRenderer::work(World* world) {
 		glClearColor(0.0f, 0.2, 0.0f, 1.0f);
 		glfwPollEvents();
 
-		view = OpenGLControls::computeViewMatrix(window);
+		view = controls->getViewMatrix();
 		mvpMatrix = projection * view * model;
 
 		glUseProgram(shaderProgramCreature);
@@ -261,9 +255,8 @@ void OpenGLWorldRenderer::work(World* world) {
 		glBindVertexArray(creaturesVAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, creaturesVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * creaturesData.size(),
-				&creaturesData[0],
-				GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * creaturesData.size(), &creaturesData[0],
+		GL_STATIC_DRAW);
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(3);
 		for (int i = 0; i < world->creatures.size(); i++) {
@@ -288,7 +281,6 @@ void OpenGLWorldRenderer::work(World* world) {
 		glEnableVertexAttribArray(3);
 		glBindBuffer(GL_ARRAY_BUFFER, waterVBO);
 
-
 		for (int i = 0; i < water.size(); i += 4) {
 			glDrawArrays(GL_TRIANGLE_STRIP, i, 4);
 
@@ -308,8 +300,7 @@ void OpenGLWorldRenderer::work(World* world) {
 
 		glBindVertexArray(mapVAO);
 		for (int i = 0; i < mapHeight; i++) {
-			glDrawArrays(GL_TRIANGLE_STRIP, i * mapWidth * 4,
-					(mapWidth - 1) * 4);
+			glDrawArrays(GL_TRIANGLE_STRIP, i * mapWidth * 4, (mapWidth - 1) * 4);
 		}
 		glBindVertexArray(0);
 
@@ -321,8 +312,7 @@ OpenGLWorldRenderer::~OpenGLWorldRenderer() {
 
 }
 
-void OpenGLWorldRenderer::setHeightDepth(World *world, float &maxHeight,
-		float &minHeight) {
+void OpenGLWorldRenderer::setHeightDepth(World *world, float &maxHeight, float &minHeight) {
 
 	maxHeight = 0.0;
 	minHeight = 0.0;
@@ -336,8 +326,10 @@ void OpenGLWorldRenderer::setHeightDepth(World *world, float &maxHeight,
 	}
 
 }
-void OpenGLWorldRenderer::getTextureCoord(const float &vertexPosX,
-		const float &vertexPosY, float &textureX, float &textureY) {
+void OpenGLWorldRenderer::getTextureCoord(	const float &vertexPosX,
+											const float &vertexPosY,
+											float &textureX,
+											float &textureY) {
 
 	textureX = ((int) vertexPosX % 64) / 64.0;
 	textureY = ((int) vertexPosY % 64) / 64.0;
@@ -346,10 +338,10 @@ void OpenGLWorldRenderer::loadTexture(std::string filePath) {
 	GLuint textureID = 0;
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
-	unsigned char *image = SOIL_load_image(filePath.c_str(), &imageWidth,
-			&imageHeight, 0, SOIL_LOAD_RGB);
+	unsigned char *image = SOIL_load_image(filePath.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB,
-	GL_UNSIGNED_BYTE, image);
+	GL_UNSIGNED_BYTE,
+					image);
 	SOIL_free_image_data(image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

@@ -6,8 +6,12 @@
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
-#include "../Visualization/OpenGLControls.h"
 #include <SOIL/SOIL.h>
+
+
+#include "../Visualization/OpenGLControlsDerived.h"
+
+
 
 class OpenGLWorldRenderer: public WorldWorker {
 public:
@@ -38,6 +42,9 @@ private:
 	GLuint snowTexture;
 	GLuint waterVAO;
 	GLuint waterVBO;
+
+
+	OpenGLControlsDerived * controls =NULL;
 
 
 
