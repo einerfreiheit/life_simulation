@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include "../Visualization/ShadersUtils.h"
+#include "../Visualization/OpenGLStaticData.h"
 
 static GLFWwindow* window = NULL;
 static int mapWidth, mapHeight;
@@ -118,6 +119,8 @@ void OpenGLWorldRenderer::init() {
 	glEnableVertexAttribArray(3);
 	glBindVertexArray(0);
 	glGenVertexArrays(1, &waterVAO);
+
+
 	glBindVertexArray(waterVAO);
 	glGenBuffers(1, &waterVBO);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
@@ -142,7 +145,7 @@ void OpenGLWorldRenderer::bindMatrices(GLuint shaderProgram) {
 }
 
 void OpenGLWorldRenderer::prepareMapData(World *world) {
-	size_t sizeData = 24 * mapHeight * mapWidth;
+	/*size_t sizeData = 24 * mapHeight * mapWidth;
 	std::vector<float> mapData;
 	mapData.resize(24 * mapHeight * mapWidth);
 
@@ -184,13 +187,16 @@ void OpenGLWorldRenderer::prepareMapData(World *world) {
 		}
 
 	}
+*/
+	OpenGLStaticData staticdata;
 	glGenVertexArrays(1, &mapVAO);
 	glBindVertexArray(mapVAO);
 	glGenBuffers(1, &mapVBO);
+	mapVBO= staticdata.createData(world);
 	glBindBuffer(GL_ARRAY_BUFFER, mapVBO);
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mapData.size(), &mapData[0],
-	GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mapData.size(), &mapData[0],
+	//GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) 0);
 	glEnableVertexAttribArray(0);
@@ -224,11 +230,10 @@ OpenGLWorldRenderer::OpenGLWorldRenderer(World *world) {
 	mapWidth = world->map[0].size();
 	setHeightDepth(world, maxHeight, minHeight);
 
-	glfwSetKeyCallback(window, OpenGLControlsBase::controlsInstance->keyCallBackDispatch);
-	glfwSetCursorPosCallback(window, OpenGLControlsBase::controlsInstance->cursorCallBackDispatch);
-	controls = new OpenGLControlsDerived;
-	controls->setInstancePointer();
-	OpenGLControlsBase::init(window);
+	camera = new OpenGLCamera (window);
+	glfwSetKeyCallback(window, camera->keyCallback);
+	glfwSetCursorPosCallback(window, camera->cursorCallBack);
+
 
 
 	createMatrices();
@@ -243,8 +248,7 @@ void OpenGLWorldRenderer::work(World* world) {
 		glClearColor(0.0f, 0.2, 0.0f, 1.0f);
 		glfwPollEvents();
 
-		view = controls->getViewMatrix();
-		mvpMatrix = projection * view * model;
+		mvpMatrix = camera->getMVPMatrix();
 
 		glUseProgram(shaderProgramCreature);
 		mvpMatrixID = glGetUniformLocation(shaderProgramCreature, "mvpMatrix");

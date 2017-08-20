@@ -8,8 +8,7 @@
 #include <iostream>
 #include <SOIL/SOIL.h>
 
-
-#include "../Visualization/OpenGLControlsDerived.h"
+#include "../Visualization/OpenGLCamera.h"
 
 
 
@@ -18,6 +17,7 @@ public:
 	OpenGLWorldRenderer(World *world);
 	virtual ~OpenGLWorldRenderer();
 	void work(World* world) override;
+	OpenGLCamera * camera;
 
 private:
 	void updateWater(World *world);
@@ -42,9 +42,6 @@ private:
 	GLuint snowTexture;
 	GLuint waterVAO;
 	GLuint waterVBO;
-
-
-	OpenGLControlsDerived * controls =NULL;
 
 
 

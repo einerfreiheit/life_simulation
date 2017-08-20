@@ -10,6 +10,8 @@
 #include "Genetics/XmlGenomeExporter.h"
 #include "Genetics/XmlGenomeLoader.h"
 #include "../Workers/OpenGLWorldRenderer.h"
+#include "../Workers/OpenGLRenderWorker.h"
+
 
 SimulationRunner::SimulationRunner() {
 	srand(7 * clock() + time( NULL));
@@ -18,7 +20,7 @@ SimulationRunner::SimulationRunner() {
 
 	HeightsBuilder::build(world);
 	ResourceFactory::addWater(world);
-	workers.push_back(new OpenGLWorldRenderer(world));
+	workers.push_back(new OpenGLRenderWorker(world));
 	world->creatures.push_back(CreatureBuilder::build(world, 1,1));
 	//world->creatures.push_back(CreatureBuilder::build(world,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
 	//XmlGenomeExporter::buildXml(world->creatures[0]);
