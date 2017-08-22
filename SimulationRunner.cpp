@@ -9,7 +9,6 @@
 #include "Factories/CreatureBuilder.h"
 #include "Genetics/XmlGenomeExporter.h"
 #include "Genetics/XmlGenomeLoader.h"
-#include "../Workers/OpenGLWorldRenderer.h"
 #include "../Workers/OpenGLRenderWorker.h"
 
 

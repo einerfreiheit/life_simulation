@@ -3,10 +3,12 @@
 #include "ShadersUtils.h"
 #include <GLFW/glfw3.h>
 #include  "OpenGLTexture.h"
+#include <iostream>
 
 GLFWwindow* OpenGLRender::window = NULL;
-OpenGLTexture *mapTexture =NULL;
-
+OpenGLTexture *mapTexture = NULL;
+OpenGLTexture *waterTexture = NULL;
+OpenGLTexture *creatureTexture = NULL;
 
 void OpenGLRender::checkError() {
 	GLenum errorCode = glGetError();
@@ -51,20 +53,22 @@ OpenGLRender::OpenGLRender(World *world) {
 	glfwSetCursorPosCallback(window, camera->cursorCallBack);
 	glGenVertexArrays(1, &vertexAttributeObject);
 
-
-
-
 	shader = ShadersUtils::loadShaders("./shaders/vertex_shader.glsl", "./shaders/fragment_shader.glsl");
 	shaderMVP = glGetUniformLocation(shader, "mvpMatrix");
 	shaderTexture = glGetUniformLocation(shader, "gSampler");
 
 	staticData = new OpenGLStaticData;
-	glGenBuffers(1, &mapData);
+	//glGenBuffers(1, &mapData);
 	mapData = staticData->createData(world);
-	glBindBuffer(GL_ARRAY_BUFFER, mapData);
+	dynamicData = new OpenGLDynamicData;
+	//glBindBuffer(GL_ARRAY_BUFFER, mapData);
 
 	mapTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/ground _1.jpg");
 	mapTexture->loadTexture();
+	creatureTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/worm.jpg");
+	creatureTexture->loadTexture();
+	waterTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/water.jpg");
+	waterTexture->loadTexture();
 
 }
 
@@ -76,6 +80,7 @@ void OpenGLRender::draw(World *world) {
 	glClearColor(0.0f, 0.2, 0.0f, 1.0f);
 	glfwPollEvents();
 	glUseProgram(shader);
+	dynamicData->updateBuffers(world);
 	mvpMatrix = camera->getMVPMatrix();
 	glUniformMatrix4fv(shaderMVP, 1, GL_FALSE, (&mvpMatrix[0][0]));
 
@@ -83,26 +88,49 @@ void OpenGLRender::draw(World *world) {
 	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 	glBindVertexArray(vertexAttributeObject);
-
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
 	glBindBuffer(GL_ARRAY_BUFFER, mapData);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) 0);
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (GLvoid*) (4 * sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
 
 	for (int i = 0; i < world->map.size(); i++) {
-				glDrawArrays(GL_TRIANGLE_STRIP, i * world->map[0].size() * 4, (world->map[0].size() - 1) * 4);
-			}
+		glDrawArrays(GL_TRIANGLE_STRIP, i * world->map[0].size() * 4, (world->map[0].size() - 1) * 4);
+	}
 
+
+	glBindVertexArray(0);
+	glBindVertexArray(vertexAttributeObject);
+
+	waterTexture->bindTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, dynamicData->waterBuffer);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
+
+	for (int i = 0; i < dynamicData->water.size() / 20; i++) {
+		glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
+	}
+
+	dynamicData->water.clear();
+	creatureTexture->bindTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, dynamicData->creaturesBuffer);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
+
+	for (int i = 0; i < world->creatures.size(); i++) {
+		glDrawArrays(GL_TRIANGLE_STRIP, 4 * i, 4);
+
+
+	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
 
 	glBindVertexArray(0);
+	glUseProgram(0);
 
 	glfwSwapBuffers(window);
 

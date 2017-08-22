@@ -17,7 +17,7 @@ GLuint OpenGLStaticData::createData(World *world) {
 	getHeightDepth(world);
 	double intensity = 0.0;
 	size_t sizeData = 24 * mapHeight * mapWidth;
-	mapData.resize(24 * mapHeight * mapWidth);
+	//mapData.resize(24 * mapHeight * mapWidth);
 
 	float vertexZ;
 	int offset;
@@ -25,34 +25,34 @@ GLuint OpenGLStaticData::createData(World *world) {
 	float vertexPosY;
 	for (int y = 0; y < mapHeight; y++) {
 		for (int x = 0; x < mapWidth; x++) {
-			offset = 24 * (x + y * mapWidth);
+			offset = 20 * (x + y * mapWidth);
 			vertexZ = world->map[y][x].height;
 			intensity = (vertexZ - minHeight) / (maxHeight - minHeight);
 			vertexPosX = (float) x;
 			vertexPosY = (float) y;
-			mapData[offset] = vertexPosX;
-			mapData[offset + 1] = vertexPosY;
-			mapData[offset + 2] = vertexZ;
-			mapData[offset + 3] = intensity;
-			getTextureUV(vertexPosX, vertexPosY, mapData[offset + 4], mapData[offset + 5]);
+			mapData.push_back(vertexPosX);
+			mapData.push_back(vertexPosY);
+			mapData.push_back(vertexZ);
+		//	mapData[offset + 3] = intensity;
+			getTextureUV(vertexPosX, vertexPosY);
 
-			mapData[offset + 6] = vertexPosX;
-			mapData[offset + 7] = (vertexPosY + 1.0);
-			mapData[offset + 8] = vertexZ;
-			mapData[offset + 9] = intensity;
-			getTextureUV(vertexPosX, vertexPosY + 1, mapData[offset + 10], mapData[offset + 11]);
+			mapData.push_back(vertexPosX);
+			mapData.push_back (vertexPosY + 1.0);
+			mapData.push_back(vertexZ);
+		//	mapData[offset + 9] = intensity;
+			getTextureUV(vertexPosX, vertexPosY + 1);
 
-			mapData[offset + 12] = (vertexPosX + 1.0);
-			mapData[offset + 13] = vertexPosY;
-			mapData[offset + 14] = vertexZ;
-			mapData[offset + 15] = intensity;
-			getTextureUV((vertexPosX + 1), vertexPosY, mapData[offset + 16], mapData[offset + 17]);
+			mapData.push_back(vertexPosX + 1.0);
+			mapData.push_back(vertexPosY);
+			mapData.push_back(vertexZ);
+			//mapData[offset + 15] = intensity;
+			getTextureUV((vertexPosX + 1), vertexPosY);
 
-			mapData[offset + 18] = (vertexPosX + 1.0);
-			mapData[offset + 19] = (vertexPosY + 1.0);
-			mapData[offset + 20] = vertexZ;
-			mapData[offset + 21] = intensity;
-			getTextureUV((vertexPosX + 1), (vertexPosY + 1), mapData[offset + 22], mapData[offset + 23]);
+			mapData.push_back(vertexPosX + 1.0);
+			mapData.push_back(vertexPosY + 1.0);
+			mapData.push_back(vertexZ);
+			//mapData[offset + 21] = intensity;
+			getTextureUV((vertexPosX + 1), (vertexPosY + 1));
 
 		}
 	}
@@ -66,11 +66,11 @@ GLuint OpenGLStaticData::createData(World *world) {
 }
 
 void OpenGLStaticData::getTextureUV(const float &vertexPosX,
-									const float &vertexPosY,
-									float &textureX,
-									float &textureY) {
-	textureX = ((int) vertexPosX % 64) / 64.0;
-	textureY = ((int) vertexPosY % 64) / 64.0;
+									const float &vertexPosY) {
+	float textureX = vertexPosX/64.0;;
+	float textureY = vertexPosY/64.0;
+	mapData.push_back(textureX);
+	mapData.push_back(textureY);
 }
 
 void OpenGLStaticData::getHeightDepth(World *world) {

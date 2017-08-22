@@ -7,6 +7,7 @@
 
 #include "OpenGLCamera.h"
 #include "OpenGLStaticData.h"
+#include "OpenGLDynamicData.h"
 
 class OpenGLRender {
 public:
@@ -26,6 +27,7 @@ private:
 	glm::mat4 mvpMatrix;
 
 	OpenGLStaticData *staticData = NULL;
+	OpenGLDynamicData *dynamicData =NULL;
 	OpenGLCamera *camera=NULL;
 
 

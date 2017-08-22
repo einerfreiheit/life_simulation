@@ -11,8 +11,7 @@ public:
 	GLuint  createData(World *world);
 private:
 	void getHeightDepth(World *world);
-	void getTextureUV(const float &vertexPosX, const float &vertexPosY,
-						float &textureX, float &textureY);
+	void getTextureUV(const float &vertexPosX, const float &vertexPosY);
 	float minHeight;
 	float maxHeight;
 	std::vector<float> mapData;

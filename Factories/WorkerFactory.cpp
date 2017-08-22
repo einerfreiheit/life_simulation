@@ -9,7 +9,6 @@
 #include "../Workers/WaiterWorker.h"
 #include "../Workers/WaterWorker.h"
 #include "../Workers/MetabolismWorker.h"
-#include "../Workers/OpenGLWorldRenderer.h"
 
 #include "../Workers/OpenGLRenderWorker.h"
 
