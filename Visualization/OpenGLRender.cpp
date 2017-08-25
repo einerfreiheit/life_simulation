@@ -123,7 +123,7 @@ void OpenGLRender::draw(World *world) {
 	//for (int i = 0; i < dynamicData->waterBufferData.size() / 20; i++) {
 		//glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
 	//}
-	//glDrawElements(GL_TRIANGLES,dynamicData->waterIndices.size(),GL_UNSIGNED_INT,0);
+	glDrawElements(GL_TRIANGLES,dynamicData->waterIndices.size(),GL_UNSIGNED_INT,0);
 
 	dynamicData->water.clear();
 	dynamicData->waterIndices.clear();

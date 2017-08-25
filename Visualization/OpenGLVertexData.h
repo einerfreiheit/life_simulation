@@ -15,8 +15,8 @@
 class OpenGLVertexData {
 public:
 
-	OpenGLVertexData(){};
-	~OpenGLVertexData(){};
+	OpenGLVertexData();
+	~OpenGLVertexData();
 
 	GLuint vertexBufferObject=0;
 	GLuint indexBufferObject=0;
