@@ -67,8 +67,8 @@ GLuint OpenGLStaticData::createData(World *world) {
 
 void OpenGLStaticData::getTextureUV(const float &vertexPosX,
 									const float &vertexPosY) {
-	float textureX = vertexPosX/64.0;;
-	float textureY = vertexPosY/64.0;
+	float textureX = vertexPosX/256.0;;
+	float textureY = vertexPosY/256.0;
 	mapData.push_back(textureX);
 	mapData.push_back(textureY);
 }

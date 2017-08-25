@@ -3,6 +3,7 @@
 #include "ShadersUtils.h"
 #include <GLFW/glfw3.h>
 #include  "OpenGLTexture.h"
+
 #include <iostream>
 
 GLFWwindow* OpenGLRender::window = NULL;
@@ -60,7 +61,10 @@ OpenGLRender::OpenGLRender(World *world) {
 	staticData = new OpenGLStaticData;
 	//glGenBuffers(1, &mapData);
 	mapData = staticData->createData(world);
-	dynamicData = new OpenGLDynamicData;
+	dynamicData = new OpenGLDynamicData(world);
+	mapData_ = new OpenGLMapData;
+	mapData_->computeData(world);
+
 	//glBindBuffer(GL_ARRAY_BUFFER, mapData);
 
 	mapTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/ground _1.jpg");
@@ -91,12 +95,17 @@ void OpenGLRender::draw(World *world) {
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, mapData);
+	glBindBuffer(GL_ARRAY_BUFFER, mapData_->vertexBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mapData_->indexBufferObject);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
 
-	for (int i = 0; i < world->map.size(); i++) {
-		glDrawArrays(GL_TRIANGLE_STRIP, i * world->map[0].size() * 4, (world->map[0].size() - 1) * 4);
-	}
+	glDrawElements(GL_TRIANGLES,mapData_->elementNumber,GL_UNSIGNED_INT,0);
+
+//	for (int i = 0; i < world->map.size(); i++) {
+	//	glDrawArrays(GL_TRIANGLE_STRIP, i * world->map[0].size() * 4, (world->map[0].size() - 1) * 4);
+	//}
 
 
 	glBindVertexArray(0);
@@ -105,14 +114,19 @@ void OpenGLRender::draw(World *world) {
 	waterTexture->bindTexture(GL_TEXTURE0);
 	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, dynamicData->waterBuffer);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
 
-	for (int i = 0; i < dynamicData->water.size() / 20; i++) {
-		glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
-	}
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,dynamicData->waterIBO);
+
+	//for (int i = 0; i < dynamicData->waterBufferData.size() / 20; i++) {
+		//glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
+	//}
+	//glDrawElements(GL_TRIANGLES,dynamicData->waterIndices.size(),GL_UNSIGNED_INT,0);
 
 	dynamicData->water.clear();
+	dynamicData->waterIndices.clear();
 	creatureTexture->bindTexture(GL_TEXTURE0);
 	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, dynamicData->creaturesBuffer);

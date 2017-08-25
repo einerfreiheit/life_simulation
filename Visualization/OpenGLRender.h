@@ -9,6 +9,9 @@
 #include "OpenGLStaticData.h"
 #include "OpenGLDynamicData.h"
 
+#include "OpenGLMapData.h"
+
+
 class OpenGLRender {
 public:
 	OpenGLRender(World *world);
@@ -29,6 +32,7 @@ private:
 	OpenGLStaticData *staticData = NULL;
 	OpenGLDynamicData *dynamicData =NULL;
 	OpenGLCamera *camera=NULL;
+	OpenGLMapData *mapData_=NULL;
 
 
 
