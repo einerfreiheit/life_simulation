@@ -44,7 +44,7 @@ void CreatureStatistics::updateEatenFood(const double creatureBait) {
 
 void CreatureStatistics::updateFissionsNumber() {
 	this->fissionNumber++;
-}
+}//@ отступы
 void CreatureStatistics::updateLifetime() {
 	this->lifeTime++;
 }
@@ -56,7 +56,7 @@ void CreatureStatistics::writeStatistics() {
 	std::string outputPath = SimulationData::getInst()->outputPath + "output.txt";
 	std::ofstream out(outputPath,std::ios::out | std::ios::app);
 	out << "creature id: " << id <<" lifetime "<<lifeTime;
-	out<<" attacks: "<<attacksNumber<<" moved: "<< distanceMoved<<" eated: "<<eatenFood;
+	out<<" attacks: "<<attacksNumber<<" moved: "<< distanceMoved<<" eated: "<<eatenFood;//@ автоформаттер
 	out<< " fission number: "<<fissionNumber<<" genome complexity: "<<genomeComlexity<<" conjugation: "<<conjugationNumber<<std::endl;
 
 	out.close();

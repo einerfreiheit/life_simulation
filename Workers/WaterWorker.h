@@ -17,10 +17,9 @@ private:
 	double recieverWaterLevel = 0.0;
 	double movableWater = 0.0;
 	double waterToMove = 0.0;
-	bool canFlow = false;
 	double bufferedWaterLevel = 0.0;
-	void setTransmitterAndReciverPointers(World *world, int y1, int x1, int y2, int x2, bool &canFlow);
-	void flow( bool &canFlow);
+	bool setTransmitterAndReciverPointers(World *world, int y1, int x1, int y2, int x2);
+	void flow();
 
 };
 

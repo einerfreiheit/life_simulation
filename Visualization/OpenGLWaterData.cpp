@@ -43,7 +43,7 @@ void OpenGLWaterData::computeBuffersData(World *world) {
 																		(fy + 1) * textureDecrease);
 				vertices[verticesToUpdate + 3].vertexPosition = glm::vec3(fx + 1, fy + 1, waterZ);
 				vertices[verticesToUpdate + 3].textureUV = glm::vec2(	(fx + 1) * textureDecrease,
-																		(fy + 1) * textureDecrease);
+																						(fy + 1) * textureDecrease);
 
 				vertexIndices.push_back(verticesToUpdate + 1);
 				vertexIndices.push_back(verticesToUpdate + 2);

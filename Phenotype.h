@@ -13,7 +13,7 @@ public:
 	double energyToMove;
 	double fissionLoss;
 	double fissionThreshold;
-	double hungryEdge;
+	double hungryEdge;//@ edge - плохое слово
 	double energyToClimb;
 	double healthPoints;
 	double attackPower;

@@ -27,7 +27,7 @@ void Cell::removeCreature(int id) {
 			hasBeenRemoved = true;
 			break;
 		}
-		if (!hasBeenRemoved) {
+		if (!hasBeenRemoved) {//@ баг -> вынести за пределы цикла
 			throw std::runtime_error("cannot find and remove creature from cell");
 		}
 

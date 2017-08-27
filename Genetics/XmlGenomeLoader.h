@@ -13,7 +13,7 @@
 class XmlGenomeLoader {
 public:
 
-	static GenomePtr buildGenome(const char* fileName);
+	static GenomePtr buildGenome(const char* fileName);//@ строку передавать, а не конст чар аррай
 	static void buildChromosomes(TiXmlElement *section, GenomePtr genome );
 };
 

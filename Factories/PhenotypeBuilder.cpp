@@ -24,14 +24,12 @@ PhenotypePtr PhenotypeBuilder::build(const GenomePtr genome) {
 
 void PhenotypeBuilder::processGene(const Gene& gene, PhenotypePtr phenotype) {
 	switch (gene.type) {
-	case GT_AGRESSION: {
+	case GT_AGRESSION:
 		phenotype->aggresion += gene.allel1;
 		break;
-	}
-	case GT_TRANSLATION: {
+	case GT_TRANSLATION:
 		phenotype->geneTranslationSpeed += gene.allel1;
 		break;
-	}
 	default:
 		break;
 	}

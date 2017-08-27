@@ -19,7 +19,7 @@ World::~World() {
 
 Cell* World::getCell(int y, int x) {
 	Cell *cellPtr = NULL;
-	if (y < map.size() && x < map[0].size()) {
+	if (y < map.size() && x < map[0].size()) { //@ а если меньше 0?
 		cellPtr = &map[y][x];
 	}
 

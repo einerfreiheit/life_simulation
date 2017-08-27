@@ -1,7 +1,7 @@
 #include "PlyModel.h"
 
 PlyModel::PlyModel() {
-	std::vector<vertice*> vertices;
+	std::vector<vertice*> vertices;//@ useless
 	std::vector<face*> faces;
 }
 

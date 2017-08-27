@@ -14,7 +14,7 @@ public:
 	Creature(int id);
 	virtual ~Creature();
 
-	std::vector<SimpleAction*> creatureActions;
+	std::vector<SimpleAction*> creatureActions;//@ Creature.creatureActions ?!
 	bool isHungry() const;
 	CreatureStatistics *stats;
 	void setGenome(GenomePtr genome);
@@ -25,10 +25,10 @@ public:
 
 	PhenotypePtr phenotype;
 	GenomePtr genome;
-	bool hasBeenAttaked = false;
+	bool hasBeenAttaked = false;//@ attacked
 
 	double energy;
-	double lowEnergyLevel = 100.0;
+	double lowEnergyLevel = 100.0;//@ почему инициализация некоторых штук идёт тут, а некоторых не тут?
 	int x;
 	int y;
 

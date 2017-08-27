@@ -14,8 +14,8 @@ public:
 	float height;
 
 	void removeCreature(int id);
-	std::vector<CreaturePtr> creaturesInCell;
-	int xCoordinate;
+	std::vector<CreaturePtr> creaturesInCell; //@ Cell.creaturesInCell
+	int xCoordinate;//@ просто x и просто y
 	int yCoordinate;
 };
 

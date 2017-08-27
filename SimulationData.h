@@ -15,8 +15,8 @@ public:
 		return inst;
 	}
 	std::string outputPath;
-	int mapHeightToSet;
-	int mapWidthToSet;
+	int mapHeightToSet;//@ просто mapWidth
+	int mapWidthToSet;//@ просто mapHeight
 
 	double firstLayerFrequency;
 

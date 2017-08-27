@@ -2,6 +2,9 @@
 #define MAP_PLYMODEL_H_
 
 #include <vector>
+
+//@ struct для цвета и для координаты
+
 struct vertice {
 	std::vector<float> coordinates;
 	std::vector<int > colors;

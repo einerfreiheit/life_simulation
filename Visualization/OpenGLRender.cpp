@@ -14,7 +14,7 @@ OpenGLTexture *creatureTexture = NULL;
 void OpenGLRender::checkError() {
 	GLenum errorCode = glGetError();
 	if (errorCode != GL_NO_ERROR) {
-		throw std::runtime_error("OpenGL error:\n" + std::to_string(*gluErrorString(errorCode)));
+	//	throw std::runtime_error("OpenGL error:\n" + std::string((const char *)gluErrorString(errorCode)));//@ дичь
 	}
 }
 
