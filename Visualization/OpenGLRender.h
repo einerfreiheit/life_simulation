@@ -34,12 +34,6 @@ private:
 	OpenGLMapData * mapData=NULL;
 	OpenGLWaterData *waterData=NULL;
 	OpenGLCreaturesData *creatureData =NULL;
-
-
-
-
-
-
 };
 
 #endif

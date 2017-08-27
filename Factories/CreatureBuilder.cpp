@@ -6,7 +6,7 @@
 #include <string>
 #include "./SimulationData.h"
 
-std::string CreatureBuilder::path = SimulationData::getInst()->outputPath;
+std::string CreatureBuilder::path = SimulationData::getInst()->outputPath;//@ лучше 3 раза написать явно, чем вызывать такое до int main
 int CreatureBuilder::nextId = 0;
 
 CreaturePtr CreatureBuilder::build(World *world, int posX, int posY) {
@@ -58,7 +58,7 @@ CreaturePtr CreatureBuilder::build(World *world, GenomePtr loadedGenome,int posX
 
 	world->map[posY][posX].creaturesInCell.push_back(result);
 
-	cv::Mat vis = GenomeVisualizer::visualize(loadedGenome);
+	cv::Mat vis = GenomeVisualizer::visualize(loadedGenome);//@ вынести в метод
 	cv::imwrite(path + std::to_string(nextId) + ".png", vis);
 
 	return result;

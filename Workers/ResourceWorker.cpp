@@ -13,6 +13,7 @@ ResourceWorker::ResourceWorker() {
 Cell *ResourceWorker::getRandom(World *world) {
 	return world->getCell(rand() % world->map.size(), rand() % world->map[0].size());
 }
+
 void ResourceWorker::work(World *world) {
 
 	while (cellNumber>0){
@@ -22,5 +23,6 @@ void ResourceWorker::work(World *world) {
 
 	}
 }
+
 ResourceWorker::~ResourceWorker() {
 }

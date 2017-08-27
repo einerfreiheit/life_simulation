@@ -5,7 +5,7 @@ GenomePtr XmlGenomeLoader::buildGenome(const char *fileName) {
 
 	TiXmlDocument document(fileName);
 	if (!document.LoadFile()) {
-		throw std::runtime_error("cannot load genome file!");
+		throw std::runtime_error("cannot load genome file!"); //@ что за файл? вдруг там 47 хромосома
 
 	}
 	GenomePtr genome = std::shared_ptr<Genome>(new Genome);
@@ -22,7 +22,7 @@ GenomePtr XmlGenomeLoader::buildGenome(const char *fileName) {
 }
 
 void XmlGenomeLoader::buildChromosomes(TiXmlElement *chromosomeElement, GenomePtr genome) {
-	if (!chromosomeElement) {
+	if (!chromosomeElement) {//@ ни нужно
 		return;
 	}
 	int type;

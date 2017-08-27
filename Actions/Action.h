@@ -6,7 +6,7 @@
 
 class Action: public SimpleAction {
 public:
-	Action();
+	Action();//@ автоформаттер
 	virtual ~Action();
 	enum ACTION_TYPE {
 		AT_EAT=1,

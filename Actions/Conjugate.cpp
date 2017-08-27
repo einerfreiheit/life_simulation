@@ -12,10 +12,10 @@ Conjugate::~Conjugate() {
 
 void Conjugate::act(World* world, CreaturePtr creature) {
 	int id = creature->getId();
-	Cell& cell = world->map[creature->y][creature->x];
+	Cell& cell = world->map[creature->y][creature->x];//@ getter
 
 	for (auto otherCreature : cell.creaturesInCell) {
-		if (otherCreature->getId() != id && canConjugate(otherCreature)) {
+		if (otherCreature->getId() != id && canConjugate(otherCreature)) {//@ оргия, если слишком много червей в клетке
 			conjugate(creature, otherCreature);
 			creature->stats->updateConjugationNumber();
 		}

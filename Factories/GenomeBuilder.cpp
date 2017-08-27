@@ -44,6 +44,7 @@ void GenomeBuilder::crossingOver(GenomePtr genome) {
 		numberOfCrossingOver--;
 	}
 }
+
 void GenomeBuilder::buildPlasmid(const GenomePtr genome) {
 	ChromosomePtr plasmidChromosome(new Chromosome);
 	int randomChromosome = rand() % genome->chromosomes.size();

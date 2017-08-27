@@ -42,7 +42,7 @@ void MetabolismWorker::grow(CreaturePtr creature,const  Gene &gene) {
 }
 
 #define SWITCH_GENE_PROCESSING(geneType, action) \
-case geneType: { action; break; }
+case geneType: { action; break; };
 
 void MetabolismWorker::updatePhenotype(CreaturePtr creature) {
 	int chromosomeIndex = 0;
@@ -61,10 +61,7 @@ void MetabolismWorker::updatePhenotype(CreaturePtr creature) {
 
 			switch (currentGene.type) {
 			SWITCH_GENE_PROCESSING(GT_GROW, grow(creature, currentGene))
-				;
 			SWITCH_GENE_PROCESSING(GT_REGENERATION, grow(creature, currentGene))
-				;
-
 			default:
 				std::cout << "unknown gene type: " << currentGene.type << std::endl;
 				break;

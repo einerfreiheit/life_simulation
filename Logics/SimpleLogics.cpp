@@ -47,15 +47,13 @@ void SimpleLogics::willToMove(CreaturePtr creature) {
 		y++;
 		break;
 	}
-	case 2: {
+	case 2: {//@ зачем?! ну зачем?!
 		x--;
 		break;
 	}
-	case 3: {
-		x++;
-		break;
-	}
-
+	case 3:
+	    x++;
+	    break;
 	}
 
 

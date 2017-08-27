@@ -1,6 +1,7 @@
 #include "PlyExporter.h"
 #include "../SimulationData.h"
 #include <iostream>
+
 void PlyExporter::exportPly(PlyModel *model) {
 
 	std::string outputPath = SimulationData::getInst()->outputPath + "output.ply";
@@ -8,7 +9,7 @@ void PlyExporter::exportPly(PlyModel *model) {
 	out << "ply" << std::endl;
 	out << "format ascii 1.0" << std::endl;
 	out << "element vertex";
-	out << ' ' << model->vertices.size() << std::endl;
+	out << " " << model->vertices.size() << std::endl;
 	out << "property float x" << std::endl;
 	out << "property float y" << std::endl;
 	out << "property float z" << std::endl;
@@ -16,7 +17,7 @@ void PlyExporter::exportPly(PlyModel *model) {
 	out << "property uchar green" << std::endl;
 	out << "property uchar blue" << std::endl;
 	out << "element face";
-	out << ' ' << model->faces.size() << std::endl;
+	out << " " << model->faces.size() << std::endl;
 	out << "property list uchar int vertex_index" << std::endl;
 	out << "end_header" << std::endl;
 
@@ -25,7 +26,7 @@ void PlyExporter::exportPly(PlyModel *model) {
 			out << coordinate << ' ';
 		}
 		for (auto color : model->vertices[i]->colors) {
-			out << color << ' ';
+			out << (int)color << ' ';
 		}
 		out << std::endl;
 
@@ -40,4 +41,3 @@ void PlyExporter::exportPly(PlyModel *model) {
 		out << std::endl;
 	}
 }
-
