@@ -63,7 +63,13 @@ OpenGLRender::OpenGLRender(World *world) {
 	mapData = staticData->createData(world);
 	dynamicData = new OpenGLDynamicData(world);
 	mapData_ = new OpenGLMapData;
-	mapData_->computeData(world);
+	mapData_->update(world);
+	creatureData = new OpenGLCreaturesData;
+	creatureData->initBuffers(world);
+
+	waterData = new OpenGLWaterData;
+	waterData->initBuffers(world);
+	//waterData->vertices.resize(world->map.size()*world->map[0].size()*4);
 
 	//glBindBuffer(GL_ARRAY_BUFFER, mapData);
 
@@ -108,36 +114,37 @@ void OpenGLRender::draw(World *world) {
 	//}
 
 
+	waterData->update(world);
+	creatureData->update(world);
+
 	glBindVertexArray(0);
 	glBindVertexArray(vertexAttributeObject);
 
 	waterTexture->bindTexture(GL_TEXTURE0);
 	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
-	glBindBuffer(GL_ARRAY_BUFFER, dynamicData->waterBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, waterData->vertexBufferObject);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,dynamicData->waterIBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,waterData->indexBufferObject);
 
 	//for (int i = 0; i < dynamicData->waterBufferData.size() / 20; i++) {
 		//glDrawArrays(GL_TRIANGLE_STRIP, 4*i, 4);
 	//}
-	glDrawElements(GL_TRIANGLES,dynamicData->waterIndices.size(),GL_UNSIGNED_INT,0);
+	glDrawElements(GL_TRIANGLES,waterData->elementNumber,GL_UNSIGNED_INT,0);
 
-	dynamicData->water.clear();
-	dynamicData->waterIndices.clear();
+	//dynamicData->water.clear();
+	//dynamicData->waterIndices.clear();
 	creatureTexture->bindTexture(GL_TEXTURE0);
 	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
-	glBindBuffer(GL_ARRAY_BUFFER, dynamicData->creaturesBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, creatureData->vertexBufferObject);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
 
-	for (int i = 0; i < world->creatures.size(); i++) {
-		glDrawArrays(GL_TRIANGLE_STRIP, 4 * i, 4);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,creatureData->indexBufferObject);
+	glDrawElements(GL_TRIANGLES,waterData->elementNumber,GL_UNSIGNED_INT,0);
 
-
-	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

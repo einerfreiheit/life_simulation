@@ -6,12 +6,10 @@ class OpenGLMapData: public OpenGLVertexData {
 public:
 	OpenGLMapData();
 
-	GLsizei elementNumber;
-	void computeData(World *world);
+
+	void computeBuffersData(World *world);
 
 private:
-	void computeVertexData(World *world);
-	void updateBuffers();
 	void getHeightDepth(World *world);
 	float minHeight;
 	float maxHeight;

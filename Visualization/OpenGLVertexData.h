@@ -18,9 +18,14 @@ public:
 	OpenGLVertexData();
 	~OpenGLVertexData();
 
-	GLuint vertexBufferObject=0;
-	GLuint indexBufferObject=0;
-	GLuint vertexNumber=0;
+	virtual void update(World *world);
+	virtual void computeBuffersData(World *world)=0;
+
+
+	GLsizei elementNumber;
+	GLuint vertexBufferObject;
+	GLuint indexBufferObject;
+	GLuint vertexNumber;
 
 	std::vector<vertex> vertices;
 	std::vector<GLuint> vertexIndices;

@@ -17,9 +17,7 @@ OpenGLMapData::OpenGLMapData() {
 
 }
 
-void OpenGLMapData::computeVertexData(World *world) {
-	glGenBuffers(1, &vertexBufferObject);
-	glGenBuffers(1, &indexBufferObject);
+void OpenGLMapData::computeBuffersData(World *world) {
 
 	GLuint data = 0;
 	size_t mapHeight = world->map.size();
@@ -31,12 +29,10 @@ void OpenGLMapData::computeVertexData(World *world) {
 	GLuint vertexIndex = 0;
 
 	float vertexZ;
-	int offset;
 	float vertexPosX;
 	float vertexPosY;
 	for (int y = 0; y < mapHeight; y++) {
 		for (int x = 0; x < mapWidth; x++) {
-			offset = 20 * (x + y * mapWidth);
 			vertexZ = world->map[y][x].height;
 			intensity = (vertexZ - minHeight) / (maxHeight - minHeight);
 			vertexPosX = (float) x;
@@ -48,12 +44,12 @@ void OpenGLMapData::computeVertexData(World *world) {
 
 			vertex v2;
 
-			v2.vertexPosition = glm::vec3(vertexPosX+1.0, vertexPosY , vertexZ);
-			v2.textureUV = glm::vec2((vertexPosX +1.0)* textureDecrease, (vertexPosY) * textureDecrease);
+			v2.vertexPosition = glm::vec3(vertexPosX + 1.0, vertexPosY, vertexZ);
+			v2.textureUV = glm::vec2((vertexPosX + 1.0) * textureDecrease, (vertexPosY) * textureDecrease);
 
 			vertex v3;
-			v3.vertexPosition = glm::vec3(vertexPosX, vertexPosY+1.0, vertexZ);
-			v3.textureUV = glm::vec2((vertexPosX) * textureDecrease, (vertexPosY+1.0) * textureDecrease);
+			v3.vertexPosition = glm::vec3(vertexPosX, vertexPosY + 1.0, vertexZ);
+			v3.textureUV = glm::vec2((vertexPosX) * textureDecrease, (vertexPosY + 1.0) * textureDecrease);
 
 			vertex v4;
 			v4.vertexPosition = glm::vec3(vertexPosX + 1.0, vertexPosY + 1.0, vertexZ);
@@ -76,20 +72,13 @@ void OpenGLMapData::computeVertexData(World *world) {
 		}
 	}
 
-}
-
-void OpenGLMapData::computeData(World *world){
-	computeVertexData(world);
-	updateBuffers();
-	elementNumber = vertexIndices.size();
-}
-void OpenGLMapData::updateBuffers() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof( vertexIndices) *vertexIndices.size(), &vertexIndices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * vertexIndices.size(), &vertexIndices[0], GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertex), &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex) * vertices.size(), &vertices[0],
+	GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
 
