@@ -7,7 +7,7 @@ SimpleVideoRecord::SimpleVideoRecord() {
 	writer.open(SimulationData::getInst()->outputPath + "./output.avi",
 				CV_FOURCC('M', 'J', 'P', 'G'),
 				25.0,
-				cv::Size(SimulationData::getInst()->mapHeightToSet, SimulationData::getInst()->mapWidthToSet),
+				cv::Size(SimulationData::getInst()->mapHeight, SimulationData::getInst()->mapWidth),
 				true);
 }
 

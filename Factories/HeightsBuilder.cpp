@@ -9,11 +9,12 @@ void HeightsBuilder::build(World* world) {
 
 	ValueNoise valueNoise;
 	valueNoise.makeNoise(world);
-	PlyModel *model = new PlyModel;
-	PlyConverter::setVertices(world, model);
-	PlyConverter::setFaces(world,model);
-	PlyExporter::exportPly(model);
-	delete model;
-
+	if (SimulationData::getInst()->usePLY) {
+		PlyModel *model = new PlyModel;
+		PlyConverter::setVertices(world, model);
+		PlyConverter::setFaces(world, model);
+		PlyExporter::exportPly(model);
+		delete model;
+	}
 
 }

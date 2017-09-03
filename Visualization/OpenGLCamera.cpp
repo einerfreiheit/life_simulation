@@ -15,7 +15,7 @@ OpenGLCamera::OpenGLCamera(GLFWwindow *window) {
 
 
 	std::cout<<height<<" height"<<width<<"width";
-	glm::vec3 mapCenter(-0.5 * SimulationData::getInst()->mapWidthToSet, -0.5 * SimulationData::getInst()->mapHeightToSet, 0.0f);
+	glm::vec3 mapCenter(-0.5 * SimulationData::getInst()->mapWidth, -0.5 * SimulationData::getInst()->mapHeight, 0.0f);
 	model = glm::scale(model, glm::vec3(scaleF, scaleF, scaleF));
 	model = glm::translate(model, mapCenter);
 	model = glm::rotate(model, 0.0f, glm::vec3(1.0f, 0.0f, 0.0f));

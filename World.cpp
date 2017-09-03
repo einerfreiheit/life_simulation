@@ -5,10 +5,10 @@ World::World(const int mapHeightToSet, const int mapWidthToSet) {
 	for (int y = 0; y < mapHeightToSet; y++) {
 		map[y].resize(mapWidthToSet);
 	}
-	for (size_t y=0;y<map.size();y++){
-		for (size_t x=0; x<map[0].size();x++){
-			map[y][x].xCoordinate=x;
-			map[y][x].yCoordinate=y;
+	for (size_t y = 0; y < map.size(); y++) {
+		for (size_t x = 0; x < map[0].size(); x++) {
+			map[y][x].xCoordinate = x;
+			map[y][x].yCoordinate = y;
 		}
 	}
 	creatures.reserve(100);
@@ -18,11 +18,10 @@ World::~World() {
 }
 
 Cell* World::getCell(int y, int x) {
-	Cell *cellPtr = NULL;
-	if (y < map.size() && x < map[0].size()) { //@ а если меньше 0?
-		cellPtr = &map[y][x];
+	if (y < 0 || x < 0 || x > map[0].size() || y > map.size()) {
+		return NULL;
 	}
 
-	return cellPtr;
+	return &map[y][x];
 
 }

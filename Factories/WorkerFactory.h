@@ -15,8 +15,15 @@ public:
 		}
 
 	}
+	template<typename T> static void addWorker(World *world, std::vector<WorldWorker*> &workers, bool condition = true) {
 
-	static void build(std::vector<WorldWorker*>&workers);
+			if (condition) {
+				workers.push_back(new T(world));
+			}
+
+		}
+
+	static void build(World *world, std::vector<WorldWorker*>&workers);
 
 };
 

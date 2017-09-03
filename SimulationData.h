@@ -15,8 +15,8 @@ public:
 		return inst;
 	}
 	std::string outputPath;
-	int mapHeightToSet;//@ просто mapWidth
-	int mapWidthToSet;//@ просто mapHeight
+	int mapHeight;
+	int mapWidth;
 
 	double firstLayerFrequency;
 
@@ -31,6 +31,9 @@ public:
 	bool useWaiterWorker;
 	bool useCreatureActionWorker;
 	bool useWaterWorker;
+	bool useOpenGLRenderWorker;
+	bool useMetabolismWorker;
+	bool usePLY;
 
 	int timeToWait;
 

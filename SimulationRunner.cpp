@@ -9,21 +9,15 @@
 #include "Factories/CreatureBuilder.h"
 #include "Genetics/XmlGenomeExporter.h"
 #include "Genetics/XmlGenomeLoader.h"
-#include "../Workers/OpenGLRenderWorker.h"
-
 
 SimulationRunner::SimulationRunner() {
 	srand(7 * clock() + time( NULL));
-	world = new World(SimulationData::getInst()->mapHeightToSet, SimulationData::getInst()->mapWidthToSet);
-
-
+	world = new World(SimulationData::getInst()->mapHeight, SimulationData::getInst()->mapWidth);
 	HeightsBuilder::build(world);
 	ResourceFactory::addWater(world);
-	workers.push_back(new OpenGLRenderWorker(world));
-	world->creatures.push_back(CreatureBuilder::build(world, 1,1));
+	world->creatures.push_back(CreatureBuilder::build(world, 1, 1));
 	//world->creatures.push_back(CreatureBuilder::build(world,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
 	//XmlGenomeExporter::buildXml(world->creatures[0]);
-
 
 }
 
@@ -31,7 +25,7 @@ SimulationRunner::~SimulationRunner() {
 }
 
 void SimulationRunner::run() {
-	WorkerFactory::build(workers);
+	WorkerFactory::build(world, workers);
 
 	while (true) {
 		for (auto worker : workers) {

@@ -9,8 +9,8 @@ SimulationData::SimulationData() {
 }
 void SimulationData::addParams() {
 	setSection("World");
-	add<int>("height", mapHeightToSet, 5);
-	add<int>("width", mapWidthToSet, 5);
+	add<int>("height", mapHeight, 5);
+	add<int>("width", mapWidth, 5);
 	setSection("WorldHeights");
 	add<double>("firstLayerFrequency", firstLayerFrequency, 0.3);
 
@@ -26,7 +26,8 @@ void SimulationData::addParams() {
 	add<bool>("displayOutput", displayOutput, true);
 	add<bool>("videoRecord", videoRecord, false);
 	add<bool>("useWaterWorker", useWaterWorker, false);
-
+	add<bool>("useOpenGLRenderWorker",useOpenGLRenderWorker,true);
+	add <bool> ("useMetabolismWorker", useMetabolismWorker,true);
 	setSection("WaitingTime");
 	add<int>("timeToWait", timeToWait, 1000);
 
@@ -47,4 +48,5 @@ void SimulationData::addParams() {
 
 	setSection("Output");
 	add<std::string>("outputPath", outputPath, "./");
+	add<bool> ("usePLY", usePLY, false);
 }
