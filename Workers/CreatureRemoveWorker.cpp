@@ -13,6 +13,8 @@ void CreatureRemoveWorker::work(World *world) {
 	while (i <= lastId) {
 		CreaturePtr creature = world->creatures[i];
 		if (creature->energy <= 0 || creature->phenotype->healthPoints <= 0) {
+			creature->stats->updateGenomeComlexity(creature->getGenome());
+			creature->stats->writeStatistics();
 			world->getCell(creature->y, creature->x)->removeCreature(creature->getId());
 			world->creatures[i] = world->creatures[lastId];
 			lastId--;

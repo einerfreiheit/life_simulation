@@ -15,7 +15,7 @@ void CreatureSpawnWorker::work(World *world) {
 			creature->energy -= creature->phenotype->fissionLoss;
 			CreaturePtr second = CreatureBuilder::build(world, creature);
 			newborn.push_back(second);
-			creature->stats->updateFissionsNumber();
+			creature->stats->incrementFissionsNumber();
 		}
 	}
 

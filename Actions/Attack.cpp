@@ -29,7 +29,7 @@ void Attack::act(World* world, CreaturePtr creature) {
 	for (auto otherCreature : cell.creaturesInCell) {//@ геноцид при большом числе червей в клетке
 		if (otherCreature->getId() != id) {
 			attack(creature, otherCreature);
-			creature->stats->updateAttacksNumber();
+			creature->stats->incrementAttacksNumber();
 		}
 
 	}

@@ -42,7 +42,7 @@ void Move::act(World *world, CreaturePtr creature) {
 	creature->x=nextX;
 	creature->y=nextY;
 	move(cellFrom, cellTo, creature->getId());
-	creature->stats->updateDistanceMoved();
+	creature->stats->incrementTraveledDistace();
 
 
 }

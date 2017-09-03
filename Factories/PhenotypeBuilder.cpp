@@ -8,7 +8,7 @@ PhenotypePtr PhenotypeBuilder::build(const GenomePtr genome) {
 	result->energyToMove = SimulationData::getInst()->energyToMove;
 	result->fissionLoss = SimulationData::getInst()->fissionLoss;
 	result->fissionThreshold = SimulationData::getInst()->fissionThreshold;
-	result->hungryEdge = 100;
+	result->hungryThershold = 100;
 	result->energyToClimb = result->energyToMove * 2;
 
 	for (const ChromosomePtr &chromosome : genome->chromosomes) {

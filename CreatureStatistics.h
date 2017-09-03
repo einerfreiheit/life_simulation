@@ -8,24 +8,26 @@ public:
 	CreatureStatistics();
 	virtual ~CreatureStatistics();
 
-	void updateConjugationNumber();
-	void setCreatureId(const int id);//@ const не нужон
-	void updateLifetime();
-	void updateAttacksNumber();
-	void updateFissionsNumber();
-	void updateEatenFood(const double creatureBait); //@ и тут не нужен
-	void updateDistanceMoved();
-	void writeStatistics();//@ вынести дальше от методов модификации
+	void incrementConjugationNumber();
+	void incrementLifetime();
+	void incrementAttacksNumber();
+	void incrementFissionsNumber();
+	void incrementEatenFood( double creatureBait);
+	void incrementTraveledDistace();
 	void updateGenomeComlexity(const GenomePtr genome); //@ а тут нужен, но можно по ссылке передать
+	void setCreatureId(int id);
+
+	void writeStatistics();
+
 private:
 	int id;
 	int lifeTime;
 	int attacksNumber;
-	int fissionNumber;//@ множ. число
+	int fissionsNumber;
 	double eatenFood;
-	int distanceMoved;//@ ?!@?!
+	int traveledDistace;
 	int genomeComlexity;
-	int conjugationNumber; //@ множ. число
+	int conjugationsNumber;
 
 };
 

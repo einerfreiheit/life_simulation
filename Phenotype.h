@@ -13,19 +13,17 @@ public:
 	double energyToMove;
 	double fissionLoss;
 	double fissionThreshold;
-	double hungryEdge;//@ edge - плохое слово
+	double hungryThershold;
 	double energyToClimb;
 	double healthPoints;
 	double attackPower;
 	double creatureSize;
+
 	double conjugateEnergy = 5.0;
-
 	double aggresion = 0.0;
-
 	double geneTranslationSpeed = 1.0;
 	int maxGeneTranslationNumber = 5;
 	int geneTranslationNumber = 1;
-
 	double maxHealthPoints = 100.0;
 
 	std::string cellReceptor;
