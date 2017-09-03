@@ -9,10 +9,9 @@
 #include "../Workers/WaiterWorker.h"
 #include "../Workers/WaterWorker.h"
 #include "../Workers/MetabolismWorker.h"
-
 #include "../Workers/OpenGLRenderWorker.h"
 
-void WorkerFactory::build(std::vector<WorldWorker*>&workers) {
+void WorkerFactory::build(World *world, std::vector<WorldWorker*>&workers) {
 	addWorker<AIWorker>(workers, SimulationData::getInst()->useAIWorker);
 	addWorker<CreatureActionWorker>(workers, SimulationData::getInst()->useCreatureActionWorker);
 	addWorker<CreatureSpawnWorker>(workers, SimulationData::getInst()->useCreatureSpawnWorker);
@@ -21,8 +20,8 @@ void WorkerFactory::build(std::vector<WorldWorker*>&workers) {
 	addWorker<VisualWorker>(workers, SimulationData::getInst()->useVisualWorker);
 	addWorker<WaiterWorker>(workers, SimulationData::getInst()->useWaiterWorker);
 	addWorker<WaterWorker>(workers, SimulationData::getInst()->useWaterWorker);
-//	addWorker<OpenGLRenderWorker>(workers,true);
-	addWorker<MetabolismWorker>(workers, true);
+	addWorker<OpenGLRenderWorker>(world, workers, SimulationData::getInst()->useOpenGLRenderWorker);
+	addWorker<MetabolismWorker>(workers, SimulationData::getInst()->useMetabolismWorker);
 
 }
 

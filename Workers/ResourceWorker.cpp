@@ -5,8 +5,8 @@
 ResourceWorker::ResourceWorker() {
 	this->name = "ResourceWorker";
 	this->gainPerCell = SimulationData::getInst()->gainResourcePerCell;
-	int height = SimulationData::getInst()->mapHeightToSet;
-	int width = SimulationData::getInst()->mapWidthToSet;
+	int height = SimulationData::getInst()->mapHeight;
+	int width = SimulationData::getInst()->mapWidth;
 	cellNumber = std::sqrt(height * width);
 }
 

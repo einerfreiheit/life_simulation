@@ -19,8 +19,8 @@ float ValueNoise::smooth(const float& t) {
 }
 
 void ValueNoise::makeNoise(World* world) {
-	int height = SimulationData::getInst()->mapHeightToSet;
-	int width = SimulationData::getInst()->mapWidthToSet;
+	int height = SimulationData::getInst()->mapHeight;
+	int width = SimulationData::getInst()->mapWidth;
 	const int layersNumber = 5;
 
 	setKeyValues();

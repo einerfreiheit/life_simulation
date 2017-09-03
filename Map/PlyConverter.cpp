@@ -2,8 +2,8 @@
 #include "../SimulationData.h"
 
 void PlyConverter::setVertices(World *world, PlyModel *model) {
-	int height = SimulationData::getInst()->mapHeightToSet;
-	int width = SimulationData::getInst()->mapWidthToSet;
+	int height = SimulationData::getInst()->mapHeight;
+	int width = SimulationData::getInst()->mapWidth;
 	double maxHeight = world->map[0][0].height;
 	double minHeight = world->map[0][0].height;
 	for (int i = 0; i < world->map.size(); i++) {
@@ -29,8 +29,8 @@ void PlyConverter::setVertices(World *world, PlyModel *model) {
 
 }
 void PlyConverter::setFaces(World *world, PlyModel *model) {
-	int height = SimulationData::getInst()->mapHeightToSet;
-	int width = SimulationData::getInst()->mapWidthToSet;
+	int height = SimulationData::getInst()->mapHeight;
+	int width = SimulationData::getInst()->mapWidth;
 
 	for (int y = 0; y < height-1; y++) {
 		for (int x = 0; x < width-1; x++) {
