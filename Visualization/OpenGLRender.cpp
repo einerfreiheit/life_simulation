@@ -1,20 +1,16 @@
 #include "OpenGLRender.h"
 #include <string>
 #include "ShadersUtils.h"
-#include <GLFW/glfw3.h>
-#include  "OpenGLTexture.h"
+#include "../OpenGL/OpenGLBufferFactory.h"
 
 #include <iostream>
 
 GLFWwindow* OpenGLRender::window = NULL;
-OpenGLTexture *mapTexture = NULL;
-OpenGLTexture *waterTexture = NULL;
-OpenGLTexture *creatureTexture = NULL;
 
 void OpenGLRender::checkError() {
 	GLenum errorCode = glGetError();
 	if (errorCode != GL_NO_ERROR) {
-	//	throw std::runtime_error("OpenGL error:\n" + std::string((const char *)gluErrorString(errorCode)));//@ дичь
+		throw std::runtime_error(std::to_string(errorCode));
 	}
 }
 
@@ -58,24 +54,25 @@ OpenGLRender::OpenGLRender(World *world) {
 	shaderMVP = glGetUniformLocation(shader, "mvpMatrix");
 	shaderTexture = glGetUniformLocation(shader, "gSampler");
 
-	mapData = new OpenGLMapData;
-	mapData->update(world);
+	OpenGLBufferFactory::buildBuffers(staticBuffers, dynamicBuffers);
+	for (auto buffer : staticBuffers) {
+		buffer->initBuffer(world);
+		buffer->updateBuffer(world);
+	}
+	for (auto buffer : dynamicBuffers) {
+		buffer->initBuffer(world);
+	}
 
-	creatureData = new OpenGLCreaturesData;
-	creatureData->initBuffers(world);
-	waterData = new OpenGLWaterData;
-	waterData->initBuffers(world);
-
-	mapTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/ground _1.jpg");
-	mapTexture->loadTexture();
-	creatureTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/worm.jpg");
-	creatureTexture->loadTexture();
-	waterTexture = new OpenGLTexture(GL_TEXTURE_2D, "./textures/water.jpg");
-	waterTexture->loadTexture();
 
 }
 
 OpenGLRender::~OpenGLRender() {
+	for (int i =0; i<staticBuffers.size();i++){
+		delete staticBuffers[i];
+	}
+	for (int i =0; i<dynamicBuffers.size();i++){
+			delete dynamicBuffers[i];
+		}
 
 }
 void OpenGLRender::draw(World *world) {
@@ -86,46 +83,35 @@ void OpenGLRender::draw(World *world) {
 	mvpMatrix = camera->getMVPMatrix();
 	glUniformMatrix4fv(shaderMVP, 1, GL_FALSE, (&mvpMatrix[0][0]));
 
-	mapTexture->bindTexture(GL_TEXTURE0);
-	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
-
 	glBindVertexArray(vertexAttributeObject);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, mapData->vertexBufferObject);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mapData->indexBufferObject);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
+	for (auto buffer : staticBuffers) {
+		buffer->texture->bindTexture(GL_TEXTURE0);
+		glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
-	glDrawElements(GL_TRIANGLES,mapData->elementNumber,GL_UNSIGNED_INT,0);
+		glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
+		glDrawElements(GL_TRIANGLES, buffer->bufferData->indicesToUpate, GL_UNSIGNED_INT, 0);
 
+	}
+	for (auto buffer : dynamicBuffers) {
 
-	waterData->update(world);
-	creatureData->update(world);
+		buffer->updateBuffer(world);
+		buffer->texture->bindTexture(GL_TEXTURE0);
+		glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
-	glBindVertexArray(0);
-	glBindVertexArray(vertexAttributeObject);
+		glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
+		glDrawElements(GL_TRIANGLES, buffer->bufferData->indicesToUpate, GL_UNSIGNED_INT, 0);
 
-	waterTexture->bindTexture(GL_TEXTURE0);
-	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
-	glBindBuffer(GL_ARRAY_BUFFER, waterData->vertexBufferObject);
+	}
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,waterData->indexBufferObject);
-
-	glDrawElements(GL_TRIANGLES,waterData->elementNumber,GL_UNSIGNED_INT,0);
-
-	creatureTexture->bindTexture(GL_TEXTURE0);
-	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
-	glBindBuffer(GL_ARRAY_BUFFER, creatureData->vertexBufferObject);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*) (3 * sizeof(float)));
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,creatureData->indexBufferObject);
-	glDrawElements(GL_TRIANGLES,waterData->elementNumber,GL_UNSIGNED_INT,0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisableVertexAttribArray(0);
@@ -134,6 +120,8 @@ void OpenGLRender::draw(World *world) {
 
 	glBindVertexArray(0);
 	glUseProgram(0);
+
+	std::cout << glGetError() << " error ";
 
 	glfwSwapBuffers(window);
 

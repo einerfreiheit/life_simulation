@@ -28,5 +28,6 @@ void OpenGLTexture::bindTexture(GLenum textureUnit){
 	glBindTexture(_textureTarget,textureObject);
 }
 OpenGLTexture::~OpenGLTexture() {
+	glDeleteTextures(1,&textureObject);
 }
 

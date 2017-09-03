@@ -7,10 +7,8 @@
 
 #include "OpenGLCamera.h"
 
+#include "../OpenGL/OpenGLBuffer.h"
 
-#include "OpenGLWaterData.h"
-#include "OpenGLMapData.h"
-#include "OpenGLCreaturesData.h"
 
 
 class OpenGLRender {
@@ -21,6 +19,8 @@ public:
 	static void init();
 
 private:
+	std::vector <OpenGLBuffer*> staticBuffers;
+	std::vector <OpenGLBuffer*> dynamicBuffers;
 	static void checkError();
 	static GLFWwindow *window;
 	GLuint shader;
@@ -31,9 +31,7 @@ private:
 
 
 	OpenGLCamera *camera=NULL;
-	OpenGLMapData * mapData=NULL;
-	OpenGLWaterData *waterData=NULL;
-	OpenGLCreaturesData *creatureData =NULL;
+
 };
 
 #endif
