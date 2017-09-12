@@ -26,7 +26,7 @@ double Move::getNeededEnergy(World *world, Cell *cellFrom, Cell *cellTo, Creatur
 void Move::act(World *world, CreaturePtr creature) {
 	int nextX = dx + creature->x;
 	int nextY = dy + creature->y;
-	double energyReq = 0;//@ не используется
+	double energyReq = 0; //@ не используется
 	double neededEnergy = 0.0;
 	if (isOutOfBorder(world, nextY, nextX)) {
 		return;
@@ -38,37 +38,31 @@ void Move::act(World *world, CreaturePtr creature) {
 	if (neededEnergy > creature->energy) {
 		return;
 	}
-	creature->energy-=neededEnergy;
-	creature->x=nextX;
-	creature->y=nextY;
+	creature->energy -= neededEnergy;
+	creature->x = nextX;
+	creature->y = nextY;
 	move(cellFrom, cellTo, creature->getId());
 	creature->stats->incrementTraveledDistace();
-
 
 }
 
 void Move::move(Cell *cellFrom, Cell *cellTo, int id) {
-	bool hasBeenMoved=false;//@ переменная не нужна
-	if (cellFrom->creaturesInCell.empty()) {
+	if (cellFrom->creatures.empty()) {
 		throw std::runtime_error(" Move: departure cell is empty");
 	}
-	for (size_t i = 0; i < cellFrom->creaturesInCell.size(); i++) {
-		if (cellFrom->creaturesInCell[i]->getId() == id) {
-			cellTo->creaturesInCell.push_back(cellFrom->creaturesInCell[i]);
-			cellFrom->creaturesInCell[i] = cellFrom->creaturesInCell[cellFrom->creaturesInCell.size() - 1];//@ ресайз сразу после
-			hasBeenMoved=true;
-			break;//@ ретурн вместо брека
+	for (size_t i = 0; i < cellFrom->creatures.size(); i++) {
+		if (cellFrom->creatures[i]->getId() == id) {
+			cellTo->creatures.push_back(cellFrom->creatures[i]);
+			cellFrom->creatures[i] = cellFrom->creatures[cellFrom->creatures.size() - 1];
+			cellFrom->creatures.resize(cellFrom->creatures.size() - 1);
+
+			return;
 
 		}
 	}
 
-	if (hasBeenMoved){
-		cellFrom->creaturesInCell.resize(cellFrom->creaturesInCell.size()-1);
-		return;//@ зачем?
-	}
-	else {
-		throw std::runtime_error("Move: cannot find creature in departure cell");
-	}
+	throw std::runtime_error("Move: cannot find creature in departure cell");
+
 }
 
 Move::~Move() {

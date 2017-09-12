@@ -14,7 +14,7 @@ public:
 	void incrementFissionsNumber();
 	void incrementEatenFood( double creatureBait);
 	void incrementTraveledDistace();
-	void updateGenomeComlexity(const GenomePtr genome); //@ а тут нужен, но можно по ссылке передать
+	void updateGenomeComlexity(const GenomePtr genome);
 	void setCreatureId(int id);
 
 	void writeStatistics();
@@ -24,7 +24,7 @@ private:
 	int lifeTime;
 	int attacksNumber;
 	int fissionsNumber;
-	double eatenFood;
+	float eatenFood;
 	int traveledDistace;
 	int genomeComlexity;
 	int conjugationsNumber;

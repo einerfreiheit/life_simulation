@@ -10,6 +10,8 @@ public:
 
 	void initBufferData(World *world);
 	void computeBufferData(World *world);
+
+	void addWater(Cell *cell,float textureOffset);
 };
 
 #endif

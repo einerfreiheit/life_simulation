@@ -8,20 +8,20 @@ class Phenotype {
 public:
 	Phenotype();
 	~Phenotype();
-	double energyFromFood;
-	double creatureOneBait;
-	double energyToMove;
-	double fissionLoss;
-	double fissionThreshold;
-	double hungryThershold;
-	double energyToClimb;
-	double healthPoints;
-	double attackPower;
-	double creatureSize;
+	float energyFromFood;
+	float creatureOneBait;
+	float energyToMove;
+	float fissionLoss;
+	float fissionThreshold;
+	float hungryThershold;
+	float energyToClimb;
+	float healthPoints;
+	float attackPower;
+	float creatureSize;
 
-	double conjugateEnergy = 5.0;
-	double aggresion = 0.0;
-	double geneTranslationSpeed = 1.0;
+	float conjugateEnergy = 5.0;
+	float aggresion = 0.0;
+	float geneTranslationSpeed = 1.0;
 	int maxGeneTranslationNumber = 5;
 	int geneTranslationNumber = 1;
 	double maxHealthPoints = 100.0;

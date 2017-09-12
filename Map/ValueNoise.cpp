@@ -10,7 +10,7 @@ ValueNoise::ValueNoise() {
 }
 
 ValueNoise::~ValueNoise() {
-	delete []keyValues;
+	delete[] keyValues;
 
 }
 
@@ -22,13 +22,39 @@ void ValueNoise::makeNoise(World* world) {
 	int height = SimulationData::getInst()->mapHeight;
 	int width = SimulationData::getInst()->mapWidth;
 	const int layersNumber = 5;
+	float frequency = 0.3;
+	float amplitude = 1.0;
 
 	setKeyValues();
 
+	float heightMap[(height + 1) * (width + 1)] = { 0.0 };
+	for (int i = 0; i < (height + 1); i++) {
+		for (int j = 0; j < (width + 1); j++) {
+			frequency = 0.3;
+			amplitude = 1.0;
+			for (int q = 0; q < layersNumber; q++) {
+				heightMap[j + i * (width + 1)] += getValue(i, j, frequency, amplitude);
+				frequency *= 0.5;
+				amplitude *= 2.0;
+			}
+
+		}
+	}
+
+	for (int i = 0; i < (height); i++) {
+		for (int j = 0; j < (width); j++) {
+			world->getCell(i, j)->heights[0][0] = heightMap[j + (width + 1) * i];
+			world->getCell(i, j)->heights[0][1] = heightMap[j + (width + 1) * i + 1];
+			world->getCell(i, j)->heights[1][0] = heightMap[j + (width + 1) * i + (width + 1)];
+			world->getCell(i, j)->heights[1][1] = heightMap[j + (width + 1) * i + width + 2];
+
+		}
+	}
+
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			float frequency = 0.3;
-			float amplitude = 1.0;
+			frequency = 0.3;
+			amplitude = 1.0;
 			for (int q = 0; q < layersNumber; q++) {
 
 				world->map[i][j].height += getValue(i, j, frequency, amplitude);
@@ -37,7 +63,10 @@ void ValueNoise::makeNoise(World* world) {
 			}
 
 		}
+
 	}
+
+
 }
 
 void ValueNoise::setKeyValues() {

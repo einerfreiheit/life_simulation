@@ -1,5 +1,4 @@
 #include "VisualWorker.h"
-#include <iostream>
 #include "../Visualization/SimpleDisplay.h"
 #include "../Visualization/SimpleVideoRecord.h"
 

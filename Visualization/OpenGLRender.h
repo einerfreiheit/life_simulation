@@ -4,9 +4,7 @@
 #include "../World.h"
 #include <GL/glew.h>
 #include <glm/matrix.hpp>
-
 #include "OpenGLCamera.h"
-
 #include "../OpenGL/OpenGLBuffer.h"
 
 
@@ -28,8 +26,6 @@ private:
 	GLuint shaderMVP;
 	GLuint shaderTexture;
 	glm::mat4 mvpMatrix;
-
-
 	OpenGLCamera *camera=NULL;
 
 };

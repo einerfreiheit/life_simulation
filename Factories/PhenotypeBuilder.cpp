@@ -43,7 +43,7 @@ void PhenotypeBuilder::buildCreatureReceptor(const GenomePtr genome, PhenotypePt
 		}
 
 	}
-	std::cout <<phenotype->cellReceptor << std::endl;
+	//std::cout <<phenotype->cellReceptor << std::endl;
 
 
 }

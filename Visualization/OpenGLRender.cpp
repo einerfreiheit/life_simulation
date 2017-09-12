@@ -2,7 +2,6 @@
 #include <string>
 #include "ShadersUtils.h"
 #include "../OpenGL/OpenGLBufferFactory.h"
-
 #include <iostream>
 
 GLFWwindow* OpenGLRender::window = NULL;
@@ -82,6 +81,7 @@ void OpenGLRender::draw(World *world) {
 	glUseProgram(shader);
 	mvpMatrix = camera->getMVPMatrix();
 	glUniformMatrix4fv(shaderMVP, 1, GL_FALSE, (&mvpMatrix[0][0]));
+	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 	glBindVertexArray(vertexAttributeObject);
 	glEnableVertexAttribArray(0);
@@ -89,7 +89,6 @@ void OpenGLRender::draw(World *world) {
 
 	for (auto buffer : staticBuffers) {
 		buffer->texture->bindTexture(GL_TEXTURE0);
-		glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
@@ -102,7 +101,6 @@ void OpenGLRender::draw(World *world) {
 
 		buffer->updateBuffer(world);
 		buffer->texture->bindTexture(GL_TEXTURE0);
-		glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);

@@ -2,8 +2,7 @@
 #define WORKERS_CREATURESPAWNWORKER_H_
 
 #include "WorldWorker.h"
-#include "Creature.h"
-#include "../Factories/CreatureBuilder.h"
+
 
 class CreatureSpawnWorker: public WorldWorker {
 public:

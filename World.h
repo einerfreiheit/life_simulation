@@ -3,7 +3,6 @@
 
 #include "CommonIncludes.h"
 #include "Cell.h"
-#include "Creature.h"
 
 class World {
 public:

@@ -29,7 +29,7 @@ void Creature::setGenome(GenomePtr _genome) {
 	this->genome = _genome;
 }
 
-GenomePtr Creature::getGenome() const { //@ автоформаттер
+GenomePtr Creature::getGenome() const {
 	return genome;
 }
 

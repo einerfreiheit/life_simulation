@@ -12,12 +12,12 @@ private:
 	Cell *transmitter = NULL;
 	Cell *receiver = NULL;
 	Cell *bufferPointer = NULL;
-	double soilWater = 0.0;
-	double transmitterWaterLevel = 0.0;
-	double recieverWaterLevel = 0.0;
-	double movableWater = 0.0;
-	double waterToMove = 0.0;
-	double bufferedWaterLevel = 0.0;
+	float soilWater = 0.0;
+	float transmitterWaterLevel = 0.0;
+	float recieverWaterLevel = 0.0;
+	float movableWater = 0.0;
+	float waterToMove = 0.0;
+	float bufferedWaterLevel = 0.0;
 	bool setTransmitterAndReciverPointers(World *world, int y1, int x1, int y2, int x2);
 	void flow();
 

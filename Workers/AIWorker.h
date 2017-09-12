@@ -11,7 +11,7 @@ public:
     void work ( World *world ) override;
 
 private:
-    SimpleLogics *simple;
+    SimpleLogics *simple = NULL;
 
 
 };

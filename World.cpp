@@ -7,8 +7,8 @@ World::World(const int mapHeightToSet, const int mapWidthToSet) {
 	}
 	for (size_t y = 0; y < map.size(); y++) {
 		for (size_t x = 0; x < map[0].size(); x++) {
-			map[y][x].xCoordinate = x;
-			map[y][x].yCoordinate = y;
+			map[y][x].x = x;
+			map[y][x].y = y;
 		}
 	}
 	creatures.reserve(100);

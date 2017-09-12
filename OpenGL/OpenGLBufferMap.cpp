@@ -24,7 +24,7 @@ void OpenGLBufferMap::computeBufferData(World *world) {
 	for (int y = 0; y < world->map.size(); y++) {
 		for (int x = 0; x < world->map[0].size(); x++) {
 			vertexZ = world->map[y][x].height;
-			addCellVertices(world->getCell(y, x), vertexZ);
+			addCellVertices(world->getCell(y, x));
 		}
 	}
 

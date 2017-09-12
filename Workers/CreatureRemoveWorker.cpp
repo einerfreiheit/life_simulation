@@ -7,7 +7,7 @@ CreatureRemoveWorker::CreatureRemoveWorker() {
 
 void CreatureRemoveWorker::work(World *world) {
 
-	int lastId = (int) world->creatures.size() - 1;
+	int lastId = world->creatures.size() - 1;
 	int lastIdBefore = lastId;
 	int i = 0;
 	while (i <= lastId) {

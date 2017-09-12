@@ -17,8 +17,7 @@ Cell *ResourceWorker::getRandom(World *world) {
 void ResourceWorker::work(World *world) {
 
 	while (cellNumber>0){
-		randomCell = getRandom(world);
-		randomCell->food+=gainPerCell;
+		getRandom(world)->food+=gainPerCell;
 		cellNumber--;
 
 	}

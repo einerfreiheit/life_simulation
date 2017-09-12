@@ -8,8 +8,11 @@
 #include <vector>
 
 struct vertex {
-	float vertexPosition[3];
-	float textureUV[2];
+	float x;
+	float y;
+	float z;
+	float textureX;
+	float textureY;
 
 };
 
@@ -27,6 +30,7 @@ public:
 	virtual void initBufferData(World *world)=0;
 	virtual void computeBufferData(World *world)=0;
 	void addCellVertices(Cell *cell, float & vertexZ);
+	void addCellVertices(Cell *cell);
 	std::vector<vertex> vertices;
 	std::vector<GLuint> indices;
 	GLuint verticesToUpdate;
