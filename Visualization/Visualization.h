@@ -8,7 +8,7 @@ class Visualization {
 public:
 	Visualization();
 	virtual ~Visualization();
-	World *world=NULL;
+	World *world;
 };
 
 #endif

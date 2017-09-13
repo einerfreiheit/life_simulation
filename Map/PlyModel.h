@@ -2,27 +2,31 @@
 #define MAP_PLYMODEL_H_
 
 #include <vector>
+#include "../World.h"
 
-//@ struct для цвета и для координаты
-
-struct vertice {
-	std::vector<float> coordinates;
-	std::vector<int > colors;
+struct vertexData {
+	float x;
+	float y;
+	float z;
+	int red;
+	int green;
+	int blue;
 
 };
-struct face {
-	std::vector<int> index;
+struct cellIndices {
+	std::vector<int> values;
 };
+
 class PlyModel {
 public:
 
 	PlyModel();
 	virtual ~PlyModel();
-	void addVertice(const float&x, const float &y, const float &z);
-	void addVerticeColor(int possition, const int &red, const int &green, const int &blue);
-	void addFace(const std::vector<int> &verticesIndex);
-	std::vector<vertice*> vertices;
-	std::vector<face*> faces;
+
+	void addCellVertices(Cell *cell, const float &minHeight, const float &heightDepth);
+	void addIndices(World *world);
+	std::vector<cellIndices*> indices;
+	std::vector<vertexData*> vertices;
 };
 
 #endif

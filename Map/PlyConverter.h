@@ -7,6 +7,8 @@
 class PlyConverter {
 public:
 
+	static void buildPLYModel(World *world, PlyModel * model);
+
 	static void setVertices(World *world, PlyModel *model);
 	static void setFaces(World *world, PlyModel *model);
 	static bool setColors;

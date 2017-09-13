@@ -17,27 +17,23 @@ void PlyExporter::exportPly(PlyModel *model) {
 	out << "property uchar green" << std::endl;
 	out << "property uchar blue" << std::endl;
 	out << "element face";
-	out << " " << model->faces.size() << std::endl;
+	out << " " << model->indices.size() << std::endl;
 	out << "property list uchar int vertex_index" << std::endl;
 	out << "end_header" << std::endl;
 
-	for (int i = 0; i < model->vertices.size(); i++) {
-		for (auto coordinate : model->vertices[i]->coordinates) {
-			out << coordinate << ' ';
-		}
-		for (auto color : model->vertices[i]->colors) {
-			out << (int)color << ' ';
+	for (auto vertex : model->vertices) {
+
+		out << vertex->x << " " << vertex->y << " " << vertex->z << " " << vertex->red << " " << vertex->blue << " "
+				<< vertex->green << " " << std::endl;
+	}
+	for (auto index : model->indices) {
+		out << index->values.size() << " ";
+		for (auto value : index->values) {
+			out << value << " ";
 		}
 		out << std::endl;
-
 	}
-	for (int i = 0; i < model->faces.size(); i++) {
 
-		out << model->faces[i]->index.size() << ' ';
-		for (auto index : model->faces[i]->index) {
-			out << index << ' ';
-		}
+	out.close();
 
-		out << std::endl;
-	}
 }

@@ -17,8 +17,7 @@ SimpleVideoRecord::~SimpleVideoRecord() {
 void SimpleVideoRecord::update(const cv::Mat* visualization) {
 	cv::resize(*visualization, *output, visualization->size(), 1, 1, cv::INTER_NEAREST);
 	writer.write(*output);
-	writer.release();
-	output->release();
+
 
 }
 
