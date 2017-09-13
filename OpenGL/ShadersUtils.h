@@ -1,5 +1,5 @@
-#ifndef VISUALIZATION_SHADERSUTILS_H_
-#define VISUALIZATION_SHADERSUTILS_H_
+#ifndef OPENGL_SHADERSUTILS_H_
+#define OPENGL_SHADERSUTILS_H_
 
 #include <GL/glew.h>
 #include <string>

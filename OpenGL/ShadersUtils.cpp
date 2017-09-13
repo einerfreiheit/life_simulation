@@ -1,4 +1,5 @@
-#include "ShadersUtils.h"
+#include "../OpenGL/ShadersUtils.h"
+
 #include <iostream>
 #include <fstream>
 #include <vector>

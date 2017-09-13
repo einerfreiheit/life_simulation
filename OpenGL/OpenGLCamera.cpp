@@ -1,4 +1,5 @@
-#include "OpenGLCamera.h"
+#include "../OpenGL/OpenGLCamera.h"
+
 #include <iostream>
 OpenGLCamera* OpenGLCamera::instance = NULL;
 
@@ -67,7 +68,7 @@ void OpenGLCamera::updateCursor(GLFWwindow*window, double xPos, double yPos) {
 
 void OpenGLCamera::updateKeys(GLFWwindow *window, int key, int scancode, int action, int mods) {
 	if (action != GLFW_PRESS) {
-		return;
+		//return;
 	}
 	switch (key) {
 	case GLFW_KEY_UP: {

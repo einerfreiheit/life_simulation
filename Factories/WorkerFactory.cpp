@@ -17,7 +17,7 @@ void WorkerFactory::build(World *world, std::vector<WorldWorker*>&workers) {
 	addWorker<CreatureSpawnWorker>(workers, SimulationData::getInst()->useCreatureSpawnWorker);
 	addWorker<CreatureRemoveWorker>(workers, SimulationData::getInst()->useCreatureRemoveWorker);
 	addWorker<ResourceWorker>(workers, SimulationData::getInst()->useResourceWorker);
-	addWorker<VisualWorker>(workers, SimulationData::getInst()->useVisualWorker);
+	addWorker<VisualWorker>(world,workers, SimulationData::getInst()->useVisualWorker);
 	addWorker<WaiterWorker>(workers, SimulationData::getInst()->useWaiterWorker);
 	addWorker<WaterWorker>(workers, SimulationData::getInst()->useWaterWorker);
 	addWorker<OpenGLRenderWorker>(world, workers, SimulationData::getInst()->useOpenGLRenderWorker);

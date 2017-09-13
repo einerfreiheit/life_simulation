@@ -1,8 +1,9 @@
-#include "OpenGLRender.h"
+#include "../OpenGL/OpenGLRender.h"
+
 #include <string>
-#include "ShadersUtils.h"
 #include "../OpenGL/OpenGLBufferFactory.h"
 #include <iostream>
+#include "../OpenGL/ShadersUtils.h"
 
 GLFWwindow* OpenGLRender::window = NULL;
 

@@ -1,5 +1,5 @@
 #include "OpenGLRenderWorker.h"
-#include "../Visualization/OpenGLRender.h"
+#include "../OpenGL/OpenGLRender.h"
 
 OpenGLRender * OpenGLRenderWorker::renderer = NULL;
 
