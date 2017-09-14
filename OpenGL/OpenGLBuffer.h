@@ -2,8 +2,8 @@
 #define OPENGL_OPENGLBUFFER_H_
 
 #include "OpenGLBufferData.h"
-#include "../Visualization/OpenGLTexture.h"
 #include "../World.h"
+#include "OpenGLTexture.h"
 
 class OpenGLBuffer {
 public:

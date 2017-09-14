@@ -26,8 +26,8 @@ void OpenGLBufferCreatures::computeBufferData(World *world) {
 	for (int y = 0; y < world->map.size(); y++) {
 		for (int x = 0; x < world->map[0].size(); x++) {
 			cell = world->getCell(y, x);
-			if (!cell->creaturesInCell.empty()) {
-				for (auto creature : cell->creaturesInCell) {
+			if (!cell->creatures.empty()) {
+				for (auto creature : cell->creatures) {
 					vertexZ = cell->height + cell->water + heightOffset;
 					addCellVertices(world->getCell(y, x), vertexZ);
 					heightOffset += 0.1;

@@ -7,7 +7,7 @@ Phenotype::Phenotype() {
 	energyToMove = SimulationData::getInst()->energyToMove;
 	fissionLoss = SimulationData::getInst()->fissionLoss;
 	fissionThreshold = SimulationData::getInst()->fissionThreshold;
-	hungryEdge = 100;
+	hungryThershold = 100;
 	healthPoints = SimulationData::getInst()->creatureHealthPoints;
 	attackPower = SimulationData::getInst()->creatureAttackPower;
 	creatureSize = 10.0;

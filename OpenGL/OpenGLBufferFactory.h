@@ -5,7 +5,7 @@
 
 #include "OpenGLBuffer.h"
 #include "OpenGLBufferData.h"
-#include "../Visualization/OpenGLTexture.h"
+#include "OpenGLTexture.h"
 
 class OpenGLBufferFactory {
 public:

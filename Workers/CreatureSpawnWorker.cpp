@@ -1,5 +1,6 @@
 #include "CreatureSpawnWorker.h"
-#include <iostream>
+#include "Creature.h"
+#include "../Factories/CreatureBuilder.h"
 #include <stdexcept>
 
 CreatureSpawnWorker::CreatureSpawnWorker() {
@@ -11,11 +12,10 @@ void CreatureSpawnWorker::work(World *world) {
 	std::vector<CreaturePtr> newborn;
 	for (CreaturePtr creature : world->creatures) {
 		if (creature->energy > creature->phenotype->fissionThreshold) {
-			std::cout << creature->getId() << " ready to fission";
 			creature->energy -= creature->phenotype->fissionLoss;
 			CreaturePtr second = CreatureBuilder::build(world, creature);
 			newborn.push_back(second);
-			creature->stats->updateFissionsNumber();
+			creature->stats->incrementFissionsNumber();
 		}
 	}
 

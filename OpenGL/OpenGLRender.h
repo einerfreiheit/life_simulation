@@ -1,13 +1,11 @@
-#ifndef VISUALIZATION_OPENGLRENDER_H_
-#define VISUALIZATION_OPENGLRENDER_H_
+#ifndef OPENGL_OPENGLRENDER_H_
+#define OPENGL_OPENGLRENDER_H_
 
 #include "../World.h"
 #include <GL/glew.h>
 #include <glm/matrix.hpp>
-
-#include "OpenGLCamera.h"
-
 #include "../OpenGL/OpenGLBuffer.h"
+#include "../OpenGL/OpenGLCamera.h"
 
 
 
@@ -28,8 +26,6 @@ private:
 	GLuint shaderMVP;
 	GLuint shaderTexture;
 	glm::mat4 mvpMatrix;
-
-
 	OpenGLCamera *camera=NULL;
 
 };

@@ -1,26 +1,24 @@
 #include "VisualWorker.h"
-#include <iostream>
-#include "../Visualization/SimpleDisplay.h"
-#include "../Visualization/SimpleVideoRecord.h"
+#include "../Visualization/OpenCVVideoOutput.h"
+#include "../Visualization/OpenCVDisplay.h"
 
-VisualWorker::VisualWorker() {
+VisualWorker::VisualWorker(World *world) {
 	this->name = "VisualWorker";
 
-	simpleVisualization = new SimpleVisualization;
-
+	data = new OpenCVData(world);
 	if (SimulationData::getInst()->videoRecord) {
-		outputUnits.push_back(new SimpleVideoRecord);
+		output.push_back(new OpenCVVideoOutput);
 	}
 	if (SimulationData::getInst()->displayOutput) {
-		outputUnits.push_back(new SimpleDisplay);
+		output.push_back(new OpenCVDisplay);
 	}
+
 }
 
 void VisualWorker::work(World *world) {
-	simpleVisualization->update(world);
-
-	for (OpenCvVisualization * output : outputUnits) {
-		output->update(simpleVisualization->getVisualisation());
+	data->update(world);
+	for (auto unit: output){
+		unit->update(data->getVisiulization());
 	}
 
 }

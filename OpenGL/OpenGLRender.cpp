@@ -1,16 +1,16 @@
-#include "OpenGLRender.h"
-#include <string>
-#include "ShadersUtils.h"
-#include "../OpenGL/OpenGLBufferFactory.h"
+#include "../OpenGL/OpenGLRender.h"
 
+#include <string>
+#include "../OpenGL/OpenGLBufferFactory.h"
 #include <iostream>
+#include "../OpenGL/ShadersUtils.h"
 
 GLFWwindow* OpenGLRender::window = NULL;
 
 void OpenGLRender::checkError() {
 	GLenum errorCode = glGetError();
 	if (errorCode != GL_NO_ERROR) {
-		throw std::runtime_error(std::to_string(errorCode));
+		throw std::runtime_error((char*)gluErrorString(errorCode));
 	}
 }
 
@@ -82,6 +82,7 @@ void OpenGLRender::draw(World *world) {
 	glUseProgram(shader);
 	mvpMatrix = camera->getMVPMatrix();
 	glUniformMatrix4fv(shaderMVP, 1, GL_FALSE, (&mvpMatrix[0][0]));
+	glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 	glBindVertexArray(vertexAttributeObject);
 	glEnableVertexAttribArray(0);
@@ -89,7 +90,6 @@ void OpenGLRender::draw(World *world) {
 
 	for (auto buffer : staticBuffers) {
 		buffer->texture->bindTexture(GL_TEXTURE0);
-		glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
@@ -102,7 +102,6 @@ void OpenGLRender::draw(World *world) {
 
 		buffer->updateBuffer(world);
 		buffer->texture->bindTexture(GL_TEXTURE0);
-		glUniform1i(glGetUniformLocation(shader, "gSampler"), 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffer->vertexBufferObject);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer->indexBufferObject);
@@ -112,7 +111,7 @@ void OpenGLRender::draw(World *world) {
 
 	}
 
-
+	glBindTexture(GL_TEXTURE_2D,0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
@@ -121,7 +120,7 @@ void OpenGLRender::draw(World *world) {
 	glBindVertexArray(0);
 	glUseProgram(0);
 
-	std::cout << glGetError() << " error ";
+	std::cout << (char*)gluErrorString(glGetError())<<std::endl;
 
 	glfwSwapBuffers(window);
 

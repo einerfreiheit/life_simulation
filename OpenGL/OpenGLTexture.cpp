@@ -1,4 +1,4 @@
-#include "OpenGLTexture.h"
+#include "../OpenGL/OpenGLTexture.h"
 
 OpenGLTexture::OpenGLTexture(GLenum textureTarget, const std::string &filePath) {
 	_filePath = filePath;

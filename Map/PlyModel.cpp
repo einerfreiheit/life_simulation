@@ -1,41 +1,53 @@
 #include "PlyModel.h"
 
 PlyModel::PlyModel() {
-	std::vector<vertice*> vertices;//@ useless
-	std::vector<face*> faces;
+
 }
 
 PlyModel::~PlyModel() {
-	if (!vertices.empty()) {
-		for (int i = 0; i < vertices.size(); i++) {
+	if (vertices.size()){
+		for (int i=0;i<vertices.size();i++){
 			delete vertices[i];
 		}
 	}
-	if (!faces.empty()) {
-		for (int i = 0; i < faces.size(); i++) {
-			delete faces[i];
+	if (indices.size()){
+		for (int i=0;i<indices.size();i++){
+			delete indices[i];
 		}
 	}
 
 }
 
-void PlyModel::addVertice(const float &x, const float &y, const float &z) {
-	vertice* vert = new vertice;
-	vert->coordinates.push_back(x);
-	vert->coordinates.push_back(y);
-	vert->coordinates.push_back(z);
-	vertices.push_back(vert);
+
+
+void PlyModel::addCellVertices(Cell *cell, const float& minHeight, const float &heightDepth) {
+	vertexData *data = new vertexData;
+
+	data->x = cell->x;
+	data->y = cell->y;
+	data->z = cell->heights[0][0];
+	uchar color = 255 * (data->z - minHeight) / heightDepth;
+	data->red = color;
+	data->blue = color / 2;
+	data->green = 0;
+	vertices.push_back(data);
 
 }
-void PlyModel::addVerticeColor(int possition, const int &red, const int &green, const int &blue) {
 
-	vertices[possition]->colors.push_back(red);
-	vertices[possition]->colors.push_back(green);
-	vertices[possition]->colors.push_back(blue);
+void PlyModel::addIndices(World *world) {
+
+	int height = world->map.size();
+	int width = world->map[0].size();
+	for (int y = 0; y < height - 1; y++) {
+		for (int x = 0; x < width - 1; x++) {
+
+			cellIndices * newIndices = new cellIndices;
+			newIndices->values.push_back(x + y * width);
+			newIndices->values.push_back(x + 1 + y * width);
+			newIndices->values.push_back((y + 1) * width + x + 1);
+			newIndices->values.push_back((y + 1) * width + x);
+			indices.push_back(newIndices);
+		}
+	}
 }
 
-void PlyModel::addFace(const std::vector<int> &verticesIndex) {
-	face *newFace = new face;
-	newFace->index = verticesIndex;
-	faces.push_back(newFace);
-}

@@ -11,10 +11,8 @@ CreatureActionWorker::~CreatureActionWorker() {
 
 void CreatureActionWorker::work(World *world) {
 	for (CreaturePtr &creature : world->creatures) {
-		std::cout << creature->getId() << " creature id" << std::endl;
 		uint8_t gate = 0;
-
-		for (SimpleAction *simpleAction : creature->creatureActions) {
+		for (SimpleAction *simpleAction : creature->actions) {
 			Action *actionPtr = static_cast<Action*>(simpleAction);
 
 			if ((gate & actionPtr->getType()) == 0) {
@@ -25,6 +23,6 @@ void CreatureActionWorker::work(World *world) {
 
 		}
 		creature->energy -= 0.1;
-		creature->creatureActions.clear();
+		creature->actions.clear();
 	}
 }

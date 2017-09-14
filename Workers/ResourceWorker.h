@@ -12,7 +12,6 @@ public:
 private:
 	double gainPerCell;
 	int cellNumber;
-	Cell *randomCell = NULL;//@ выпилить из полей
 
 };
 

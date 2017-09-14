@@ -1,7 +1,6 @@
 #ifndef SIMULATIONDATA_H_
 #define SIMULATIONDATA_H_
 
-#include "World.h"
 #include "SimpleConfiguration.h"
 #include <string>
 

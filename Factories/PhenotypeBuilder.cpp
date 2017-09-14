@@ -8,7 +8,7 @@ PhenotypePtr PhenotypeBuilder::build(const GenomePtr genome) {
 	result->energyToMove = SimulationData::getInst()->energyToMove;
 	result->fissionLoss = SimulationData::getInst()->fissionLoss;
 	result->fissionThreshold = SimulationData::getInst()->fissionThreshold;
-	result->hungryEdge = 100;
+	result->hungryThershold = 100;
 	result->energyToClimb = result->energyToMove * 2;
 
 	for (const ChromosomePtr &chromosome : genome->chromosomes) {
@@ -18,7 +18,6 @@ PhenotypePtr PhenotypeBuilder::build(const GenomePtr genome) {
 	}
 	result->geneTranslationNumber = std::min((int) result->geneTranslationSpeed, result->maxGeneTranslationNumber);
 	result->geneTranslationNumber = std::max(result->geneTranslationNumber, 1);
-	PhenotypeBuilder::buildCreatureReceptor(genome, result);
 	return result;
 }
 
@@ -35,15 +34,3 @@ void PhenotypeBuilder::processGene(const Gene& gene, PhenotypePtr phenotype) {
 	}
 }
 
-void PhenotypeBuilder::buildCreatureReceptor(const GenomePtr genome, PhenotypePtr phenotype) {
-
-	for (auto chromosome : genome->chromosomes) {
-		for (auto gene : chromosome->genes) {
-			phenotype->cellReceptor += std::to_string(gene.type);
-		}
-
-	}
-	std::cout <<phenotype->cellReceptor << std::endl;
-
-
-}

@@ -1,5 +1,5 @@
-#ifndef VISUALIZATION_OPENGLCAMERA_H_
-#define VISUALIZATION_OPENGLCAMERA_H_
+#ifndef OPENGL_OPENGLCAMERA_H_
+#define OPENGL_OPENGLCAMERA_H_
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

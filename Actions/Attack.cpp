@@ -9,27 +9,25 @@ Attack::~Attack() {
 }
 
 void Attack::attack(CreaturePtr aggressor, CreaturePtr victim) {
-
-	double &victimHealthPoints = victim->phenotype->healthPoints;//@ суперсокращение
-	double attackPower = aggressor->phenotype->attackPower;//@ и тут тоже
-	victimHealthPoints -= attackPower;
+	victim->phenotype->healthPoints -= aggressor->phenotype->attackPower;
 	std::cout << "creature id: " << victim->getId() << "  hp :" << victim->phenotype->healthPoints
 			<< " attacked by creature id:" << aggressor->getId() << std::endl;
-	victim->hasBeenAttaked = true;
+	victim->hasBeenAttacked = true;
 
 }
 
 void Attack::act(World* world, CreaturePtr creature) {
 
 	int id = creature->getId();
-	Cell& cell = world->map[creature->y][creature->x];//@ геттер
+	Cell& cell = *world->getCell(creature->y,creature->x);
 
-	int numberOfCreatures = cell.creaturesInCell.size();
+	int numberOfCreatures = cell.creatures.size();
 	std::cout << numberOfCreatures << " number of creatures in " << creature->y << " " << creature->x << std::endl;
-	for (auto otherCreature : cell.creaturesInCell) {//@ геноцид при большом числе червей в клетке
+	for (auto otherCreature : cell.creatures) {
 		if (otherCreature->getId() != id) {
 			attack(creature, otherCreature);
-			creature->stats->updateAttacksNumber();
+			creature->stats->incrementAttacksNumber();
+			return;
 		}
 
 	}

@@ -38,7 +38,6 @@ void OpenGLBuffer::initBuffer(World *world) {
 	bufferData->initBufferData(world);
 	texture->loadTexture();
 
-
 	glGenBuffers(1, &vertexBufferObject);
 	glGenBuffers(1, &indexBufferObject);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject);

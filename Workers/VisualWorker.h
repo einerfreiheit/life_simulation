@@ -2,18 +2,19 @@
 #define WORKERS_VISUALWORKER_H_
 
 #include "WorldWorker.h"
-#include "../Visualization/SimpleVisualization.h"
+#include "../Visualization/OpenCVOutput.h"
+#include "../Visualization/OpenCVData.h"
+
 #include <vector>
 
 class VisualWorker: public WorldWorker {
 public:
-	VisualWorker();
+	VisualWorker(World *world);
 	virtual ~VisualWorker();
 	void work(World *world) override;
 private:
-
-	SimpleVisualization *simpleVisualization;
-	std::vector<OpenCvVisualization*> outputUnits;
+	OpenCVData *data;
+	std::vector<OpenCVOutput*> output;
 };
 
 #endif

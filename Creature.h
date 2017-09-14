@@ -14,21 +14,20 @@ public:
 	Creature(int id);
 	virtual ~Creature();
 
-	std::vector<SimpleAction*> creatureActions;//@ Creature.creatureActions ?!
+	std::vector<SimpleAction*> actions;
 	bool isHungry() const;
-	CreatureStatistics *stats;
+	CreatureStatistics *stats=NULL;
 	void setGenome(GenomePtr genome);
 	void setPhenotype(PhenotypePtr phenotype);
 	int getId() const;
 	GenomePtr getGenome() const;
 
+	PhenotypePtr phenotype=NULL;
+	GenomePtr genome=NULL;
+	bool hasBeenAttacked = false;
 
-	PhenotypePtr phenotype;
-	GenomePtr genome;
-	bool hasBeenAttaked = false;//@ attacked
-
-	double energy;
-	double lowEnergyLevel = 100.0;//@ почему инициализация некоторых штук идёт тут, а некоторых не тут?
+	float energy;
+	float lowEnergyLevel = 100.0;//@ почему инициализация некоторых штук идёт тут, а некоторых не тут?
 	int x;
 	int y;
 

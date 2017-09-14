@@ -8,24 +8,22 @@ class Phenotype {
 public:
 	Phenotype();
 	~Phenotype();
-	double energyFromFood;
-	double creatureOneBait;
-	double energyToMove;
-	double fissionLoss;
-	double fissionThreshold;
-	double hungryEdge;//@ edge - плохое слово
-	double energyToClimb;
-	double healthPoints;
-	double attackPower;
-	double creatureSize;
-	double conjugateEnergy = 5.0;
+	float energyFromFood;
+	float creatureOneBait;
+	float energyToMove;
+	float fissionLoss;
+	float fissionThreshold;
+	float hungryThershold;
+	float energyToClimb;
+	float healthPoints;
+	float attackPower;
+	float creatureSize;
 
-	double aggresion = 0.0;
-
-	double geneTranslationSpeed = 1.0;
+	float conjugateEnergy = 5.0;
+	float aggresion = 0.0;
+	float geneTranslationSpeed = 1.0;
 	int maxGeneTranslationNumber = 5;
 	int geneTranslationNumber = 1;
-
 	double maxHealthPoints = 100.0;
 
 	std::string cellReceptor;

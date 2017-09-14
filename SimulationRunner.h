@@ -2,8 +2,6 @@
 #define SIMULATIONRUNNER_H
 
 #include "Workers/WorldWorker.h"
-#include "Factories/WorkerFactory.h"
-#include "SimulationData.h"
 
 class SimulationRunner {
 public:
@@ -12,7 +10,7 @@ public:
 	std::vector<WorldWorker *> workers;
 	void run();
 private:
-	World *world;
+	World *world =NULL;
 
 };
 

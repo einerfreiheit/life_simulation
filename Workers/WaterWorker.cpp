@@ -14,17 +14,17 @@ void WaterWorker::flow() {
 	if (movableWater <= 0.0) {
 		return;
 	}
-	waterToMove = std::min(0.5 * (transmitterWaterLevel - recieverWaterLevel), movableWater);
+	waterToMove = std::min(0.5 * (transmitterWaterLevel - recieverWaterLevel), (double)movableWater);
 
-	if (!transmitter->creaturesInCell.empty() && waterToMove>0.01){
+	if (!transmitter->creatures.empty() && waterToMove>0.01){
 
-		for (auto creature: transmitter->creaturesInCell){
-			creature->x=receiver->xCoordinate;
-			creature->y=receiver->yCoordinate;
+		for (auto creature: transmitter->creatures){
+			creature->x=receiver->x;
+			creature->y=receiver->y;
 		}
-		std::vector<CreaturePtr> displacedCreatures = transmitter->creaturesInCell;
-		receiver->creaturesInCell.insert(receiver->creaturesInCell.end(),displacedCreatures.begin(), displacedCreatures.end());
-		transmitter->creaturesInCell.clear();
+		std::vector<CreaturePtr> displacedCreatures = transmitter->creatures;
+		receiver->creatures.insert(receiver->creatures.end(),displacedCreatures.begin(), displacedCreatures.end());
+		transmitter->creatures.clear();
 	}
 
 	transmitter->water -= waterToMove;
@@ -62,7 +62,7 @@ bool WaterWorker::setTransmitterAndReciverPointers(World *world, int y1, int x1,
 	transmitterWaterLevel = transmitter->height + transmitter->water;
 	bufferPointer = world->getCell(y2, x2);
 	bufferedWaterLevel = bufferPointer->height + bufferPointer->water;
-	if (bufferedWaterLevel == transmitterWaterLevel) {//@ всегда сравнение вещественных через std::abs(diff) < eps
+	if (std::abs(bufferedWaterLevel - transmitterWaterLevel)<0.0001) {
 		return false;
 	}
 	if (transmitterWaterLevel > bufferedWaterLevel) {

@@ -1,8 +1,8 @@
 #ifndef WORKERS_OPENGLRENDERWORKER_H_
 #define WORKERS_OPENGLRENDERWORKER_H_
 
+#include "../OpenGL/OpenGLRender.h"
 #include "WorldWorker.h"
-#include "../Visualization/OpenGLRender.h"
 
 class OpenGLRenderWorker:public WorldWorker {
 public:
