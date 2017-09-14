@@ -9,7 +9,7 @@
 SimulationRunner::SimulationRunner() {
 	srand(7 * clock() + time( NULL));
 	world = WorldBuilder::buidWorld();
-	//world->map[0][0].water=10000;
+
 }
 
 SimulationRunner::~SimulationRunner() {

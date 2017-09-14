@@ -10,7 +10,7 @@ GLFWwindow* OpenGLRender::window = NULL;
 void OpenGLRender::checkError() {
 	GLenum errorCode = glGetError();
 	if (errorCode != GL_NO_ERROR) {
-		throw std::runtime_error(std::to_string(errorCode));
+		throw std::runtime_error((char*)gluErrorString(errorCode));
 	}
 }
 
@@ -120,7 +120,7 @@ void OpenGLRender::draw(World *world) {
 	glBindVertexArray(0);
 	glUseProgram(0);
 
-	std::cout << glGetError() << " error ";
+	std::cout << (char*)gluErrorString(glGetError())<<std::endl;
 
 	glfwSwapBuffers(window);
 

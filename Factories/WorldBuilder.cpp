@@ -12,7 +12,7 @@ World* WorldBuilder::buidWorld() {
 	HeightsBuilder::build(result);
 	ResourceFactory::addWater(result);
 	result->creatures.push_back(CreatureBuilder::build(result, 1, 1));
-	//world->creatures.push_back(CreatureBuilder::build(world,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
+	//result->creatures.push_back(CreatureBuilder::build(result,XmlGenomeLoader::buildGenome("genome_id_0.xml"), 1, 1));
 	//XmlGenomeExporter::buildXml(world->creatures[0]);
 
 	return result;

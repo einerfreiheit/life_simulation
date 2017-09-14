@@ -3,8 +3,12 @@
 
 class SimpleAction {
 public:
-	SimpleAction();
-	virtual ~SimpleAction();
+	SimpleAction() {
+	}
+	;
+	virtual ~SimpleAction() {
+	}
+	;
 
 };
 

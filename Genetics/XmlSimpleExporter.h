@@ -1,10 +1,10 @@
-#ifndef GENETICS_XMLSIMPLEEPORTER_H_
-#define GENETICS_XMLSIMPLEEPORTER_H_
+#ifndef GENETICS_XMLSIMPLEEXPORTER_H_
+#define GENETICS_XMLSIMPLEEXPORTER_H_
 
 #include <string>
 #include <tinyxml.h>
 
-class XmlSimpleEporter { //@ Eporter
+class XmlSimpleExporter {
 public:
 
 	static TiXmlElement* addElement(TiXmlElement* rootElement, const std::string &elementName);

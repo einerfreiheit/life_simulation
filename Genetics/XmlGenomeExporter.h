@@ -1,7 +1,7 @@
 #ifndef GENETICS_XMLGENOMEEXPORTER_H_
 #define GENETICS_XMLGENOMEEXPORTER_H_
 
-#include "XmlSimpleEporter.h"
+#include "XmlSimpleExporter.h"
 #include "../Creature.h"
 
 

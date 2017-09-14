@@ -6,7 +6,6 @@
 #include <string>
 #include "./SimulationData.h"
 
-std::string CreatureBuilder::path = SimulationData::getInst()->outputPath;//@ лучше 3 раза написать явно, чем вызывать такое до int main
 int CreatureBuilder::nextId = 0;
 
 CreaturePtr CreatureBuilder::build(World *world, int posX, int posY) {
@@ -18,10 +17,9 @@ CreaturePtr CreatureBuilder::build(World *world, int posX, int posY) {
 	PhenotypePtr phenotype = PhenotypeBuilder::build(genome);
 	result->setGenome(genome);
 	result->setPhenotype(phenotype);
+	world->getCell(posY,posX)->creatures.push_back(result);
 
-	world->map[posY][posX].creatures.push_back(result);
-	cv::Mat vis = GenomeVisualizer::visualize(genome);
-	cv::imwrite(path + std::to_string(nextId) + ".png", vis);
+	writeGenomeImage(genome);
 	return result;
 }
 
@@ -37,16 +35,20 @@ CreaturePtr CreatureBuilder::build(World *world, CreaturePtr parent) {
 	result->setGenome(genome);
 	result->setPhenotype(phenotype);
 
-	world->map[result->y][result->x].creatures.push_back(result);
+	world->getCell(parent->y,parent->x)->creatures.push_back(result);
 
-	cv::Mat vis = GenomeVisualizer::visualize(genome);
-	cv::imwrite(path + std::to_string(nextId) + ".png", vis);
+	writeGenomeImage(genome);
 
 	return result;
 
 }
 
-CreaturePtr CreatureBuilder::build(World *world, GenomePtr loadedGenome,int posX, int posY) {
+void CreatureBuilder::writeGenomeImage(GenomePtr genome) {
+	cv::Mat vis = GenomeVisualizer::visualize(genome);
+	cv::imwrite(SimulationData::getInst()->outputPath + std::to_string(nextId) + ".png", vis);
+
+}
+CreaturePtr CreatureBuilder::build(World *world, GenomePtr loadedGenome, int posX, int posY) {
 
 	CreaturePtr result = std::shared_ptr<Creature>(new Creature(nextId++));
 
@@ -56,10 +58,8 @@ CreaturePtr CreatureBuilder::build(World *world, GenomePtr loadedGenome,int posX
 	result->setGenome(loadedGenome);
 	result->setPhenotype(phenotype);
 
-	world->map[posY][posX].creatures.push_back(result);
-
-	cv::Mat vis = GenomeVisualizer::visualize(loadedGenome);//@ вынести в метод
-	cv::imwrite(path + std::to_string(nextId) + ".png", vis);
+	world->getCell(posY,posX)->creatures.push_back(result);
+	writeGenomeImage(loadedGenome);
 
 	return result;
 

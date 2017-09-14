@@ -26,7 +26,6 @@ double Move::getNeededEnergy(World *world, Cell *cellFrom, Cell *cellTo, Creatur
 void Move::act(World *world, CreaturePtr creature) {
 	int nextX = dx + creature->x;
 	int nextY = dy + creature->y;
-	double energyReq = 0; //@ не используется
 	double neededEnergy = 0.0;
 	if (isOutOfBorder(world, nextY, nextX)) {
 		return;
@@ -34,6 +33,7 @@ void Move::act(World *world, CreaturePtr creature) {
 
 	Cell *cellFrom = world->getCell(creature->y, creature->x);
 	Cell *cellTo = world->getCell(nextY, nextX);
+
 	neededEnergy = getNeededEnergy(world, cellFrom, cellTo, creature);
 	if (neededEnergy > creature->energy) {
 		return;
@@ -42,6 +42,7 @@ void Move::act(World *world, CreaturePtr creature) {
 	creature->x = nextX;
 	creature->y = nextY;
 	move(cellFrom, cellTo, creature->getId());
+
 	creature->stats->incrementTraveledDistace();
 
 }
@@ -55,7 +56,6 @@ void Move::move(Cell *cellFrom, Cell *cellTo, int id) {
 			cellTo->creatures.push_back(cellFrom->creatures[i]);
 			cellFrom->creatures[i] = cellFrom->creatures[cellFrom->creatures.size() - 1];
 			cellFrom->creatures.resize(cellFrom->creatures.size() - 1);
-
 			return;
 
 		}

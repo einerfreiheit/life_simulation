@@ -67,9 +67,6 @@ void OpenGLCamera::updateCursor(GLFWwindow*window, double xPos, double yPos) {
 }
 
 void OpenGLCamera::updateKeys(GLFWwindow *window, int key, int scancode, int action, int mods) {
-	if (action != GLFW_PRESS) {
-		//return;
-	}
 	switch (key) {
 	case GLFW_KEY_UP: {
 		cameraPosition.y += cameraMoveSpeed;

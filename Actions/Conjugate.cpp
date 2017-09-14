@@ -13,9 +13,10 @@ Conjugate::~Conjugate() {
 void Conjugate::act(World* world, CreaturePtr creature) {
 	int id = creature->getId();
 	for (auto otherCreature : world->getCell(creature->y,creature->x)->creatures) {
-		if (otherCreature->getId() != id && canConjugate(otherCreature)) {//@ оргия, если слишком много червей в клетке
+		if (otherCreature->getId() != id && canConjugate(otherCreature)) {
 			conjugate(creature, otherCreature);
 			creature->stats->incrementConjugationNumber();
+			return;
 		}
 	}
 }

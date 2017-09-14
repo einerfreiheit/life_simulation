@@ -18,7 +18,6 @@ PhenotypePtr PhenotypeBuilder::build(const GenomePtr genome) {
 	}
 	result->geneTranslationNumber = std::min((int) result->geneTranslationSpeed, result->maxGeneTranslationNumber);
 	result->geneTranslationNumber = std::max(result->geneTranslationNumber, 1);
-	PhenotypeBuilder::buildCreatureReceptor(genome, result);
 	return result;
 }
 
@@ -35,15 +34,3 @@ void PhenotypeBuilder::processGene(const Gene& gene, PhenotypePtr phenotype) {
 	}
 }
 
-void PhenotypeBuilder::buildCreatureReceptor(const GenomePtr genome, PhenotypePtr phenotype) {
-
-	for (auto chromosome : genome->chromosomes) {
-		for (auto gene : chromosome->genes) {
-			phenotype->cellReceptor += std::to_string(gene.type);
-		}
-
-	}
-	//std::cout <<phenotype->cellReceptor << std::endl;
-
-
-}

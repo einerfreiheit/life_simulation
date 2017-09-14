@@ -6,21 +6,20 @@
 
 class Action: public SimpleAction {
 public:
-	Action();//@ автоформаттер
+	Action();
 	virtual ~Action();
 	enum ACTION_TYPE {
-		AT_EAT=1,
-        AT_MOVE=2,
-        AT_ATTACK=4,
-	AT_CONJUGATE = 8,
-        AT_END = 16
-    } ;
+		AT_EAT = 1,
+		AT_MOVE = 2,
+		AT_ATTACK = 4,
+		AT_CONJUGATE = 8,
+		AT_END = 16
+	};
 
-    virtual void act ( World *world, CreaturePtr creature ) =0;
-    ACTION_TYPE const getType() const;
+	virtual void act(World *world, CreaturePtr creature) =0;
+	ACTION_TYPE const getType() const;
 protected:
-    ACTION_TYPE type;
-
+	ACTION_TYPE type;
 
 };
 
